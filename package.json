@@ -15,5 +15,8 @@
     "ufsc"
   ],
   "author": "Jose Ribamar Marcal Martins Junior",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^5.7.0"
+  }
 }
