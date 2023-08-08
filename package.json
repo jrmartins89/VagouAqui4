@@ -2,7 +2,7 @@
   "name": "vagou-aqui-app",
   "version": "1.0.0",
   "description": "Package containing all the modules necessary to deploy and run the application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
