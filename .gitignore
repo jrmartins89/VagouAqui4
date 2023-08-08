@@ -1,3 +1,5 @@
 /.idea/.gitignore
 /.idea/modules.xml
 /.idea/VagouAqui4.iml
+/package-lock.json
+/node_modules/
