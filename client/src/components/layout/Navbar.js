@@ -13,7 +13,7 @@ class Navbar extends Component {
                             }}
                             className="col s5 brand-logo center black-text"
                         >
-                            <i className="material-icons">code</i> //symbol next to the word
+                            <i className="material-icons">code</i>
                             Página Inicial
                         </Link>
                     </div>
