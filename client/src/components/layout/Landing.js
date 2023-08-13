@@ -9,7 +9,7 @@ class Landing extends Component {
                         <h4>
                             <p>
                                 <b>
-                                    VagouAqui
+                                    Página Principal
                                 </b>
                             </p>
                             Portal de anúncios de aluguéis em Florianópolis indexados a partir de técnicas de {" "}
