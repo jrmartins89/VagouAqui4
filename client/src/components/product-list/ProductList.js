@@ -10,17 +10,6 @@ const ProductList = () =>  {
                 <h4>
                     <b>Hey there,</b>
                 </h4>
-                <button
-                    style={{
-                        width: "150px",
-                        borderRadius: "3px",
-                        letterSpacing: "1.5px",
-                        marginTop: "1rem"
-                    }}
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                    Logout
-                </button>
                 <div className="w-full">Anúncios: </div>
                 <div className="w-full h-full flex flex-wrap gap-1 justify-between items-start overflow-y-auto">
                     {
