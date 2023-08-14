@@ -4,7 +4,9 @@ import {connect} from "react-redux";
 import {logoutUser} from "../../actions/authActions";
 
 const ProductList = () =>  {
-    const [filteredProductList, setFilteredProductList] = useState([]);
+    const [filteredProductList, loading] = useState([]);
+    if(loading)
+        return <>Loading</>
         return (
             <div className="w-full h-[85%] px-5">
                 <h4>
