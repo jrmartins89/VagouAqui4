@@ -71,28 +71,105 @@ const ProductDisplay = () => {
     }, [])
 
     return (
-        <div className='w-screen h-screen px-5 bg-gray-100 flex justify-center items-center'>
-            <div className='w-full h-[90%] rounded-md bg-white'>
-                <div className='relative w-full h-[15%] flex items-center overflow-x-auto'>
-                    <span className='mx-3 ml-5 font-medium'> Filtros: </span>
-                    {
-                        categories.map((category) => (
-                            <div
-                                onClick={() => {
-                                    if(selectedCategories.includes(category)){
-                                        removeCategory(category);
-                                    } else{
-                                        addCategory(category);
-                                    }
-                                }}
-                                className={`w-fit min-w-fit h-8 mx-2 px-5 py-2 flex flex-row justify-center items-center text-sm border break-keep rounded-3xl cursor-pointer transition-all duration-300 ${(selectedCategories.includes(category))?'border-blue-500 bg-blue-500 text-white':' border-gray-500 bg-white text-gray-900'} `}>
-                                {category.split("-").join(" ")}
-                            </div>
-                        ))
-                    }
+        <div
+            style={{
+                width: '100vw',
+                height: '100vh',
+                padding: '1.25rem',
+                backgroundColor: '#E5E7EB',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}
+        >
+            <div
+                style={{
+                    width: '100%',
+                    height: '90%',
+                    borderRadius: '0.375rem',
+                    backgroundColor: 'white',
+                }}
+            >
+                <div
+                    style={{
+                        width: '100%',
+                        height: '15%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        overflowX: 'auto',
+                    }}
+                >
+      <span
+          style={{
+              margin: '0.75rem 1rem 0 0.875rem',
+              fontWeight: '500',
+              fontSize: '1rem',
+          }}
+      >
+        Filtros:
+      </span>
+                    {categories.map((category) => (
+                        <div
+                            key={category}
+                            onClick={() => {
+                                if (selectedCategories.includes(category)) {
+                                    removeCategory(category);
+                                } else {
+                                    addCategory(category);
+                                }
+                            }}
+                            style={{
+                                width: 'fit-content',
+                                minWidth: 'fit-content',
+                                height: '2rem',
+                                margin: '0.25rem 0.5rem 0 0.125rem',
+                                padding: '0.5rem 1.25rem',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                fontSize: '0.875rem',
+                                border: '1px solid',
+                                borderRadius: '1.5rem',
+                                cursor: 'pointer',
+                                transition: 'all 300ms',
+                                borderColor: selectedCategories.includes(category)
+                                    ? '#3B82F6'
+                                    : '#9CA3AF',
+                                backgroundColor: selectedCategories.includes(category)
+                                    ? '#3B82F6'
+                                    : 'white',
+                                color: selectedCategories.includes(category)
+                                    ? 'white'
+                                    : '#4B5563',
+                            }}
+                        >
+                            {category.split('-').join(' ')}
+                        </div>
+                    ))}
                     <div
-                        onClick={() => resetCategory()}
-                        className={`${(selectedCategories.length>0)?'opacity-100':'opacity-0 pointer-events-none'} sticky right-0 w-fit h-full px-5 flex justify-center items-center text-blue-500 bg-white backdrop-blur-lg cursor-pointer hover:text-blue-700 transition-all duration-300`}
+                        onClick={resetCategory}
+                        style={{
+                            opacity: selectedCategories.length > 0 ? 1 : 0,
+                            pointerEvents: selectedCategories.length > 0 ? 'auto' : 'none',
+                            position: 'sticky',
+                            right: '0',
+                            width: 'fit-content',
+                            height: '100%',
+                            padding: '1.25rem',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            fontSize: '0.875rem',
+                            color: '#3B82F6',
+                            backgroundColor: 'white',
+                            backdropFilter: 'blur(10px)',
+                            cursor: 'pointer',
+                            transition: 'all 300ms',
+                            ':hover': {
+                                color: '#2563EB',
+                            },
+                        }}
                     >
                         clear
                     </div>
