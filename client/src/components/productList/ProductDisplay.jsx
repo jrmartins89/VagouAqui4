@@ -37,10 +37,10 @@ const ProductDisplay = () => {
     const getCategories = async () => {
         setLoading(true);
 
-        await fetch('https://dummyjson.com/products/categories')
+        await fetch('https://vagouaqui.s3.sa-east-1.amazonaws.com/categories.json')
             .then(res => res.json())
             .then(data => {
-                const arr = data.slice(0, 6);
+                const arr = data.slice(0, 30);
                 setCategories(arr);
             })
             .catch(err => alert(err))
@@ -52,7 +52,7 @@ const ProductDisplay = () => {
     const getProducts = async () => {
         setLoading(true);
 
-        await fetch('https://dummyjson.com/products')
+        await fetch('https://vagouaqui.s3.sa-east-1.amazonaws.com/products.json')
             .then(res => res.json())
             .then(data => {
                 setProductList(data.products);
