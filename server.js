@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000;
 const passport = require("passport");
 const users = require("./routes/api/users");
 const app = express();
+require('dotenv').config(); // Load environment variables from .env file
 
 // Bodyparser middleware
 app.use(
@@ -14,15 +15,17 @@ app.use(
 );
 app.use(bodyParser.json());
 // DB Config
-const db = require("./config/keys").mongoURI;
-// Connect to MongoDB
-mongoose
-    .connect(
-        db,
-        { useNewUrlParser: true }
-    )
-    .then(() => console.log("Conectado com sucesso ao MongoDB"))
-    .catch(err => console.log(err));
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => {
+        console.log('Conectado com sucesso ao MongoDB');
+    })
+    .catch(error => {
+        console.error('Erro de conexão com o banco de dados:', error);
+    });
+
 
 // Passport middleware
 app.use(passport.initialize());
