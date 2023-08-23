@@ -44,16 +44,26 @@ async function startScraping() {
 
     try {
         const adItems = await scraper.scrapeAds(url);
-        const itemsWithDetails = await scraper.getAdDetails(adItems);
+        const existingAds = await Ad.find({}, 'link'); // Get existing ad links from the database
 
-        const finalItems = itemsWithDetails.map(item => ({
-            title: item.title,
-            link: item.link,
-            description: item.description
-        }));
+        const newAdItems = adItems.filter(item =>
+            !existingAds.some(existingAd => existingAd.link === item.link)
+        );
 
-        await Ad.insertMany(finalItems);
-        console.log('Scraped data has been saved to MongoDB collection "ads"');
+        if (newAdItems.length > 0) {
+            const itemsWithDetails = await scraper.getAdDetails(newAdItems);
+
+            const finalItems = itemsWithDetails.map(item => ({
+                title: item.title,
+                link: item.link,
+                description: item.description
+            }));
+
+            await Ad.insertMany(finalItems);
+            console.log('Scraped data has been saved to MongoDB collection "ads"');
+        } else {
+            console.log('No new ads to save.');
+        }
     } catch (error) {
         console.error('Error during scraping:', error);
     }
