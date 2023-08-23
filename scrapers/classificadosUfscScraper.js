@@ -14,9 +14,8 @@ async function getAdLinks(url) {
             const titleColumn = $(element).find('td:nth-child(2)');
             const linkElement = titleColumn.find('a');
             const link = 'https://classificados.inf.ufsc.br/' + linkElement.attr('href');
-            const title = linkElement.text().trim();
-            if (isValidLink(link) && title) {
-                items.push({ title, link });
+            if (isValidLink(link)) {
+                items.push({ link });
             }
         });
 
