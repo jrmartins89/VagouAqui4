@@ -21,6 +21,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
     .then(() => {
         console.log('Conectado com sucesso ao MongoDB');
+        startScraping(); // Start scraping after successful MongoDB connection
     })
     .catch(error => {
         console.error('Erro de conexão com o banco de dados:', error);
@@ -34,4 +35,27 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
+// Start scraping function
+async function startScraping() {
+    const scraper = require("./scrapers/classificadosUfscScraper"); // Import the scraper module
+    const Ad = require("./models/Ads"); // Make sure to provide the correct path
+
+    const url = 'https://classificados.inf.ufsc.br/index.php?catid=88';
+
+    try {
+        const adItems = await scraper.scrapeAds(url);
+        const itemsWithDetails = await scraper.getAdDetails(adItems);
+
+        const finalItems = itemsWithDetails.map(item => ({
+            title: item.title,
+            link: item.link,
+            description: item.description
+        }));
+
+        await Ad.insertMany(finalItems);
+        console.log('Scraped data has been saved to MongoDB collection "ads"');
+    } catch (error) {
+        console.error('Error during scraping:', error);
+    }
+}
 app.listen(port, () => console.log(`O Servidor está rodando na porta ${port} !`));
