@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const fs = require('fs');
 
 async function scrapeAds(url) {
     try {
@@ -22,8 +23,18 @@ async function scrapeAds(url) {
 
         return items;
     } catch (error) {
-        throw new Error(`Error scraping ads: ${error.message}`);
+        const errorMessage = `Error fetching ad details for ${item.link}: ${error}`;
+        writeToErrorLog(errorMessage);
+        console.error(errorMessage);
     }
+}
+function writeToErrorLog(message) {
+    const logMessage = `${new Date().toISOString()} - ${message}\n`;
+    fs.appendFile('error_log.txt', logMessage, (err) => {
+        if (err) {
+            console.error('Error writing to error log:', err);
+        }
+    });
 }
 
 async function getAdDetails(items) {
