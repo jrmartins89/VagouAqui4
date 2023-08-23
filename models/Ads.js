@@ -4,6 +4,7 @@ const adSchema = new mongoose.Schema({
     title: String,
     link: String,
     description: String,
+    price: String,
     thumbnail: String
 });
 
