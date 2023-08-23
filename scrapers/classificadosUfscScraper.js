@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
-async function scrapeAds(url) {
+async function getAdsLinks(url) {
     try {
         const response = await axios.get(url);
         const html = response.data;
@@ -87,6 +87,6 @@ async function getAdDetails(items) {
 }
 
 module.exports = {
-    scrapeAds,
+    getAdsLinks,
     getAdDetails
 };
