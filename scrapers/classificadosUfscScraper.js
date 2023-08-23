@@ -1,25 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const mongoose = require('mongoose');
-const Ad = require('../models/Ads');
 
-require('dotenv').config(); // Load environment variables from .env file
-
-const url = 'https://classificados.inf.ufsc.br/index.php?catid=88';
-
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch(error => {
-        console.error('MongoDB connection error:', error);
-    });
-
-async function scrape() {
+async function scrapeAds(url) {
     try {
         const response = await axios.get(url);
         const html = response.data;
@@ -38,22 +20,9 @@ async function scrape() {
             }
         });
 
-        // Call getAdDetails after scraping is done
-        const itemsWithDetails = await getAdDetails(items);
-
-        // Assign sequential ids to the items and reorder properties
-        const finalItems = itemsWithDetails.map((item, index) => ({
-            title: item.title,
-            link: item.link,
-            description: item.description
-        }));
-
-        // Save the final items to MongoDB collection 'ads'
-        await Ad.insertMany(finalItems);
-        console.log('Scraped data has been saved to MongoDB collection "ads"');
-
+        return items;
     } catch (error) {
-        console.error('Error:', error);
+        throw new Error(`Error scraping ads: ${error.message}`);
     }
 }
 
@@ -96,4 +65,7 @@ async function getAdDetails(items) {
     return itemsWithDetails;
 }
 
-scrape();
+module.exports = {
+    scrapeAds,
+    getAdDetails
+};
