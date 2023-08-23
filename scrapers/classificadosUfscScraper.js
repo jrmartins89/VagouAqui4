@@ -15,8 +15,7 @@ async function scrapeAds(url) {
             const linkElement = titleColumn.find('a');
             const link = 'https://classificados.inf.ufsc.br/' + linkElement.attr('href');
             const title = linkElement.text().trim();
-
-            if (link && title) {
+            if (isValidLink(link) && title) {
                 items.push({ title, link });
             }
         });
@@ -29,6 +28,12 @@ async function scrapeAds(url) {
         return []; // Return an empty array to indicate failure
     }
 }
+
+function isValidLink(link) {
+    const linkPattern = /^https:\/\/classificados\.inf\.ufsc\.br\/detail/;
+    return linkPattern.test(link);
+}
+
 function writeToErrorLog(message) {
     const logMessage = `${new Date().toISOString()} - ${message}\n`;
     fs.appendFile('error_log.txt', logMessage, (err) => {
