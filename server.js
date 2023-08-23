@@ -43,7 +43,7 @@ async function startScraping() {
     const url = 'https://classificados.inf.ufsc.br/index.php?catid=88';
 
     try {
-        const adItems = await scraper.getAdsLinks(url);
+        const adItems = await scraper.getAdLinks(url);
         const existingAds = await Ad.find({}, 'link'); // Get existing ad links from the database
 
         const newAdItems = adItems.filter(item =>
