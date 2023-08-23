@@ -23,9 +23,10 @@ async function scrapeAds(url) {
 
         return items;
     } catch (error) {
-        const errorMessage = `Error fetching ad details for ${item.link}: ${error}`;
+        const errorMessage = `Error fetching ad list: ${error}`;
         writeToErrorLog(errorMessage);
         console.error(errorMessage);
+        return []; // Return an empty array to indicate failure
     }
 }
 function writeToErrorLog(message) {
@@ -65,11 +66,15 @@ async function getAdDetails(items) {
                     description: description
                 });
             } else {
-                console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
+                const errorMessage = `Error fetching ad details for ${item.link}: Status ${response.status}`;
+                writeToErrorLog(errorMessage);
+                console.error(errorMessage);
             }
 
         } catch (error) {
-            console.error(`Error fetching ad details for ${item.link}:`, error);
+            const errorMessage = `Error fetching ad details for ${item.link}: ${error}`;
+            writeToErrorLog(errorMessage);
+            console.error(errorMessage);
         }
     }
 
