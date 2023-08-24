@@ -53,18 +53,20 @@ async function getAdDetails(items) {
                 const html = response.data;
                 const $ = cheerio.load(html);
 
-                const box = $('.box');
+                const table = $('#container > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(1) > form > table');
+                const priceRow = table.find('tr:has(td[valign="top"]:contains("Preço"))');
 
+                const priceCell = priceRow.find('td[valign="top"]:contains("Preço") + td');
+                const price = priceCell.text().trim();
+
+                const box = $('.box');
                 const title = box.find('h1').text().trim();
                 let description = box.find('[colspan="2"]').text().trim();
 
-                // Extract description using regex between 'Descrição:' and 'Detalhes Gerais:'
                 const regexMatch = description.match(/Descrição:(.*?)Detalhes Gerais:/s);
                 if (regexMatch && regexMatch[1]) {
                     description = regexMatch[1].trim();
                 }
-                const priceElement = $('#container > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(1) > form > table > tbody > tr:nth-child(12) > td:nth-child(2)');
-                const price = priceElement.text().trim();
 
                 itemsWithDetails.push({
                     title: title,
