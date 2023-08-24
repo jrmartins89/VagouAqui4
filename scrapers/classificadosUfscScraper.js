@@ -63,6 +63,9 @@ async function getAdDetails(items) {
                 if (regexMatch && regexMatch[1]) {
                     description = regexMatch[1].trim();
                 }
+                const priceElement = $('#container > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(1) > form > table > tbody > tr:nth-child(12) > td:nth-child(2)');
+                const price = priceElement.text().trim();
+
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
