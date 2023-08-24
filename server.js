@@ -56,7 +56,8 @@ async function startScraping() {
             const finalItems = itemsWithDetails.map(item => ({
                 title: item.title,
                 link: item.link,
-                description: item.description
+                description: item.description,
+                price: item.price
             }));
 
             await Ad.insertMany(finalItems);
