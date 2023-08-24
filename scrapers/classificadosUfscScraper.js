@@ -64,10 +64,14 @@ async function getAdDetails(items) {
                     description = regexMatch[1].trim();
                 }
 
+                const priceSelector = '#container > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(1) > form > table > tbody > tr:nth-child(12) > td:nth-child(2)';
+                const price = $(priceSelector).text().trim();
+                console.log(price);
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
-                    description: description
+                    description: description,
+                    price: price
                 });
             } else {
                 const errorMessage = `Error fetching ad details for ${item.link}: Status ${response.status}`;
