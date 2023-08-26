@@ -67,7 +67,8 @@ async function getAdDetails(items) {
                 if (regexMatch && regexMatch[1]) {
                     description = regexMatch[1].trim();
                 }
-
+                const imageLink = item.link + '&show_still=1';
+                console.log('Image Link:', imageLink);
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
