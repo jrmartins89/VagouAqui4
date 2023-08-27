@@ -1,29 +1,34 @@
 const https = require('https');
 const cheerio = require('cheerio');
 
-const url = 'https://classificados.inf.ufsc.br/detail.php?id=208568&show_still=1';
+function scrapeImages(url, callback) {
+    https.get(url, (response) => {
+        let data = '';
 
-https.get(url, (response) => {
-    let data = '';
-
-    response.on('data', (chunk) => {
-        data += chunk;
-    });
-
-    response.on('end', () => {
-        const $ = cheerio.load(data);
-
-        const images = [];
-
-        $('img').each((index, element) => {
-            images.push($(element).attr('src'));
+        response.on('data', (chunk) => {
+            data += chunk;
         });
 
-        const adImages = images.filter(image => image.includes('images') && image.includes('_tmb1.jpg'))
-            .map(image => image.replace('images/', 'https://classificados.inf.ufsc.br/images/')
-                .replace('_tmb1.jpg', '.jpg'));
+        response.on('end', () => {
+            const $ = cheerio.load(data);
 
-        console.log('Ad Images:');
-        console.log(adImages);
+            const images = [];
+
+            $('img').each((index, element) => {
+                images.push($(element).attr('src'));
+            });
+
+            const adImages = images.filter(image => image.includes('images') && image.includes('_tmb1.jpg'))
+                .map(image => image.replace('images/', 'https://classificados.inf.ufsc.br/images/')
+                    .replace('_tmb1.jpg', '.jpg'));
+
+            callback(null, adImages);
+        });
+    }).on('error', (error) => {
+        callback(error, null);
     });
-});
+}
+
+module.exports = {
+    scrapeImages
+};
