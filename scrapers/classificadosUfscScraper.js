@@ -1,3 +1,4 @@
+const scrapeImages = require('../imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
@@ -67,14 +68,14 @@ async function getAdDetails(items) {
                 if (regexMatch && regexMatch[1]) {
                     description = regexMatch[1].trim();
                 }
-                const imageLink = item.link + '&show_still=1';
-                console.log('Image Link:', imageLink);
+                const imageUrls = item.link + '&show_still=1';
+                const imageLinks = [];
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
                     description: description,
                     price: price,
-                    imageLinks: imageLink
+                    imageLinks: imageLinks
                 });
             } else {
                 const errorMessage = `Error fetching ad details for ${item.link}: Status ${response.status}`;
