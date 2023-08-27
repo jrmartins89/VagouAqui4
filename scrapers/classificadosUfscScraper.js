@@ -1,8 +1,8 @@
-const scrapeImages = require('../imageScraper');
+const { scrapeImages }  = require('../imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
-
+let adImages =[];
 async function getAdLinks(url) {
     try {
         const response = await axios.get(url);
@@ -69,13 +69,20 @@ async function getAdDetails(items) {
                     description = regexMatch[1].trim();
                 }
                 const imageUrls = item.link + '&show_still=1';
-                const imageLinks = [];
+                await (async () => {
+                    try {
+                        adImages = await scrapeImages(imageUrls);
+                        console.log(adImages);
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                })(); //why did I use async function
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
                     description: description,
                     price: price,
-                    imageLinks: imageLinks
+                    imageLinks: adImages
                 });
             } else {
                 const errorMessage = `Error fetching ad details for ${item.link}: Status ${response.status}`;
