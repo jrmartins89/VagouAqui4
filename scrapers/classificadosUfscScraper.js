@@ -74,7 +74,7 @@ async function getAdDetails(items) {
                     link: item.link,
                     description: description,
                     price: price,
-                    thumbnail: imageLink
+                    imageLinks: imageLink
                 });
             } else {
                 const errorMessage = `Error fetching ad details for ${item.link}: Status ${response.status}`;

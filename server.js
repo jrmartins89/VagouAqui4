@@ -56,7 +56,7 @@ async function startScraping() {
                 link: item.link,
                 description: item.description,
                 price: item.price,
-                thumbnail: item.thumbnail
+                imageLinks: item.imageLinks
             }));
 
             await Ad.insertMany(finalItems);
