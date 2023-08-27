@@ -1,34 +1,37 @@
 const https = require('https');
 const cheerio = require('cheerio');
 
-function scrapeImages(url, callback) {
-    https.get(url, (response) => {
-        let data = '';
+async function scrapeImages(imageUrls) {
+    return new Promise((resolve, reject) => {
+        https.get(imageUrls, (response) => {
+            let data = '';
 
-        response.on('data', (chunk) => {
-            data += chunk;
-        });
-
-        response.on('end', () => {
-            const $ = cheerio.load(data);
-
-            const images = [];
-
-            $('img').each((index, element) => {
-                images.push($(element).attr('src'));
+            response.on('data', (chunk) => {
+                data += chunk;
             });
 
-            const adImages = images.filter(image => image.includes('images') && image.includes('_tmb1.jpg'))
-                .map(image => image.replace('images/', 'https://classificados.inf.ufsc.br/images/')
-                    .replace('_tmb1.jpg', '.jpg'));
+            response.on('end', () => {
+                const $ = cheerio.load(data);
 
-            callback(null, adImages);
+                const images = [];
+
+                $('img').each((index, element) => {
+                    images.push($(element).attr('src'));
+                });
+
+                const adImages = images.filter(image => image.includes('images') && image.includes('_tmb1.jpg'))
+                    .map(image => image.replace('images/', 'https://classificados.inf.ufsc.br/images/')
+                        .replace('_tmb1.jpg', '.jpg'));
+
+                resolve(adImages);
+            });
+        }).on('error', (error) => {
+            reject(error);
         });
-    }).on('error', (error) => {
-        callback(error, null);
     });
 }
 
 module.exports = {
     scrapeImages
 };
+//why did i use promise here?
