@@ -19,7 +19,9 @@ https.get(url, (response) => {
             images.push($(element).attr('src'));
         });
 
-        const adImages = images.filter(image => image.includes('images') && image.includes('_tmb1.jpg'));
+        const adImages = images.filter(image => image.includes('images') && image.includes('_tmb1.jpg'))
+            .map(image => image.replace('images/', 'https://classificados.inf.ufsc.br/images/')
+                .replace('_tmb1.jpg', '.jpg'));
 
         console.log('Ad Images:');
         console.log(adImages);
