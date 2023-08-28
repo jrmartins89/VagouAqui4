@@ -5,23 +5,27 @@ const port = process.env.PORT || 5000;
 const passport = require("passport");
 const users = require("./routes/api/users");
 const app = express();
-const scraper = require("./scrapers/classificadosUfscScraper"); // Import the scraper module
-const Ad = require("./models/Ads"); // Make sure to provide the correct path
-const url = 'https://classificados.inf.ufsc.br/index.php?catid=88';
-require('dotenv').config(); // Load environment variables from .env file
-
-// Bodyparser middleware
-app.use(
-    bodyParser.urlencoded({
-        extended: false
-    })
-);
+const scraper = require("./scrapers/classificadosUfscScraper");
+const Ad = require("./models/Ads");
+require("dotenv").config();
+require("./config/passport")(passport);
+const urls = [
+    "https://classificados.inf.ufsc.br/index.php?catid=88", // carvoeira
+    "https://classificados.inf.ufsc.br/index.php?catid=91", // corrego grande
+    "https://classificados.inf.ufsc.br/index.php?catid=89", // serrinha
+    "https://classificados.inf.ufsc.br/index.php?catid=94", // outros bairros
+    "https://classificados.inf.ufsc.br/index.php?catid=197", // centro
+    "https://classificados.inf.ufsc.br/index.php?catid=90", // itacorubi
+    "https://classificados.inf.ufsc.br/index.php?catid=96", // saco dos limoes
+    "https://classificados.inf.ufsc.br/index.php?catid=86" // trindade
+];
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// DB Config
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose
+    .connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => {
         console.log('Conectado com sucesso ao MongoDB');
         startScraping(); // Start scraping after successful MongoDB connection
@@ -33,39 +37,39 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Passport middleware
 app.use(passport.initialize());
-// Passport config
-require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
 // Start scraping function
 async function startScraping() {
     try {
-        const adItems = await scraper.getAdLinks(url);
-        const existingAds = await Ad.find({}, 'link'); // Get existing ad links from the database
+        for (const url of urls) {
+            const adItems = await scraper.getAdLinks(url);
+            const existingAds = await Ad.find({}, "link");
 
-        const newAdItems = adItems.filter(item =>
-            !existingAds.some(existingAd => existingAd.link === item.link)
-        );
+            const newAdItems = adItems.filter(
+                (item) => !existingAds.some((existingAd) => existingAd.link === item.link)
+            );
 
-        if (newAdItems.length > 0) {
-            const itemsWithDetails = await scraper.getAdDetails(newAdItems);
+            if (newAdItems.length > 0) {
+                const itemsWithDetails = await scraper.getAdDetails(newAdItems);
 
-            const finalItems = itemsWithDetails.map(item => ({
-                title: item.title,
-                link: item.link,
-                description: item.description,
-                price: item.price,
-                imageLinks: item.imageLinks
-            }));
+                const finalItems = itemsWithDetails.map((item) => ({
+                    title: item.title,
+                    link: item.link,
+                    description: item.description,
+                    price: item.price,
+                    imageLinks: item.imageLinks,
+                }));
 
-            await Ad.insertMany(finalItems);
-            console.log('Scraped data has been saved to MongoDB collection "ads"');
-        } else {
-            console.log('No new ads to save.');
+                await Ad.insertMany(finalItems);
+                console.log(`Scraped data from ${url} has been saved to MongoDB collection "ads"`);
+            } else {
+                console.log(`No new ads to save from ${url}`);
+            }
         }
     } catch (error) {
-        console.error('Error during scraping:', error);
+        console.error("Error during scraping:", error);
     }
 }
 app.listen(port, () => console.log(`O Servidor está rodando na porta ${port} !`));
