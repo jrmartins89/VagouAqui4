@@ -184,6 +184,11 @@ const ProductDisplay = () => {
                                 borderColor: selectedCategories.includes(category) ? '#3B82F6' : '#9CA3AF',
                                 backgroundColor: selectedCategories.includes(category) ? '#3B82F6' : 'white',
                                 color: selectedCategories.includes(category) ? 'white' : '#4B5563',
+                                ":hover": {
+                                    borderColor: "#3B82F6",
+                                    color: "#3B82F6",
+                                    backgroundColor: "white",
+                                },
                             }}
                         >
                             {category.split('-').join(' ')}
@@ -208,9 +213,6 @@ const ProductDisplay = () => {
                             backdropFilter: 'blur(10px)',
                             cursor: 'pointer',
                             transition: 'all 300ms',
-                            ':hover': {
-                                color: '#2563EB',
-                            },
                         }}
                     >
                         clear
