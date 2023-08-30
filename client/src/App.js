@@ -11,7 +11,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import ProductDisplay from "./components/productList/ProductDisplay";
+import AdGrid from "./components/productList/ProductDisplay";
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
     // Set auth token header auth
@@ -42,7 +42,7 @@ class App extends Component {
                     <Route exact path="/login" component={Login} />
                     <Switch>
                         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                        <PrivateRoute exact path="/products" component={ProductDisplay} />
+                        <PrivateRoute exact path="/products" component={AdGrid} />
                     </Switch>
                 </div>
             </Router>
