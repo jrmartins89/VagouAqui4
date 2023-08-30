@@ -9,25 +9,30 @@ function AdGrid() {
     const [neighborhoodFilter, setNeighborhoodFilter] = useState('');
 
     useEffect(() => {
-        // Fetch ads from the backend
-        fetch('http://127.0.0.1:5000/api/ads/all') // Update the API endpoint as needed
-            .then(response => response.json())
-            .then(data => {
+        async function fetchAds() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/ads/all'); // Update the API endpoint as needed
+                const data = await response.json();
                 setAds(data);
                 setFilteredAds(data);
-            })
-            .catch(error => console.error('Error fetching ads:', error));
+            } catch (error) {
+                console.error('Error fetching ads:', error);
+            }
+        }
+        fetchAds();
     }, []);
 
     useEffect(() => {
-        // Filter ads based on the selected neighborhood
-        if (neighborhoodFilter === '') {
-            setFilteredAds(ads);
-        } else {
-            const filtered = ads.filter(ad => ad.neighbourhood === neighborhoodFilter);
-            setFilteredAds(filtered);
+        function applyNeighborhoodFilter() {
+            if (neighborhoodFilter === '') {
+                setFilteredAds(ads);
+            } else {
+                const filtered = ads.filter(ad => ad.neighbourhood === neighborhoodFilter);
+                setFilteredAds(filtered);
+            }
+            setCurrentPage(1);
         }
-        setCurrentPage(1); // Reset current page when filtering
+        applyNeighborhoodFilter();
     }, [neighborhoodFilter, ads]);
 
     const indexOfLastAd = currentPage * adsPerPage;
@@ -40,7 +45,7 @@ function AdGrid() {
         <div className="grid-container">
             <div className="filter-section">
                 <label>Filter by Neighbourhood:</label>
-                <select onChange={e => setNeighborhoodFilter(e.target.value)}>
+                <select value={neighborhoodFilter} onChange={e => setNeighborhoodFilter(e.target.value)}>
                     <option value="">All</option>
                     {[...new Set(ads.map(ad => ad.neighbourhood))].map(neighbourhood => (
                         <option key={neighbourhood} value={neighbourhood}>
