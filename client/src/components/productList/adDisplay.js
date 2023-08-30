@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './AdGrid.css'; // Import the CSS file for styling
 
 function AdGrid() {
     const [ads, setAds] = useState([]);
@@ -52,10 +53,10 @@ function AdGrid() {
                 {currentAds.map(ad => (
                     <div key={ad._id} className="grid-item">
                         <h2>{ad.title}</h2>
-                        <img src={ad.imageLinks[0]} alt={ad.title} />
-                        <p>{ad.description}</p>
-                        <p>{ad.price}</p>
-                        <p>Neighbourhood: {ad.neighbourhood}</p>
+                        <img src={ad.imageLinks[0]} alt={ad.title} className="ad-image" />
+                        <p className="ad-description">{ad.description}</p>
+                        <p className="ad-price">{ad.price}</p>
+                        <p className="ad-neighbourhood">Neighbourhood: {ad.neighbourhood}</p>
                     </div>
                 ))}
             </div>
