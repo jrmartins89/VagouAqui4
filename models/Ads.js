@@ -6,7 +6,7 @@ const adSchema = new mongoose.Schema({
     description: String,
     price: String,
     imageLinks: Array,
-    neighbourhood: String
+    neighborhood: String
 });
 
 const Ad = mongoose.model('Ad', adSchema);

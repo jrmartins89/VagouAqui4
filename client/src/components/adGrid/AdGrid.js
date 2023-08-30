@@ -44,12 +44,12 @@ function AdGrid() {
     return (
         <div className="grid-container">
             <div className="filter-section">
-                <label>Filter by Neighbourhood:</label>
+                <label>Filter by Neighborhood:</label>
                 <select value={neighborhoodFilter} onChange={e => setNeighborhoodFilter(e.target.value)}>
                     <option value="">All</option>
-                    {[...new Set(ads.map(ad => ad.neighbourhood))].map(neighbourhood => (
-                        <option key={neighbourhood} value={neighbourhood}>
-                            {neighbourhood}
+                    {[...new Set(ads.map(ad => ad.neighborhood))].map(neighborhood => (
+                        <option key={neighborhood} value={neighborhood}>
+                            {neighborhood}
                         </option>
                     ))}
                 </select>
