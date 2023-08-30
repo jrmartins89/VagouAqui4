@@ -56,7 +56,7 @@ function AdGrid() {
                         <img src={ad.imageLinks[0]} alt={ad.title} className="ad-image" />
                         <p className="ad-description">{ad.description}</p>
                         <p className="ad-price">{ad.price}</p>
-                        <p className="ad-neighbourhood">Neighbourhood: {ad.neighbourhood}</p>
+                        <p className="ad-neighbourhood">Bairro: {ad.neighbourhood}</p>
                     </div>
                 ))}
             </div>
