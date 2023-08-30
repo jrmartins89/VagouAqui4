@@ -11,7 +11,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
-import AdGrid from "./components/productList/ProductDisplay";
+import AdGrid from "./components/productList/adDisplay";
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
     // Set auth token header auth
