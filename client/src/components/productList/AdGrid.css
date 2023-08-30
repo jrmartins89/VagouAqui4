@@ -57,3 +57,8 @@
     border: none;
     cursor: pointer;
 }
+
+.pagination button.active {
+    background-color: #3498db;
+    color: white;
+}
