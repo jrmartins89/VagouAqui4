@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './AdGrid.css'; // Import the CSS file for styling
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 
 function AdGrid() {
     const [ads, setAds] = useState([]);
@@ -58,7 +61,13 @@ function AdGrid() {
                 {currentAds.map(ad => (
                     <div key={ad._id} className="grid-item">
                         <h2>{ad.title}</h2>
-                        <img src={ad.imageLinks[0]} alt={ad.title} className="ad-image" />
+                        <Carousel showArrows={true} infiniteLoop={true}>
+                            {ad.imageLinks.map((imageLink, index) => (
+                                <div key={index}>
+                                    <img src={imageLink} alt={`Ad ${index}`} className="ad-image" />
+                                </div>
+                            ))}
+                        </Carousel>
                         <p className="ad-description">{ad.description}</p>
                         <p className="ad-price">{ad.price}</p>
                         <p className="ad-neighbourhood">Bairro: {ad.neighbourhood}</p>
