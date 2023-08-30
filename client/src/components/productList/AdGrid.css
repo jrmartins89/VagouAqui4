@@ -1,0 +1,59 @@
+/* AdGrid.css */
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.grid-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+}
+
+.ad-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.ad-description {
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.ad-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.ad-neighbourhood {
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+}
