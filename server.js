@@ -8,8 +8,10 @@ const app = express();
 const scraper = require("./scrapers/classificadosUfscScraper");
 const Ad = require("./models/Ads");
 const urls = require("./urls.json"); // Load URLs from the JSON file
+const ads = require("./routes/api/ads");
 require("dotenv").config();
 require("./config/passport")(passport);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -31,6 +33,8 @@ mongoose
 app.use(passport.initialize());
 // Routes
 app.use("/api/users", users);
+
+app.use("/api/ads", ads);
 
 // Start scraping function
 async function startScraping() {
