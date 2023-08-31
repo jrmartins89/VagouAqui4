@@ -35,26 +35,23 @@
     align-items: center;
 }
 
-.carousel .slider {
-    width: 100%;
+.filtro-item {
+    margin-right: 20px;
     display: flex;
     align-items: center;
 }
 
-.carousel .carousel {
+.filtro-item label {
+    margin-right: 5px;
+    font-size: 1.2em; /* Updated font size */
+    font-weight: bold; /* Added font weight */
+    color: #000000; /* Added color */
+}
+
+/* Updated Select field styles */
+.filtro-item .select-container {
     flex: 1;
-}
-
-/* Additional styles for carousel images */
-.carousel .slider-wrapper img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Maintain aspect ratio */
-}
-
-.ad-description {
-    font-size: 1em;
-    margin-top: 10px;
+    max-width: 300px; /* Set a maximum width for the Select field */
 }
 
 .ad-price {
