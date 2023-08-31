@@ -52,7 +52,7 @@
 /* Updated Select field styles */
 .filtro-item .select-container {
     flex: 1;
-    max-width: 300px; /* Set a maximum width for the Select field */
+    max-width: 200px; /* Set a maximum width for the Select field */
 }
 
 .ad-price {
