@@ -1,34 +1,34 @@
 [
   {
-    "neighbourhood": "carvoeira",
+    "neighborhood": "carvoeira",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=88"
   },
   {
-    "neighbourhood": "corrego grande",
+    "neighborhood": "corrego grande",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=91"
   },
   {
-    "neighbourhood": "serrinha",
+    "neighborhood": "serrinha",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=89"
   },
   {
-    "neighbourhood": "outros bairros",
+    "neighborhood": "outros bairros",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=94"
   },
   {
-    "neighbourhood": "centro",
+    "neighborhood": "centro",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=197"
   },
   {
-    "neighbourhood": "itacorubi",
+    "neighborhood": "itacorubi",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=90"
   },
   {
-    "neighbourhood": "saco dos limoes",
+    "neighborhood": "saco dos limoes",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=96"
   },
   {
-    "neighbourhood": "trindade",
+    "neighborhood": "trindade",
     "url": "https://classificados.inf.ufsc.br/index.php?catid=86"
   }
 ]

@@ -23,9 +23,9 @@ function AdGrid() {
         fetchAds();
     }, []);
 
-    const neighborhoods = Array.from(new Set(ads.map(ad => ad.neighbourhood))); // Get unique neighborhoods
+    const neighborhoods = Array.from(new Set(ads.map(ad => ad.neighborhood))); // Get unique neighborhoods
     const filteredAds = selectedNeighborhood
-        ? ads.filter(ad => ad.neighbourhood === selectedNeighborhood.value)
+        ? ads.filter(ad => ad.neighborhood === selectedNeighborhood.value)
         : ads;
     const indexOfLastAd = currentPage * adsPerPage;
     const indexOfFirstAd = indexOfLastAd - adsPerPage;
@@ -72,7 +72,7 @@ function AdGrid() {
                             </Carousel>
                             <p className="ad-description">{ad.description}</p>
                             <p className="ad-price">{ad.price}</p>
-                            <p className="ad-neighbourhood">Bairro: {ad.neighbourhood}</p>
+                            <p className="ad-neighborhood">Bairro: {ad.neighborhood}</p>
                         </div>
                     ))}
                 </div>

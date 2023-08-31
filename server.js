@@ -49,20 +49,20 @@ async function startScraping() {
 
             if (newAdItems.length > 0) {
                 const itemsWithDetails = await scraper.getAdDetails(newAdItems);
-
+                console.log('urlInfo>>>>>>>>>>>>>>',urlInfo);
                 const finalItems = itemsWithDetails.map((item) => ({
                     title: item.title,
                     link: item.link,
                     description: item.description,
                     price: item.price,
                     imageLinks: item.imageLinks,
-                    neighbourhood: urlInfo.neighbourhood, // Save neighbourhood value
+                    neighborhood: urlInfo.neighborhood, // Save neighborhood value
                 }));
 
                 await Ad.insertMany(finalItems);
-                console.log(`Scraped data from ${urlInfo.neighbourhood} has been saved to MongoDB collection "ads"`);
+                console.log(`Scraped data from ${urlInfo.neighborhood} has been saved to MongoDB collection "ads"`);
             } else {
-                console.log(`No new ads to save from ${urlInfo.neighbourhood}`);
+                console.log(`No new ads to save from ${urlInfo.neighborhood}`);
             }
         }
     } catch (error) {
