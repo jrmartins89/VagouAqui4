@@ -48,12 +48,14 @@ function AdGrid() {
             <section className="filtros">
                 <div className="filtro-item">
                     <label>Bairro:</label>
+                    <div className="select-container">
                     <Select
                         options={neighborhoodOptions}
                         value={selectedNeighborhood}
                         onChange={handleNeighborhoodChange}
                         isClearable
                     />
+                    </div>
                 </div>
             </section>
             <div className="grid-container">
