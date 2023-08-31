@@ -39,6 +39,7 @@
     margin-right: 20px;
     display: flex;
     align-items: center;
+    justify-content: center; /* Add this line to horizontally center the content */
 }
 
 .filtro-item label {
