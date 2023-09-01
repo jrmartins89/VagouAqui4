@@ -1,26 +1,31 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const fs = require('fs');
 
 async function scrapeIbagyAds() {
     try {
-        // Make an HTTP GET request to the target URL
         const response = await axios.get('https://ibagy.com.br/aluguel/kitnet_conjugado/florianopolis/');
 
-        // Check if the request was successful (status code 200)
         if (response.status === 200) {
-            // Load the HTML content using Cheerio
             const $ = cheerio.load(response.data);
-
-            // Find the element with id 'imovel-boxes'
             const adsPage = $('#imovel-boxes');
 
-            // Find all <a> elements with target='_blank' and retrieve their 'href' attributes
-            const adsLinks = adsPage.find('a[target="_blank"]').map((index, element) => {
-                return $(element).attr('href');
-            }).get();
+            const adsLinks = new Set(); // Use a Set to store unique links
 
-            // Show the links in the console
-            console.log(adsLinks);
+            adsPage.find('a[target="_blank"]').each((index, element) => {
+                const link = $(element).attr('href');
+                if (link) {
+                    adsLinks.add(link); // Add the link to the Set
+                }
+            });
+
+            const uniqueAdsLinks = Array.from(adsLinks); // Convert the Set back to an array
+
+            const adsData = { links: uniqueAdsLinks };
+
+            fs.writeFileSync('adsLinks.json', JSON.stringify(adsData, null, 2));
+
+            console.log('Unique ads links saved to adsLinks.json');
         } else {
             console.error('Failed to fetch the page. Status code:', response.status);
         }
@@ -29,5 +34,4 @@ async function scrapeIbagyAds() {
     }
 }
 
-// Call the scraper function
 scrapeIbagyAds();
