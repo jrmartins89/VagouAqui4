@@ -44,16 +44,13 @@ async function scrapeIbagyAdsDetails(adLinks) {
 
             if (response.status === 200) {
                 const $ = cheerio.load(response.data);
-                const description = $('#clb-descricao').html();
+                const adDescriptionMatch = $('#clb-descricao > div > div > div:nth-child(3) > p').text();
 
-                const titleMatch = description.match(/<h2>(.*?)<\/h2>/);
-                const title = titleMatch ? titleMatch[1] : 'Title not found';
-
-                const adDescriptionMatch = description.match(/clb-descricao > div > div > div:nth-child(3) > p/);
-                const adDescription = adDescriptionMatch ? $(adDescriptionMatch[0]).text() : 'Description not found';
+                const titleMatch = $('#clb-descricao h2').text();
+                const title = titleMatch || 'Title not found';
 
                 console.log('Title:', title);
-                console.log('Ad Description:', adDescription);
+                console.log('Ad Description:', adDescriptionMatch || 'Description not found');
             } else {
                 console.error('Failed to fetch ad details from:', link);
             }
