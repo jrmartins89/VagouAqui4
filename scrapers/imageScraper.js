@@ -13,15 +13,18 @@ async function scrapeImagesClassificadosUfsc(imageUrls) {
             response.on('end', () => {
                 const $ = cheerio.load(data);
 
-                const images = [];
+                const images = new Set(); // Use a Set to store unique image URLs
 
                 $('img').each((index, element) => {
-                    images.push($(element).attr('src'));
+                    const imageUrl = $(element).attr('src');
+                    if (imageUrl && imageUrlPattern.test(imageUrl)) {
+                        images.add(imageUrl);
+                    }
                 });
 
-                const adImages = images.filter(image => image.includes('images') && image.includes('_tmb1.jpg'))
-                    .map(image => image.replace('images/', 'https://classificados.inf.ufsc.br/images/')
-                        .replace('_tmb1.jpg', '.jpg'));
+                // Transform the Set back to an array and filter the image URLs if needed
+                const adImages = Array.from(images)
+                    .map(image => image.replace('_tmb1.jpg', '.jpg'));
 
                 resolve(adImages);
             });
@@ -32,6 +35,7 @@ async function scrapeImagesClassificadosUfsc(imageUrls) {
 }
 
 async function scrapeImagesIbagy(url) {
+    const imageUrlPattern = /https:\/\/cdn\.vistahost\.com\.br\/ibagyimo\/vista\.imobi\/fotos\//;
     return new Promise((resolve, reject) => {
         https.get(url, (response) => {
             let data = '';
@@ -43,13 +47,19 @@ async function scrapeImagesIbagy(url) {
             response.on('end', () => {
                 const $ = cheerio.load(data);
 
-                const images = [];
+                const images = new Set(); // Use a Set to store unique image URLs
 
                 $('img').each((index, element) => {
-                    images.push($(element).attr('src'));
+                    const imageUrl = $(element).attr('src');
+                    if (imageUrl && imageUrlPattern.test(imageUrl)) {
+                        images.add(imageUrl);
+                    }
                 });
 
-                resolve(images);
+                // Transform the Set back to an array
+                const uniqueImages = Array.from(images);
+                console.log(uniqueImages)
+                resolve(uniqueImages);
             });
 
             response.on('error', (error) => {
