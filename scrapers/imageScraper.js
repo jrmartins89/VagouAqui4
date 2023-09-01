@@ -1,5 +1,6 @@
 const https = require('https');
 const cheerio = require('cheerio');
+const imageUrlPattern = /https:\/\/cdn\.vistahost\.com\.br\/ibagyimo\/vista\.imobi\/fotos\//;
 
 async function scrapeImagesClassificadosUfsc(imageUrls) {
     return new Promise((resolve, reject) => {
@@ -35,7 +36,6 @@ async function scrapeImagesClassificadosUfsc(imageUrls) {
 }
 
 async function scrapeImagesIbagy(url) {
-    const imageUrlPattern = /https:\/\/cdn\.vistahost\.com\.br\/ibagyimo\/vista\.imobi\/fotos\//;
     return new Promise((resolve, reject) => {
         https.get(url, (response) => {
             let data = '';
