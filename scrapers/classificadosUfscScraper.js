@@ -1,4 +1,4 @@
-const { scrapeImages }  = require('../imageScraper');
+const { scrapeImages }  = require('./imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
