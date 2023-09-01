@@ -1,4 +1,4 @@
-const { scrapeImages }  = require('./imageScraper');
+const { scrapeImagesClassificadosUfsc, scrapeImagesIbagy }  = require('./imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
@@ -71,7 +71,7 @@ async function getAdDetails(items) {
                 const imageUrls = item.link + '&show_still=1';
                 await (async () => {
                     try {
-                        adImages = await scrapeImages(imageUrls);
+                        adImages = await scrapeImagesClassificadosUfsc(imageUrls);
                         console.log(adImages);
                     } catch (error) {
                         console.error('Error:', error);
