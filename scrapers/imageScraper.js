@@ -63,4 +63,3 @@ module.exports = {
     scrapeImagesClassificadosUfsc,
     scrapeImagesIbagy
 };
-//why did i use promise here?
