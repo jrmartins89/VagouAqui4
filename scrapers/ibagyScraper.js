@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const {scrapeImagesIbagy} = require("./imageScraper");
 
 async function scrapeIbagyAds() {
     try {
@@ -45,12 +46,14 @@ async function scrapeIbagyAdsDetails(adLinks) {
             if (response.status === 200) {
                 const $ = cheerio.load(response.data);
                 const adDescriptionMatch = $('#clb-descricao > div > div > div:nth-child(3) > p').text();
-
                 const titleMatch = $('#clb-descricao h2').text();
                 const title = titleMatch || 'Title not found';
 
+                // Call scrapeImagesIbagy to get image links
+                const imageLinks = await scrapeImagesIbagy(link);
                 console.log('Title:', title);
                 console.log('Ad Description:', adDescriptionMatch || 'Description not found');
+                console.log('Image Links:', imageLinks.join('\n'));
             } else {
                 console.error('Failed to fetch ad details from:', link);
             }
