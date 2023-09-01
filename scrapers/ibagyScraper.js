@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
-const {scrapeImagesIbagy} = require("./imageScraper");
+const { scrapeImagesIbagy } = require('./imageScraper');
 
 async function scrapeIbagyAds() {
     try {
@@ -63,4 +63,7 @@ async function scrapeIbagyAdsDetails(adLinks) {
     }
 }
 
-scrapeIbagyAds();
+module.exports = {
+    scrapeIbagyAds,
+    scrapeIbagyAdsDetails,
+};
