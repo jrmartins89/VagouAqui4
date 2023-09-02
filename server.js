@@ -43,14 +43,14 @@ async function startScraping() {
             const adItemsFromClassificadosUfsc = await scraperUfsc.getAdLinks(urlInfo.url);
             const existingAds = await Ad.find({}, "link");
 
-            const newAdItems = adItemsFromClassificadosUfsc.filter(
+            const newAdItemsFromClassificadosUfsc = adItemsFromClassificadosUfsc.filter(
                 (item) => !existingAds.some((existingAd) => existingAd.link === item.link)
             );
 
-            if (newAdItems.length > 0) {
-                const itemsWithDetails = await scraperUfsc.getAdDetails(newAdItems);
+            if (newAdItemsFromClassificadosUfsc.length > 0) {
+                const itemsWithDetailsClassificadosUfsc = await scraperUfsc.getAdDetails(newAdItemsFromClassificadosUfsc);
                 console.log('urlInfo>>>>>>>>>>>>>>',urlInfo);
-                const finalItems = itemsWithDetails.map((item) => ({
+                const finalItemsClassificadosUfsc = itemsWithDetailsClassificadosUfsc.map((item) => ({
                     title: item.title,
                     link: item.link,
                     description: item.description,
@@ -59,7 +59,7 @@ async function startScraping() {
                     neighborhood: urlInfo.neighborhood, // Save neighborhood value
                 }));
 
-                await Ad.insertMany(finalItems);
+                await Ad.insertMany(finalItemsClassificadosUfsc);
                 console.log(`Scraped data from ${urlInfo.neighborhood} has been saved to MongoDB collection "ads"`);
             } else {
                 console.log(`No new ads to save from ${urlInfo.neighborhood}`);
