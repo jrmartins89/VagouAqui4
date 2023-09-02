@@ -40,10 +40,10 @@ app.use("/api/ads", ads);
 async function startScraping() {
     try {
         for (const urlInfo of urls) {
-            const adItems = await scraperUfsc.getAdLinks(urlInfo.url);
+            const adItemsFromClassificadosUfsc = await scraperUfsc.getAdLinks(urlInfo.url);
             const existingAds = await Ad.find({}, "link");
 
-            const newAdItems = adItems.filter(
+            const newAdItems = adItemsFromClassificadosUfsc.filter(
                 (item) => !existingAds.some((existingAd) => existingAd.link === item.link)
             );
 
