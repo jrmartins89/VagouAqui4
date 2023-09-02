@@ -58,7 +58,6 @@ async function scrapeImagesIbagy(url) {
 
                 // Transform the Set back to an array
                 const uniqueImages = Array.from(images);
-                console.log(uniqueImages)
                 resolve(uniqueImages);
             });
 
