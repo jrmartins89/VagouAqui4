@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const { scrapeImagesIbagy } = require('./imageScraper');
-
+let adItems;
 async function scrapeIbagyAds() {
     try {
         const response = await axios.get('https://ibagy.com.br/aluguel/kitnet_conjugado/florianopolis/');
@@ -29,10 +29,11 @@ async function scrapeIbagyAds() {
             console.log('Unique ads links saved to adsLinks.json');
 
             // Call the function to scrape ad details
-            await scrapeIbagyAdsDetails(uniqueAdsLinks);
+          adItems  = await scrapeIbagyAdsDetails(uniqueAdsLinks);
         } else {
             console.error('Failed to fetch the page. Status code:', response.status);
         }
+        return adItems;
     } catch (error) {
         console.error('Error:', error.message);
     }
@@ -74,6 +75,5 @@ async function scrapeIbagyAdsDetails(adLinks) {
 }
 
 module.exports = {
-    scrapeIbagyAds,
-    scrapeIbagyAdsDetails,
+    scrapeIbagyAds
 };
