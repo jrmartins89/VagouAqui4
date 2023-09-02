@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 const passport = require("passport");
 const users = require("./routes/api/users");
 const app = express();
-const scraper = require("./scrapers/classificadosUfscScraper");
+const scraperUfsc = require("./scrapers/classificadosUfscScraper");
 const Ad = require("./models/Ads");
 const urls = require("./urls.json"); // Load URLs from the JSON file
 const ads = require("./routes/api/ads");
@@ -40,7 +40,7 @@ app.use("/api/ads", ads);
 async function startScraping() {
     try {
         for (const urlInfo of urls) {
-            const adItems = await scraper.getAdLinks(urlInfo.url);
+            const adItems = await scraperUfsc.getAdLinks(urlInfo.url);
             const existingAds = await Ad.find({}, "link");
 
             const newAdItems = adItems.filter(
@@ -48,7 +48,7 @@ async function startScraping() {
             );
 
             if (newAdItems.length > 0) {
-                const itemsWithDetails = await scraper.getAdDetails(newAdItems);
+                const itemsWithDetails = await scraperUfsc.getAdDetails(newAdItems);
                 console.log('urlInfo>>>>>>>>>>>>>>',urlInfo);
                 const finalItems = itemsWithDetails.map((item) => ({
                     title: item.title,
