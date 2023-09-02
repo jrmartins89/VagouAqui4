@@ -9,6 +9,7 @@ const scraperUfsc = require("./scrapers/classificadosUfscScraper");
 const Ad = require("./models/Ads");
 const urls = require("./urls.json"); // Load URLs from the JSON file
 const ads = require("./routes/api/ads");
+const {scrapeIbagyAds} = require("./scrapers/ibagyScraper");
 require("dotenv").config();
 require("./config/passport")(passport);
 
@@ -65,6 +66,21 @@ async function startScraping() {
                 console.log(`No new ads to save from ${urlInfo.neighborhood}`);
             }
         }
+    } catch (error) {
+        console.error("Error during scraping:", error);
+    }
+
+    try {
+       const ibagyAds = await scrapeIbagyAds();
+        const finalAdsIbagy = ibagyAds.map((item) => ({
+            title: item.title,
+            link: item.link || '',
+            description: item.description || '',
+            price: item.price || '',
+            imageLinks: item.imageLinks,
+            neighborhood: '', // Save neighborhood value
+        }));
+       await Ad.insertMany(finalAdsIbagy);
     } catch (error) {
         console.error("Error during scraping:", error);
     }
