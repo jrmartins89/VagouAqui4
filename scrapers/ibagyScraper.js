@@ -40,6 +40,8 @@ async function scrapeIbagyAds() {
 
 async function scrapeIbagyAdsDetails(adLinks) {
     try {
+        const adDetailsArray = []; // Create an array to store ad details JSON objects
+
         for (const link of adLinks) {
             const response = await axios.get(link);
 
@@ -51,13 +53,21 @@ async function scrapeIbagyAdsDetails(adLinks) {
 
                 // Call scrapeImagesIbagy to get image links
                 const imageLinks = await scrapeImagesIbagy(link);
-                console.log('Title:', title);
-                console.log('Ad Description:', adDescriptionMatch || 'Description not found');
-                console.log('Image Links:', imageLinks.join('\n'));
+                // Create an adDetails object for this ad
+                const adDetails = {
+                    title,
+                    adDescription: adDescriptionMatch || 'Description not found',
+                    imageLinks,
+                };
+
+                // Push the adDetails object to the array
+                adDetailsArray.push(adDetails);
             } else {
                 console.error('Failed to fetch ad details from:', link);
             }
         }
+        // Return the array of ad details objects
+        return adDetailsArray;
     } catch (error) {
         console.error('Error:', error.message);
     }
