@@ -72,7 +72,6 @@ async function getAdDetails(items) {
                 await (async () => {
                     try {
                         adImages = await scrapeImagesClassificadosUfsc(imageUrls);
-                        console.log(adImages);
                     } catch (error) {
                         console.error('Error:', error);
                     }
