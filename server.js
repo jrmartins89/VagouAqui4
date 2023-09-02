@@ -75,9 +75,9 @@ async function startScraping() {
         const finalAdsIbagy = ibagyAds.map((item) => ({
             title: item.title,
             link: item.link || '',
-            description: item.description || '',
+            description: item.adDescription || '',
             price: item.price || '',
-            imageLinks: item.imageLinks,
+            imageLinks: item.imageLinks || '',
             neighborhood: '', // Save neighborhood value
         }));
        await Ad.insertMany(finalAdsIbagy);
