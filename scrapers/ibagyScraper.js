@@ -59,6 +59,7 @@ async function scrapeIbagyAdsDetails(adLinks) {
                     title,
                     adDescription: adDescriptionMatch || 'Description not found',
                     imageLinks,
+                    link
                 };
 
                 // Push the adDetails object to the array
