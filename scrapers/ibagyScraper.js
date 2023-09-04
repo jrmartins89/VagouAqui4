@@ -51,7 +51,7 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 const adDescriptionMatch = $('#clb-descricao > div > div > div:nth-child(3) > p').text();
                 const titleMatch = $('#clb-descricao h2').text();
                 const title = titleMatch || 'Title not found';
-
+                const price = $('#clb-imovel-topo > div > div:nth-child(1) > div:nth-child(2) > div.property-thumb-info-label > span > span.thumb-price').text()+ ' + taxas';
                 // Call scrapeImagesIbagy to get image links
                 const imageLinks = await scrapeImagesIbagy(link);
                 // Create an adDetails object for this ad
@@ -59,7 +59,8 @@ async function scrapeIbagyAdsDetails(adLinks) {
                     title,
                     adDescription: adDescriptionMatch || 'Description not found',
                     imageLinks,
-                    link
+                    link,
+                    price
                 };
 
                 // Push the adDetails object to the array
