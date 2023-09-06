@@ -8,12 +8,12 @@ function AdGrid() {
     const [ads, setAds] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [adsPerPage] = useState(5);
-    const [selectedNeighborhood, setSelectedNeighborhood] = useState(null); // Selected neighborhood filter
+    const [selectedNeighborhood, setSelectedNeighborhood] = useState(null);
 
     useEffect(() => {
         async function fetchAds() {
             try {
-                const response = await fetch('http://127.0.0.1:5000/api/ads/all'); // Update the API endpoint as needed
+                const response = await fetch('http://127.0.0.1:5000/api/ads/all');
                 const data = await response.json();
                 setAds(data);
             } catch (error) {
@@ -23,24 +23,26 @@ function AdGrid() {
         fetchAds();
     }, []);
 
-    const neighborhoods = Array.from(new Set(ads.map(ad => ad.neighborhood))); // Get unique neighborhoods
+    const uniqueNeighborhoods = Array.from(new Set(ads.map(ad => ad.neighborhood.toLowerCase())));
+
     const filteredAds = selectedNeighborhood
-        ? ads.filter(ad => ad.neighborhood === selectedNeighborhood.value)
+        ? ads.filter(ad => ad.neighborhood.toLowerCase() === selectedNeighborhood.value.toLowerCase())
         : ads;
+
     const indexOfLastAd = currentPage * adsPerPage;
     const indexOfFirstAd = indexOfLastAd - adsPerPage;
     const currentAds = filteredAds.slice(indexOfFirstAd, indexOfLastAd);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    const neighborhoodOptions = neighborhoods.map(neighborhood => ({
+    const neighborhoodOptions = uniqueNeighborhoods.map(neighborhood => ({
         value: neighborhood,
         label: neighborhood,
     }));
 
     const handleNeighborhoodChange = selectedOption => {
         setSelectedNeighborhood(selectedOption);
-        setCurrentPage(1); // Reset page number when neighborhood filter changes
+        setCurrentPage(1);
     };
 
     return (
@@ -49,12 +51,12 @@ function AdGrid() {
                 <div className="filtro-item">
                     <label>Bairro:</label>
                     <div className="select-container">
-                    <Select
-                        options={neighborhoodOptions}
-                        value={selectedNeighborhood}
-                        onChange={handleNeighborhoodChange}
-                        isClearable
-                    />
+                        <Select
+                            options={neighborhoodOptions}
+                            value={selectedNeighborhood}
+                            onChange={handleNeighborhoodChange}
+                            isClearable
+                        />
                     </div>
                 </div>
             </section>
