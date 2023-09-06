@@ -53,7 +53,11 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 const title = titleMatch || 'Title not found';
                 const price = $('#clb-imovel-topo > div > div:nth-child(1) > div:nth-child(2) > div.property-thumb-info-label > span > span.thumb-price').text()+ ' + taxas';
                 const address = $('#section-map > div > div > div > div > p > span').text();
-                console.log('bairro >>>>>>>>>>>>>>>>>', address);
+                // Use a regular expression to extract the neighborhood, excluding the number and comma
+                const neighborhoodMatch = /,\s*(.*?)\s*-\s*Florianópolis\/Sc/i.exec(address);
+                const neighborhood = neighborhoodMatch ? neighborhoodMatch[1].replace(/^\s*,\s*/, '') : 'Neighborhood not found';
+
+                console.log('Neighborhood:', neighborhood);
                 // Call scrapeImagesIbagy to get image links
                 const imageLinks = await scrapeImagesIbagy(link);
                 // Create an adDetails object for this ad
