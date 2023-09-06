@@ -78,7 +78,7 @@ async function startScraping() {
             description: item.adDescription || '',
             price: item.price || '',
             imageLinks: item.imageLinks || '',
-            neighborhood: '', // Save neighborhood value
+            neighborhood: item.neighborhood, // Save neighborhood value
         }));
        await Ad.insertMany(finalAdsIbagy);
     } catch (error) {
