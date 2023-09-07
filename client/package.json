@@ -9,6 +9,7 @@
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-image-lightbox": "^5.1.4",
     "react-redux": "^5.1.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^4.3.1",

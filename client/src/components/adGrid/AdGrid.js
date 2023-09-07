@@ -3,12 +3,16 @@ import './AdGrid.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Select from 'react-select';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 function AdGrid() {
     const [ads, setAds] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [adsPerPage] = useState(5);
     const [selectedNeighborhood, setSelectedNeighborhood] = useState(null);
+    const [isLightboxOpen, setLightboxOpen] = useState(false);
+    const [lightboxImageIndex, setLightboxImageIndex] = useState(-1);
 
     useEffect(() => {
         async function fetchAds() {
@@ -62,13 +66,19 @@ function AdGrid() {
             </section>
             <div className="grid-container">
                 <div className="grid">
-                    {currentAds.map(ad => (
+                    {currentAds.map((ad, index) => (
                         <div key={ad._id} className="grid-item">
                             <h2>{ad.title}</h2>
                             <Carousel showArrows={true} infiniteLoop={true}>
-                                {ad.imageLinks.map((imageLink, index) => (
-                                    <div key={index}>
-                                        <img src={imageLink} alt={`Ad ${index}`} className="ad-image" />
+                                {ad.imageLinks.map((imageLink, imgIndex) => (
+                                    <div
+                                        key={imgIndex}
+                                        onClick={() => {
+                                            setLightboxImageIndex(imgIndex);
+                                            setLightboxOpen(true);
+                                        }}
+                                    >
+                                        <img src={imageLink} alt={`Ad ${imgIndex}`} className="ad-image" />
                                     </div>
                                 ))}
                             </Carousel>
@@ -90,6 +100,23 @@ function AdGrid() {
                     ))}
                 </div>
             </div>
+            {isLightboxOpen && (
+                <Lightbox
+                    mainSrc={currentAds[lightboxImageIndex].imageLinks[lightboxImageIndex]}
+                    nextSrc={
+                        currentAds[lightboxImageIndex].imageLinks[(lightboxImageIndex + 1) % currentAds[lightboxImageIndex].imageLinks.length]
+                    }
+                    prevSrc={
+                        currentAds[lightboxImageIndex].imageLinks[
+                        (lightboxImageIndex + currentAds[lightboxImageIndex].imageLinks.length - 1) %
+                        currentAds[lightboxImageIndex].imageLinks.length
+                            ]
+                    }
+                    onCloseRequest={() => setLightboxOpen(false)}
+                    onMovePrevRequest={() => setLightboxImageIndex((lightboxImageIndex + currentAds[lightboxImageIndex].imageLinks.length - 1) % currentAds[lightboxImageIndex].imageLinks.length)}
+                    onMoveNextRequest={() => setLightboxImageIndex((lightboxImageIndex + 1) % currentAds[lightboxImageIndex].imageLinks.length)}
+                />
+            )}
         </div>
     );
 }
