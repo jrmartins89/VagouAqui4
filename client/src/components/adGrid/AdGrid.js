@@ -84,7 +84,7 @@ function AdGrid() {
                             </Carousel>
                             <p className="ad-description">{ad.description}</p>
                             <p className="ad-price">{ad.price}</p>
-                            <p className="ad-neighborhood">Bairro: {ad.neighborhood}</p>
+                            <p className="ad-neighborhood">{ad.neighborhood}</p>
                         </div>
                     ))}
                 </div>
