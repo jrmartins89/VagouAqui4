@@ -103,3 +103,4 @@ module.exports = {
     getAdLinks,
     getAdDetails
 };
+//refactor the function to get address
