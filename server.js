@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors"); // Import the cors package
 const port = process.env.PORT || 5000;
 const passport = require("passport");
 const users = require("./routes/api/users");
@@ -13,6 +14,7 @@ const {scrapeIbagyAds} = require("./scrapers/ibagyScraper");
 require("dotenv").config();
 require("./config/passport")(passport);
 
+app.use(cors()); // Add CORS middleware to allow all origins
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -29,12 +31,10 @@ mongoose
         console.error('Erro de conexão com o banco de dados:', error);
     });
 
-
 // Passport middleware
 app.use(passport.initialize());
 // Routes
 app.use("/api/users", users);
-
 app.use("/api/ads", ads);
 
 // Start scraping function
