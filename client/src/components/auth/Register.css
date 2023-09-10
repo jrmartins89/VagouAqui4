@@ -1,0 +1,26 @@
+/* Register.css */
+
+.container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.btn-back {
+    margin-bottom: 20px;
+}
+
+.form-container {
+    padding-left: 11.250px;
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.login-link {
+    color: #333;
+}
+
+/* Add more styles as needed */
