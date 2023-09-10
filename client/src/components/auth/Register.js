@@ -33,7 +33,6 @@ class Register extends Component {
     }
 
     componentDidMount() {
-        // If logged in and user navigates to Register page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
             this.props.history.push("/dashboard");
         }
@@ -72,7 +71,7 @@ class Register extends Component {
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2,
-            preferences: this.state.preferences // Include preferences in newUser
+            preferences: this.state.preferences
         };
         this.props.registerUser(newUser, this.props.history);
     };
@@ -157,7 +156,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.password2}</span>
                             </div>
 
-                            {/* Location Preference */}
+                            {/* Preferences Fields */}
                             <div className="input-field col s12">
                                 <label htmlFor="preferences.location">Preferred Location</label>
                                 <input
@@ -169,36 +168,50 @@ class Register extends Component {
                                 />
                             </div>
 
-                            {/* Roommates Preference */}
                             <div className="input-field col s12">
-                                <label>Roommates</label>
+                                <label>House or Apartment</label>
+                                <select
+                                    id="preferences.houseOrApartment"
+                                    name="houseOrApartment"
+                                    value={preferences.houseOrApartment}
+                                    onChange={this.onChange}
+                                >
+                                    <option value="House">House</option>
+                                    <option value="Apartment">Apartment</option>
+                                </select>
+                            </div>
+
+                            <div className="input-field col s12">
+                                <label>Gender Preference</label>
+                                <select
+                                    id="preferences.genderPreference"
+                                    name="genderPreference"
+                                    value={preferences.genderPreference}
+                                    onChange={this.onChange}
+                                >
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Any">Any</option>
+                                </select>
+                            </div>
+
+                            <div className="input-field col s12">
+                                <label>Accepts Pets</label>
                                 <p>
                                     <label>
                                         <input
-                                            type="radio"
-                                            name="roommates"
-                                            value="Alone"
-                                            checked={preferences.roommates === "Alone"}
+                                            type="checkbox"
+                                            id="preferences.acceptsPets"
+                                            name="acceptsPets"
+                                            checked={preferences.acceptsPets}
                                             onChange={this.onChange}
                                         />
-                                        <span>Alone</span>
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="roommates"
-                                            value="With Roommates"
-                                            checked={preferences.roommates === "With Roommates"}
-                                            onChange={this.onChange}
-                                        />
-                                        <span>With Roommates</span>
+                                        <span>Yes</span>
                                     </label>
                                 </p>
                             </div>
 
-                            {/* ... Other form fields ... */}
+                            {/* Add more preference fields here */}
 
                             <div className="col s12 form-container">
                                 <button
