@@ -95,7 +95,7 @@ class Register extends Component {
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.name}
@@ -110,7 +110,7 @@ class Register extends Component {
                                 <label htmlFor="name">Name</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -125,7 +125,7 @@ class Register extends Component {
                                 <label htmlFor="email">Email</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -140,7 +140,7 @@ class Register extends Component {
                                 <label htmlFor="password">Password</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password2}
@@ -157,7 +157,7 @@ class Register extends Component {
                             </div>
 
                             {/* Preferences Fields */}
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <label htmlFor="preferences.location">Preferred Location</label>
                                 <input
                                     id="preferences.location"
@@ -168,7 +168,7 @@ class Register extends Component {
                                 />
                             </div>
 
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <label>House or Apartment</label>
                                 <select
                                     id="preferences.houseOrApartment"
@@ -181,7 +181,7 @@ class Register extends Component {
                                 </select>
                             </div>
 
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <label>Gender Preference</label>
                                 <select
                                     id="preferences.genderPreference"
@@ -195,7 +195,7 @@ class Register extends Component {
                                 </select>
                             </div>
 
-                            <div className="input-field col s12">
+                            <div className="input-field col s12 form-field">
                                 <label>Accepts Pets</label>
                                 <p>
                                     <label>

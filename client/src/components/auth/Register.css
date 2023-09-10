@@ -23,4 +23,9 @@
     color: #333;
 }
 
+/* Add this CSS class for spacing between form elements */
+.form-field {
+    margin-bottom: 20px; /* You can adjust the margin to control the spacing */
+}
+
 /* Add more styles as needed */
