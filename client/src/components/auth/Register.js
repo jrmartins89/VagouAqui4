@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import {Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {registerUser} from "../../actions/authActions";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+
 class Register extends Component {
     constructor() {
         super();
@@ -12,7 +13,21 @@ class Register extends Component {
             email: "",
             password: "",
             password2: "",
-            errors: {}
+            errors: {},
+            preferences: {
+                houseOrApartment: "Apartment",
+                genderPreference: "Any",
+                acceptsPets: false,
+                location: "",
+                roommates: "Alone",
+                amenities: "",
+                leaseLength: "",
+                budget: "",
+                securityDeposit: "",
+                wheelchairAccessible: false,
+                noiseLevel: "Quiet"
+                // Add more preference fields as needed
+            }
         };
     }
 
@@ -22,6 +37,7 @@ class Register extends Component {
             this.props.history.push("/dashboard");
         }
     }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({
@@ -29,29 +45,46 @@ class Register extends Component {
             });
         }
     }
+
     onChange = e => {
-        this.setState({[e.target.id]: e.target.value});
+        if (e.target.id.startsWith("preferences.")) {
+            // Handle changes in preference fields
+            const preferenceField = e.target.id.split(".")[1];
+            const newValue = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+            this.setState(prevState => ({
+                preferences: {
+                    ...prevState.preferences,
+                    [preferenceField]: newValue
+                }
+            }));
+        } else {
+            // Handle changes in non-preference fields
+            this.setState({ [e.target.id]: e.target.value });
+        }
     };
+
     onSubmit = e => {
         e.preventDefault();
         const newUser = {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            password2: this.state.password2
+            password2: this.state.password2,
+            preferences: this.state.preferences // Include preferences in newUser
         };
         this.props.registerUser(newUser, this.props.history);
     };
 
     render() {
-        const { errors } = this.state;
+        const { errors, preferences } = this.state;
+
         return (
             <div className="container">
                 <div className="row">
                     <div className="col s8 offset-s2">
                         <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to
-                            home
+                            <i className="material-icons left">keyboard_backspace</i> Back to home
                         </Link>
                         <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                             <h4>
@@ -118,6 +151,69 @@ class Register extends Component {
                                 <label htmlFor="password2">Confirm Password</label>
                                 <span className="red-text">{errors.password2}</span>
                             </div>
+
+                            {/* Location Preference */}
+                            <div className="input-field col s12">
+                                <label htmlFor="preferences.location">Preferred Location</label>
+                                <input
+                                    id="preferences.location"
+                                    type="text"
+                                    value={preferences.location}
+                                    onChange={this.onChange}
+                                />
+                            </div>
+
+                            {/* Roommates Preference */}
+                            <div className="input-field col s12">
+                                <label htmlFor="preferences.roommates">Roommates</label>
+                                <select
+                                    id="preferences.roommates"
+                                    value={preferences.roommates}
+                                    onChange={this.onChange}
+                                >
+                                    <option value="Alone">Alone</option>
+                                    <option value="With Roommates">With Roommates</option>
+                                </select>
+                            </div>
+
+                            {/* Amenities Preference */}
+                            <div className="input-field col s12">
+                                <label htmlFor="preferences.amenities">Required Amenities</label>
+                                <input
+                                    id="preferences.amenities"
+                                    type="text"
+                                    value={preferences.amenities}
+                                    onChange={this.onChange}
+                                />
+                            </div>
+
+                            {/* Pet Preference */}
+                            <div className="input-field col s12">
+                                <label>
+                                    <input
+                                        id="preferences.acceptsPets"
+                                        type="checkbox"
+                                        checked={preferences.acceptsPets}
+                                        onChange={this.onChange}
+                                    />
+                                    <span>Accepts Pets</span>
+                                </label>
+                            </div>
+
+                            {/* Lease Length Preference */}
+                            <div className="input-field col s12">
+                                <label htmlFor="preferences.leaseLength">Preferred Lease Length</label>
+                                <input
+                                    id="preferences.leaseLength"
+                                    type="text"
+                                    value={preferences.leaseLength}
+                                    onChange={this.onChange}
+                                />
+                            </div>
+
+                            {/* Other Preferences */}
+                            {/* Add more fields for other preferences as needed */}
+
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                                 <button
                                     style={{
@@ -145,10 +241,12 @@ Register.propTypes = {
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors
 });
+
 export default connect(
     mapStateToProps,
     { registerUser }
