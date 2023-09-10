@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import "./Register.css"; // Import the CSS file
 
 class Register extends Component {
     constructor() {
@@ -83,15 +84,15 @@ class Register extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
+                        <Link to="/" className="btn-flat waves-effect btn-back">
                             <i className="material-icons left">keyboard_backspace</i> Back to home
                         </Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                            <h4>
+                        <div className="col s12 form-container">
+                            <h4 className="form-title">
                                 <b>Register</b> below
                             </h4>
                             <p className="grey-text text-darken-1">
-                                Already have an account? <Link to="/login">Log in</Link>
+                                Already have an account? <Link to="/login" className="login-link">Log in</Link>
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
@@ -101,6 +102,7 @@ class Register extends Component {
                                     value={this.state.name}
                                     error={errors.name}
                                     id="name"
+                                    name="name"
                                     type="text"
                                     className={classnames("", {
                                         invalid: errors.name
@@ -115,6 +117,7 @@ class Register extends Component {
                                     value={this.state.email}
                                     error={errors.email}
                                     id="email"
+                                    name="email"
                                     type="email"
                                     className={classnames("", {
                                         invalid: errors.email
@@ -129,6 +132,7 @@ class Register extends Component {
                                     value={this.state.password}
                                     error={errors.password}
                                     id="password"
+                                    name="password"
                                     type="password"
                                     className={classnames("", {
                                         invalid: errors.password
@@ -143,6 +147,7 @@ class Register extends Component {
                                     value={this.state.password2}
                                     error={errors.password2}
                                     id="password2"
+                                    name="password2"
                                     type="password"
                                     className={classnames("", {
                                         invalid: errors.password2
@@ -157,6 +162,7 @@ class Register extends Component {
                                 <label htmlFor="preferences.location">Preferred Location</label>
                                 <input
                                     id="preferences.location"
+                                    name="location"
                                     type="text"
                                     value={preferences.location}
                                     onChange={this.onChange}
@@ -194,16 +200,10 @@ class Register extends Component {
 
                             {/* ... Other form fields ... */}
 
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <div className="col s12 form-container">
                                 <button
-                                    style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem"
-                                    }}
+                                    className="btn btn-large waves-effect waves-light hoverable btn-register"
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                                 >
                                     Sign up
                                 </button>
