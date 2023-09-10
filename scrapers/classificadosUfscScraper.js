@@ -103,3 +103,5 @@ module.exports = {
     getAdLinks,
     getAdDetails
 };
+
+//remove function to create file
