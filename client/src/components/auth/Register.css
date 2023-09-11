@@ -28,4 +28,39 @@
     margin-bottom: 20px; /* You can adjust the margin to control the spacing */
 }
 
+/* Additional styles for preference fields */
+.input-field.col.s12.form-field {
+    margin-bottom: 20px;
+}
+
+/* Style the label for preference fields */
+.input-field.col.s12.form-field label {
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Text color */
+}
+
+/* Style the select input for preference fields */
+.input-field.col.s12.form-field select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Text color */
+}
+
+/* Style the checkbox input for preference fields */
+.input-field.col.s12.form-field label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Style the checkbox label for preference fields */
+.input-field.col.s12.form-field label span {
+    padding-left: 30px; /* Add space for the checkbox */
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Text color */
+}
+
 /* Add more styles as needed */
