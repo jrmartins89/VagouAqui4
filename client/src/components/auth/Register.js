@@ -107,7 +107,7 @@ class Register extends Component {
                                         invalid: errors.name
                                     })}
                                 />
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="name">Nome</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12 form-field">
@@ -137,7 +137,7 @@ class Register extends Component {
                                         invalid: errors.password
                                     })}
                                 />
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password">Digitar Senha</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="input-field col s12 form-field">
@@ -152,13 +152,12 @@ class Register extends Component {
                                         invalid: errors.password2
                                     })}
                                 />
-                                <label htmlFor="password2">Confirm Password</label>
+                                <label htmlFor="password2">Confirmar Senha</label>
                                 <span className="red-text">{errors.password2}</span>
                             </div>
 
                             {/* Preferences Fields */}
                             <div className="input-field col s12 form-field">
-                                <label htmlFor="preferences.location">Preferred Location</label>
                                 <input
                                     id="preferences.location"
                                     name="location"
@@ -166,10 +165,12 @@ class Register extends Component {
                                     value={preferences.location}
                                     onChange={this.onChange}
                                 />
+                                <label htmlFor="preferences.location">Bairro preferencial para locação</label>
                             </div>
-
                             <div className="input-field col s12 form-field">
-                                <label>House or Apartment</label>
+                                <div>
+                                    <label>Prefere casa ou apartamento?</label>
+                                </div>
                                 <select
                                     id="preferences.houseOrApartment"
                                     name="houseOrApartment"
@@ -180,9 +181,10 @@ class Register extends Component {
                                     <option value="Apartment">Apartment</option>
                                 </select>
                             </div>
-
                             <div className="input-field col s12 form-field">
-                                <label>Gender Preference</label>
+                                <div>
+                                    <label>Anúncios destinados à</label>
+                                </div>
                                 <select
                                     id="preferences.genderPreference"
                                     name="genderPreference"
@@ -194,9 +196,10 @@ class Register extends Component {
                                     <option value="Any">Any</option>
                                 </select>
                             </div>
-
                             <div className="input-field col s12 form-field">
-                                <label>Accepts Pets</label>
+                                <div>
+                                    <label>Aceita Pets?</label>
+                                </div>
                                 <p>
                                     <label>
                                         <input
