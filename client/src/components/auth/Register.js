@@ -193,7 +193,7 @@ class Register extends Component {
                                 >
                                     <option value="Men">Homens</option>
                                     <option value="Women">Mulheres</option>
-                                    <option value="Any">Misto</option>
+                                    <option value="Any">Tanto Faz</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
