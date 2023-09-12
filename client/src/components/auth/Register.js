@@ -84,14 +84,14 @@ class Register extends Component {
                 <div className="row">
                     <div className="col s8 offset-s2">
                         <Link to="/" className="btn-flat waves-effect btn-back">
-                            <i className="material-icons left">keyboard_backspace</i> Back to home
+                            <i className="material-icons left">keyboard_backspace</i> Voltar ao início
                         </Link>
                         <div className="col s12 form-container">
                             <h4 className="form-title">
-                                <b>Register</b> below
+                                <b>Cadastre-se</b> abaixo
                             </h4>
                             <p className="grey-text text-darken-1">
-                                Already have an account? <Link to="/login" className="login-link">Log in</Link>
+                                Já possui uma conta? <Link to="/login" className="login-link">Fazer log in</Link>
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
