@@ -177,13 +177,13 @@ class Register extends Component {
                                     value={preferences.houseOrApartment}
                                     onChange={this.onChange}
                                 >
-                                    <option value="House">House</option>
-                                    <option value="Apartment">Apartment</option>
+                                    <option value="House">Casa</option>
+                                    <option value="Apartment">Apartamento</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
                                 <div>
-                                    <label>Anúncios destinados à</label>
+                                    <label>Procuro anúncios de aluguéis destinados à:</label>
                                 </div>
                                 <select
                                     id="preferences.genderPreference"
@@ -191,9 +191,9 @@ class Register extends Component {
                                     value={preferences.genderPreference}
                                     onChange={this.onChange}
                                 >
-                                    <option value="Men">Men</option>
-                                    <option value="Women">Women</option>
-                                    <option value="Any">Any</option>
+                                    <option value="Men">Homens</option>
+                                    <option value="Women">Mulheres</option>
+                                    <option value="Any">Misto</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
@@ -209,7 +209,7 @@ class Register extends Component {
                                             checked={preferences.acceptsPets}
                                             onChange={this.onChange}
                                         />
-                                        <span>Yes</span>
+                                        <span></span>
                                     </label>
                                 </p>
                             </div>
