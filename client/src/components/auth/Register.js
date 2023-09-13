@@ -196,6 +196,21 @@ class Register extends Component {
                                     <option value="Any">Tanto Faz</option>
                                 </select>
                             </div>
+                            {/* Add more preference fields here */}
+                            <div className="input-field col s12 form-field">
+                                <div>
+                                    <label>Aluguel compartilhado?</label>
+                                </div>
+                                <select
+                                    id="preferences.roommates"
+                                    name="roommates"
+                                    value={preferences.roommates}
+                                    onChange={this.onChange}
+                                >
+                                    <option value="Alone">Sozinho</option>
+                                    <option value="With Roommates">Compartilhado</option>
+                                </select>
+                            </div>
                             <div className="input-field col s12 form-field">
                                 <div>
                                     <label>Aceita Pets?</label>
@@ -213,9 +228,6 @@ class Register extends Component {
                                     </label>
                                 </p>
                             </div>
-
-                            {/* Add more preference fields here */}
-
                             <div className="col s12 form-container">
                                 <button
                                     className="btn btn-large waves-effect waves-light hoverable btn-register"
