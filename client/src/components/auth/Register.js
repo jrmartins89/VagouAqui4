@@ -241,6 +241,21 @@ class Register extends Component {
                                         <span></span>
                                     </label>
                                 </p>
+                                <div>
+                                    <label>Acessível à cadeirantes?</label>
+                                </div>
+                                <p>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            id="preferences.wheelchairAccessible"
+                                            name="wheelchairAccessible"
+                                            checked={preferences.wheelchairAccessible}
+                                            onChange={this.onChange}
+                                        />
+                                        <span></span>
+                                    </label>
+                                </p>
                             </div>
                             <div className="col s12 form-container">
                                 <button
