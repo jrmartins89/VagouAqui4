@@ -221,8 +221,8 @@ class Register extends Component {
                                     value={preferences.roommates}
                                     onChange={this.onChange}
                                 >
-                                    <option value="Alone">Sozinho</option>
-                                    <option value="With Roommates">Compartilhado</option>
+                                    <option value="year round">Aluguel anual</option>
+                                    <option value="monthly basis">Aluguel mensal</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
