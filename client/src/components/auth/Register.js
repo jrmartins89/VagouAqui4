@@ -213,6 +213,20 @@ class Register extends Component {
                             </div>
                             <div className="input-field col s12 form-field">
                                 <div>
+                                    <label>Duração do aluguel</label>
+                                </div>
+                                <select
+                                    id="preferences.leaseLength"
+                                    name="roommates"
+                                    value={preferences.roommates}
+                                    onChange={this.onChange}
+                                >
+                                    <option value="Alone">Sozinho</option>
+                                    <option value="With Roommates">Compartilhado</option>
+                                </select>
+                            </div>
+                            <div className="input-field col s12 form-field">
+                                <div>
                                     <label>Aceita Pets?</label>
                                 </div>
                                 <p>
