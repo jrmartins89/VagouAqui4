@@ -25,19 +25,11 @@ const PreferencesSchema = new Schema({
         enum: ["Alone", "With Roommates"],
         default: "Alone"
     },
-    amenities: {
-        type: String,
-        default: ""
-    },
     leaseLength: {
         type: String,
-        default: ""
+        enum: ["year round", "monthly basis"],
     },
     budget: {
-        type: String,
-        default: ""
-    },
-    securityDeposit: {
         type: String,
         default: ""
     },
@@ -49,7 +41,11 @@ const PreferencesSchema = new Schema({
         type: String,
         enum: ["Quiet", "Social"],
         default: "Quiet"
-    }
+    },
+    acceptSmoker: {
+        type: Boolean,
+        default: false
+    },
     // Add more preference fields as needed
 });
 
