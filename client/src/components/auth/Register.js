@@ -168,6 +168,16 @@ class Register extends Component {
                                 <label htmlFor="preferences.location">Bairro preferencial para locação</label>
                             </div>
                             <div className="input-field col s12 form-field">
+                                <input
+                                    id="preferences.budget"
+                                    name="budget"
+                                    type="text"
+                                    value={preferences.budget}
+                                    onChange={this.onChange}
+                                />
+                                <label htmlFor="preferences.budget">Procuro anúncios em torno de (R$):</label>
+                            </div>
+                            <div className="input-field col s12 form-field">
                                 <div>
                                     <label>Prefere casa ou apartamento?</label>
                                 </div>
