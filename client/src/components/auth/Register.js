@@ -222,7 +222,7 @@ class Register extends Component {
                                     onChange={this.onChange}
                                 >
                                     <option value="year round">Aluguel anual</option>
-                                    <option value="monthly basis">Aluguel mensal</option>
+                                    <option value="monthly basis">Aluguel temporada</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
