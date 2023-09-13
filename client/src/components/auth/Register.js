@@ -256,6 +256,21 @@ class Register extends Component {
                                         <span></span>
                                     </label>
                                 </p>
+                                <div>
+                                    <label>Fumante?</label>
+                                </div>
+                                <p>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            id="preferences.acceptSmoker"
+                                            name="acceptSmoker"
+                                            checked={preferences.acceptSmoker}
+                                            onChange={this.onChange}
+                                        />
+                                        <span></span>
+                                    </label>
+                                </p>
                             </div>
                             <div className="col s12 form-container">
                                 <button
