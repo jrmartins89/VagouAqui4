@@ -96,6 +96,7 @@ class Register extends Component {
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
                             <div className="input-field col s12 form-field">
+                                <i className="material-icons prefix">account_circle</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.name}
@@ -111,6 +112,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12 form-field">
+                                <i className="material-icons prefix">email</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -126,6 +128,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="input-field col s12 form-field">
+                                <i className="material-icons prefix">lock</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -141,6 +144,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="input-field col s12 form-field">
+                                <i className="material-icons prefix">lock</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password2}
@@ -158,6 +162,7 @@ class Register extends Component {
 
                             {/* Preferences Fields */}
                             <div className="input-field col s12 form-field">
+                                <i className="material-icons prefix">location_on</i>
                                 <input
                                     id="preferences.location"
                                     name="location"
@@ -168,6 +173,7 @@ class Register extends Component {
                                 <label htmlFor="preferences.location">Bairro preferencial para locação</label>
                             </div>
                             <div className="input-field col s12 form-field">
+                                <i className="material-icons prefix">attach_money</i>
                                 <input
                                     id="preferences.budget"
                                     name="budget"
