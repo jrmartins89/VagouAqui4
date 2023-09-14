@@ -26,7 +26,8 @@ class Register extends Component {
                 budget: "",
                 securityDeposit: "",
                 wheelchairAccessible: false,
-                noiseLevel: "Quiet"
+                noiseLevel: "Quiet",
+                acceptSmoker: false,
                 // Add more preference fields as needed
             }
         };
@@ -79,6 +80,25 @@ class Register extends Component {
     render() {
         const { errors, preferences } = this.state;
 
+        const fieldIcons = {
+            name: "account_circle",
+            email: "email",
+            password: "lock",
+            password2: "lock",
+            location: "location_on",
+            budget: "attach_money",
+            houseOrApartment: "home",
+            genderPreference: "people",
+            acceptsPets: "pets",
+            roommates: "groups",
+            leaseLength: "event",
+            securityDeposit: "security",
+            wheelchairAccessible: "accessible",
+            noiseLevel: "volume_up",
+            acceptSmoker: "smoking_rooms",
+            // Add more fields and icons as needed
+        };
+
         return (
             <div className="container">
                 <div className="row">
@@ -96,7 +116,7 @@ class Register extends Component {
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">account_circle</i>
+                                <i className="material-icons prefix">{fieldIcons.name}</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.name}
@@ -112,7 +132,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">email</i>
+                                <i className="material-icons prefix">{fieldIcons.email}</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -128,7 +148,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">lock</i>
+                                <i className="material-icons prefix">{fieldIcons.password}</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -144,7 +164,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">lock</i>
+                                <i className="material-icons prefix">{fieldIcons.password2}</i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password2}
@@ -162,7 +182,7 @@ class Register extends Component {
 
                             {/* Preferences Fields */}
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">location_on</i>
+                                <i className="material-icons prefix">{fieldIcons.location}</i>
                                 <input
                                     id="preferences.location"
                                     name="location"
@@ -173,7 +193,7 @@ class Register extends Component {
                                 <label htmlFor="preferences.location">Bairro preferencial para locação</label>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">attach_money</i>
+                                <i className="material-icons prefix">{fieldIcons.budget}</i>
                                 <input
                                     id="preferences.budget"
                                     name="budget"
@@ -233,8 +253,8 @@ class Register extends Component {
                                 </div>
                                 <select
                                     id="preferences.leaseLength"
-                                    name="roommates"
-                                    value={preferences.roommates}
+                                    name="leaseLength"
+                                    value={preferences.leaseLength}
                                     onChange={this.onChange}
                                 >
                                     <option value="year round">Aluguel anual</option>
@@ -257,6 +277,8 @@ class Register extends Component {
                                         <span></span>
                                     </label>
                                 </p>
+                            </div>
+                            <div className="input-field col s12 form-field">
                                 <div>
                                     <label>Acessível à cadeirantes?</label>
                                 </div>
@@ -272,6 +294,8 @@ class Register extends Component {
                                         <span></span>
                                     </label>
                                 </p>
+                            </div>
+                            <div className="input-field col s12 form-field">
                                 <div>
                                     <label>Fumante?</label>
                                 </div>
