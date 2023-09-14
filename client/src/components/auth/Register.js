@@ -221,6 +221,7 @@ class Register extends Component {
                                 <div>
                                     <label>Procuro anúncios de aluguéis destinados à:</label>
                                 </div>
+                                <i className="material-icons prefix">{fieldIcons.genderPreference}</i>
                                 <select
                                     id="preferences.genderPreference"
                                     name="genderPreference"
@@ -237,6 +238,7 @@ class Register extends Component {
                                 <div>
                                     <label>Aluguel compartilhado?</label>
                                 </div>
+                                <i className="material-icons prefix">{fieldIcons.roommates}</i>
                                 <select
                                     id="preferences.roommates"
                                     name="roommates"
@@ -251,6 +253,7 @@ class Register extends Component {
                                 <div>
                                     <label>Duração do aluguel</label>
                                 </div>
+                                <i className="material-icons prefix">{fieldIcons.leaseLength}</i>
                                 <select
                                     id="preferences.leaseLength"
                                     name="leaseLength"
@@ -265,6 +268,7 @@ class Register extends Component {
                                 <div>
                                     <label>Aceita Pets?</label>
                                 </div>
+                                <i className="material-icons prefix">{fieldIcons.acceptsPets}</i>
                                 <p>
                                     <label>
                                         <input
@@ -282,6 +286,7 @@ class Register extends Component {
                                 <div>
                                     <label>Acessível à cadeirantes?</label>
                                 </div>
+                                <i className="material-icons prefix">{fieldIcons.wheelchairAccessible}</i>
                                 <p>
                                     <label>
                                         <input
@@ -301,6 +306,7 @@ class Register extends Component {
                                 </div>
                                 <p>
                                     <label>
+                                        <i className="material-icons prefix">{fieldIcons.acceptSmoker}</i>
                                         <input
                                             type="checkbox"
                                             id="preferences.acceptSmoker"
