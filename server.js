@@ -11,6 +11,7 @@ const Ad = require("./models/Ads");
 const urls = require("./urls.json"); // Load URLs from the JSON file
 const ads = require("./routes/api/ads");
 const {scrapeIbagyAds} = require("./scrapers/ibagyScraper");
+const {scrapeWebQuartoads} = require("./scrapers/webQuartoScraper");
 require("dotenv").config();
 require("./config/passport")(passport);
 
@@ -81,6 +82,21 @@ async function startScraping() {
             neighborhood: item.neighborhood, // Save neighborhood value
         }));
        await Ad.insertMany(finalAdsIbagy);
+    } catch (error) {
+        console.error("Error during scraping:", error);
+    }
+
+    try {
+        const webQuartoAds = await scrapeWebQuartoads();
+        const finalAdsWebquartos = webQuartoAds.map((item) => ({
+            title: item.title,
+            link: item.link || '',
+            description: item.adDescription || '',
+            price: item.price || '',
+            imageLinks: item.imageLinks || '',
+            neighborhood: item.neighborhood, // Save neighborhood value
+        }));
+        await Ad.insertMany(finalAdsWebquartos);
     } catch (error) {
         console.error("Error during scraping:", error);
     }
