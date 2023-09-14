@@ -25,25 +25,31 @@
 
 /* Add this CSS class for spacing between form elements */
 .form-field {
-    margin-bottom: 20px; /* You can adjust the margin to control the spacing */
+    position: relative; /* Ensure relative positioning for the container */
+    margin-bottom: 20px; /* You can adjust the margin to control the spacing between form fields */
 }
 
-/* Additional styles for preference fields */
-.input-field.col.s12.form-field {
-    margin-bottom: 20px;
+/* Style the icon position for preference field selects */
+.form-field i.material-icons.prefix {
+    position: absolute;
+    top: 50%; /* Vertically center the icon */
+    transform: translateY(-50%); /* Center the icon vertically */
+    left: 15px; /* Adjust the left distance as needed */
+    font-size: 24px; /* Adjust the icon size as needed */
 }
 
 /* Style the label for preference fields */
-.input-field.col.s12.form-field label {
+.form-field label {
     font-size: 16px; /* Adjust font size as needed */
     color: #333; /* Text color */
 }
 
 /* Style the select input for preference fields */
-.input-field.col.s12.form-field select {
+.form-field select {
     display: block;
-    width: 100%;
+    width: calc(100% - 40px); /* Adjust width considering the icon width and left spacing */
     padding: 10px;
+    padding-left: 40px; /* Add space for the icon on the left */
     border: 1px solid #ccc; /* Border color */
     border-radius: 4px;
     font-size: 16px; /* Adjust font size as needed */
@@ -51,13 +57,13 @@
 }
 
 /* Style the checkbox input for preference fields */
-.input-field.col.s12.form-field label input[type="checkbox"] {
+.form-field label input[type="checkbox"] {
     position: absolute;
     opacity: 0;
 }
 
 /* Style the checkbox label for preference fields */
-.input-field.col.s12.form-field label span {
+.form-field label span {
     padding-left: 30px; /* Add space for the checkbox */
     font-size: 16px; /* Adjust font size as needed */
     color: #333; /* Text color */
