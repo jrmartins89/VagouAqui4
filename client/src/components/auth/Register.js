@@ -265,11 +265,8 @@ class Register extends Component {
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Aceita Pets?</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.acceptsPets}</i>
-                                <p>
+                                <p className="checkbox-label">
+                                    <i className="material-icons prefix">{fieldIcons.acceptsPets}</i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -278,16 +275,13 @@ class Register extends Component {
                                             checked={preferences.acceptsPets}
                                             onChange={this.onChange}
                                         />
-                                        <span></span>
+                                        <span className="checkbox-text">Aceita Pets?</span>
                                     </label>
                                 </p>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Acessível à cadeirantes?</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.wheelchairAccessible}</i>
-                                <p>
+                                <p className="checkbox-label">
+                                    <i className="material-icons prefix">{fieldIcons.wheelchairAccessible}</i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -296,17 +290,14 @@ class Register extends Component {
                                             checked={preferences.wheelchairAccessible}
                                             onChange={this.onChange}
                                         />
-                                        <span></span>
+                                        <span className="checkbox-text">Acessível à cadeirantes?</span>
                                     </label>
                                 </p>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Fumante?</label>
-                                </div>
-                                <p>
+                                <p className="checkbox-label">
+                                    <i className="material-icons prefix">{fieldIcons.acceptSmoker}</i>
                                     <label>
-                                        <i className="material-icons prefix">{fieldIcons.acceptSmoker}</i>
                                         <input
                                             type="checkbox"
                                             id="preferences.acceptSmoker"
@@ -314,10 +305,12 @@ class Register extends Component {
                                             checked={preferences.acceptSmoker}
                                             onChange={this.onChange}
                                         />
-                                        <span></span>
+                                        <span className="checkbox-text">Fumante?</span>
                                     </label>
                                 </p>
                             </div>
+                            {/* Add more preference fields here */}
+
                             <div className="col s12 form-container">
                                 <button
                                     className="btn btn-large waves-effect waves-light hoverable btn-register"
