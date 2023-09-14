@@ -19,6 +19,12 @@ async function scrapeWebQuartoads() {
                     adsLinks.add(link); // Add the link to the Set
                 }
             });
+
+            const uniqueAdsLinks = Array.from(adsLinks); // Convert the Set back to an array
+
+            const adsData = { links: uniqueAdsLinks };
+            console.log('LINKS >>>>>>>>>>>>>>>>>', uniqueAdsLinks);
+
         } else {
             console.error('Failed to fetch the page. Status code:', response.status);
         }
