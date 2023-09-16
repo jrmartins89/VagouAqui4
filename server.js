@@ -93,7 +93,7 @@ async function startScraping() {
         const finalAdsWebquartos = webQuartoAds.map((item) => ({
             title: item.title,
             link: item.link || "",
-            description: item.adDescription || "",
+            description: item.description || "",
             price: item.price || "",
             imageLinks: item.imageLinks || "",
             neighborhood: item.neighborhood,
