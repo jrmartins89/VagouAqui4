@@ -10,6 +10,7 @@ async function scrapeWebQuartoads() {
             const ads = new Set();
             const adsPage = $('body > script:nth-child(12)');
             const scriptHtml = adsPage.html();
+            const jsonString = scriptHtml.substring(scriptHtml.indexOf('{'));
 
             // Use Cheerio to select the elements you want to scrape
             adsPage.find('a[target="_blank"]').each((index, element) => {
