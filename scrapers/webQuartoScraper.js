@@ -7,7 +7,7 @@ async function scrapeWebQuartoads() {
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
-            const ads = [];
+            const ads = new Set();
 
             // Use Cheerio to select the elements you want to scrape
             $('.row').each((index, element) => {
