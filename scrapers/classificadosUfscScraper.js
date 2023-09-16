@@ -1,8 +1,7 @@
 const { scrapeImagesClassificadosUfsc }  = require('./imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const fs = require('fs');
-let adImages =[];
+
 async function getAdLinks(url) {
     try {
         const response = await axios.get(url);
@@ -22,25 +21,14 @@ async function getAdLinks(url) {
 
         return items;
     } catch (error) {
-        const errorMessage = `Error fetching ad list: ${error}`;
-        writeToErrorLog(errorMessage);
-        console.error(errorMessage);
-        return []; // Return an empty array to indicate failure
+        console.error('Error fetching ad list:', error);
+        return [];
     }
 }
 
 function isValidLink(link) {
     const linkPattern = /^https:\/\/classificados\.inf\.ufsc\.br\/detail/;
     return linkPattern.test(link);
-}
-
-function writeToErrorLog(message) {
-    const logMessage = `${new Date().toISOString()} - ${message}\n`;
-    fs.appendFile('error_log.txt', logMessage, (err) => {
-        if (err) {
-            console.error('Error writing to error log:', err);
-        }
-    });
 }
 
 async function getAdDetails(items) {
@@ -69,13 +57,9 @@ async function getAdDetails(items) {
                     description = regexMatch[1].trim();
                 }
                 const imageUrls = item.link + '&show_still=1';
-                await (async () => {
-                    try {
-                        adImages = await scrapeImagesClassificadosUfsc(imageUrls);
-                    } catch (error) {
-                        console.error('Error:', error);
-                    }
-                })(); //why did I use async function
+
+                const adImages = await scrapeImagesClassificadosUfsc(imageUrls);
+
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
@@ -84,15 +68,10 @@ async function getAdDetails(items) {
                     imageLinks: adImages
                 });
             } else {
-                const errorMessage = `Error fetching ad details for ${item.link}: Status ${response.status}`;
-                writeToErrorLog(errorMessage);
-                console.error(errorMessage);
+                console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
             }
-
         } catch (error) {
-            const errorMessage = `Error fetching ad details for ${item.link}: ${error}`;
-            writeToErrorLog(errorMessage);
-            console.error(errorMessage);
+            console.error(`Error fetching ad details for ${item.link}: ${error}`);
         }
     }
 
@@ -103,5 +82,3 @@ module.exports = {
     getAdLinks,
     getAdDetails
 };
-
-//remove function to create file
