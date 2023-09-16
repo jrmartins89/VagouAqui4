@@ -7,7 +7,7 @@ async function scrapeWebQuartoads() {
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
-            const ads = new Set();
+            const ads = [];
             const adsPage = $('body > script:nth-child(12)');
             const scriptHtml = adsPage.html();
             const jsonString = scriptHtml.substring(scriptHtml.indexOf('{'));
