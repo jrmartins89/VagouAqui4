@@ -23,9 +23,11 @@ async function scrapeWebQuartoads() {
                     link: finalJson.ads[i].url,
                     description: finalJson.ads[i].description,
                     price: finalJson.ads[i].rent_price,
-                    imageLinks: finalJson.ads[i].photos[i].url
+                    imageLinks: finalJson.ads[i].photos[i].url,
+                    neighborhood: finalJson.ads[i].district
                 })
             }
+            return ads;
         } else {
             console.error('Failed to fetch the json data. Status code:', response.status);
         }
