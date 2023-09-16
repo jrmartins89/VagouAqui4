@@ -14,8 +14,7 @@ async function scrapeWebQuartoads() {
             const targetString = 'window.search.city_name = \'Florianópolis - SC\';';
             const startIndex = jsonString.indexOf(targetString);
             const truncatedHtml = jsonString.substring(0, startIndex);
-            const secondIndex = truncatedHtml.indexOf(';\n' +
-                '        ');
+            const secondIndex = truncatedHtml.indexOf(';\n' +'        ');
             const finalJson = JSON.parse(truncatedHtml.substring(0, secondIndex));
             console.log(finalJson);
         } else {
