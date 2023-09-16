@@ -18,7 +18,7 @@ async function scrapeWebQuartoads() {
             const finalJson = JSON.parse(truncatedHtml.substring(0, secondIndex));
             console.log(finalJson);
         } else {
-            console.error('Failed to fetch the page. Status code:', response.status);
+            console.error('Failed to fetch the json data. Status code:', response.status);
         }
     } catch (error) {
         console.error('Error:', error.message);
