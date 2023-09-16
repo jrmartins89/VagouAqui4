@@ -32,7 +32,21 @@ router.post("/register", (req, res) => {
             const newUser = new User({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                preferences: {
+                    houseOrApartment: req.body.houseOrApartment || 'Apartment',
+                    genderPreference: req.body.genderPreference || 'Any',
+                    acceptsPets: req.body.acceptsPets || false,
+                    location: req.body.location || '',
+                    roommates: req.body.roommates || 'Alone',
+                    amenities: req.body.amenities || '',
+                    leaseLength: req.body.leaseLength || 'year round',
+                    budget: req.body.budget || '',
+                    securityDeposit: req.body.securityDeposit || '',
+                    wheelchairAccessible: req.body.wheelchairAccessible ||false,
+                    noiseLevel: req.body.noiseLevel || 'Quiet',
+                    acceptSmoker: req.body.acceptSmoker || false,
+                }
             });
 
             // Hash password before saving in database
