@@ -16,7 +16,6 @@ async function scrapeWebQuartoads() {
             const truncatedHtml = jsonString.substring(0, startIndex);
             const secondIndex = truncatedHtml.indexOf(';\n' +'        ');
             const finalJson = JSON.parse(truncatedHtml.substring(0, secondIndex));
-            console.log(finalJson);
             for (let i = 0; i < finalJson.ads.length; i ++) {
                 ads.push({
                     title: finalJson.ads[i].title,
