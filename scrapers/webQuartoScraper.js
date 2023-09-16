@@ -11,12 +11,14 @@ async function scrapeWebQuartoads() {
             const adsPage = $('.col-xs-12');
 
             // Use Cheerio to select the elements you want to scrape
-            $('.row').each((index, element) => {
-                const title = $(element).text();
-                ads.push(title);
-            });
-
-            console.log('Scraped titles:', ads);
+            adsPage.find('a[target="_blank"]').each((index, element) => {
+                const link = $(element).attr('href');
+                if (link) {
+                    ads.add(link); // Add the link to the Set
+                }
+            })
+            const adsList = Array.from(ads);
+            console.log('Scraped titles:', adsList);
         } else {
             console.error('Failed to fetch the page. Status code:', response.status);
         }
