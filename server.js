@@ -79,11 +79,9 @@ async function startScraping() {
 
         const ibagyAds = await scrapeIbagyAds();
         await saveNewAds(ibagyAds, "Ibagy");
-        console.log("Finished scraping Ibagy ads");
 
         const webQuartoAds = await scrapeWebQuartoads();
         await saveNewAds(webQuartoAds, "WebQuarto");
-        console.log("Finished scraping WebQuarto ads");
     } catch (error) {
         console.error("Error during scraping:", error);
     }
