@@ -8,7 +8,8 @@ async function scrapeWebQuartoads() {
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
             const ads = new Set();
-            const adsPage = $('.col-xs-12');
+            const adsPage = $('body > script:nth-child(12)');
+            const scriptHtml = adsPage.html();
 
             // Use Cheerio to select the elements you want to scrape
             adsPage.find('a[target="_blank"]').each((index, element) => {
