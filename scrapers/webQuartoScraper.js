@@ -7,8 +7,15 @@ async function scrapeWebQuartoads() {
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
-            const adsPage = $('#ssr_root > div:nth-child(3) > div:nth-child(3) > div');
+            const ads = [];
 
+            // Use Cheerio to select the elements you want to scrape
+            $('.row').each((index, element) => {
+                const title = $(element).text();
+                ads.push(title);
+            });
+
+            console.log('Scraped titles:', ads);
         } else {
             console.error('Failed to fetch the page. Status code:', response.status);
         }
@@ -20,3 +27,5 @@ async function scrapeWebQuartoads() {
 module.exports = {
     scrapeWebQuartoads
 };
+
+scrapeWebQuartoads(); // Call the function to start scraping
