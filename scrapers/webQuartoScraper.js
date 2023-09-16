@@ -11,16 +11,11 @@ async function scrapeWebQuartoads() {
             const adsPage = $('body > script:nth-child(12)');
             const scriptHtml = adsPage.html();
             const jsonString = scriptHtml.substring(scriptHtml.indexOf('{'));
-
-            // Use Cheerio to select the elements you want to scrape
-            adsPage.find('a[target="_blank"]').each((index, element) => {
-                const link = $(element).attr('href');
-                if (link) {
-                    ads.add(link); // Add the link to the Set
-                }
-            })
-            const adsList = Array.from(ads);
-            console.log('Scraped titles:', adsList);
+            const targetString = 'window.search.city_name = \'Florianópolis - SC\';';
+            const startIndex = jsonString.indexOf(targetString);
+            const truncatedHtml = jsonString.substring(0, startIndex);
+            JSON.parse(truncatedHtml);
+            console.log(truncatedHtml)
         } else {
             console.error('Failed to fetch the page. Status code:', response.status);
         }
