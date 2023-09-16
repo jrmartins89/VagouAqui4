@@ -78,30 +78,42 @@ async function startScraping() {
         console.log("Finished scraping Classificados UFSC ads");
 
         const ibagyAds = await scrapeIbagyAds();
-        const finalAdsIbagy = ibagyAds.map((item) => ({
-            title: item.title,
-            link: item.link || "",
-            description: item.adDescription || "",
-            price: item.price || "",
-            imageLinks: item.imageLinks || "",
-            neighborhood: item.neighborhood,
-        }));
-        await Ad.insertMany(finalAdsIbagy);
+        await saveNewAds(ibagyAds, "Ibagy");
         console.log("Finished scraping Ibagy ads");
 
         const webQuartoAds = await scrapeWebQuartoads();
-        const finalAdsWebquartos = webQuartoAds.map((item) => ({
-            title: item.title,
-            link: item.link || "",
-            description: item.description || "",
-            price: item.price || "",
-            imageLinks: item.imageLinks || "",
-            neighborhood: item.neighborhood,
-        }));
-        await Ad.insertMany(finalAdsWebquartos);
+        await saveNewAds(webQuartoAds, "WebQuarto");
         console.log("Finished scraping WebQuarto ads");
     } catch (error) {
         console.error("Error during scraping:", error);
+    }
+}
+
+// Function to save new ads to the database, avoiding duplicates
+async function saveNewAds(newAds, source) {
+    try {
+        const existingAds = await Ad.find({}, "link");
+        const newAdsToInsert = newAds.filter(
+            (newAd) => !existingAds.some((existingAd) => existingAd.link === newAd.link)
+        );
+
+        if (newAdsToInsert.length > 0) {
+            const finalAds = newAdsToInsert.map((item) => ({
+                title: item.title,
+                link: item.link || "",
+                description: item.description || "",
+                price: item.price || "",
+                imageLinks: item.imageLinks || "",
+                neighborhood: item.neighborhood,
+            }));
+
+            await Ad.insertMany(finalAds);
+            console.log(`Finished scraping ${source} ads`);
+        } else {
+            console.log(`No new ads to save from ${source}`);
+        }
+    } catch (error) {
+        console.error(`Error during scraping ${source} ads:`, error);
     }
 }
 
