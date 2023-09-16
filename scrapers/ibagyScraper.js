@@ -1,6 +1,5 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const fs = require('fs');
 const { scrapeImagesIbagy } = require('./imageScraper');
 let adItems;
 async function scrapeIbagyAds() {
@@ -23,11 +22,7 @@ async function scrapeIbagyAds() {
             const uniqueAdsLinks = Array.from(adsLinks); // Convert the Set back to an array
 
             const adsData = { links: uniqueAdsLinks };
-
-            fs.writeFileSync('adsLinks.json', JSON.stringify(adsData, null, 2));
-
-            console.log('Unique ads links saved to adsLinks.json');
-
+            JSON.stringify(adsData, null, 2);
             // Call the function to scrape ad details
           adItems  = await scrapeIbagyAdsDetails(uniqueAdsLinks);
         } else {
