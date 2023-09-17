@@ -1,0 +1,41 @@
+/* Landing.css */
+
+/* Style for the outer container */
+.container-valign {
+    height: 75vh;
+}
+
+/* Style for the title */
+.title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style for the description */
+.description {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Style for the buttons */
+.button {
+    width: 140px;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+    margin-top: 20px;
+}
+
+/* Style for the Cadastro (Sign Up) button */
+.btn-cadastro {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+/* Style for the Log In button */
+.btn-login {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
