@@ -9,7 +9,7 @@ import 'react-image-lightbox/style.css';
 function AdGrid() {
     const [ads, setAds] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [adsPerPage] = useState(5);
+    const [adsPerPage] = useState(15);
     const [selectedNeighborhood, setSelectedNeighborhood] = useState(null);
     const [lightboxImages, setLightboxImages] = useState([]);
     const [lightboxImageIndex, setLightboxImageIndex] = useState(-1);
