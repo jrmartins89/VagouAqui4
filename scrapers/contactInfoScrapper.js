@@ -17,16 +17,19 @@ function extractContactInfoFromDescription(description) {
         /\(\d{2}\)\d{9}/                  // (xx)xxxxxxxxx
     ];
 
-    const contactInfo = [];
+    const uniqueContactInfo = new Set(); // Use a Set to store unique phone numbers
 
     phonePatterns.forEach(pattern => {
         const matches = description.match(pattern);
         if (matches) {
-            contactInfo.push(matches[0]);
+            matches.forEach(match => {
+                uniqueContactInfo.add(match + ''); // Add each match to the Set
+            });
         }
     });
 
-    return contactInfo;
+    // Convert the Set back to an array before returning
+    return Array.from(uniqueContactInfo);
 }
 
 module.exports = {
