@@ -91,7 +91,9 @@ function AdGrid() {
                     {currentAds.map((ad, adIndex) => (
                         <div key={adIndex} className="grid-item">
                             <h2>{ad.title}</h2>
-                            <p className="contact-info">{ad.contactInfo}</p> {/* Display contact information */}
+                            <p className="contact-info">
+                                <h2>Contato: {ad.contactInfo}</h2>
+                            </p> {/* Display contact information */}
                             <Carousel showArrows={true} infiniteLoop={true}>
                                 {ad.imageLinks.map((imageLink, imgIndex) => (
                                     <div
@@ -103,8 +105,12 @@ function AdGrid() {
                                 ))}
                             </Carousel>
                             <p className="ad-description">{ad.description}</p>
-                            <p className="ad-price">{ad.price}</p>
-                            <p className="ad-neighborhood">{ad.neighborhood}</p>
+                            <p className="ad-price">
+                               <h3>{ad.price}</h3>
+                            </p>
+                            <p className="ad-neighborhood">
+                                <h3>{ad.neighborhood}</h3>
+                            </p>
                         </div>
                     ))}
                 </div>
