@@ -16,16 +16,21 @@ async function scrapeWebQuartoads() {
             const truncatedHtml = jsonString.substring(0, startIndex);
             const secondIndex = truncatedHtml.indexOf(';\n' +'        ');
             const finalJson = JSON.parse(truncatedHtml.substring(0, secondIndex));
-            for (let i = 0; i < finalJson.ads.length; i ++) {
+
+            for (let i = 0; i < finalJson.ads.length; i++) {
+                const ad = finalJson.ads[i];
+                const imageLinks = ad.photos.map(photo => photo.url);
+
                 ads.push({
-                    title: finalJson.ads[i].title,
-                    link: finalJson.ads[i].url,
-                    description: finalJson.ads[i].description,
-                    price: finalJson.ads[i].rent_price,
-                    imageLinks: finalJson.ads[i].main_photo,
-                    neighborhood: finalJson.ads[i].district
-                })
+                    title: ad.title,
+                    link: ad.url,
+                    description: ad.description,
+                    price: ad.rent_price,
+                    imageLinks: imageLinks,
+                    neighborhood: ad.district
+                });
             }
+
             return ads;
         } else {
             console.error('Failed to fetch the json data. Status code:', response.status);
