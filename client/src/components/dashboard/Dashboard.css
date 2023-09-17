@@ -1,0 +1,46 @@
+/* Dashboard.css */
+
+/* Container styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Greeting styles */
+h4 {
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Description text styles */
+.flow-text {
+    font-size: 18px;
+    text-align: center;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Button styles */
+.btn {
+    width: 140px;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* "Produtos" button */
+.produtos-btn {
+    background-color: #2196F3; /* Blue color */
+    color: white;
+}
+
+/* "Logout" button */
+.logout-btn {
+    background-color: #FF5733; /* Red color */
+    color: white;
+}
