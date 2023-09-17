@@ -59,6 +59,18 @@ function AdGrid() {
         setLightboxImageIndex(-1);
     };
 
+    const nextPage = () => {
+        if (currentPage < Math.ceil(filteredAds.length / adsPerPage)) {
+            paginate(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            paginate(currentPage - 1);
+        }
+    };
+
     return (
         <div>
             <section className="filtros">
@@ -96,6 +108,7 @@ function AdGrid() {
                     ))}
                 </div>
                 <div className="pagination">
+                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
                     {Array.from({ length: Math.ceil(filteredAds.length / adsPerPage) }).map((_, index) => (
                         <button
                             key={index}
@@ -105,6 +118,7 @@ function AdGrid() {
                             {index + 1}
                         </button>
                     ))}
+                    <button onClick={nextPage} disabled={currentPage === Math.ceil(filteredAds.length / adsPerPage)}>Next</button>
                 </div>
             </div>
             {lightboxImages.length > 0 && lightboxImageIndex !== -1 && (
