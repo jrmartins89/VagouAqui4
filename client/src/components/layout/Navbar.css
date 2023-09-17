@@ -1,0 +1,51 @@
+/* Navbar.css */
+
+/* Style the fixed navigation bar */
+.navbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: #fff; /* Background color for the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Material design shadow effect */
+}
+
+/* Style the navigation links and logo */
+.nav-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px; /* Adjust the height as needed */
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000; /* Text color for the link */
+    font-family: monospace;
+}
+
+.material-icons {
+    font-size: 1.5rem; /* Adjust the icon size as needed */
+    margin-right: 8px; /* Add spacing between icon and text */
+}
+
+/* Change the link color on hover */
+.brand-logo:hover {
+    color: #007bff; /* Change the text color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    /* Adjust the navbar height for smaller screens */
+    .nav-wrapper {
+        height: 48px;
+    }
+
+    /* Adjust the icon size for smaller screens */
+    .material-icons {
+        font-size: 1.2rem;
+    }
+}
