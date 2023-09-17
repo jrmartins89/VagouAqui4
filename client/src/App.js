@@ -7,14 +7,14 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
+import Register from "./components/User/Register";
+import Login from "./components/User/Login";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import AdGrid from "./components/adGrid/AdGrid";
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
-    // Set auth token header auth
+    // Set User token header User
     const token = localStorage.jwtToken;
     setAuthToken(token);
     // Decode token and get user info and exp
