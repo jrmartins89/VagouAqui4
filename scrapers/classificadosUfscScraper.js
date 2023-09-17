@@ -71,7 +71,7 @@ async function getAdDetails(items) {
                     description: description,
                     price: price,
                     imageLinks: adImages,
-                    contactInfo: contactInfo || 'Sem contato informado'
+                    contactInfo: contactInfo || ['sem contato informado']
                 });
             } else {
                 console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
