@@ -13,7 +13,8 @@ function extractContactInfoFromDescription(description) {
         /\(\d{2}\) \d{5}-\d{4}/,          // (xx) xxxxx-xxxx
         /\d{2} \d \d{4} \d{4}/,           // xx x xxxx xxxx
         /\(\d{2}\)\d{5}-\d{4}/,           // (xx)xxxxx-xxxx
-        /\+\d{2}\(\d{2}\)\d{5}-\d{4}/     // +xx(xx)xxxxx-xxxx
+        /\+\d{2}\(\d{2}\)\d{5}-\d{4}/,     // +xx(xx)xxxxx-xxxx
+        /\(\d{2}\)\d{9}/                  // (xx)xxxxxxxxx
     ];
 
     const contactInfo = [];
