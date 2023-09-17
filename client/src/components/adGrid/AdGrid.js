@@ -1,3 +1,5 @@
+// components/AdGrid.js
+
 import React, { useState, useEffect } from 'react';
 import './AdGrid.css';
 import { Carousel } from 'react-responsive-carousel';
@@ -89,8 +91,9 @@ function AdGrid() {
             <div className="grid-container">
                 <div className="grid">
                     {currentAds.map((ad, adIndex) => (
-                        <div key={ad._id} className="grid-item">
+                        <div key={adIndex} className="grid-item">
                             <h2>{ad.title}</h2>
+                            <p>Contact Info: {ad.contactInfo}</p> {/* Display contact information */}
                             <Carousel showArrows={true} infiniteLoop={true}>
                                 {ad.imageLinks.map((imageLink, imgIndex) => (
                                     <div
