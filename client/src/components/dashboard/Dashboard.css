@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Greeting styles */
@@ -43,4 +43,18 @@ h4 {
 .logout-btn {
     background-color: #FF5733; /* Red color */
     color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    /* Adjust styles for screens with a maximum width of 768px (e.g., tablets) */
+    h4 {
+        font-size: 20px;
+    }
+    .flow-text {
+        font-size: 16px;
+    }
+    .btn {
+        width: 120px;
+    }
 }
