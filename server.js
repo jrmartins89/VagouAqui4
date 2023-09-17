@@ -64,6 +64,7 @@ async function startScraping() {
                         price: item.price,
                         imageLinks: item.imageLinks,
                         neighborhood: urlInfo.neighborhood,
+                        contactInfo:item.contactInfo
                     })
                 );
 
