@@ -11,7 +11,7 @@ function AdGrid() {
     const [currentPage, setCurrentPage] = useState(1);
     const [adsPerPage] = useState(5);
     const [selectedNeighborhood, setSelectedNeighborhood] = useState(null);
-    const [isLightboxOpen, setLightboxOpen] = useState(false);
+    const [lightboxImages, setLightboxImages] = useState([]);
     const [lightboxImageIndex, setLightboxImageIndex] = useState(-1);
 
     useEffect(() => {
@@ -49,6 +49,16 @@ function AdGrid() {
         setCurrentPage(1);
     };
 
+    const openLightbox = (images, imageIndex) => {
+        setLightboxImages(images);
+        setLightboxImageIndex(imageIndex);
+    };
+
+    const closeLightbox = () => {
+        setLightboxImages([]);
+        setLightboxImageIndex(-1);
+    };
+
     return (
         <div>
             <section className="filtros">
@@ -66,17 +76,14 @@ function AdGrid() {
             </section>
             <div className="grid-container">
                 <div className="grid">
-                    {currentAds.map((ad, index) => (
+                    {currentAds.map((ad, adIndex) => (
                         <div key={ad._id} className="grid-item">
                             <h2>{ad.title}</h2>
                             <Carousel showArrows={true} infiniteLoop={true}>
                                 {ad.imageLinks.map((imageLink, imgIndex) => (
                                     <div
                                         key={imgIndex}
-                                        onClick={() => {
-                                            setLightboxImageIndex(imgIndex);
-                                            setLightboxOpen(true);
-                                        }}
+                                        onClick={() => openLightbox(ad.imageLinks, imgIndex)}
                                     >
                                         <img src={imageLink} alt={`Ad ${imgIndex}`} className="ad-image" />
                                     </div>
@@ -100,21 +107,14 @@ function AdGrid() {
                     ))}
                 </div>
             </div>
-            {isLightboxOpen && (
+            {lightboxImages.length > 0 && lightboxImageIndex !== -1 && (
                 <Lightbox
-                    mainSrc={currentAds[lightboxImageIndex].imageLinks[lightboxImageIndex]}
-                    nextSrc={
-                        currentAds[lightboxImageIndex].imageLinks[(lightboxImageIndex + 1) % currentAds[lightboxImageIndex].imageLinks.length]
-                    }
-                    prevSrc={
-                        currentAds[lightboxImageIndex].imageLinks[
-                        (lightboxImageIndex + currentAds[lightboxImageIndex].imageLinks.length - 1) %
-                        currentAds[lightboxImageIndex].imageLinks.length
-                            ]
-                    }
-                    onCloseRequest={() => setLightboxOpen(false)}
-                    onMovePrevRequest={() => setLightboxImageIndex((lightboxImageIndex + currentAds[lightboxImageIndex].imageLinks.length - 1) % currentAds[lightboxImageIndex].imageLinks.length)}
-                    onMoveNextRequest={() => setLightboxImageIndex((lightboxImageIndex + 1) % currentAds[lightboxImageIndex].imageLinks.length)}
+                    mainSrc={lightboxImages[lightboxImageIndex]}
+                    nextSrc={lightboxImages[(lightboxImageIndex + 1) % lightboxImages.length]}
+                    prevSrc={lightboxImages[(lightboxImageIndex + lightboxImages.length - 1) % lightboxImages.length]}
+                    onCloseRequest={closeLightbox}
+                    onMovePrevRequest={() => setLightboxImageIndex((lightboxImageIndex + lightboxImages.length - 1) % lightboxImages.length)}
+                    onMoveNextRequest={() => setLightboxImageIndex((lightboxImageIndex + 1) % lightboxImages.length)}
                 />
             )}
         </div>
