@@ -1,6 +1,7 @@
 const { scrapeImagesClassificadosUfsc }  = require('./imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { extractContactInfoFromDescription } = require('./contactInfoScrapper');
 
 async function getAdLinks(url) {
     try {
@@ -44,9 +45,11 @@ async function getAdDetails(items) {
 
                 const table = $('#container > div:nth-child(2) > table > tbody > tr:nth-child(4) > td:nth-child(1) > form > table');
                 const priceRow = table.find('tr:has(td[valign="top"]:contains("Preço"))');
-
                 const priceCell = priceRow.find('td[valign="top"]:contains("Preço") + td');
                 const price = priceCell.text().trim();
+                const genderRow = table.find('tr:has(td[valign="top"]:contains("Gênero"))');
+                const genderCell = genderRow.find('td[valign="top"]:contains("Gênero") + td');
+                const gender = genderCell.text().trim();
 
                 const box = $('.box');
                 const title = box.find('h1').text().trim();
@@ -59,13 +62,16 @@ async function getAdDetails(items) {
                 const imageUrls = item.link + '&show_still=1';
 
                 const adImages = await scrapeImagesClassificadosUfsc(imageUrls);
+                // Extract contact information from the description
+                const contactInfo = extractContactInfoFromDescription(description);
 
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
                     description: description,
                     price: price,
-                    imageLinks: adImages
+                    imageLinks: adImages,
+                    contactInfo: contactInfo || 'Sem contato informado'
                 });
             } else {
                 console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
