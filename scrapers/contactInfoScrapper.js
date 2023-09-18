@@ -29,7 +29,19 @@ function extractContactInfoFromDescription(description) {
 }
 
 function extractIdfromAdLink(adLink) {
+    // Split the adLink by "/" to extract individual parts
+    const parts = adLink.split("/");
 
+    // Loop through the parts to find a part that resembles an ID
+    for (const part of parts) {
+        // Check if the part is a numeric ID (assuming IDs are numeric)
+        if (/^\d+$/.test(part)) {
+            return part; // Return the first numeric part found as the ID
+        }
+    }
+
+    // If no ID is found, return null or an appropriate value
+    return null;
 }
 
 module.exports = {
