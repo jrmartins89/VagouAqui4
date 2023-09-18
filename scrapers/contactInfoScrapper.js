@@ -44,7 +44,23 @@ function extractIdfromAdLink(adLink) {
     return null;
 }
 
+function extractPhoneFromWhatsAppLink(link) {
+    // Define a regular expression to extract the phone number from a WhatsApp API link
+    const regex = /(?:\?|&)phone=(\d+)/;
+
+    // Use the regular expression to find a match in the link
+    const match = link.match(regex);
+
+    // If a match is found, return the extracted phone number, otherwise return null
+    if (match && match[1]) {
+        return match[1];
+    } else {
+        return null;
+    }
+}
+
 module.exports = {
     extractContactInfoFromDescription,
-    extractIdfromAdLink
+    extractIdfromAdLink,
+    extractPhoneFromWhatsAppLink
 };
