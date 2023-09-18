@@ -2,6 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { scrapeImagesIbagy } = require('./imageScraper');
 let adItems;
+const { extractContactInfoFromDescription } = require('./contactInfoScrapper');
+
 async function scrapeIbagyAds() {
     try {
         const response = await axios.get('https://ibagy.com.br/aluguel/kitnet_conjugado/florianopolis/');
@@ -69,6 +71,7 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 console.error('Failed to fetch ad details from:', link);
             }
         }
+
         // Return the array of ad details objects
         return adDetailsArray;
     } catch (error) {
