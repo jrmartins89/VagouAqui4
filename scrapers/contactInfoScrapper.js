@@ -28,6 +28,11 @@ function extractContactInfoFromDescription(description) {
     return Array.from(uniqueContactInfo);
 }
 
+function extractIdfromAdLink(adLink) {
+
+}
+
 module.exports = {
-    extractContactInfoFromDescription
+    extractContactInfoFromDescription,
+    extractIdfromAdLink
 };
