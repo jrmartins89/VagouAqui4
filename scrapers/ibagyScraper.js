@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { scrapeImagesIbagy } = require('./imageScraper');
 let adItems;
-const { extractIdfromAdLink } = require('./contactInfoScrapper');
+const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contactInfoScrapper');
 
 async function scrapeIbagyAds() {
     try {
@@ -53,6 +53,7 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 const neighborhood = extractNeighborhood(address);
                 const adIdNumber = extractIdfromAdLink(link);
                 const contactLinkObject = $(`#imovelView_asyncSubmit > div.mauticform-innerform > div > div.propertyform-bottom > a.clb-gtm-site-whatsapp.clb-gtm-imovel-form-whatsapp.clb-gtm-imovel-${adIdNumber}.clb-interesse-aluguel`);
+                const contactInfo = extractPhoneFromWhatsAppLink(contactLinkObject);
                 console.log('Neighborhood:', neighborhood);
                 // Call scrapeImagesIbagy to get image links
                 const imageLinks = await scrapeImagesIbagy(link);
@@ -63,7 +64,8 @@ async function scrapeIbagyAdsDetails(adLinks) {
                     imageLinks,
                     link,
                     price,
-                    neighborhood
+                    neighborhood,
+                    contactInfo
                 };
 
                 // Push the adDetails object to the array
