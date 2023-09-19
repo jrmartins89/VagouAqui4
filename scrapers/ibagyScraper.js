@@ -6,7 +6,7 @@ const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contact
 
 async function scrapeIbagyAds() {
     try {
-        const response = await axios.get('https://ibagy.com.br/aluguel/kitnet_conjugado/florianopolis/');
+        const response = await axios.get('https://ibagy.com.br/aluguel/residencial/florianopolis/');
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
