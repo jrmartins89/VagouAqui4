@@ -11,7 +11,8 @@ function extractContactInfoFromDescription(description) {
         /\d{2}-\d{9}/,                // xx-xxxxxxxxx
         /\d{2} \d \d{4} \d{4}/,       // xx x xxxx xxxx
         /\d{10}/,                     // xxxxxxxxxxx
-        /\d{2}\.\d\.\d{4}\.\d{4}/     // xx.x.xxxx.xxxx
+        /\d{2}\.\d\.\d{4}\.\d{4}/,    // xx.x.xxxx.xxxx
+        /\(\d{2}\) \d{9}/             // (xx) xxxxxxxxx
     ];
 
     const uniqueContactInfo = new Set(); // Use a Set to store unique phone numbers
