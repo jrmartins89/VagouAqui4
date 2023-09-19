@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const {extractContactInfoFromDescription} = require("./contactInfoScrapper");
 
 // Define a function to scrape a single page
 async function scrapeWebQuartoadsPage(pageNumber) {
@@ -21,6 +22,7 @@ async function scrapeWebQuartoadsPage(pageNumber) {
 
             for (let i = 0; i < finalJson.ads.length; i++) {
                 const ad = finalJson.ads[i];
+                const contactInfo = extractContactInfoFromDescription(ad.description);
                 const imageLinks = ad.photos.map(photo => photo.url);
 
                 ads.push({
