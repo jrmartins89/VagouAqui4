@@ -95,4 +95,3 @@ function extractNeighborhood(address) {
 module.exports = {
     scrapeIbagyAds
 };
-scrapeIbagyAds();
