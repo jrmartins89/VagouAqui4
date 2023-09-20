@@ -32,6 +32,7 @@ function isValidLink(link) {
     return linkPattern.test(link);
 }
 
+//function to get details from adLinks
 async function getAdDetails(items) {
     const itemsWithDetails = [];
 
