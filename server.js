@@ -63,17 +63,17 @@ async function startScraping() {
                         description: item.description,
                         price: item.price,
                         imageLinks: item.imageLinks,
-                        neighborhood: urlInfo.neighborhood,
+                        neighborhood: item.neighborhood,
                         contactInfo:item.contactInfo
                     })
                 );
 
                 await Ad.insertMany(finalItemsClassificadosUfsc);
                 console.log(
-                    `Scraped data from ${urlInfo.neighborhood} has been saved to MongoDB collection "ads"`
+                    `Scraped data from ${item.neighborhood} has been saved to MongoDB collection "ads"`
                 );
             } else {
-                console.log(`No new ads to save from ${urlInfo.neighborhood}`);
+                console.log(`No new ads to save from ${item.neighborhood}`);
             }
         }
         console.log("Finished scraping Classificados UFSC ads");

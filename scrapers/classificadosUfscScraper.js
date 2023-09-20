@@ -51,7 +51,10 @@ async function getAdDetails(items) {
                 const genderRow = table.find('tr:has(td[valign="top"]:contains("Gênero"))');
                 const genderCell = genderRow.find('td[valign="top"]:contains("Gênero") + td');
                 const gender = genderCell.text().trim();
-
+                const neighborhoodRow = table.find('tr:has(td[valign="top"]:contains("Bairro"))');
+                const neighborhoodCell = neighborhoodRow.find('td[valign="top"]:contains("Bairro") + td');
+                const neighborhood = neighborhoodCell.text().trim();
+                console.log('bairro >>>>>>>>>>>', neighborhood);
                 const box = $('.box');
                 const title = box.find('h1').text().trim();
                 let description = box.find('[colspan="2"]').text().trim();
@@ -72,7 +75,8 @@ async function getAdDetails(items) {
                     description: description,
                     price: price,
                     imageLinks: adImages,
-                    contactInfo: contactInfo || ['sem contato informado']
+                    contactInfo: contactInfo || ['sem contato informado'],
+                    neighborhood: neighborhood
                 });
             } else {
                 console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
