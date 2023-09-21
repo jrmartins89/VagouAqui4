@@ -54,7 +54,6 @@ async function getAdDetails(items) {
                 const neighborhoodRow = table.find('tr:has(td[valign="top"]:contains("Bairro"))');
                 const neighborhoodCell = neighborhoodRow.find('td[valign="top"]:contains("Bairro") + td');
                 const neighborhood = neighborhoodCell.text().trim();
-                console.log('bairro >>>>>>>>>>>', neighborhood);
                 const box = $('.box');
                 const title = box.find('h1').text().trim();
                 let description = box.find('[colspan="2"]').text().trim();
@@ -76,7 +75,7 @@ async function getAdDetails(items) {
                     price: price,
                     imageLinks: adImages,
                     contactInfo: contactInfo || ['sem contato informado'],
-                    neighborhood: neighborhood
+                    neighborhood: neighborhood || 'sem bairro informado'
                 });
             } else {
                 console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
