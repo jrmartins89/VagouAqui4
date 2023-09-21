@@ -40,6 +40,7 @@ app.use("/api/ads", ads);
 
 // Start scraping function
 async function startScraping() {
+    let finalItemsClassificadosUfsc=[];
     try {
         for (const urlInfo of urls) {
             const adItemsFromClassificadosUfsc = await scraperUfsc.getAdLinks(
@@ -56,7 +57,7 @@ async function startScraping() {
                     newAdItemsFromClassificadosUfsc
                 );
 
-                const finalItemsClassificadosUfsc = itemsWithDetailsClassificadosUfsc.map(
+                 finalItemsClassificadosUfsc = itemsWithDetailsClassificadosUfsc.map(
                     (item) => ({
                         title: item.title,
                         link: item.link,
@@ -69,11 +70,8 @@ async function startScraping() {
                 );
 
                 await Ad.insertMany(finalItemsClassificadosUfsc);
-                console.log(
-                    `Scraped data from ${item.neighborhood} has been saved to MongoDB collection "ads"`
-                );
             } else {
-                console.log(`No new ads to save from ${item.neighborhood}`);
+                console.log('Classificados UFSC ads');
             }
         }
         console.log("Finished scraping Classificados UFSC ads");
