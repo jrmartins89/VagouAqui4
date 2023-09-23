@@ -15,10 +15,15 @@ async function getRoomgoAdDetails(adLink) {
             // Find the description text inside adContent
             const adDescription = adContent.find('div.content-block.description-text p').text();
             const adTitle = adHeader.find('div.content-block.header-block h1').text();
-            // Display the ad description in the console
-            console.log("Ad title:", adTitle);
-            console.log("Ad Description:", adDescription);
-            return adDescription;
+
+            // Create a JSON object with ad details
+            const adDetails = {
+                title: adTitle,
+                description: adDescription,
+                link: adLink,
+            };
+
+            return adDetails;
         } else {
             console.error(`Failed to fetch ad details from ${adLink}. Status code: ${response.status}`);
         }
@@ -45,11 +50,6 @@ async function scrapeRoomgoAdsPage(pageNumber) {
                 }
             });
 
-            // Display ad links on the console
-            console.log("Ad Links:");
-            console.log(adLinks);
-
-            // You can continue with the rest of your scraping logic here
             return adLinks;
         } else {
             console.error(`Failed to fetch the HTML data for page ${pageNumber}. Status code: ${response.status}`);
@@ -59,21 +59,20 @@ async function scrapeRoomgoAdsPage(pageNumber) {
     }
 }
 
-module.exports = {
-    scrapeRoomgoAdsPage,
-    getRoomgoAdDetails
-};
-
 // Example usage:
-for (let i= 1; i <=2; i++){
-scrapeRoomgoAdsPage(i)
-   .then((adLinks) => {
-       // Now you can iterate through adLinks and call getRoomgoAdDetails for each ad
-       adLinks.forEach((adLink) => {
-           getRoomgoAdDetails(adLink);
-       });
-   })
-   .catch((error) => {
-       console.error(error);
-   });
-}
+const numberOfPages = 2;
+
+(async () => {
+    const adLinksArray = [];
+
+    for (let i = 1; i <= numberOfPages; i++) {
+        const adLinks = await scrapeRoomgoAdsPage(i);
+        adLinksArray.push(...adLinks); // Collect all ad links
+    }
+
+    // Wait for all ad links to be collected, then scrape ad details
+    const adDetailsArray = await Promise.all(adLinksArray.map(getRoomgoAdDetails));
+
+    // Do something with the ad details, which is an array of JSON objects
+    console.log(adDetailsArray);
+})();
