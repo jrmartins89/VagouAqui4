@@ -107,7 +107,8 @@ async function saveNewAds(newAds, source) {
                 price: item.price || "",
                 imageLinks: item.imageLinks || "",
                 neighborhood: item.neighborhood,
-                contactInfo: item.contactInfo
+                contactInfo: item.contactInfo,
+                source: source
             }));
 
             await Ad.insertMany(finalAds);
