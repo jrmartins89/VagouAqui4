@@ -66,7 +66,8 @@ module.exports = {
 };
 
 // Example usage:
-scrapeRoomgoAdsPage(1)
+for (let i= 1; i <=2; i++){
+scrapeRoomgoAdsPage(i)
    .then((adLinks) => {
        // Now you can iterate through adLinks and call getRoomgoAdDetails for each ad
        adLinks.forEach((adLink) => {
@@ -76,3 +77,4 @@ scrapeRoomgoAdsPage(1)
    .catch((error) => {
        console.error(error);
    });
+}
