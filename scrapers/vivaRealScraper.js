@@ -47,55 +47,59 @@ async function extractVivaRealImageLinks(adLink) {
 
 // Function to scrape VivaReal ad details
 async function getVivaRealAdLinks() {
+    const baseUrl = 'https://www.vivareal.com.br/aluguel/santa-catarina/florianopolis/kitnet_residencial/?pagina=';
+
     try {
-        const response = await axios.get('https://www.vivareal.com.br/aluguel/santa-catarina/florianopolis/kitnet_residencial/');
+        const adDetailsPromises = [];
 
-        if (response.status === 200) {
-            const $ = cheerio.load(response.data);
+        for (let page = 1; page <= 2; page++) {
+            const url = `${baseUrl}${page}`;
+            const response = await axios.get(url);
 
-            // Find the main content of the ad
-            const adList = $('.js-card-selector');
+            if (response.status === 200) {
+                const $ = cheerio.load(response.data);
 
-            // Create an array to store promises for ad details
-            const adDetailsPromises = [];
+                // Find the main content of the ad
+                const adList = $('.js-card-selector');
 
-            // Iterate through each ad
-            adList.each((index, element) => {
-                const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
-                const adTitle = adTitleElement.text().trim();
-                const adDescription = $(element).find('.property-card__description').text().trim();
-                const adLink = 'https://www.vivareal.com.br' + adTitleElement.attr('href');
-                const adPrice = $(element).find('.property-card__price').text().trim();
-                const address = $(element).find('.property-card__address').text().trim();
+                // Iterate through each ad on the page
+                adList.each((index, element) => {
+                    const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
+                    const adTitle = adTitleElement.text().trim();
+                    const adDescription = $(element).find('.property-card__description').text().trim();
+                    const adLink = 'https://www.vivareal.com.br' + adTitleElement.attr('href');
+                    const adPrice = $(element).find('.property-card__price').text().trim();
+                    const address = $(element).find('.property-card__address').text().trim();
 
-                // Extract neighborhood using the extractNeighborhood function
-                const neighborhood = extractNeighborhood(address);
+                    // Extract neighborhood using the extractNeighborhood function
+                    const neighborhood = extractNeighborhood(address);
 
-                // Call extractVivaRealImageLinks to get image links and push the promise into the array
-                const imageLinksPromise = extractVivaRealImageLinks(adLink);
+                    // Call extractVivaRealImageLinks to get image links and push the promise into the array
+                    const imageLinksPromise = extractVivaRealImageLinks(adLink);
 
-                // Create a promise for this ad's details
-                const adDetailsPromise = imageLinksPromise.then(imageLinks => {
-                    return {
-                        title: adTitle,
-                        description: adDescription,
-                        link: adLink,
-                        price: adPrice,
-                        neighborhood: neighborhood,
-                        imageLinks: imageLinks,
-                    };
+                    // Create a promise for this ad's details
+                    const adDetailsPromise = imageLinksPromise.then(imageLinks => {
+                        return {
+                            title: adTitle,
+                            description: adDescription,
+                            link: adLink,
+                            price: adPrice,
+                            neighborhood: neighborhood,
+                            imageLinks: imageLinks,
+                        };
+                    });
+
+                    adDetailsPromises.push(adDetailsPromise);
                 });
-
-                adDetailsPromises.push(adDetailsPromise);
-            });
-
-            // Wait for all ad details promises to resolve
-            const adDetailsArray = await Promise.all(adDetailsPromises);
-
-            return adDetailsArray;
-        } else {
-            console.error(`Failed to fetch ad details. Status code: ${response.status}`);
+            } else {
+                console.error(`Failed to fetch ad details for page ${page}. Status code: ${response.status}`);
+            }
         }
+
+        // Wait for all ad details promises to resolve
+        const adDetailsArray = await Promise.all(adDetailsPromises);
+
+        return adDetailsArray;
     } catch (error) {
         console.error('Error while scraping ad details:', error.message);
     }
@@ -104,3 +108,5 @@ async function getVivaRealAdLinks() {
 module.exports = {
     getVivaRealAdLinks
 };
+
+getVivaRealAdLinks()
