@@ -12,7 +12,7 @@ const urls = require("./urls.json");
 const ads = require("./routes/api/ads");
 const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
-const {scrapeRoomgoAdsPage} = require("./scrapers/roomgoScraper");
+const {scrapeRoomgoAdsPage} = require("./scrapers/vivaRealScraper");
 require("dotenv").config();
 require("./config/passport")(passport);
 

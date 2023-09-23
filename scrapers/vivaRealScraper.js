@@ -45,7 +45,7 @@ async function getRoomgoAdDetails(adLink) {
 // Function to scrape Roomgo ad links
 async function scrapeRoomgoAdsPage(pageNumber) {
     try {
-        const url = `https://www.roomgo.com.br/santa-catarina/florianopolis-companheiros-de-quarto?page=${pageNumber}#room-ads-area`;
+        const url = `https://www.vivareal.com.br/aluguel/santa-catarina/florianopolis/kitnet_residencial/?pagina=${pageNumber}`;
         const response = await axios.get(url);
 
         if (response.status === 200) {
