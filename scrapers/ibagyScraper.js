@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { scrapeImagesIbagy } = require('./imageScraper');
-const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contactInfoScrapper');
+const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contactInfoScraper');
 
 async function scrapeIbagyAds() {
     let adItems = [];

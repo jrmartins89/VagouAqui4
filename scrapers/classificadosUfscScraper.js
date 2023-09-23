@@ -1,7 +1,7 @@
 const { scrapeImagesClassificadosUfsc }  = require('./imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { extractContactInfoFromDescription } = require('./contactInfoScrapper');
+const { extractContactInfoFromDescription } = require('./contactInfoScraper');
 
 async function getAdLinks(url) {
     try {

@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const {extractContactInfoFromDescription} = require("./contactInfoScrapper");
+const {extractContactInfoFromDescription} = require("./contactInfoScraper");
 
 // Define a function to scrape a single page
 async function scrapeWebQuartoadsPage(pageNumber) {
