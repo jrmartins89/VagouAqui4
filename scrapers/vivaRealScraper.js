@@ -56,11 +56,11 @@ async function getVivaRealAdLinks() {
             // Find the main content of the ad
             const adList = $('.js-card-selector');
 
-            // Create an array to store ad details
-            const adDetailsArray = [];
+            // Create an array to store promises for ad details
+            const adDetailsPromises = [];
 
             // Iterate through each ad
-            adList.each(async (index, element) => {
+            adList.each((index, element) => {
                 const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
                 const adTitle = adTitleElement.text().trim();
                 const adDescription = $(element).find('.property-card__description').text().trim();
@@ -71,21 +71,26 @@ async function getVivaRealAdLinks() {
                 // Extract neighborhood using the extractNeighborhood function
                 const neighborhood = extractNeighborhood(address);
 
-                // Call extractVivaRealImageLinks to get image links
-                const imageLinks = await extractVivaRealImageLinks(adLink);
+                // Call extractVivaRealImageLinks to get image links and push the promise into the array
+                const imageLinksPromise = extractVivaRealImageLinks(adLink);
 
-                // Create a JSON object with ad details for each ad and push it to the array
-                const adDetails = {
-                    title: adTitle,
-                    description: adDescription,
-                    link: adLink,
-                    price: adPrice,
-                    neighborhood: neighborhood,
-                    imageLinks: imageLinks,
-                };
+                // Create a promise for this ad's details
+                const adDetailsPromise = imageLinksPromise.then(imageLinks => {
+                    return {
+                        title: adTitle,
+                        description: adDescription,
+                        link: adLink,
+                        price: adPrice,
+                        neighborhood: neighborhood,
+                        imageLinks: imageLinks,
+                    };
+                });
 
-                adDetailsArray.push(adDetails);
+                adDetailsPromises.push(adDetailsPromise);
             });
+
+            // Wait for all ad details promises to resolve
+            const adDetailsArray = await Promise.all(adDetailsPromises);
 
             return adDetailsArray;
         } else {
@@ -99,5 +104,3 @@ async function getVivaRealAdLinks() {
 module.exports = {
     getVivaRealAdLinks
 };
-
-getVivaRealAdLinks()
