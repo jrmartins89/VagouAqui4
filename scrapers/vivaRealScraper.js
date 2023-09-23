@@ -3,14 +3,23 @@ const cheerio = require('cheerio');
 
 // Function to extract neighborhood from address
 function extractNeighborhood(address) {
-    // Use a regular expression to extract the neighborhood
-    const regex = /- ([^,]+),/;
-    const match = address.match(regex);
-    if (match && match.length > 1) {
-        return match[1].trim();
+    // Split the address by commas and dashes
+    const parts = address.split(/,|-/);
+
+    // Find the first non-empty part that represents the neighborhood
+    for (let i = 0; i < parts.length; i++) {
+        const trimmedPart = parts[i].trim();
+
+        // Check if the part contains only letters or spaces (potential neighborhood)
+        if (/^[A-Za-z\s]+$/.test(trimmedPart)) {
+            return trimmedPart;
+        }
     }
+
+    // If no neighborhood is found, return null
     return null;
 }
+
 
 // Function to scrape VivaReal ad details
 async function getVivaRealAdLinks() {
