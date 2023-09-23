@@ -29,4 +29,3 @@ async function getVivaRealAdLinks() {
         console.error(`Error while scraping ad details from ${adLink}:`, error.message);
     }
 }
-
