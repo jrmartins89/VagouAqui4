@@ -1,10 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const { scrapeImagesIbagy } = require('./imageScraper');
-let adItems;
 const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contactInfoScrapper');
 
 async function scrapeIbagyAds() {
+    let adItems;
     try {
         const response = await axios.get('https://ibagy.com.br/aluguel/residencial/florianopolis/');
 
