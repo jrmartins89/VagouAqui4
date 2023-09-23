@@ -11,14 +11,13 @@ async function getRoomgoAdDetails(adLink) {
 
             // Find the main content of the ad
             const adContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div.main-content');
-
+            const adHeader = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7');
             // Find the description text inside adContent
             const adDescription = adContent.find('div.content-block.description-text p').text();
-
+            const adTitle = adHeader.find('div.content-block.header-block h1').text();
             // Display the ad description in the console
-            console.log("Ad Description:");
-            console.log(adDescription);
-
+            console.log("Ad title:", adTitle);
+            console.log("Ad Description:", adDescription);
             return adDescription;
         } else {
             console.error(`Failed to fetch ad details from ${adLink}. Status code: ${response.status}`);
