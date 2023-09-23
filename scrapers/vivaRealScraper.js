@@ -17,12 +17,12 @@ async function getVivaRealAdLinks() {
 
             // Iterate through each ad
             adList.each((index, element) => {
-                const adTitle = $(element).find('.property-card__title').text().trim();
+                const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
+                const adTitle = adTitleElement.text().trim();
                 const adDescription = $(element).find('.property-card__description').text().trim();
-                const adLink = $(element).find('a.property-card__link').attr('href');
+                const adLink ='https://www.vivareal.com.br' + adTitleElement.attr('href');
                 const adPrice = $(element).find('.property-card__price').text().trim();
                 const neighborhood = $(element).find('.property-card__address').text().trim();
-
 
                 // Create a JSON object with ad details for each ad and push it to the array
                 const adDetails = {
