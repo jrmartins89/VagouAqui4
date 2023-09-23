@@ -16,12 +16,13 @@ async function getRoomgoAdDetails(adLink) {
             // Find the description text inside adContent
             const adDescription = adContent.find('div.content-block.description-text p').text();
             const adTitle = adHeader.find('div.content-block.header-block h1').text();
-            const adprice = adPriceContent. find('h4.cost-detail span').text();
+            const adPrice = adPriceContent. find('h4.cost-detail span').text();
             // Create a JSON object with ad details
             const adDetails = {
                 title: adTitle,
                 description: adDescription,
                 link: adLink,
+                price: adPrice
             };
 
             return adDetails;
