@@ -1,29 +1,53 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const {extractContactInfoFromDescription} = require("./contactInfoScrapper");
+const { extractContactInfoFromDescription } = require("./contactInfoScrapper");
 
-async function scrapeRooomgoAdsPage(pageNumber) {
+async function scrapeRoomgoAdsPage(pageNumber) {
     try {
-        const url = `https://www.roomgo.com.br/santa-catarina/florianopolis-companheiros-de-quarto?page=${pageNumber}#room-ads-area`;
+        const url = `https://www.roomgo.com.br/santa-catarina/florianopolis-companheiros-de-quarto?page=1#room-ads-area`;
         const response = await axios.get(url);
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
             const ads = [];
-            const adsPage = $('#room-ads-area > div.listing_area_content');
-                ads.push({
-                    title: ad.title,
-                    link: ad.url,
-                    description: ad.description,
-                    price: ad.rent_price,
-                    imageLinks: imageLinks,
-                    neighborhood: ad.district
-                });
+
+            const adLinks = []; // Variable to store ad links
+
+            // Extract data-url values from elements with the listing_item class
+            $('.listing_item').each((index, element) => {
+                const dataUrl = $(element).attr('data-url');
+                if (dataUrl) {
+                    adLinks.push(dataUrl);
+                }
+            });
+
+            // Display ad links on the console
+            console.log("Ad Links:");
+            console.log(adLinks);
+
+            // You can continue with the rest of your scraping logic here
+
             return ads;
         } else {
-            console.error(`Failed to fetch the json data for page ${pageNumber}. Status code: ${response.status}`);
+            console.error(`Failed to fetch the HTML data for page ${pageNumber}. Status code: ${response.status}`);
         }
     } catch (error) {
         console.error(`Error while scraping page ${pageNumber}:`, error.message);
     }
 }
+
+module.exports = {
+    scrapeRoomgoAdsPage
+};
+
+scrapeRoomgoAdsPage();
+
+
+// Example usage:
+// scrapeRoomgoAdsPage(1)
+//   .then((ads) => {
+//       console.log(ads);
+//   })
+//   .catch((error) => {
+//       console.error(error);
+//   });
