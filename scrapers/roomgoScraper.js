@@ -20,6 +20,9 @@ async function getRoomgoAdDetails(adLink) {
             const adPrice = adPriceContent.find('h4.cost-detail span').text();
             // Extract the value from data-test-address property
             const address = adAddressContent.attr('data-test-address');
+            // Extract the neighborhood using a regex pattern
+            const neighborhoodMatch = address.match(/,\s*([\w\s-]+)$/);
+            const neighborhood = neighborhoodMatch ? neighborhoodMatch[1] : '';
 
             // Create a JSON object with ad details
             const adDetails = {
@@ -27,7 +30,7 @@ async function getRoomgoAdDetails(adLink) {
                 description: adDescription,
                 link: adLink,
                 price: adPrice,
-                neighborhood:adNeighborhood
+                neighborhood: neighborhood
             };
 
             return adDetails;
