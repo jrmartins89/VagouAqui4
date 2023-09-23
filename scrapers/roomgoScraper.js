@@ -12,10 +12,11 @@ async function getRoomgoAdDetails(adLink) {
             // Find the main content of the ad
             const adContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div.main-content');
             const adHeader = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7');
+            const adPriceContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div:nth-child(4)');
             // Find the description text inside adContent
             const adDescription = adContent.find('div.content-block.description-text p').text();
             const adTitle = adHeader.find('div.content-block.header-block h1').text();
-
+            const adprice = adPriceContent. find('h4.cost-detail span').text();
             // Create a JSON object with ad details
             const adDetails = {
                 title: adTitle,
