@@ -1,6 +1,17 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+// Function to extract neighborhood from address
+function extractNeighborhood(address) {
+    // Use a regular expression to extract the neighborhood
+    const regex = /- ([^,]+),/;
+    const match = address.match(regex);
+    if (match && match.length > 1) {
+        return match[1].trim();
+    }
+    return null;
+}
+
 // Function to scrape VivaReal ad details
 async function getVivaRealAdLinks() {
     try {
@@ -20,9 +31,12 @@ async function getVivaRealAdLinks() {
                 const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
                 const adTitle = adTitleElement.text().trim();
                 const adDescription = $(element).find('.property-card__description').text().trim();
-                const adLink ='https://www.vivareal.com.br' + adTitleElement.attr('href');
+                const adLink = 'https://www.vivareal.com.br' + adTitleElement.attr('href');
                 const adPrice = $(element).find('.property-card__price').text().trim();
-                const neighborhood = $(element).find('.property-card__address').text().trim();
+                const address = $(element).find('.property-card__address').text().trim();
+
+                // Extract neighborhood using the extractNeighborhood function
+                const neighborhood = extractNeighborhood(address);
 
                 // Create a JSON object with ad details for each ad and push it to the array
                 const adDetails = {
