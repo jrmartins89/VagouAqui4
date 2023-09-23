@@ -10,19 +10,7 @@ async function getRoomgoAdDetails(adLink) {
             const $ = cheerio.load(response.data);
 
             // Find the main content of the ad
-            const adDescriptionContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div.main-content');
-            const adHeaderContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7');
-            const adPriceContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div:nth-child(4)');
-            const adAddressContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div.content-block.header-block');
-            // Find the description text inside adContent
-            const adDescription = adDescriptionContent.find('div.content-block.description-text p').text();
-            const adTitle = adHeaderContent.find('div.content-block.header-block h1').text();
-            const adPrice = adPriceContent.find('h4.cost-detail span').text();
-            // Extract the value from data-test-address property
-            const address = adAddressContent.attr('data-test-address');
-            // Extract the neighborhood using a regex pattern
-            const neighborhoodMatch = address.match(/,\s*([\w\s-]+)$/);
-            const neighborhood = neighborhoodMatch ? neighborhoodMatch[1] : '';
+            const adList = $('#js-site-main > div.results__container > div.results__content > section > div.results-main__panel.js-list > div.results-list.js-results-list');
 
             // Create a JSON object with ad details
             const adDetails = {
