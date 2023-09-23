@@ -4,32 +4,41 @@ const { scrapeImagesIbagy } = require('./imageScraper');
 const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contactInfoScrapper');
 
 async function scrapeIbagyAds() {
-    let adItems;
+    let adItems = [];
     try {
-        const response = await axios.get('https://ibagy.com.br/aluguel/residencial/florianopolis/');
+        const pages = [
+            'https://ibagy.com.br/aluguel/residencial/florianopolis/',
+            'https://ibagy.com.br/aluguel/kitnet_conjugado/'
+        ];
 
-        if (response.status === 200) {
-            const $ = cheerio.load(response.data);
-            const adsPage = $('#imovel-boxes');
+        for (const page of pages) {
+            const response = await axios.get(page);
 
-            const adsLinks = new Set(); // Use a Set to store unique links
+            if (response.status === 200) {
+                const $ = cheerio.load(response.data);
+                const adsPage = $('#imovel-boxes');
 
-            adsPage.find('a[target="_blank"]').each((index, element) => {
-                const link = $(element).attr('href');
-                if (link) {
-                    adsLinks.add(link); // Add the link to the Set
-                }
-            });
+                const adsLinks = new Set(); // Use a Set to store unique links
 
-            const uniqueAdsLinks = Array.from(adsLinks); // Convert the Set back to an array
+                adsPage.find('a[target="_blank"]').each((index, element) => {
+                    const link = $(element).attr('href');
+                    if (link) {
+                        adsLinks.add(link); // Add the link to the Set
+                    }
+                });
 
-            const adsData = { links: uniqueAdsLinks };
-            JSON.stringify(adsData, null, 2);
-            // Call the function to scrape ad details
-          adItems  = await scrapeIbagyAdsDetails(uniqueAdsLinks);
-        } else {
-            console.error('Failed to fetch the page. Status code:', response.status);
+                const uniqueAdsLinks = Array.from(adsLinks); // Convert the Set back to an array
+
+                const adsData = { links: uniqueAdsLinks };
+                JSON.stringify(adsData, null, 2);
+                // Call the function to scrape ad details
+                const adItemsForPage = await scrapeIbagyAdsDetails(uniqueAdsLinks);
+                adItems.push(...adItemsForPage);
+            } else {
+                console.error('Failed to fetch the page. Status code:', response.status);
+            }
         }
+
         return adItems;
     } catch (error) {
         console.error('Error:', error.message);
