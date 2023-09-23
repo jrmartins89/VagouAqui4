@@ -12,7 +12,7 @@ const urls = require("./urls.json");
 const ads = require("./routes/api/ads");
 const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
-const {scrapeRoomgoAdsPage} = require("./scrapers/vivaRealScraper");
+const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
 require("dotenv").config();
 require("./config/passport")(passport);
 
@@ -89,8 +89,8 @@ async function startScraping() {
         const webQuartoAds = await scrapeWebQuartoads();
         await saveNewAds(webQuartoAds, "WebQuarto");
 
-        const roomgoAds = await scrapeRoomgoAdsPage();
-        await saveNewAds(roomgoAds, "roomgo");
+        const vivaRealAds = await getVivaRealAdLinks();
+        await saveNewAds(vivaRealAds, "vivaReal");
     } catch (error) {
         console.error("Error during scraping:", error);
     }
