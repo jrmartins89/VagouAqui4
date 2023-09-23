@@ -17,7 +17,7 @@ async function scrapeRoomgoAdsPage(pageNumber) {
             $('.listing_item').each((index, element) => {
                 const dataUrl = $(element).attr('data-url');
                 if (dataUrl) {
-                    adLinks.push(dataUrl);
+                    adLinks.push('https://www.roomgo.com.br/santa-catarina'+ dataUrl);
                 }
             });
 
