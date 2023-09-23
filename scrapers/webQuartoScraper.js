@@ -31,7 +31,8 @@ async function scrapeWebQuartoadsPage(pageNumber) {
                     description: ad.description,
                     price: ad.rent_price,
                     imageLinks: imageLinks,
-                    neighborhood: ad.district
+                    neighborhood: ad.district,
+                    contactInfo: contactInfo
                 });
             }
 
