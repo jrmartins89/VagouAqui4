@@ -2,9 +2,9 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 // Function to scrape Roomgo ad details
-async function getRoomgoAdDetails(adLink) {
+async function getVivaRealAdLinks() {
     try {
-        const response = await axios.get(adLink);
+        const response = await axios.get('https://www.vivareal.com.br/aluguel/santa-catarina/florianopolis/kitnet_residencial/');
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
@@ -30,47 +30,3 @@ async function getRoomgoAdDetails(adLink) {
     }
 }
 
-// Function to scrape Roomgo ad links
-async function scrapeRoomgoAdsPage(pageNumber) {
-    try {
-        const url = `https://www.vivareal.com.br/aluguel/santa-catarina/florianopolis/kitnet_residencial/?pagina=${pageNumber}`;
-        const response = await axios.get(url);
-
-        if (response.status === 200) {
-            const $ = cheerio.load(response.data);
-            const adLinks = [];
-
-            // Extract data-url values from elements with the listing_item class
-            $('.listing_item').each((index, element) => {
-                const dataUrl = $(element).attr('data-url');
-                if (dataUrl) {
-                    adLinks.push('https://www.roomgo.com.br/santa-catarina' + dataUrl);
-                }
-            });
-
-            return adLinks;
-        } else {
-            console.error(`Failed to fetch the HTML data for page ${pageNumber}. Status code: ${response.status}`);
-        }
-    } catch (error) {
-        console.error(`Error while scraping page ${pageNumber}:`, error.message);
-    }
-}
-
-// Example usage:
-const numberOfPages = 2;
-
-(async () => {
-    const adLinksArray = [];
-
-    for (let i = 1; i <= numberOfPages; i++) {
-        const adLinks = await scrapeRoomgoAdsPage(i);
-        adLinksArray.push(...adLinks); // Collect all ad links
-    }
-
-    // Wait for all ad links to be collected, then scrape ad details
-    const adDetailsArray = await Promise.all(adLinksArray.map(getRoomgoAdDetails));
-
-    // Do something with the ad details, which is an array of JSON objects
-    console.log(adDetailsArray);
-})();
