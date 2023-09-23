@@ -13,12 +13,14 @@ async function getRoomgoAdDetails(adLink) {
             const adDescriptionContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div.main-content');
             const adHeaderContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7');
             const adPriceContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div:nth-child(4)');
-            const adNeighborhoodContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div.content-block.header-block');
+            const adAddressContent = $('#roomDetail > div.page.page-room-detail > div.grid-wrapper.grid-12 > div.grid-box.span-7 > div.content-block.header-block');
             // Find the description text inside adContent
             const adDescription = adDescriptionContent.find('div.content-block.description-text p').text();
             const adTitle = adHeaderContent.find('div.content-block.header-block h1').text();
             const adPrice = adPriceContent.find('h4.cost-detail span').text();
-            const adNeighborhood = adNeighborhoodContent.find().text();
+            // Extract the value from data-test-address property
+            const address = adAddressContent.attr('data-test-address');
+
             // Create a JSON object with ad details
             const adDetails = {
                 title: adTitle,
