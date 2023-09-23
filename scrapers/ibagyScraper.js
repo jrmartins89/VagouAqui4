@@ -8,7 +8,7 @@ async function scrapeIbagyAds() {
     try {
         const pages = [
             'https://ibagy.com.br/aluguel/residencial/florianopolis/',
-            'https://ibagy.com.br/aluguel/kitnet_conjugado/'
+            'https://ibagy.com.br/aluguel/kitnet_conjugado/florianopolis'
         ];
 
         for (const page of pages) {
