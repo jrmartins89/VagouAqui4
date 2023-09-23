@@ -41,24 +41,30 @@ app.use("/api/ads", ads);
 
 // Start scraping function
 async function startScraping() {
-    let finalItemsClassificadosUfsc=[];
     try {
         for (const urlInfo of urls) {
+            // Fetch ads from scraperUfsc for each URL
             const adItemsFromClassificadosUfsc = await scraperUfsc.getAdLinks(
                 urlInfo.url
             );
+
+            // Fetch existing ads from the database
             const existingAds = await Ad.find({}, "link");
 
+            // Filter new ads
             const newAdItemsFromClassificadosUfsc = adItemsFromClassificadosUfsc.filter(
-                (item) => !existingAds.some((existingAd) => existingAd.link === item.link)
+                (item) =>
+                    !existingAds.some((existingAd) => existingAd.link === item.link)
             );
 
             if (newAdItemsFromClassificadosUfsc.length > 0) {
+                // Fetch ad details
                 const itemsWithDetailsClassificadosUfsc = await scraperUfsc.getAdDetails(
                     newAdItemsFromClassificadosUfsc
                 );
 
-                 finalItemsClassificadosUfsc = itemsWithDetailsClassificadosUfsc.map(
+                // Map and save new ads
+                const finalItemsClassificadosUfsc = itemsWithDetailsClassificadosUfsc.map(
                     (item) => ({
                         title: item.title,
                         link: item.link,
@@ -66,17 +72,17 @@ async function startScraping() {
                         price: item.price,
                         imageLinks: item.imageLinks,
                         neighborhood: item.neighborhood,
-                        contactInfo:item.contactInfo
+                        contactInfo: item.contactInfo,
                     })
                 );
 
-                await Ad.insertMany(finalItemsClassificadosUfsc);
+                await saveNewAds(finalItemsClassificadosUfsc, "Classificados UFSC");
             } else {
-                console.log('Classificados UFSC ads');
+                console.log('No new Classificados UFSC ads to save');
             }
         }
-        console.log("Finished scraping Classificados UFSC ads");
 
+        // Continue with scraping other sources and saving new ads as before
         const ibagyAds = await scrapeIbagyAds();
         await saveNewAds(ibagyAds, "Ibagy");
 
@@ -85,7 +91,6 @@ async function startScraping() {
 
         const roomgoAds = await scrapeRoomgoAdsPage();
         await saveNewAds(roomgoAds, "roomgo");
-
     } catch (error) {
         console.error("Error during scraping:", error);
     }
