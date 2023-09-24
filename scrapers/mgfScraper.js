@@ -59,12 +59,35 @@ async function extractMgfAdDetails(adLinks) {
                      neighborhood = parts[0].trim();
                 }
 
+                // Find and save the image carrousel
+                const imageCarrousel = [];
+                $('.carousel-item').each((index, element) => {
+                    const source = $(element).find('source');
+                    const dataSrcset = source.attr('data-srcset');
+                    if (dataSrcset) {
+                        imageCarrousel.push(dataSrcset);
+                    }
+                });
+
+                // Iterate through imageCarrousel and extract image links
+                const imageLinks = [];
+                imageCarrousel.forEach((srcset) => {
+                    const regex = /([^\s,]+)/g;
+                    const matches = srcset.match(regex);
+                    if (matches && matches.length > 0) {
+                        imageLinks.push(matches[0]);
+                    }
+                });
+
+
+
                 const adDetail = {
                     adTitle,
                     adDescription,
                     adPrice,
                     adLink,
-                    neighborhood
+                    neighborhood,
+                    imageLinks
                 };
 
                 return adDetail;
