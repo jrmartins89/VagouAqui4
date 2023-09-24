@@ -10,7 +10,8 @@ async function extractMgfHrefValues() {
             const $ = cheerio.load(response.data);
             const adList = $('#slist > div');
 
-            adList.each((index, element) => {
+            // Parse through all children elements of 'adList'
+            adList.children().each((index, element) => {
                 const adLink = $(element).find('a.h-100.d-flex.flex-column').attr('href');
                 if (adLink) {
                     adLinks.push(adLink);
@@ -23,6 +24,7 @@ async function extractMgfHrefValues() {
         console.error('Error while scraping href values for ads:', error.message);
     }
 }
+
 module.exports = {
     extractMgfHrefValues
 }
