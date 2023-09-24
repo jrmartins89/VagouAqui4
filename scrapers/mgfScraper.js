@@ -6,7 +6,7 @@ async function extractMgfHrefValues() {
     try {
         const baseUrl = 'https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=';
         const adLinks = [];
-        let neighborhood;
+
         const getPageLinks = async (pageNumber) => {
             const url = `${baseUrl}${pageNumber}`;
             const response = await axios.get(url);
@@ -31,7 +31,7 @@ async function extractMgfHrefValues() {
 
         await Promise.all(pagePromises);
 
-        const adDetails = await extractMgfAdDetails(adLinks, neighborhood);
+        const adDetails = await extractMgfAdDetails(adLinks);
         console.log(JSON.stringify(adDetails, null, 2));
 
         console.log('Scraping has finished.');
@@ -41,7 +41,7 @@ async function extractMgfHrefValues() {
     }
 }
 
-async function extractMgfAdDetails(adLinks, neighborhood) {
+async function extractMgfAdDetails(adLinks) {
     const adDetailPromises = adLinks.map(async (adLink) => {
         try {
             const response = await axios.get(adLink);
@@ -50,13 +50,12 @@ async function extractMgfAdDetails(adLinks, neighborhood) {
                 const adTitle = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h1').text().trim();
                 const adDescription = $('#dbox > p').text().trim();
                 const adPrice = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > div:nth-child(2) > div > div.card.border-secondary.rounded-4.shadow.mb-4.p-3 > h3').text().trim();
-
+                const neighborhood = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h2 > a.lead.link-dark.align-middle').text();
                 const adDetail = {
                     adTitle,
                     adDescription,
                     adPrice,
                     adLink,
-                    neighborhood
                 };
 
                 return adDetail;
