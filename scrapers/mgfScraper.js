@@ -6,7 +6,7 @@ async function extractMgfHrefValues() {
     try {
         const baseUrl = 'https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=';
         const adLinks = [];
-
+        let neighborhood;
         const getPageLinks = async (pageNumber) => {
             const url = `${baseUrl}${pageNumber}`;
             const response = await axios.get(url);
@@ -31,7 +31,7 @@ async function extractMgfHrefValues() {
 
         await Promise.all(pagePromises);
 
-        const adDetails = await extractMgfAdDetails(adLinks);
+        const adDetails = await extractMgfAdDetails(adLinks, neighborhood);
         console.log(JSON.stringify(adDetails, null, 2));
 
         console.log('Scraping has finished.');
@@ -41,7 +41,7 @@ async function extractMgfHrefValues() {
     }
 }
 
-async function extractMgfAdDetails(adLinks) {
+async function extractMgfAdDetails(adLinks, neighborhood) {
     const adDetailPromises = adLinks.map(async (adLink) => {
         try {
             const response = await axios.get(adLink);
@@ -55,7 +55,8 @@ async function extractMgfAdDetails(adLinks) {
                     adTitle,
                     adDescription,
                     adPrice,
-                    adLink
+                    adLink,
+                    neighborhood
                 };
 
                 return adDetail;
