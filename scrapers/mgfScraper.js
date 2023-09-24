@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const {extractContactInfoFromDescription} = require("./contactInfoScraper");
 
 // Function to scrape and display href values from MGF ad page
 async function extractMgfHrefValues() {
@@ -50,6 +51,8 @@ async function extractMgfAdDetails(adLinks) {
                 const $ = cheerio.load(response.data);
                 const adTitle = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h1').text().trim();
                 const adDescription = $('#dbox > p').text().trim();
+                const contactInfoContent = extractContactInfoFromDescription(adDescription);
+                const contactInfo = contactInfoContent.length === 0 ? adLink : contactInfoContent
                 const adPrice = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > div:nth-child(2) > div > div.card.border-secondary.rounded-4.shadow.mb-4.p-3 > h3').text().trim();
                 const neighborhoodContent = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h2 > a.lead.link-dark.align-middle').text();
                 // Split the input string based on the comma
@@ -88,7 +91,8 @@ async function extractMgfAdDetails(adLinks) {
                     adPrice,
                     adLink,
                     neighborhood,
-                    imageLinks
+                    imageLinks,
+                    contactInfo
                 };
 
                 return adDetail;
