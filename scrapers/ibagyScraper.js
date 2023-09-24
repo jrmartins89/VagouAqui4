@@ -4,41 +4,38 @@ const { scrapeImagesIbagy } = require('./imageScraper');
 const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contactInfoScraper');
 
 async function scrapeIbagyAds() {
-    let adItems = [];
+    const pages = [
+        'https://ibagy.com.br/aluguel/residencial/florianopolis/',
+        'https://ibagy.com.br/aluguel/kitnet_conjugado/florianopolis'
+    ];
+
     try {
-        const pages = [
-            'https://ibagy.com.br/aluguel/residencial/florianopolis/',
-            'https://ibagy.com.br/aluguel/kitnet_conjugado/florianopolis'
-        ];
-
-        for (const page of pages) {
+        const pagePromises = pages.map(async (page) => {
             const response = await axios.get(page);
-
             if (response.status === 200) {
                 const $ = cheerio.load(response.data);
                 const adsPage = $('#imovel-boxes');
-
-                const adsLinks = new Set(); // Use a Set to store unique links
+                const adsLinks = new Set();
 
                 adsPage.find('a[target="_blank"]').each((index, element) => {
                     const link = $(element).attr('href');
                     if (link) {
-                        adsLinks.add(link); // Add the link to the Set
+                        adsLinks.add(link);
                     }
                 });
 
-                const uniqueAdsLinks = Array.from(adsLinks); // Convert the Set back to an array
-
-                const adsData = { links: uniqueAdsLinks };
-                JSON.stringify(adsData, null, 2);
-                // Call the function to scrape ad details
-                const adItemsForPage = await scrapeIbagyAdsDetails(uniqueAdsLinks);
-                adItems.push(...adItemsForPage);
+                const uniqueAdsLinks = Array.from(adsLinks);
+                return uniqueAdsLinks;
             } else {
                 console.error('Failed to fetch the page. Status code:', response.status);
+                return [];
             }
-        }
+        });
 
+        const allPageLinks = await Promise.all(pagePromises);
+        const adLinks = [].concat(...allPageLinks);
+
+        const adItems = await scrapeIbagyAdsDetails(adLinks);
         return adItems;
     } catch (error) {
         console.error('Error:', error.message);
@@ -47,11 +44,10 @@ async function scrapeIbagyAds() {
 
 async function scrapeIbagyAdsDetails(adLinks) {
     try {
-        const adDetailsArray = []; // Create an array to store ad details JSON objects
+        const adDetailsArray = [];
 
-        for (const link of adLinks) {
+        const adPromises = adLinks.map(async (link) => {
             const response = await axios.get(link);
-
             if (response.status === 200) {
                 const $ = cheerio.load(response.data);
                 const adDescriptionMatch = $('#clb-descricao > div > div > div:nth-child(3) > p').text();
@@ -64,9 +60,8 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 const contactLinkObject = $(`#imovelView_asyncSubmit > div.mauticform-innerform > div > div.propertyform-bottom > a.clb-gtm-site-whatsapp.clb-gtm-imovel-form-whatsapp.clb-gtm-imovel-${adIdNumber}.clb-interesse-aluguel`);
                 const contactInfo = extractPhoneFromWhatsAppLink(contactLinkObject["0"].attribs.href);
                 console.log('Neighborhood:', neighborhood);
-                // Call scrapeImagesIbagy to get image links
+
                 const imageLinks = await scrapeImagesIbagy(link);
-                // Create an adDetails object for this ad
                 const adDetails = {
                     title,
                     adDescription: adDescriptionMatch || 'Description not found',
@@ -76,22 +71,19 @@ async function scrapeIbagyAdsDetails(adLinks) {
                     neighborhood,
                     contactInfo
                 };
-
-                // Push the adDetails object to the array
                 adDetailsArray.push(adDetails);
             } else {
                 console.error('Failed to fetch ad details from:', link);
             }
-        }
+        });
 
-        // Return the array of ad details objects
+        await Promise.all(adPromises);
         return adDetailsArray;
     } catch (error) {
         console.error('Error:', error.message);
     }
 }
 
-// Updated regex function to remove number and comma
 function extractNeighborhood(address) {
     const neighborhoodMatch = /(\d+,\s*)(.*?)\s*-\s*Florianópolis\/Sc/i.exec(address);
     if (neighborhoodMatch) {
