@@ -4,24 +4,31 @@ const cheerio = require('cheerio');
 // Function to scrape and display href values from VivaReal ad page
 async function extractMgfHrefValues() {
     try {
-        const response = await axios.get('https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=1');
+        const baseUrl = 'https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=';
         const adLinks = [];
-        if (response.status === 200) {
-            const $ = cheerio.load(response.data);
-            const adList = $('#slist > div');
 
-            // Parse through all children elements of 'adList'
-            adList.children().each((index, element) => {
-                const adLink = $(element).find('a.h-100.d-flex.flex-column').attr('href');
-                if (adLink) {
-                    adLinks.push(adLink);
-                }
-            });
+        // Loop through pages from 1 to 40
+        for (let pageNumber = 1; pageNumber <= 40; pageNumber++) {
+            const url = `${baseUrl}${pageNumber}`;
+            const response = await axios.get(url);
 
-            // Call extractMgfAdDetails with adLinks
-            const adDetails = await extractMgfAdDetails(adLinks);
-            console.log(JSON.stringify(adDetails, null, 2));
+            if (response.status === 200) {
+                const $ = cheerio.load(response.data);
+                const adList = $('#slist > div');
+
+                // Parse through all children elements of 'adList'
+                adList.children().each((index, element) => {
+                    const adLink = $(element).find('a.h-100.d-flex.flex-column').attr('href');
+                    if (adLink) {
+                        adLinks.push(adLink);
+                    }
+                });
+            }
         }
+
+        // Call extractMgfAdDetails with adLinks
+        const adDetails = await extractMgfAdDetails(adLinks);
+        console.log(JSON.stringify(adDetails, null, 2));
     } catch (error) {
         console.error('Error while scraping href values for ads:', error.message);
     }
