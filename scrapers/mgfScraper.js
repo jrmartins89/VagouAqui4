@@ -8,7 +8,7 @@ async function extractMgfHrefValues() {
         const adLinks = [];
 
         // Loop through pages from 1 to 40
-        for (let pageNumber = 1; pageNumber <= 40; pageNumber++) {
+        for (let pageNumber = 1; pageNumber <= 2; pageNumber++) {
             const url = `${baseUrl}${pageNumber}`;
             const response = await axios.get(url);
 
@@ -28,7 +28,9 @@ async function extractMgfHrefValues() {
 
         // Call extractMgfAdDetails with adLinks
         const adDetails = await extractMgfAdDetails(adLinks);
-        console.log(JSON.stringify(adDetails, null, 2));
+        // Inform the user that scraping has finished
+        console.log('Scraping has finished.');
+        return adDetails
     } catch (error) {
         console.error('Error while scraping href values for ads:', error.message);
     }
