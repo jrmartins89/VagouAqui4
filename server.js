@@ -13,6 +13,7 @@ const ads = require("./routes/api/ads");
 const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
 const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
+const {extractMgfHrefValues} = require("./scrapers/mgfScraper");
 require("dotenv").config();
 require("./config/passport")(passport);
 
@@ -91,6 +92,9 @@ async function startScraping() {
 
         const vivaRealAds = await getVivaRealAdLinks();
         await saveNewAds(vivaRealAds, "vivaReal");
+
+        const mgfScraper = await extractMgfHrefValues();
+        await saveNewAds(mgfScraper, "MGF");
     } catch (error) {
         console.error("Error during scraping:", error);
     }
