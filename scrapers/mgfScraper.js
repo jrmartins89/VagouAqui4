@@ -28,6 +28,8 @@ async function extractMgfHrefValues() {
 
         // Call extractMgfAdDetails with adLinks
         const adDetails = await extractMgfAdDetails(adLinks);
+        console.log(JSON.stringify(adDetails, null, 2));
+
         // Inform the user that scraping has finished
         console.log('Scraping has finished.');
         return adDetails
@@ -38,9 +40,7 @@ async function extractMgfHrefValues() {
 
 // Function to extract ad details
 async function extractMgfAdDetails(adLinks) {
-    const adDetails = [];
-
-    for (const adLink of adLinks) {
+    const adDetails = await Promise.all(adLinks.map(async (adLink) => {
         try {
             const response = await axios.get(adLink);
             if (response.status === 200) {
@@ -57,14 +57,14 @@ async function extractMgfAdDetails(adLinks) {
                     adLink
                 };
 
-                adDetails.push(adDetail);
+                return adDetail;
             }
         } catch (error) {
             console.error('Error while scraping ad details:', error.message);
         }
-    }
+    }));
 
-    return adDetails;
+    return adDetails.filter(Boolean); // Remove any undefined values
 }
 
 module.exports = {
