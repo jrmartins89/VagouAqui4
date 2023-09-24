@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 async function extractMgfHrefValues() {
     try {
         const baseUrl = 'https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=';
-        const adLinks = [];
+        const adLinks = new Set(); // Use a Set to store unique URLs
 
         const getPageLinks = async (pageNumber) => {
             const url = `${baseUrl}${pageNumber}`;
@@ -18,7 +18,7 @@ async function extractMgfHrefValues() {
                 adList.children().each((index, element) => {
                     const adLink = $(element).find('a.h-100.d-flex.flex-column').attr('href');
                     if (adLink) {
-                        adLinks.push(adLink);
+                        adLinks.add(adLink); // Add the URL to the Set to ensure uniqueness
                     }
                 });
             }
@@ -31,7 +31,8 @@ async function extractMgfHrefValues() {
 
         await Promise.all(pagePromises);
 
-        const adDetails = await extractMgfAdDetails(adLinks);
+        const adLinksArray = Array.from(adLinks); // Convert Set to an array
+        const adDetails = await extractMgfAdDetails(adLinksArray);
         console.log(JSON.stringify(adDetails, null, 2));
 
         console.log('Scraping has finished.');
