@@ -50,12 +50,21 @@ async function extractMgfAdDetails(adLinks) {
                 const adTitle = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h1').text().trim();
                 const adDescription = $('#dbox > p').text().trim();
                 const adPrice = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > div:nth-child(2) > div > div.card.border-secondary.rounded-4.shadow.mb-4.p-3 > h3').text().trim();
-                const neighborhood = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h2 > a.lead.link-dark.align-middle').text();
+                const neighborhoodContent = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h2 > a.lead.link-dark.align-middle').text();
+                // Split the input string based on the comma
+                const parts = neighborhoodContent.split(',');
+                let neighborhood;
+                // Extract the neighborhood (assuming it's the first part)
+                if (parts.length >= 1) {
+                     neighborhood = parts[0].trim();
+                }
+
                 const adDetail = {
                     adTitle,
                     adDescription,
                     adPrice,
                     adLink,
+                    neighborhood
                 };
 
                 return adDetail;
