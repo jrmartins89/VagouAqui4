@@ -50,7 +50,7 @@ async function extractMgfAdDetails(adLinks) {
 
                 // Find and save the image carrousel
                 const imageCarrousel = [];
-                $('#imgs > div').each((index, element) => {
+                $('.carousel-item').each((index, element) => {
                     const source = $(element).find('source');
                     const dataSrcset = source.attr('data-srcset');
                     if (dataSrcset) {
