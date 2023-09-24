@@ -59,7 +59,6 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 const adIdNumber = extractIdfromAdLink(link);
                 const contactLinkObject = $(`#imovelView_asyncSubmit > div.mauticform-innerform > div > div.propertyform-bottom > a.clb-gtm-site-whatsapp.clb-gtm-imovel-form-whatsapp.clb-gtm-imovel-${adIdNumber}.clb-interesse-aluguel`);
                 const contactInfo = extractPhoneFromWhatsAppLink(contactLinkObject["0"].attribs.href);
-                console.log('Neighborhood:', neighborhood);
 
                 const imageLinks = await scrapeImagesIbagy(link);
                 const adDetails = {
