@@ -6,19 +6,30 @@ async function extractMgfHrefValues() {
     try {
         const baseUrl = 'https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=';
         const adLinks = [];
-
+        let neighborhood;
         const getPageLinks = async (pageNumber) => {
             const url = `${baseUrl}${pageNumber}`;
             const response = await axios.get(url);
 
             if (response.status === 200) {
                 const $ = cheerio.load(response.data);
-                const adList = $('#slist > div');
+                const adList = $('#slist > div > section:nth-child(2) > div > a.h-100.d-flex.flex-column');
 
-                adList.children().each((index, element) => {
-                    const adLink = $(element).find('a.h-100.d-flex.flex-column').attr('href');
+                adList.each((index, element) => {
+                    const adLink = $(element).attr('href');
                     if (adLink) {
                         adLinks.push(adLink);
+                    }
+
+                    // Extract neighborhood content
+                    const neighborhoodContent = $(element).find('div.card-footer.text-body.text-truncate.mt-auto').text().trim();
+                    if (neighborhoodContent) {
+                        // Use a regular expression to extract the neighborhood
+                        const regex = /([^,]+)/;
+                        const match = neighborhoodContent.match(regex);
+                        if (match && match[1]) {
+                            neighborhood = match[1].trim();
+                        }
                     }
                 });
             }
@@ -31,7 +42,7 @@ async function extractMgfHrefValues() {
 
         await Promise.all(pagePromises);
 
-        const adDetails = await extractMgfAdDetails(adLinks);
+        const adDetails = await extractMgfAdDetails(adLinks, neighborhood);
         JSON.stringify(adDetails, null, 2);
 
         console.log('Scraping has finished.');
@@ -41,7 +52,7 @@ async function extractMgfHrefValues() {
     }
 }
 
-async function extractMgfAdDetails(adLinks) {
+async function extractMgfAdDetails(adLinks, neighborhood) {
     const adDetailPromises = adLinks.map(async (adLink) => {
         try {
             const response = await axios.get(adLink);
@@ -78,7 +89,8 @@ async function extractMgfAdDetails(adLinks) {
                     adDescription,
                     adPrice,
                     adLink,
-                    imageLinks // Include the extracted image links
+                    imageLinks, // Include the extracted image links
+                    neighborhood
                 };
 
                 return adDetail;
