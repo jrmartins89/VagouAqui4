@@ -25,7 +25,7 @@ async function extractMgfHrefValues() {
         };
 
         const pagePromises = [];
-        for (let pageNumber = 1; pageNumber <= 10; pageNumber++) {
+        for (let pageNumber = 1; pageNumber <= 40; pageNumber++) {
             pagePromises.push(getPageLinks(pageNumber));
         }
 
