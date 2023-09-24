@@ -32,7 +32,7 @@ async function extractMgfHrefValues() {
         await Promise.all(pagePromises);
 
         const adDetails = await extractMgfAdDetails(adLinks);
-        console.log(JSON.stringify(adDetails, null, 2));
+        JSON.stringify(adDetails, null, 2);
 
         console.log('Scraping has finished.');
         return adDetails;
