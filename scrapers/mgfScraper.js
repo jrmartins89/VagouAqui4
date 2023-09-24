@@ -35,7 +35,6 @@ async function extractMgfHrefValues() {
         const adLinksArray = Array.from(adLinks); // Convert Set to an array
         const adDetails = await extractMgfAdDetails(adLinksArray);
 
-        console.log('A coleta de anúncios finalizou.');
         return adDetails;
     } catch (error) {
         console.error('Error while scraping href values for ads:', error.message);
