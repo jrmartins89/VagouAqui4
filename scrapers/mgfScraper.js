@@ -8,7 +8,7 @@ async function extractMgfHrefValues() {
         const adLinks = [];
 
         // Loop through pages from 1 to 40
-        for (let pageNumber = 1; pageNumber <= 2; pageNumber++) {
+        for (let pageNumber = 1; pageNumber <= 10; pageNumber++) {
             const url = `${baseUrl}${pageNumber}`;
             const response = await axios.get(url);
 
