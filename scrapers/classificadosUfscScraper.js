@@ -84,7 +84,7 @@ async function getAdDetails(items) {
             console.error(`Error fetching ad details for ${item.link}: ${error}`);
         }
     }
-
+    console.log('A coleta de anúncios finalizou.');
     return itemsWithDetails;
 }
 

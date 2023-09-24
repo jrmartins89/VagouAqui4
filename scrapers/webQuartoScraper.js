@@ -54,7 +54,7 @@ async function scrapeWebQuartoads() {
             allAds.push(...ads);
         }
     }
-    console.log('Scraped Ads total:', allAds.length)
+    console.log('A coleta de anúncios finalizou.');
     return allAds;
 }
 

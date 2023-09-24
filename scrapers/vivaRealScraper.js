@@ -66,7 +66,7 @@ async function getVivaRealAdLinks() {
 
             // Wait for all ad details promises to resolve
             const adDetailsArray = await Promise.all(adDetailsPromises);
-
+            console.log('A coleta de anúncios finalizou.');
             return adDetailsArray;
         } else {
             console.error(`Failed to fetch ad details. Status code: ${response.status}`);
