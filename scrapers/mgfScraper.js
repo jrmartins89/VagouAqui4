@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 // Function to scrape and display href values from VivaReal ad page
-async function extractVivaRealHrefValues() {
+async function extractMgfHrefValues() {
     try {
         const response = await axios.get('https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=1');
         const adLinks = [];
@@ -23,6 +23,9 @@ async function extractVivaRealHrefValues() {
         console.error('Error while scraping href values for ads:', error.message);
     }
 }
+module.exports = {
+    extractMgfHrefValues
+}
 
 // Call the function to start scraping and displaying href values
-extractVivaRealHrefValues();
+extractMgfHrefValues();
