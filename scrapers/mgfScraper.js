@@ -47,6 +47,28 @@ async function extractMgfAdDetails(adLinks) {
             const response = await axios.get(adLink);
             if (response.status === 200) {
                 const $ = cheerio.load(response.data);
+
+                // Find and save the image carrousel
+                const imageCarrousel = [];
+                $('#imgs > div').each((index, element) => {
+                    const source = $(element).find('source');
+                    const dataSrcset = source.attr('data-srcset');
+                    if (dataSrcset) {
+                        imageCarrousel.push(dataSrcset);
+                    }
+                });
+
+                // Iterate through imageCarrousel and extract image links
+                const imageLinks = [];
+                imageCarrousel.forEach((srcset) => {
+                    const regex = /([^\s,]+)/g;
+                    const matches = srcset.match(regex);
+                    if (matches && matches.length > 0) {
+                        imageLinks.push(matches[0]);
+                    }
+                });
+
+                // Extract other ad details
                 const adTitle = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h1').text().trim();
                 const adDescription = $('#dbox > p').text().trim();
                 const adPrice = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > div:nth-child(2) > div > div.card.border-secondary.rounded-4.shadow.mb-4.p-3 > h3').text().trim();
@@ -55,7 +77,8 @@ async function extractMgfAdDetails(adLinks) {
                     adTitle,
                     adDescription,
                     adPrice,
-                    adLink
+                    adLink,
+                    imageLinks // Include the extracted image links
                 };
 
                 return adDetail;
@@ -69,6 +92,7 @@ async function extractMgfAdDetails(adLinks) {
 
     return adDetails.filter(Boolean);
 }
+
 
 module.exports = {
     extractMgfHrefValues
