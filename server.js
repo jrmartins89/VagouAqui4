@@ -43,30 +43,75 @@ app.use("/api/ads", ads);
 // Start scraping function
 async function startScraping() {
     try {
-        for (const urlInfo of urls) {
-            // Fetch ads from scraperUfsc for each URL
-            const adItemsFromClassificadosUfsc = await scraperUfsc.getAdLinks(
-                urlInfo.url
-            );
+        await scrapeAndSaveNewAds(
+            scraperUfsc,
+            "Classificados UFSC",
+            urls,
+            scraperUfsc.getAdLinks,
+            scraperUfsc.getAdDetails
+        );
 
-            // Fetch existing ads from the database
-            const existingAds = await Ad.find({}, "link");
+        await scrapeAndSaveNewAds(
+            null, // Pass null for source because it's handled in each scraper function
+            "Ibagy",
+            null, // Pass null for URLs because it's handled within scrapeIbagyAds
+            scrapeIbagyAds,
+            null // Pass null for getAdDetails because it's not used in scrapeIbagyAds
+        );
 
-            // Filter new ads
-            const newAdItemsFromClassificadosUfsc = adItemsFromClassificadosUfsc.filter(
-                (item) =>
-                    !existingAds.some((existingAd) => existingAd.link === item.link)
-            );
+        await scrapeAndSaveNewAds(
+            null, // Pass null for source because it's handled in each scraper function
+            "WebQuarto",
+            null, // Pass null for URLs because it's handled within scrapeWebQuartoads
+            scrapeWebQuartoads,
+            null // Pass null for getAdDetails because it's not used in scrapeWebQuartoads
+        );
 
-            if (newAdItemsFromClassificadosUfsc.length > 0) {
-                // Fetch ad details
-                const itemsWithDetailsClassificadosUfsc = await scraperUfsc.getAdDetails(
-                    newAdItemsFromClassificadosUfsc
+        await scrapeAndSaveNewAds(
+            null, // Pass null for source because it's handled in each scraper function
+            "vivaReal",
+            null, // Pass null for URLs because it's handled within getVivaRealAdLinks
+            getVivaRealAdLinks,
+            null // Pass null for getAdDetails because it's not used in getVivaRealAdLinks
+        );
+
+        await scrapeAndSaveNewAds(
+            null, // Pass null for source because it's handled in each scraper function
+            "MGF",
+            null, // Pass null for URLs because it's handled within extractMgfHrefValues
+            extractMgfHrefValues,
+            null // Pass null for getAdDetails because it's not used in extractMgfHrefValues
+        );
+    } catch (error) {
+        console.error("Error during scraping:", error);
+    }
+}
+
+// Function to scrape and save new ads, avoiding duplicates
+async function scrapeAndSaveNewAds(scraper, source, urls, scrapeFunction, getDetailsFunction) {
+    try {
+        if (urls) {
+            for (const urlInfo of urls) {
+                // Fetch ads using the provided scrapeFunction
+                const adItems = await scrapeFunction(urlInfo.url);
+
+                // Fetch existing ads from the database
+                const existingAds = await Ad.find({}, "link");
+
+                // Filter new ads
+                const newAdItems = adItems.filter(
+                    (item) =>
+                        !existingAds.some((existingAd) => existingAd.link === item.link)
                 );
 
-                // Map and save new ads
-                const finalItemsClassificadosUfsc = itemsWithDetailsClassificadosUfsc.map(
-                    (item) => ({
+                if (newAdItems.length > 0) {
+                    // Fetch ad details using the provided getDetailsFunction if available
+                    const itemsWithDetails = getDetailsFunction
+                        ? await getDetailsFunction(newAdItems)
+                        : newAdItems;
+
+                    // Map and save new ads
+                    const finalItems = itemsWithDetails.map((item) => ({
                         title: item.title,
                         link: item.link,
                         description: item.description,
@@ -74,29 +119,46 @@ async function startScraping() {
                         imageLinks: item.imageLinks,
                         neighborhood: item.neighborhood,
                         contactInfo: item.contactInfo,
-                    })
-                );
+                    }));
 
-                await saveNewAds(finalItemsClassificadosUfsc, "Classificados UFSC");
+                    await saveNewAds(finalItems, source);
+                } else {
+                    console.log(`No new ${source} ads to save`);
+                }
+            }
+        } else {
+            // Fetch ads using the provided scrapeFunction
+            const adItems = await scrapeFunction();
+
+            // Fetch existing ads from the database
+            const existingAds = await Ad.find({}, "link");
+
+            // Filter new ads
+            const newAdItems = adItems.filter(
+                (item) =>
+                    !existingAds.some((existingAd) => existingAd.link === item.link)
+            );
+
+            if (newAdItems.length > 0) {
+                // Map and save new ads
+                const finalItems = newAdItems.map((item) => ({
+                    title: item.title,
+                    link: item.link || "",
+                    description: item.description || "",
+                    price: item.price || "",
+                    imageLinks: item.imageLinks || "",
+                    neighborhood: item.neighborhood,
+                    contactInfo: item.contactInfo,
+                    source: source,
+                }));
+
+                await saveNewAds(finalItems, source);
             } else {
-                console.log('No new Classificados UFSC ads to save');
+                console.log(`No new ${source} ads to save`);
             }
         }
-
-        // Continue with scraping other sources and saving new ads as before
-        const ibagyAds = await scrapeIbagyAds();
-        await saveNewAds(ibagyAds, "Ibagy");
-
-        const webQuartoAds = await scrapeWebQuartoads();
-        await saveNewAds(webQuartoAds, "WebQuarto");
-
-        const vivaRealAds = await getVivaRealAdLinks();
-        await saveNewAds(vivaRealAds, "vivaReal");
-
-        const mgfScraper = await extractMgfHrefValues();
-        await saveNewAds(mgfScraper, "MGF");
     } catch (error) {
-        console.error("Error during scraping:", error);
+        console.error(`Error during scraping ${source} ads:`, error);
     }
 }
 
@@ -117,11 +179,10 @@ async function saveNewAds(newAds, source) {
                 imageLinks: item.imageLinks || "",
                 neighborhood: item.neighborhood,
                 contactInfo: item.contactInfo,
-                source: source
+                source: source,
             }));
 
             await Ad.insertMany(finalAds);
-            console.log(`Finished scraping ${source} ads`);
         } else {
             console.log(`No new ads to save from ${source}`);
         }
