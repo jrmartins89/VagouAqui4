@@ -37,11 +37,8 @@ async function getVivaRealAdLinks() {
             // Find the main content of the ad
             const adList = $('.js-card-selector');
 
-            // Create an array to store promises for ad details
-            const adDetailsPromises = [];
-
-            // Iterate through each ad
-            adList.each((index, element) => {
+            // Create an array to store promises for ad details and image links
+            const adDetailsPromises = adList.map(async (index, element) => {
                 const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
                 const adTitle = adTitleElement.text().trim();
                 const adDescription = $(element).find('.property-card__description').text().trim();
@@ -52,23 +49,20 @@ async function getVivaRealAdLinks() {
                 // Extract neighborhood using the extractNeighborhood function
                 const neighborhood = extractNeighborhood(address);
 
-                // Call extractVivaRealImageLinks to get image links and push the promise into the array
-                const imageLinksPromise = extractVivaRealImageLinks(adLink);
-
-                // Create a promise for this ad's details
-                const adDetailsPromise = imageLinksPromise.then(imageLinks => {
-                    return {
+                // Fetch image links and ad details in parallel
+                const [imageLinks, adDetails] = await Promise.all([
+                    extractVivaRealImageLinks(adLink),
+                    Promise.resolve({
                         title: adTitle,
                         description: adDescription,
                         link: adLink,
                         price: adPrice,
                         neighborhood: neighborhood,
-                        imageLinks: imageLinks,
-                    };
-                });
+                    }),
+                ]);
 
-                adDetailsPromises.push(adDetailsPromise);
-            });
+                return { ...adDetails, imageLinks };
+            }).get();
 
             // Wait for all ad details promises to resolve
             const adDetailsArray = await Promise.all(adDetailsPromises);
@@ -102,5 +96,5 @@ function extractNeighborhood(address) {
 }
 
 module.exports = {
-    getVivaRealAdLinks
+    getVivaRealAdLinks,
 };
