@@ -34,7 +34,6 @@ async function extractMgfHrefValues() {
 
         const adLinksArray = Array.from(adLinks); // Convert Set to an array
         const adDetails = await extractMgfAdDetails(adLinksArray);
-        console.log(JSON.stringify(adDetails, null, 2));
 
         console.log('Scraping has finished.');
         return adDetails;
