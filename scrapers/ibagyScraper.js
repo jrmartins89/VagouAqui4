@@ -1,7 +1,13 @@
 const axios = require('axios');
+const axiosRateLimit = require('axios-rate-limit');
 const cheerio = require('cheerio');
 const { scrapeImagesIbagy } = require('./imageScraper');
 const { extractIdfromAdLink, extractPhoneFromWhatsAppLink } = require('./contactInfoScraper');
+
+const rateLimitedAxios = axiosRateLimit(axios.create(), {
+    maxRequests: 2, // Adjust this value based on the website's rate limiting policy
+    perMilliseconds: 1000, // Adjust this value based on the website's rate limiting policy
+});
 
 async function scrapeIbagyAds() {
     const pages = [
@@ -11,23 +17,29 @@ async function scrapeIbagyAds() {
 
     try {
         const pagePromises = pages.map(async (page) => {
-            const response = await axios.get(page);
-            if (response.status === 200) {
-                const $ = cheerio.load(response.data);
-                const adsPage = $('#imovel-boxes');
-                const adsLinks = new Set();
+            try {
+                const response = await rateLimitedAxios.get(page);
 
-                adsPage.find('a[target="_blank"]').each((index, element) => {
-                    const link = $(element).attr('href');
-                    if (link) {
-                        adsLinks.add(link);
-                    }
-                });
+                if (response.status === 200) {
+                    const $ = cheerio.load(response.data);
+                    const adsPage = $('#imovel-boxes');
+                    const adsLinks = new Set();
 
-                const uniqueAdsLinks = Array.from(adsLinks);
-                return uniqueAdsLinks;
-            } else {
-                console.error('Failed to fetch the page. Status code:', response.status);
+                    adsPage.find('a[target="_blank"]').each((index, element) => {
+                        const link = $(element).attr('href');
+                        if (link) {
+                            adsLinks.add(link);
+                        }
+                    });
+
+                    const uniqueAdsLinks = Array.from(adsLinks);
+                    return uniqueAdsLinks;
+                } else {
+                    console.error('Failed to fetch the page. Status code:', response.status);
+                    return [];
+                }
+            } catch (error) {
+                console.error('Error fetching page:', error.message);
                 return [];
             }
         });
