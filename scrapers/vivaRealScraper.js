@@ -1,10 +1,17 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const axiosRateLimit = require('axios-rate-limit');
+
+// Create an instance of axios with rate limiting (1 request per second)
+const axiosInstance = axiosRateLimit(axios.create(), {
+    maxRequests: 1,
+    perMilliseconds: 1000, // 1 request per second
+});
 
 // Function to scrape image links from VivaReal ad page
 async function extractVivaRealImageLinks(adLink) {
     try {
-        const response = await axios.get(adLink);
+        const response = await axiosInstance.get(adLink);
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
