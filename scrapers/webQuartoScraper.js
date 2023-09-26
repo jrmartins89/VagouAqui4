@@ -1,12 +1,19 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const {extractContactInfoFromDescription} = require("./contactInfoScraper");
+const { extractContactInfoFromDescription } = require('./contactInfoScraper');
+const axiosRateLimit = require('axios-rate-limit');
+
+// Create an axios instance with rate limiting
+const axiosInstance = axiosRateLimit(axios.create(), {
+    maxRequests: 1, // Number of requests per second
+    perMilliseconds: 1000, // Milliseconds per request (in this case, 1 request per second)
+});
 
 // Define a function to scrape a single page
 async function scrapeWebQuartoadsPage(pageNumber) {
     try {
         const url = `https://www.webquarto.com.br/busca/quartos/florianopolis-sc?page=${pageNumber}`;
-        const response = await axios.get(url);
+        const response = await axiosInstance.get(url); // Use the rate-limited axios instance
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
