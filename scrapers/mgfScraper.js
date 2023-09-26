@@ -108,5 +108,3 @@ async function extractMgfAdDetails(adLinks) {
 module.exports = {
     extractMgfHrefValues
 }
-
-extractMgfHrefValues();
