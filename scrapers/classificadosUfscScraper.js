@@ -1,11 +1,21 @@
-const { scrapeImagesClassificadosUfsc }  = require('./imageScraper');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const axiosRetry = require('axios-retry');
+const axiosRateLimit = require('axios-rate-limit');
+const { scrapeImagesClassificadosUfsc } = require('./imageScraper');
 const { extractContactInfoFromDescription } = require('./contactInfoScraper');
+
+// Create an Axios instance with rate limiting and retries
+const axiosInstance = axiosRateLimit(axios.create(), {
+    maxRequests: 2, // Adjust this value as needed
+    perMilliseconds: 1000, // Adjust this value as needed
+});
+
+axiosRetry(axiosInstance, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
 async function getAdLinks(url) {
     try {
-        const response = await axios.get(url);
+        const response = await axiosInstance.get(url);
         const html = response.data;
         const $ = cheerio.load(html);
 
