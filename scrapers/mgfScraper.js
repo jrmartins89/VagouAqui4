@@ -26,7 +26,7 @@ async function extractMgfHrefValues() {
         };
 
         const pagePromises = [];
-        for (let pageNumber = 1; pageNumber <= 40; pageNumber++) {
+        for (let pageNumber = 1; pageNumber <= 30; pageNumber++) {
             pagePromises.push(getPageLinks(pageNumber));
         }
 
@@ -84,13 +84,13 @@ async function extractMgfAdDetails(adLinks) {
 
 
                 const adDetail = {
-                    adTitle,
-                    adDescription,
-                    adPrice,
-                    adLink,
-                    neighborhood,
-                    imageLinks,
-                    contactInfo
+                    title: adTitle,
+                    description: adDescription,
+                    price: adPrice,
+                    link: adLink,
+                    neighborhood: neighborhood,
+                    imageLinks: imageLinks,
+                    contactInfo: contactInfo
                 };
 
                 return adDetail;
