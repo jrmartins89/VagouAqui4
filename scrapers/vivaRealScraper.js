@@ -48,10 +48,12 @@ async function getVivaRealAdLinks() {
             const adDetailsPromises = adList.map(async (index, element) => {
                 const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
                 const adTitle = adTitleElement.text().trim();
-                const adDescription = $(element).find('.property-card__description').text().trim();
                 const adLink = 'https://www.vivareal.com.br' + adTitleElement.attr('href');
                 const adPrice = $(element).find('.property-card__price').text().trim();
                 const address = $(element).find('.property-card__address').text().trim();
+
+                // Use await to resolve the description promise
+                const adDescription = await extractDescription(adLink);
 
                 // Extract neighborhood using the extractNeighborhood function
                 const neighborhood = extractNeighborhood(address);
@@ -82,6 +84,20 @@ async function getVivaRealAdLinks() {
     }
 }
 
+async function extractDescription(adLink) {
+    try {
+        const response = await axios.get(adLink);
+
+        if (response.status === 200) {
+            const $ = cheerio.load(response.data);
+            const adDescription = $('#js-site-main > div.main-container > div.main-features-container > div.details-container > div.description > div > div > p').text().trim();
+            return adDescription;
+        }
+    } catch (error) {
+        console.error('Error while scraping description:', error.message);
+    }
+}
+
 // Function to extract neighborhood from address
 function extractNeighborhood(address) {
     // Split the address by commas and dashes
@@ -104,3 +120,6 @@ function extractNeighborhood(address) {
 module.exports = {
     getVivaRealAdLinks,
 };
+
+// Call the function to start scraping
+getVivaRealAdLinks();
