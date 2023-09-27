@@ -33,9 +33,20 @@ function AdGrid() {
         ? ads.filter(ad => ad.neighborhood.toLowerCase() === selectedNeighborhood.value.toLowerCase())
         : ads;
 
-    const indexOfLastAd = currentPage * adsPerPage;
-    const indexOfFirstAd = indexOfLastAd - adsPerPage;
-    const currentAds = filteredAds.slice(indexOfFirstAd, indexOfLastAd);
+    const totalPages = Math.ceil(filteredAds.length / adsPerPage);
+
+    // Calculate the lower and upper bounds for the displayed page indices
+    const pageRange = 10; // Number of page indices to show
+
+    let lowerBound = Math.max(currentPage - Math.floor(pageRange / 2), 1);
+    let upperBound = Math.min(lowerBound + pageRange - 1, totalPages);
+
+    if (upperBound - lowerBound + 1 < pageRange) {
+        lowerBound = Math.max(1, upperBound - pageRange + 1);
+    }
+
+    // Create an array of page indices to display
+    const pageIndicesToDisplay = Array.from({ length: upperBound - lowerBound + 1 }, (_, i) => i + lowerBound);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -60,7 +71,7 @@ function AdGrid() {
     };
 
     const nextPage = () => {
-        if (currentPage < Math.ceil(filteredAds.length / adsPerPage)) {
+        if (currentPage < totalPages) {
             paginate(currentPage + 1);
         }
     };
@@ -69,6 +80,16 @@ function AdGrid() {
         if (currentPage > 1) {
             paginate(currentPage - 1);
         }
+    };
+
+    const advanceTenPages = () => {
+        const newPage = Math.min(currentPage + 10, totalPages);
+        paginate(newPage);
+    };
+
+    const retreatTenPages = () => {
+        const newPage = Math.max(currentPage - 10, 1);
+        paginate(newPage);
     };
 
     return (
@@ -88,7 +109,7 @@ function AdGrid() {
             </section>
             <div className="grid-container">
                 <div className="grid">
-                    {currentAds.map((ad, adIndex) => (
+                    {filteredAds.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage).map((ad, adIndex) => (
                         <div key={adIndex} className="grid-item">
                             <h2>{ad.title}</h2>
                             <p className="contact-info">
@@ -106,7 +127,7 @@ function AdGrid() {
                             </Carousel>
                             <p className="ad-description">{ad.description}</p>
                             <p className="ad-price">
-                               <h3>{ad.price}</h3>
+                                <h3>{ad.price}</h3>
                             </p>
                             <p className="ad-neighborhood">
                                 <h3>{ad.neighborhood}</h3>
@@ -116,16 +137,18 @@ function AdGrid() {
                 </div>
                 <div className="pagination">
                     <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
-                    {Array.from({ length: Math.ceil(filteredAds.length / adsPerPage) }).map((_, index) => (
+                    <button onClick={retreatTenPages} disabled={currentPage - 10 < 1}>-10 Páginas</button>
+                    {pageIndicesToDisplay.map((pageIndex) => (
                         <button
-                            key={index}
-                            onClick={() => paginate(index + 1)}
-                            className={currentPage === index + 1 ? 'active' : ''}
+                            key={pageIndex}
+                            onClick={() => paginate(pageIndex)}
+                            className={currentPage === pageIndex ? 'active' : ''}
                         >
-                            {index + 1}
+                            {pageIndex}
                         </button>
                     ))}
-                    <button onClick={nextPage} disabled={currentPage === Math.ceil(filteredAds.length / adsPerPage)}>Next</button>
+                    <button onClick={advanceTenPages} disabled={currentPage + 10 > totalPages}>+10 Páginas</button>
+                    <button onClick={nextPage} disabled={currentPage === totalPages}>Next</button>
                 </div>
             </div>
             {lightboxImages.length > 0 && lightboxImageIndex !== -1 && (
