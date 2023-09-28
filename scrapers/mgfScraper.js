@@ -48,7 +48,8 @@ async function extractMgfAdDetails(adLinks) {
             if (response.status === 200) {
                 const $ = cheerio.load(response.data);
                 const adTitle = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h1').text().trim();
-                const adDescription = $('#dbox > p').text().trim();
+                const FullAdDescription = $('#dbox > p').text().trim();
+                const adDescription = FullAdDescription.replace(/CONTINUE LENDO/g, '');
                 const contactInfoContent = extractContactInfoFromDescription(adDescription);
                 const contactInfo = contactInfoContent.length === 0 ? adLink : contactInfoContent
                 const adPrice = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > div:nth-child(2) > div > div.card.border-secondary.rounded-4.shadow.mb-4.p-3 > h3').text().trim();
