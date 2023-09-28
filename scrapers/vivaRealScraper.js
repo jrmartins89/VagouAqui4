@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const axiosRateLimit = require('axios-rate-limit');
+const {extractContactInfoFromDescription} = require("./contactInfoScraper");
 
 // Create an instance of axios with rate limiting (1 request per second)
 const axiosInstance = axiosRateLimit(axios.create(), {
@@ -54,7 +55,7 @@ async function getVivaRealAdLinks() {
 
                 // Use await to resolve the description promise
                 const adDescription = await extractDescription(adLink);
-
+                const contactInfo = extractContactInfoFromDescription(adDescription);
                 // Extract neighborhood using the extractNeighborhood function
                 const neighborhood = extractNeighborhood(address);
 
@@ -67,6 +68,7 @@ async function getVivaRealAdLinks() {
                         link: adLink,
                         price: adPrice,
                         neighborhood: neighborhood,
+                        contactInfo: contactInfo.length === 0 ? adLink : contactInfo
                     }),
                 ]);
 
