@@ -91,7 +91,7 @@ async function extractMgfAdDetails(adLinks) {
                     link: adLink,
                     neighborhood: neighborhood,
                     imageLinks: imageLinks,
-                    contactInfo: contactInfo
+                    contactInfo: contactInfo.length === 0 ? adLink : contactInfo
                 };
 
                 return adDetail;
