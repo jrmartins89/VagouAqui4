@@ -50,7 +50,7 @@
     margin: 0; /* Remove margin inside the button */
     padding: 0; /* Reset padding */
     line-height: 1; /* Ensure the text is vertically centered */
-    white-space: nowrap; /* Prevent text from wrapping */
+    white-space: normal; /* Prevent text from wrapping */
 }
 
 /* Change the link color on hover */
