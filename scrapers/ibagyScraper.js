@@ -70,12 +70,12 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 const neighborhood = extractNeighborhood(address);
                 const adIdNumber = extractIdfromAdLink(link);
                 const contactLinkObject = $(`#imovelView_asyncSubmit > div.mauticform-innerform > div > div.propertyform-bottom > a.clb-gtm-site-whatsapp.clb-gtm-imovel-form-whatsapp.clb-gtm-imovel-${adIdNumber}.clb-interesse-aluguel`);
-                const contactInfo = extractPhoneFromWhatsAppLink(contactLinkObject["0"].attribs.href);
-
+                let contactInfo = extractPhoneFromWhatsAppLink(contactLinkObject["0"].attribs.href);
+                    contactInfo = contactInfo.length === 0 ? link : contactInfo;
                 const imageLinks = await scrapeImagesIbagy(link);
                 const adDetails = {
                     title,
-                    adDescription: adDescriptionMatch || 'Description not found',
+                    adDescription: adDescriptionMatch,
                     imageLinks,
                     link,
                     price,
