@@ -78,12 +78,12 @@
 
     /* Adjust button size for smaller screens */
     .btn-edit-prefs {
-        height: 60%; /* Reduce button height proportionally */
+        height: 60px; /* Reduce button height proportionally */
+        padding: 0 8px; /* Adjust the padding inside the button for smaller screens */
     }
 
     /* Adjust text size for smaller screens */
     .btn-edit-prefs p {
-        font-size: 0.8rem; /* Make the font smaller */
-        padding: 0 4px; /* Reduce padding inside the button */
+        font-size: 0.8rem; /* Make the font smaller for smaller screens */
     }
 }
