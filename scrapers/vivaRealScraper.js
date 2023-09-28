@@ -120,6 +120,3 @@ function extractNeighborhood(address) {
 module.exports = {
     getVivaRealAdLinks,
 };
-
-// Call the function to start scraping
-getVivaRealAdLinks();
