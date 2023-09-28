@@ -76,16 +76,16 @@ async function getAdDetails(items) {
 
                 const adImages = await scrapeImagesClassificadosUfsc(imageUrls);
                 // Extract contact information from the description
-                const contactInfo = extractContactInfoFromDescription(description);
-
+                let contactInfo = extractContactInfoFromDescription(description);
+                    contactInfo = contactInfo.length === 0 ? item.link : contactInfo;
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
                     description: description,
                     price: price,
                     imageLinks: adImages,
-                    contactInfo: contactInfo || ['sem contato informado'],
-                    neighborhood: neighborhood || 'sem bairro informado'
+                    contactInfo: contactInfo,
+                    neighborhood: neighborhood
                 });
             } else {
                 console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
