@@ -39,7 +39,7 @@ async function scrapeWebQuartoadsPage(pageNumber) {
                     price: ad.rent_price,
                     imageLinks: imageLinks,
                     neighborhood: ad.district,
-                    contactInfo: contactInfo
+                    contactInfo: contactInfo.length === 0 ? ad.url : contactInfo
                 });
             }
 
