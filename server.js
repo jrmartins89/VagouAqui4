@@ -13,7 +13,7 @@ const ads = require("./routes/api/ads");
 const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
 const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
-const {extractMgfHrefValues} = require("./scrapers/mgfScraper");
+const { extractMgfHrefValues } = require("./scrapers/mgfScraper");
 require("dotenv").config();
 require("./config/passport")(passport);
 
@@ -43,6 +43,8 @@ app.use("/api/ads", ads);
 // Start scraping function
 async function startScraping() {
     try {
+        console.log("Scraping process started.");
+
         await scrapeAndSaveNewAds(
             scraperUfsc,
             "Classificados UFSC",
@@ -50,38 +52,45 @@ async function startScraping() {
             scraperUfsc.getAdLinks,
             scraperUfsc.getAdDetails
         );
+        console.log("Scraping process for Classificados UFSC finished.");
 
         await scrapeAndSaveNewAds(
-            null, // Pass null for source because it's handled in each scraper function
+            null,
             "Ibagy",
-            null, // Pass null for URLs because it's handled within scrapeIbagyAds
+            null,
             scrapeIbagyAds,
-            null // Pass null for getAdDetails because it's not used in scrapeIbagyAds
+            null
         );
+        console.log("Scraping process for Ibagy finished.");
 
         await scrapeAndSaveNewAds(
-            null, // Pass null for source because it's handled in each scraper function
+            null,
             "WebQuarto",
-            null, // Pass null for URLs because it's handled within scrapeWebQuartoads
+            null,
             scrapeWebQuartoads,
-            null // Pass null for getAdDetails because it's not used in scrapeWebQuartoads
+            null
         );
+        console.log("Scraping process for WebQuarto finished.");
 
         await scrapeAndSaveNewAds(
-            null, // Pass null for source because it's handled in each scraper function
+            null,
             "vivaReal",
-            null, // Pass null for URLs because it's handled within getVivaRealAdLinks
+            null,
             getVivaRealAdLinks,
-            null // Pass null for getAdDetails because it's not used in getVivaRealAdLinks
+            null
         );
+        console.log("Scraping process for vivaReal finished.");
 
         await scrapeAndSaveNewAds(
-            null, // Pass null for source because it's handled in each scraper function
+            null,
             "MGF",
-            null, // Pass null for URLs because it's handled within extractMgfHrefValues
+            null,
             extractMgfHrefValues,
-            null // Pass null for getAdDetails because it's not used in extractMgfHrefValues
+            null
         );
+        console.log("Scraping process for MGF finished.");
+
+        console.log("All scraping processes have finished.");
     } catch (error) {
         console.error("Error during scraping:", error);
     }
