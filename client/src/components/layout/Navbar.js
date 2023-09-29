@@ -15,8 +15,9 @@ class Navbar extends Component {
                             <i className="material-icons">code</i>
                             Página Inicial
                         </Link>
+                        {/* Updated Link to use /preferences */}
                         <Link
-                            to="/edit-preferences"
+                            to="/preferences"
                             className="btn btn-edit-prefs"
                         >
                             <p>Edit Preferences</p>
