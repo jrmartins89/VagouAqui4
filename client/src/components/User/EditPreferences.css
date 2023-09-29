@@ -38,17 +38,7 @@
 
 /* Style the input for preference fields */
 .form-field input[type="text"],
-.form-field input[type="number"] {
-    display: block;
-    width: calc(100% - 40px);
-    padding: 10px 10px 10px 40px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #333;
-}
-
-/* Style the select input for preference fields */
+.form-field input[type="number"],
 .form-field select {
     display: block;
     width: calc(100% - 40px);
@@ -72,4 +62,29 @@
     color: #333;
 }
 
-/* Add more styles as needed */
+/* Responsive styles */
+
+@media screen and (max-width: 768px) {
+    /* Adjust font sizes and padding for smaller screens */
+
+    .form-title {
+        font-size: 20px;
+    }
+
+    .form-field label {
+        font-size: 14px;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="number"],
+    .form-field select {
+        padding: 8px 8px 8px 40px;
+        font-size: 14px;
+    }
+
+    .form-field label span {
+        font-size: 14px;
+    }
+}
+
+/* Add more media queries and adjust styles as needed for different screen sizes */
