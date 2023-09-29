@@ -96,7 +96,6 @@ class EditPreferences extends Component {
                         <form noValidate onSubmit={this.onSubmit}>
                             {/* Preferences Fields */}
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">location_on</i>
                                 <input
                                     id="preferences.location"
                                     name="location"
@@ -108,7 +107,6 @@ class EditPreferences extends Component {
                                 <label htmlFor="preferences.location">Preferred Location</label>
                             </div>
                             <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">attach_money</i>
                                 <input
                                     id="preferences.budget"
                                     name="budget"
