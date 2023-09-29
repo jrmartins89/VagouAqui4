@@ -65,17 +65,20 @@ export const logoutUser = () => dispatch => {
 };
 
 // Update User Preferences
-export const updateUserPreferences = (updatedPreferences, history) => dispatch => {
+export const updateUserPreferences = (updatedPreferences, history) => (dispatch) => {
     axios
         .put("/api/users/preferences", updatedPreferences)
-        .then(res => {
+        .then((res) => {
             // Assuming the preferences were successfully updated
             // You can handle success as needed
+
+            // Redirect to a success page
+            history.push("/products"); // Redirect to a success page
         })
-        .catch(err =>
+        .catch((err) =>
             dispatch({
                 type: GET_ERRORS,
-                payload: err.response.data
+                payload: err.response.data,
             })
         );
 };
