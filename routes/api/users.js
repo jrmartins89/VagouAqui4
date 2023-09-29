@@ -124,45 +124,27 @@ router.post("/login", (req, res) => {
 // @route PUT api/users/preferences
 // @desc Update user preferences
 // @access Private (requires authentication)
-// @route PUT api/users/preferences
-// @desc Update user preferences
-// @access Private (requires authentication)
-router.put("/preferences", (req, res) => {
-    passport.authenticate("jwt", { session: false }, (err, user, info) => {
-        if (err || !user) {
-            return res.status(401).json({ unauthorized: "Unauthorized" });
-        }
+router.put("/preferences", passport.authenticate("jwt", { session: false }), (req, res) => {
+    // User is authenticated, proceed with preference update
+    const updatedPreferences = req.body;
 
-        // User is authenticated, proceed with preference update
-        const updatedPreferences = {
-            houseOrApartment: req.body.houseOrApartment || 'Apartment',
-            genderPreference: req.body.genderPreference || 'Any',
-            acceptsPets: req.body.acceptsPets || false,
-            location: req.body.location || '',
-            roommates: req.body.roommates || 'Alone',
-            amenities: req.body.amenities || '',
-            leaseLength: req.body.leaseLength || 'year round',
-            budget: req.body.budget || '',
-            securityDeposit: req.body.securityDeposit || '',
-            wheelchairAccessible: req.body.wheelchairAccessible || false,
-            noiseLevel: req.body.noiseLevel || 'Quiet',
-            acceptSmoker: req.body.acceptSmoker || false,
-        };
-
-        // Update the user's preferences in the database
-        User.findOneAndUpdate(
-            { _id: user.id }, // User ID from the JWT payload
-            { $set: { "preferences": updatedPreferences } }, // Specify "preferences" field
-            { new: true }
-        )
-            .then(updatedUser => {
-                if (!updatedUser) {
-                    return res.status(404).json({ userNotFound: "User not found" });
-                }
-                res.json(user.preferences); // Respond with the updated preferences
-            })
-            .catch(err => console.log(err));
-    })(req, res);
+    // Update the user's preferences in the database
+    User.findOneAndUpdate(
+        { _id: req.user.id }, // User ID from the JWT payload
+        { $set: { "preferences": updatedPreferences } }, // Specify "preferences" field
+        { new: true }
+    )
+        .then((updatedUser) => {
+            if (!updatedUser) {
+                return res.status(404).json({ userNotFound: "User not found" });
+            }
+            res.json(updatedUser.preferences); // Respond with the updated preferences
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ error: "Server error" });
+        });
 });
+
 
 module.exports = router;
