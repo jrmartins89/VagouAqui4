@@ -63,3 +63,19 @@ export const logoutUser = () => dispatch => {
     // Set current user to empty object {} which will set isAuthenticated to false
     dispatch(setCurrentUser({}));
 };
+
+// Update User Preferences
+export const updateUserPreferences = (updatedPreferences, history) => dispatch => {
+    axios
+        .put("/api/users/preferences", updatedPreferences)
+        .then(res => {
+            // Assuming the preferences were successfully updated
+            // You can handle success as needed
+        })
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
