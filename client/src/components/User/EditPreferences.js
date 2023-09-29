@@ -46,8 +46,8 @@ class EditPreferences extends Component {
             this.setState({
                 preferences: {
                     ...preferences,
-                    [preferenceField]: newValue
-                }
+                    [preferenceField]: newValue,
+                },
             });
         }
     };
@@ -57,7 +57,7 @@ class EditPreferences extends Component {
 
         // Create an object with updated preferences
         const updatedPreferences = {
-            preferences: this.state.preferences
+            ...this.state.preferences,
         };
 
         // Dispatch an action to update user preferences
@@ -241,14 +241,11 @@ class EditPreferences extends Component {
 
 EditPreferences.propTypes = {
     updateUserPreferences: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
+    auth: state.auth,
 });
 
-export default connect(
-    mapStateToProps,
-    { updateUserPreferences }
-)(withRouter(EditPreferences));
+export default connect(mapStateToProps, { updateUserPreferences })(withRouter(EditPreferences));
