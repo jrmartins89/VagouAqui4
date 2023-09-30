@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux"; // Import connect for Redux integration
-import { logoutUser } from "../../actions/authActions"; // Import the logout action
-import "./Navbar.css"; // Import the CSS file
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+import "./Navbar.css";
 
 class Navbar extends Component {
     onLogoutClick = (e) => {
@@ -11,6 +11,8 @@ class Navbar extends Component {
     };
 
     render() {
+        const { isAuthenticated } = this.props.auth;
+
         return (
             <div className="navbar-fixed">
                 <nav className="z-depth-0">
@@ -25,13 +27,14 @@ class Navbar extends Component {
                         <Link to="/preferences" className="btn btn-edit-prefs">
                             <p>Edit Preferences</p>
                         </Link>
-                        {/* Logout button */}
-                        <button
-                            onClick={this.onLogoutClick}
-                            className="btn btn-logout"
-                        >
-                            <b>Logout</b>
-                        </button>
+                        { isAuthenticated ? (
+                            <button
+                                onClick={this.onLogoutClick}
+                                className="btn btn-logout"
+                            >
+                                <b>Logout</b>
+                            </button>
+                        ) : null }
                     </div>
                 </nav>
             </div>
