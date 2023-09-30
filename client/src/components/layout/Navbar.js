@@ -22,10 +22,12 @@ class Navbar extends Component {
                         >
                             Início
                         </Link>
-                        <Link to="/preferences" className="btn btn-edit-prefs">
-                            <p>Editar Preferências</p>
-                        </Link>
-                        { isAuthenticated ? (
+                        {isAuthenticated && (
+                            <Link to="/preferences" className="btn btn-edit-prefs">
+                                <p>Editar Preferências</p>
+                            </Link>
+                        )}
+                        {isAuthenticated ? (
                             <div className="user-info">
                                 <span className="user-email">{user.email}</span>
                                 <button
@@ -35,7 +37,7 @@ class Navbar extends Component {
                                     <b>Logout</b>
                                 </button>
                             </div>
-                        ) : null }
+                        ) : null}
                     </div>
                 </nav>
             </div>
