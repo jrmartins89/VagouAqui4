@@ -24,17 +24,17 @@
     height: auto; /* Allow the button to adjust its height based on content */
     display: flex;
     align-items: center;
-    background-color: #007bff; /* Background color for the button */
+    background-color: #007bff; /* Background color for the "Edit Preferences" button */
     color: #fff; /* Text color for the button text */
     border: none; /* Remove button border */
     border-radius: 4px; /* Add button border radius */
-    padding: 6px 12px; /* Add padding to the button */
+    padding: 6px 12px; /* Add padding to the "Edit Preferences" button */
     text-decoration: none; /* Remove any text decoration */
     white-space: normal; /* Allow text to wrap when button width is reduced */
 }
 
 .btn-edit-prefs p {
-    margin: 0; /* Remove margin inside the button */
+    margin: 0; /* Remove margin inside the "Edit Preferences" button */
     padding: 0; /* Reset padding */
     line-height: 1; /* Ensure the text is vertically centered */
     white-space: normal; /* Allow text to wrap when button width is reduced */
@@ -43,17 +43,21 @@
 
 /* Style the "Logout" button */
 .btn-logout {
-    height: auto; /* Allow the button to adjust its height based on content */
-    display: flex;
-    align-items: center;
-    background-color: #f00; /* Background color for the "Logout" button */
+    background-color: #9d0101; /* Background color for the "Edit Preferences" button */
     color: #fff; /* Text color for the button text */
-    border: none; /* Remove button border */
-    border-radius: 4px; /* Add button border radius */
-    padding: 6px 12px; /* Add padding to the button */
-    text-decoration: none; /* Remove any text decoration */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    margin: 0; /* Remove margin inside the "Edit Preferences" button */
+    padding: 0; /* Reset padding */
+    line-height: 1; /* Ensure the text is vertically centered */
     white-space: normal; /* Allow text to wrap when button width is reduced */
+    font-size: 0.8rem; /* Reduce text size */
+}
+
+.btn-logout p {
+    margin: 0; /* Remove margin inside the "Logout" button */
+    padding: 0; /* Reset padding */
+    line-height: 1; /* Ensure the text is vertically centered */
+    white-space: normal; /* Allow text to wrap when button width is reduced */
+    font-size: 0.8rem; /* Reduce text size */
 }
 
 /* Style the centered and black text brand logo */
@@ -119,7 +123,7 @@
     .btn-edit-prefs,
     .btn-logout {
         height: auto; /* Allow the button to adjust its height based on content */
-        padding: 6px 12px; /* Adjust the padding inside the button for smaller screens */
+        padding: 6px 12px; /* Adjust the padding inside the buttons for smaller screens */
     }
 
     /* Adjust text size for smaller screens */
