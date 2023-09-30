@@ -89,6 +89,8 @@
 .user-info {
     display: flex;
     align-items: center;
+    color: #000; /* Text color for the user's name */
+    font-weight: bold;
 }
 
 /* Style the user's name */
