@@ -41,56 +41,15 @@
     font-size: 0.8rem; /* Reduce text size */
 }
 
-/* Style the "Logout" button */
-.btn-logout {
-    background-color: #9d0101; /* Background color for the "Edit Preferences" button */
-    color: #fff; /* Text color for the button text */
-    margin: 0; /* Remove margin inside the "Edit Preferences" button */
-    padding: 0; /* Reset padding */
-    line-height: 1; /* Ensure the text is vertically centered */
-    white-space: normal; /* Allow text to wrap when button width is reduced */
-    font-size: 0.8rem; /* Reduce text size */
-}
-
-.btn-logout p {
-    margin: 0; /* Remove margin inside the "Logout" button */
-    padding: 0; /* Reset padding */
-    line-height: 1; /* Ensure the text is vertically centered */
-    white-space: normal; /* Allow text to wrap when button width is reduced */
-    font-size: 0.8rem; /* Reduce text size */
-}
-
-/* Style the centered and black text brand logo */
-.col.s5.brand-logo.center.black-text,
-.col.s5.brand-logo.black-text {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #000; /* Text color for the link */
-    font-family: monospace;
-    font-size: 2rem; /* Reduce font size */
-    white-space: normal; /* Allow text to wrap when button width is reduced */
-    max-height: 48px; /* Maximum height for the logo */
-    overflow: hidden; /* Hide overflowed text when wrapped */
-}
-
-.material-icons {
-    font-size: 1rem; /* Reduce icon size */
-    margin-right: 4px; /* Reduce spacing between icon and text */
-}
-
-/* Change the link color on hover */
-.col.s5.brand-logo.center.black-text:hover,
-.col.s5.brand-logo.black-text:hover {
-    color: #007bff; /* Change the text color on hover */
-}
-
 /* Style the user info container */
 .user-info {
     display: flex;
     align-items: center;
     color: #000; /* Text color for the user's name */
     font-weight: bold;
+    width: 200px; /* Set a fixed width for the container */
+    white-space: nowrap; /* Prevent content from wrapping */
+    overflow: hidden; /* Hide overflowed content */
 }
 
 /* Style the user's name */
@@ -98,6 +57,24 @@
     margin-right: 10px; /* Add margin between name and button */
     font-weight: bold; /* Make the name text bold */
     color: #000; /* Text color for the user's name */
+}
+
+/* Style the "Logout" button */
+.btn-logout {
+    background-color: #9d0101; /* Background color for the "Logout" button */
+    color: #fff; /* Text color for the button text */
+    margin: 0; /* Remove margin inside the "Logout" button */
+    padding: 0; /* Reset padding */
+    line-height: 1; /* Ensure the text is vertically centered */
+    white-space: nowrap; /* Prevent content from wrapping */
+    font-size: 0.8rem; /* Reduce text size */
+}
+
+.btn-logout p {
+    margin: 0; /* Remove margin inside the "Logout" button */
+    padding: 0; /* Reset padding */
+    line-height: 1; /* Ensure the text is vertically centered */
+    font-size: 0.8rem; /* Reduce text size */
 }
 
 /* Media queries and responsive styles */
