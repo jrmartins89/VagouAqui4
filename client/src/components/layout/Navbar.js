@@ -13,9 +13,9 @@ class Navbar extends Component {
     render() {
         const { isAuthenticated, user } = this.props.auth;
         return (
-            <div className="navbar-fixed">
+            <div className="navbar">
                 <nav className="z-depth-0">
-                    <div className="nav-wrapper white">
+                    <div className="nav-wrapper">
                         <Link
                             to="/"
                             className="col s5 brand-logo center black-text"
@@ -27,7 +27,7 @@ class Navbar extends Component {
                         </Link>
                         { isAuthenticated ? (
                             <div className="user-info">
-                                <span className="user-email">{user.email}</span> {/* Display user's email */}
+                                <span className="user-email">{user.email}</span>
                                 <button
                                     onClick={this.onLogoutClick}
                                     className="btn btn-logout"

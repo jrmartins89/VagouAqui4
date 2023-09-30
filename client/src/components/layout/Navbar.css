@@ -1,18 +1,13 @@
 /* Navbar.css */
 
-/* Style the fixed navigation bar */
-.navbar-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background-color: #fff; /* Background color for the navbar */
+/* Style the navigation bar */
+.navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Material design shadow effect */
 }
 
 /* Style the navigation links and logo */
 .nav-wrapper {
+    background-color: #68917d; /* Background color for the "Edit Preferences" button */
     display: flex;
     justify-content: space-between; /* Move items to the ends of the container */
     align-items: center;
@@ -24,7 +19,7 @@
     height: auto; /* Allow the button to adjust its height based on content */
     display: flex;
     align-items: center;
-    background-color: #007bff; /* Background color for the "Edit Preferences" button */
+    background-color: #041f3b; /* Background color for the "Edit Preferences" button */
     color: #fff; /* Text color for the button text */
     border: none; /* Remove button border */
     border-radius: 4px; /* Add button border radius */
