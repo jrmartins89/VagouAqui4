@@ -11,7 +11,7 @@ class Navbar extends Component {
     };
 
     render() {
-        const { isAuthenticated } = this.props.auth;
+        const { isAuthenticated, user } = this.props.auth;
 
         return (
             <div className="navbar-fixed">
@@ -28,12 +28,15 @@ class Navbar extends Component {
                             <p>Edit Preferences</p>
                         </Link>
                         { isAuthenticated ? (
-                            <button
-                                onClick={this.onLogoutClick}
-                                className="btn btn-logout"
-                            >
-                                <b>Logout</b>
-                            </button>
+                            <div className="user-info">
+                                <span className="user-name">{user.name}</span>
+                                <button
+                                    onClick={this.onLogoutClick}
+                                    className="btn btn-logout"
+                                >
+                                    <b>Logout</b>
+                                </button>
+                            </div>
                         ) : null }
                     </div>
                 </nav>

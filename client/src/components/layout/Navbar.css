@@ -79,7 +79,20 @@
     color: #007bff; /* Change the text color on hover */
 }
 
-/* Responsive Styles */
+/* Style the user info container */
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+/* Style the user's name */
+.user-name {
+    margin-right: 10px; /* Add margin between name and button */
+    font-weight: bold; /* Make the name text bold */
+    color: #000; /* Text color for the user's name */
+}
+
+/* Media queries and responsive styles */
 @media (max-width: 768px) {
     /* Adjust the navbar height for smaller screens */
     .nav-wrapper {
