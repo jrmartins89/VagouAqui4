@@ -31,6 +31,8 @@ export const loginUser = userData => dispatch => {
             setAuthToken(token);
             // Decode token to get user data
             const decoded = jwt_decode(token);
+            // Include email in the user object
+            decoded.email = userData.email;
             // Set current user
             dispatch(setCurrentUser(decoded));
         })
