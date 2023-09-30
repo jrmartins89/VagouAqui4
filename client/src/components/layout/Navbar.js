@@ -30,7 +30,7 @@ class Navbar extends Component {
                             onClick={this.onLogoutClick}
                             className="btn btn-logout"
                         >
-                            Logout
+                            <b>Logout</b>
                         </button>
                     </div>
                 </nav>
