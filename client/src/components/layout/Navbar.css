@@ -128,3 +128,41 @@
         font-size: 0.8rem; /* Reduce text size for smaller screens */
     }
 }
+
+/* Extended media query for screens with dimensions 320x668 */
+@media (max-width: 320px) and (max-height: 668px) {
+    /* Adjust the navbar height for smaller screens */
+    .nav-wrapper {
+        height: 44px; /* Reduce the height of the navbar to fit the screen */
+    }
+
+    /* Adjust the icon size and font size for smaller screens */
+    .material-icons {
+        font-size: 0.8rem;
+        margin-right: 4px; /* Reduce spacing between icon and text */
+    }
+
+    .col.s5.brand-logo.center.black-text,
+    .col.s5.brand-logo.black-text {
+        font-size: 0.8rem; /* Reduce font size for smaller screens */
+        max-height: 36px; /* Reduce max height for the logo */
+    }
+
+    /* Adjust button size for smaller screens */
+    .btn-edit-prefs,
+    .btn-logout {
+        height: auto; /* Allow the button to adjust its height based on content */
+        padding: 4px 8px; /* Reduce button padding to fit smaller screens */
+    }
+
+    /* Adjust text size for smaller screens */
+    .btn-edit-prefs p,
+    .btn-logout p {
+        font-size: 0.6rem; /* Reduce text size for smaller screens */
+    }
+
+    /* User email adjustments */
+    .user-email {
+        font-size: 0.6rem; /* Reduce font size for the user's email */
+    }
+}
