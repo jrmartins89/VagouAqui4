@@ -80,7 +80,7 @@ class EditPreferences extends Component {
                     <div className="col s8 offset-s2">
                         <div className="col s12 form-container">
                             <h4 className="form-title">
-                                <b>Edit Preferences</b>
+                                <b>Editar Preferências</b>
                             </h4>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
@@ -94,7 +94,7 @@ class EditPreferences extends Component {
                                     onChange={this.onChange}
                                     className="validate"
                                 />
-                                <label htmlFor="preferences.location">Preferred Location</label>
+                                <label htmlFor="preferences.location">Bairro de preferência</label>
                             </div>
                             <div className="input-field col s12 form-field">
                                 <input
@@ -105,7 +105,7 @@ class EditPreferences extends Component {
                                     onChange={this.onChange}
                                     className="validate"
                                 />
-                                <label htmlFor="preferences.budget">Budget (R$):</label>
+                                <label htmlFor="preferences.budget">Valor de aluguel (R$):</label>
                             </div>
                             <div className="input-field col s12 form-field">
                                 <div>
@@ -218,7 +218,7 @@ class EditPreferences extends Component {
                                     className="btn btn-large waves-effect waves-light hoverable btn-update"
                                     type="submit"
                                 >
-                                    Update Preferences
+                                    Atualizar
                                 </button>
                             </div>
                         </form>

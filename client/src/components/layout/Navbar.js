@@ -25,7 +25,7 @@ class Navbar extends Component {
                             Página Inicial
                         </Link>
                         <Link to="/preferences" className="btn btn-edit-prefs">
-                            <p>Edit Preferences</p>
+                            <p>Editar Preferências</p>
                         </Link>
                         { isAuthenticated ? (
                             <div className="user-info">
