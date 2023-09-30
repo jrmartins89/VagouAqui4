@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './AdGrid.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Select from 'react-select';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
@@ -10,7 +9,6 @@ function AdGrid() {
     const [ads, setAds] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [adsPerPage] = useState(15);
-    const [selectedNeighborhood, setSelectedNeighborhood] = useState(null);
     const [lightboxImages, setLightboxImages] = useState([]);
     const [lightboxImageIndex, setLightboxImageIndex] = useState(-1);
 
@@ -27,13 +25,7 @@ function AdGrid() {
         fetchAds();
     }, []);
 
-    const uniqueNeighborhoods = Array.from(new Set(ads.map(ad => ad.neighborhood.toLowerCase())));
-
-    const filteredAds = selectedNeighborhood
-        ? ads.filter(ad => ad.neighborhood.toLowerCase() === selectedNeighborhood.value.toLowerCase())
-        : ads;
-
-    const totalPages = Math.ceil(filteredAds.length / adsPerPage);
+    const totalPages = Math.ceil(ads.length / adsPerPage);
 
     // Calculate the lower and upper bounds for the displayed page indices
     const pageRange = 10; // Number of page indices to show
@@ -49,16 +41,6 @@ function AdGrid() {
     const pageIndicesToDisplay = Array.from({ length: upperBound - lowerBound + 1 }, (_, i) => i + lowerBound);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
-
-    const neighborhoodOptions = uniqueNeighborhoods.map(neighborhood => ({
-        value: neighborhood,
-        label: neighborhood,
-    }));
-
-    const handleNeighborhoodChange = selectedOption => {
-        setSelectedNeighborhood(selectedOption);
-        setCurrentPage(1);
-    };
 
     const openLightbox = (images, imageIndex) => {
         setLightboxImages(images);
@@ -94,27 +76,14 @@ function AdGrid() {
 
     return (
         <div>
-            <section className="filtros">
-                <div className="filtro-item">
-                    <label>Bairro:</label>
-                    <div className="select-container">
-                        <Select
-                            options={neighborhoodOptions}
-                            value={selectedNeighborhood}
-                            onChange={handleNeighborhoodChange}
-                            isClearable
-                        />
-                    </div>
-                </div>
-            </section>
             <div className="grid-container">
                 <div className="grid">
-                    {filteredAds.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage).map((ad, adIndex) => (
+                    {ads.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage).map((ad, adIndex) => (
                         <div key={adIndex} className="grid-item">
                             <h2>{ad.title}</h2>
                             <p className="contact-info">
                                 <h2>Contato: {ad.contactInfo}</h2>
-                            </p> {/* Display contact information */}
+                            </p>
                             <Carousel showArrows={true} infiniteLoop={true}>
                                 {ad.imageLinks.map((imageLink, imgIndex) => (
                                     <div
