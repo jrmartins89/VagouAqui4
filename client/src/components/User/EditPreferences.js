@@ -34,13 +34,22 @@ class EditPreferences extends Component {
             .get("/api/users/preferences")
             .then((res) => {
                 const userPreferences = res.data;
-                console.log('preferencia',res.data);
                 this.setState({ preferences: userPreferences });
             })
             .catch((err) => {
                 console.error("Error fetching user preferences:", err);
             });
     }
+
+    onChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        this.setState((prevState) => ({
+            preferences: {
+                ...prevState.preferences,
+                [name]: type === "checkbox" ? checked : value,
+            },
+        }));
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
