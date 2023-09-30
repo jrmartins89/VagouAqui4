@@ -8,11 +8,6 @@
     margin: 20px;
 }
 
-/* Filter section */
-.filter-section {
-    margin-bottom: 20px;
-}
-
 /* Grid layout */
 .grid {
     display: grid;
@@ -52,26 +47,6 @@
 .carousel .slider-wrapper {
     display: flex;
     align-items: center;
-}
-
-/* Filter item */
-.filtro-item {
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.filtro-item label {
-    margin-right: 5px;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #000000;
-}
-
-.filtro-item .select-container {
-    flex: 1;
-    max-width: 200px;
 }
 
 /* Price */
@@ -141,21 +116,6 @@
     }
     .pagination button {
         padding: 4px 6px;
-        font-size: 0.8em;
-    }
-    .filtro-item {
-        margin-right: 10px;
-    }
-    .filtro-item label {
-        font-size: 1em;
-    }
-    .filtro-item .select-container {
-        max-width: 150px;
-    }
-    .ad-price {
-        font-size: 1em;
-    }
-    .ad-neighborhood {
         font-size: 0.8em;
     }
 }
