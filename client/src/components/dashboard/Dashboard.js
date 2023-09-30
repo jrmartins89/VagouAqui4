@@ -8,11 +8,6 @@ import { Link } from "react-router-dom";
 import "./Dashboard.css"; // Import the CSS file
 
 class Dashboard extends Component {
-    onLogoutClick = (e) => {
-        e.preventDefault();
-        this.props.logoutUser();
-    };
-
     render() {
         const { user } = this.props.auth;
 
@@ -37,14 +32,6 @@ class Dashboard extends Component {
                         >
                             Produtos
                         </Link>
-                    </div>
-                    <div className="col s6">
-                        <button
-                            onClick={this.onLogoutClick}
-                            className="btn logout-btn waves-effect waves-light hoverable"
-                        >
-                            Logout
-                        </button>
                     </div>
                 </div>
             </div>
