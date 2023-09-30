@@ -21,21 +21,45 @@
 
 /* Style for the buttons */
 .button {
-    width: 140px;
-    border-radius: 3px;
-    letter-spacing: 1.5px;
-    margin-top: 20px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    text-decoration: none;
+    white-space: normal;
+    margin: 10px auto; /* Center buttons horizontally */
 }
 
-/* Style for the Cadastro (Sign Up) button */
-.btn-cadastro {
-    background-color: #2196F3;
-    color: #fff;
+/* Style for the button text */
+.button p {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    white-space: normal;
+    font-size: 0.8rem;
 }
 
-/* Style for the Log In button */
-.btn-login {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
+/* Media Query for screens smaller than 768px */
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    .container-valign {
+        height: auto;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
 }
