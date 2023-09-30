@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateUserPreferences } from "../../actions/authActions";
 import "./EditPreferences.css"; // Import the CSS file
+import axios from "axios"; // Import axios for making API requests
 
 class EditPreferences extends Component {
     constructor(props) {
@@ -23,34 +24,23 @@ class EditPreferences extends Component {
                 noiseLevel: "Quiet",
                 acceptSmoker: false,
                 // Add more preference fields as needed
-            }
+            },
         };
     }
 
     componentDidMount() {
-        // Populate preferences from the Redux store or API
-        const { user } = this.props.auth;
-        if (user && user.preferences) {
-            this.setState({ preferences: user.preferences });
-        }
-    }
-
-    onChange = (e) => {
-        const { preferences } = this.state;
-
-        if (e.target.id.startsWith("preferences.")) {
-            // Handle changes in preference fields
-            const preferenceField = e.target.id.split(".")[1];
-            const newValue = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-
-            this.setState({
-                preferences: {
-                    ...preferences,
-                    [preferenceField]: newValue,
-                },
+        // Fetch user preferences from the database
+        axios
+            .get("/api/users/preferences")
+            .then((res) => {
+                const userPreferences = res.data;
+                console.log('preferencia',res.data);
+                this.setState({ preferences: userPreferences });
+            })
+            .catch((err) => {
+                console.error("Error fetching user preferences:", err);
             });
-        }
-    };
+    }
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -248,4 +238,6 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps, { updateUserPreferences })(withRouter(EditPreferences));
+export default connect(mapStateToProps, { updateUserPreferences })(
+    withRouter(EditPreferences)
+);

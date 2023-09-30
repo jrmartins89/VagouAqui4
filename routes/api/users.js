@@ -143,5 +143,22 @@ router.put("/preferences", passport.authenticate("jwt", { session: false }), (re
         });
 });
 
+// @route GET api/users/preferences
+// @desc Get user preferences
+// @access Private (requires authentication)
+router.get("/preferences", passport.authenticate("jwt", { session: false }), (req, res) => {
+    // User is authenticated, retrieve their preferences
+    User.findById(req.user.id)
+        .then((user) => {
+            if (!user) {
+                return res.status(404).json({ userNotFound: "User not found" });
+            }
+            res.json(user.preferences); // Respond with the user's preferences
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ error: "Server error" });
+        });
+});
 
 module.exports = router;
