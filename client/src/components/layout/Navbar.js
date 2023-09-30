@@ -21,8 +21,7 @@ class Navbar extends Component {
                             to="/"
                             className="col s5 brand-logo center black-text"
                         >
-                            <i className="material-icons">code</i>
-                            Página Inicial
+                            Início
                         </Link>
                         <Link to="/preferences" className="btn btn-edit-prefs">
                             <p>Editar Preferências</p>

@@ -57,14 +57,15 @@
 }
 
 /* Style the centered and black text brand logo */
-.col.s5.brand-logo.center.black-text {
+.col.s5.brand-logo.center.black-text,
+.col.s5.brand-logo.black-text {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: #000; /* Text color for the link */
     font-family: monospace;
     font-size: 2rem; /* Reduce font size */
-    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    white-space: normal; /* Allow text to wrap when button width is reduced */
     max-height: 48px; /* Maximum height for the logo */
     overflow: hidden; /* Hide overflowed text when wrapped */
 }
@@ -75,7 +76,8 @@
 }
 
 /* Change the link color on hover */
-.col.s5.brand-logo.center.black-text:hover {
+.col.s5.brand-logo.center.black-text:hover,
+.col.s5.brand-logo.black-text:hover {
     color: #007bff; /* Change the text color on hover */
 }
 
@@ -105,10 +107,12 @@
         margin-right: 4px; /* Reduce spacing between icon and text */
     }
 
-    .col.s5.brand-logo.center.black-text {
+    .col.s5.brand-logo.center.black-text,
+    .col.s5.brand-logo.black-text {
         font-size: 1rem; /* Reduce font size for smaller screens */
         max-height: none; /* Remove the maximum height for the logo */
         overflow: visible; /* Allow the text to be visible when wrapped */
+        white-space: normal; /* Allow text to wrap when button width is reduced */
     }
 
     /* Adjust button size for smaller screens */
