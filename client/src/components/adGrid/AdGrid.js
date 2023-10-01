@@ -7,6 +7,7 @@ import 'react-image-lightbox/style.css';
 
 function AdGrid() {
     const [ads, setAds] = useState([]);
+    const [recommendedAds, setRecommendedAds] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [adsPerPage] = useState(15);
     const [lightboxImages, setLightboxImages] = useState([]);
@@ -24,6 +25,20 @@ function AdGrid() {
         }
         fetchAds();
     }, []);
+
+    useEffect(() => {
+        async function fetchRecommendedAds() {
+            try {
+                // Replace 'userId' with the actual user ID or appropriate parameter.
+                const response = await fetch('http://127.0.0.1:5000/api/recommendations/userId');
+                const data = await response.json();
+                setRecommendedAds(data);
+            } catch (error) {
+                console.error('Error fetching recommended ads:', error);
+            }
+        }
+        fetchRecommendedAds();
+    }, []); // Fetch recommended ads when the component mounts.
 
     const totalPages = Math.ceil(ads.length / adsPerPage);
 
@@ -78,7 +93,7 @@ function AdGrid() {
         <div>
             <div className="grid-container">
                 <div className="grid">
-                    {ads.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage).map((ad, adIndex) => (
+                    {[...ads, ...recommendedAds].slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage).map((ad, adIndex) => (
                         <div key={adIndex} className="grid-item">
                             <h2>{ad.title}</h2>
                             <p className="contact-info">
@@ -120,6 +135,8 @@ function AdGrid() {
                     <button onClick={nextPage} disabled={currentPage === totalPages}>Next</button>
                 </div>
             </div>
+
+            {/* Lightbox code */}
             {lightboxImages.length > 0 && lightboxImageIndex !== -1 && (
                 <Lightbox
                     mainSrc={lightboxImages[lightboxImageIndex]}
