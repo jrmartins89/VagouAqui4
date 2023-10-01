@@ -39,9 +39,10 @@
     font-size: 0.8rem; /* Reduce text size */
 }
 
-/* Position the "Show Recommendations" button next to the "Editar Preferências" button */
+/* Position the "Show Recommendations" button next to the "Edit Preferences" button */
 .btn-show-recommendations {
     margin-left: 0px; /* Add margin between the buttons */
+    font-weight: bold;
 }
 
 /* Style the user info container */
@@ -154,5 +155,42 @@
     /* User email adjustments */
     .user-email {
         font-size: 0.6rem; /* Reduce font size for the user's email */
+    }
+}
+
+/* Responsive styles for different device sizes */
+@media (max-width: 375px) {
+    /* Mobile M */
+    .btn-show-recommendations {
+        font-size: 0.6rem;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 414px) {
+    /* Mobile L */
+    .btn-show-recommendations {
+        font-size: 0.7rem;
+        margin-right: auto;/* Adjust text size for Mobile L */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Tablet */
+    .btn-show-recommendations {
+        font-size: 0.9rem; /* Adjust text size for Tablet */
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    /* Laptop */
+    .btn-show-recommendations {
+        font-size: 1rem; /* Adjust text size for Laptop */
+    }
+}
+
+@media (min-width: 1441px) {
+    /* Laptop Large */
+    .btn-show-recommendations {
+        font-size: 1.1rem;
     }
 }

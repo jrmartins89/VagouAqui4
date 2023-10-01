@@ -30,7 +30,7 @@ class Navbar extends Component {
                                     onClick={this.showRecommendations}
                                     className="btn btn-show-recommendations"
                                 >
-                                    <p>Show Recommendations</p>
+                                    <p>Recomendações</p>
                                 </button>
                             )}
                         </div>
