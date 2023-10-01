@@ -16,17 +16,24 @@ class Navbar extends Component {
             <div className="navbar">
                 <nav className="z-depth-0">
                     <div className="nav-wrapper">
-                        <Link
-                            to="/"
-                            className="col s5 brand-logo center black-text"
-                        >
+                        <Link to="/" className="col s5 brand-logo center black-text">
                             Início
                         </Link>
-                        {isAuthenticated && (
-                            <Link to="/preferences" className="btn btn-edit-prefs">
-                                <p>Editar Preferências</p>
-                            </Link>
-                        )}
+                        <div className="nav-buttons"> {/* Wrap the buttons in a div */}
+                            {isAuthenticated && (
+                                <Link to="/preferences" className="btn btn-edit-prefs">
+                                    <p>Editar Preferências</p>
+                                </Link>
+                            )}
+                            {isAuthenticated && (
+                                <button
+                                    onClick={this.showRecommendations}
+                                    className="btn btn-show-recommendations"
+                                >
+                                    <p>Show Recommendations</p>
+                                </button>
+                            )}
+                        </div>
                         {isAuthenticated ? (
                             <div className="user-info">
                                 <span className="user-email">{user.email}</span>

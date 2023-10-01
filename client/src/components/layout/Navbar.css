@@ -7,7 +7,7 @@
 
 /* Style the navigation links and logo */
 .nav-wrapper {
-    background-color: #68917d; /* Background color for the "Edit Preferences" button */
+    background-color: #68917d; /* Background color for the "Edit Preferences" and "Show Recommendations" buttons */
     display: flex;
     justify-content: space-between; /* Move items to the ends of the container */
     align-items: center;
@@ -15,25 +15,33 @@
 }
 
 /* Style the "Edit Preferences" button */
-.btn-edit-prefs {
-    height: auto; /* Allow the button to adjust its height based on content */
+.btn-edit-prefs,
+.btn-show-recommendations {
+    height: auto; /* Allow the buttons to adjust their height based on content */
     display: flex;
     align-items: center;
-    background-color: #041f3b; /* Background color for the "Edit Preferences" button */
+    background-color: #041f3b; /* Background color for the buttons */
     color: #fff; /* Text color for the button text */
     border: none; /* Remove button border */
     border-radius: 4px; /* Add button border radius */
-    padding: 6px 8px; /* Adjust padding to match the "Logout" button */
+    padding: 4px 6px; /* Adjust padding */
     text-decoration: none; /* Remove any text decoration */
     white-space: normal; /* Allow text to wrap when button width is reduced */
+    font-size: 0.8rem; /* Reduce text size */
 }
 
-.btn-edit-prefs p {
-    margin: 0; /* Remove margin inside the "Edit Preferences" button */
+.btn-edit-prefs p,
+.btn-show-recommendations p {
+    margin: 0; /* Remove margin inside the buttons */
     padding: 0; /* Reset padding */
     line-height: 1; /* Ensure the text is vertically centered */
     white-space: normal; /* Allow text to wrap when button width is reduced */
     font-size: 0.8rem; /* Reduce text size */
+}
+
+/* Position the "Show Recommendations" button next to the "Editar Preferências" button */
+.btn-show-recommendations {
+    margin-left: 0px; /* Add margin between the buttons */
 }
 
 /* Style the user info container */
@@ -94,13 +102,15 @@
 
     /* Adjust button size for smaller screens */
     .btn-edit-prefs,
+    .btn-show-recommendations,
     .btn-logout {
-        height: auto; /* Allow the button to adjust its height based on content */
+        height: auto; /* Allow the buttons to adjust their height based on content */
         padding: 6px 8px; /* Adjust the padding inside the buttons for smaller screens */
     }
 
     /* Adjust text size for smaller screens */
     .btn-edit-prefs p,
+    .btn-show-recommendations p,
     .btn-logout p {
         font-size: 0.8rem; /* Reduce text size for smaller screens */
     }
@@ -127,13 +137,15 @@
 
     /* Adjust button size for smaller screens */
     .btn-edit-prefs,
+    .btn-show-recommendations,
     .btn-logout {
-        height: auto; /* Allow the button to adjust its height based on content */
+        height: auto; /* Allow the buttons to adjust their height based on content */
         padding: 4px 8px; /* Reduce button padding to fit smaller screens */
     }
 
     /* Adjust text size for smaller screens */
     .btn-edit-prefs p,
+    .btn-show-recommendations p,
     .btn-logout p {
         font-size: 0.6rem; /* Reduce text size for smaller screens */
     }
