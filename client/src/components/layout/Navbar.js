@@ -10,6 +10,16 @@ class Navbar extends Component {
         this.props.logoutUser();
     };
 
+    // Define the showRecommendations method
+    showRecommendations = () => {
+        // Ensure that the user is authenticated and has a userId
+        const { isAuthenticated, user } = this.props.auth;
+        if (isAuthenticated && user) {
+            // Redirect to the recommendations route with the user's ID
+            this.props.history.push(`/recommendations/${user.id}`);
+        }
+    };
+
     render() {
         const { isAuthenticated, user } = this.props.auth;
         return (
