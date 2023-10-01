@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom"; // Import withRouter
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import "./Navbar.css";
@@ -66,4 +66,5 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logoutUser })(Navbar);
+// Wrap the Navbar component with withRouter to access the history object
+export default withRouter(connect(mapStateToProps, { logoutUser })(Navbar));
