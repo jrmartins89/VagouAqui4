@@ -106,6 +106,7 @@
     .btn-logout {
         height: auto; /* Allow the buttons to adjust their height based on content */
         padding: 6px 8px; /* Adjust the padding inside the buttons for smaller screens */
+        margin-left: 0px
     }
 
     /* Adjust text size for smaller screens */
