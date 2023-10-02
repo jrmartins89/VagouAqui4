@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import { useSelector } from 'react-redux';
 
 function AdGrid() {
     const [ads, setAds] = useState([]);
@@ -12,6 +13,8 @@ function AdGrid() {
     const [adsPerPage] = useState(15);
     const [lightboxImages, setLightboxImages] = useState([]);
     const [lightboxImageIndex, setLightboxImageIndex] = useState(-1);
+
+    const userId = useSelector(state => state.auth.user.userId);
 
     useEffect(() => {
         async function fetchAds() {
@@ -29,8 +32,7 @@ function AdGrid() {
     useEffect(() => {
         async function fetchRecommendedAds() {
             try {
-                // Replace 'userId' with the actual user ID or appropriate parameter.
-                const response = await fetch('http://127.0.0.1:5000/api/recommendations/userId');
+                const response = await fetch(`http://127.0.0.1:5000/api/recommendations/${userId}`);
                 const data = await response.json();
                 setRecommendedAds(data);
             } catch (error) {
@@ -38,8 +40,7 @@ function AdGrid() {
             }
         }
         fetchRecommendedAds();
-    }, []); // Fetch recommended ads when the component mounts.
-
+    }, [userId]);
     const totalPages = Math.ceil(ads.length / adsPerPage);
 
     // Calculate the lower and upper bounds for the displayed page indices
