@@ -4,16 +4,17 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const port = process.env.PORT || 5000;
 const passport = require("passport");
-const users = require("./routes/api/users");
+const usersRouter = require("./routes/api/users");
 const app = express();
 const scraperUfsc = require("./scrapers/classificadosUfscScraper");
 const Ad = require("./models/Ads");
 const urls = require("./urls.json");
-const ads = require("./routes/api/ads");
+const adsRouter = require("./routes/api/ads");
 const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
 const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
 const { extractMgfHrefValues } = require("./scrapers/mgfScraper");
+const recommendationsRouter = require("./routes/api/recommendation"); // Import the recommendations router
 require("dotenv").config();
 require("./config/passport")(passport);
 
@@ -28,7 +29,7 @@ mongoose
     })
     .then(() => {
         console.log("Conectado com sucesso ao MongoDB");
-        startScraping();
+        //startScraping();
     })
     .catch((error) => {
         console.error("Erro de conexão com o banco de dados:", error);
@@ -36,9 +37,12 @@ mongoose
 
 // Passport middleware
 app.use(passport.initialize());
+
 // Routes
-app.use("/api/users", users);
-app.use("/api/ads", ads);
+app.use("/api/users", usersRouter);
+app.use("/api/ads", adsRouter);
+app.use("/api/recommendations", recommendationsRouter);
+// Example usage of the recommendation system
 
 // Start scraping function
 async function startScraping() {
