@@ -42,7 +42,7 @@ app.use(passport.initialize());
 app.use("/api/users", usersRouter);
 app.use("/api/ads", adsRouter);
 app.use("/api/recommendations", recommendationsRouter);
-// Example usage of the recommendation system
+
 
 // Start scraping function
 async function startScraping() {
