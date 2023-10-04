@@ -1,12 +1,18 @@
-// Function to generate content-based recommendations for a user
-async function generateContentBasedRecommendations(userId, mongooseConnection) {
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const User = mongoose.model('users'); // Assuming 'users' is the name of your user model
+const Ad = mongoose.model('Ad'); // Assuming 'Ad' is the name of your ad model
+
+// Route to fetch content-based recommendations for a user
+router.get('/:userId', async (req, res) => {
     try {
+        const userId = req.params.userId;
+
         // Fetch the user's preferences
-        const User = mongooseConnection.model("users");
         const user = await User.findById(userId);
-        console.log('usuario:', user);
+
         // Fetch all ads from the database
-        const Ad = mongooseConnection.model("Ad");
         const allAds = await Ad.find();
 
         // Filter ads based on user preferences
@@ -31,14 +37,12 @@ async function generateContentBasedRecommendations(userId, mongooseConnection) {
 
         // Extract the recommended ads (you can limit the number of recommendations)
         const recommendedAds = filteredAds.slice(0, 10); // Change the number as needed
-        console.log('recommendedAds', recommendedAds);
-        return recommendedAds;
+
+        res.json(recommendedAds);
     } catch (error) {
         console.error("Error generating content-based recommendations:", error);
-        return [];
+        res.status(500).json({ message: 'Error fetching recommendations', error: error.message });
     }
-}
+});
 
-module.exports = {
-    generateContentBasedRecommendations,
-};
+module.exports = router;
