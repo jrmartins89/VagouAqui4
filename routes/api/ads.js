@@ -14,7 +14,7 @@ router.get('/all', async (req, res) => {
 });
 
 // Route to fetch content-based recommendations for a user
-router.get('/recommendations/:userId', async (req, res) => {
+router.get('/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
 
