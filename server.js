@@ -29,7 +29,7 @@ mongoose
     })
     .then(() => {
         console.log("Conectado com sucesso ao MongoDB");
-        //startScraping();
+        startScraping();
     })
     .catch((error) => {
         console.error("Erro de conexão com o banco de dados:", error);
