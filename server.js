@@ -8,7 +8,6 @@ const usersRouter = require("./routes/api/users");
 const app = express();
 const scraperUfsc = require("./scrapers/classificadosUfscScraper");
 const Ad = require("./models/Ads");
-const urls = require("./urls.json");
 const adsRouter = require("./routes/api/ads");
 const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
@@ -16,6 +15,43 @@ const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
 const { extractMgfHrefValues } = require("./scrapers/mgfScraper");
 const recommendationsRouter = require("./routes/api/recommendation");
 const schedule = require("node-schedule");
+// Define an array of URLs
+const urls = [
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=88"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=91"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=89"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=94"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=197"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=90"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=96"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=86"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=72"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=73"
+    },
+    {
+        "url": "https://classificados.ufsc.br/index.php?catid=74"
+    }
+]
+
 require("dotenv").config();
 require("./config/passport")(passport);
 
