@@ -13,18 +13,4 @@ router.get('/all', async (req, res) => {
     }
 });
 
-// Route to fetch content-based recommendations for a user
-router.get('/:userId', async (req, res) => {
-    try {
-        const userId = req.params.userId;
-
-        // Call the generateContentBasedRecommendations function from the recommendation.js file
-        const recommendedAds = await generateContentBasedRecommendations(userId);
-
-        res.json(recommendedAds);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching recommendations', error: error.message });
-    }
-});
-
 module.exports = router;
