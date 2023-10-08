@@ -15,6 +15,7 @@ const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
 const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
 const { extractMgfHrefValues } = require("./scrapers/mgfScraper");
 const recommendationsRouter = require("./routes/api/recommendation"); // Import the recommendations router
+const schedule = require("node-schedule"); // Import the node-schedule library
 require("dotenv").config();
 require("./config/passport")(passport);
 
@@ -29,7 +30,8 @@ mongoose
     })
     .then(() => {
         console.log("Conectado com sucesso ao MongoDB");
-        startScraping();
+        // Schedule the scraping task to run every two weeks
+        scheduleScrapingTask();
     })
     .catch((error) => {
         console.error("Erro de conexão com o banco de dados:", error);
@@ -42,63 +44,6 @@ app.use(passport.initialize());
 app.use("/api/users", usersRouter);
 app.use("/api/ads", adsRouter);
 app.use("/api/recommendation", recommendationsRouter);
-
-
-// Start scraping function
-async function startScraping() {
-    try {
-        console.log("Scraping process started.");
-
-        await scrapeAndSaveNewAds(
-            scraperUfsc,
-            "Classificados UFSC",
-            urls,
-            scraperUfsc.getAdLinks,
-            scraperUfsc.getAdDetails
-        );
-        console.log("Scraping process for Classificados UFSC finished.");
-
-        await scrapeAndSaveNewAds(
-            null,
-            "Ibagy",
-            null,
-            scrapeIbagyAds,
-            null
-        );
-        console.log("Scraping process for Ibagy finished.");
-
-        await scrapeAndSaveNewAds(
-            null,
-            "WebQuarto",
-            null,
-            scrapeWebQuartoads,
-            null
-        );
-        console.log("Scraping process for WebQuarto finished.");
-
-        await scrapeAndSaveNewAds(
-            null,
-            "vivaReal",
-            null,
-            getVivaRealAdLinks,
-            null
-        );
-        console.log("Scraping process for vivaReal finished.");
-
-        await scrapeAndSaveNewAds(
-            null,
-            "MGF",
-            null,
-            extractMgfHrefValues,
-            null
-        );
-        console.log("Scraping process for MGF finished.");
-
-        console.log("All scraping processes have finished.");
-    } catch (error) {
-        console.error("Error during scraping:", error);
-    }
-}
 
 // Function to scrape and save new ads, avoiding duplicates
 async function scrapeAndSaveNewAds(scraper, source, urls, scrapeFunction, getDetailsFunction) {
@@ -201,6 +146,71 @@ async function saveNewAds(newAds, source) {
         }
     } catch (error) {
         console.error(`Error during scraping ${source} ads:`, error);
+    }
+}
+
+// Schedule the scraping task to run every two weeks
+function scheduleScrapingTask() {
+    // Schedule the task to run every two weeks (on Sunday at midnight)
+    schedule.scheduleJob({ hour: 23, minute: 0, dayOfWeek: 5 }, function () {
+        startScraping();
+    });
+}
+
+// Start scraping function
+async function startScraping() {
+    try {
+        console.log("Scraping process started.");
+
+        // Call the scraping functions for each source
+        await scrapeAndSaveNewAds(
+            scraperUfsc,
+            "Classificados UFSC",
+            urls,
+            scraperUfsc.getAdLinks,
+            scraperUfsc.getAdDetails
+        );
+        console.log("Scraping process for Classificados UFSC finished.");
+
+        await scrapeAndSaveNewAds(
+            null,
+            "Ibagy",
+            null,
+            scrapeIbagyAds,
+            null
+        );
+        console.log("Scraping process for Ibagy finished.");
+
+        await scrapeAndSaveNewAds(
+            null,
+            "WebQuarto",
+            null,
+            scrapeWebQuartoads,
+            null
+        );
+        console.log("Scraping process for WebQuarto finished.");
+
+        await scrapeAndSaveNewAds(
+            null,
+            "vivaReal",
+            null,
+            getVivaRealAdLinks,
+            null
+        );
+        console.log("Scraping process for vivaReal finished.");
+
+        await scrapeAndSaveNewAds(
+            null,
+            "MGF",
+            null,
+            extractMgfHrefValues,
+            null
+        );
+        console.log("Scraping process for MGF finished.");
+
+        console.log("All scraping processes have finished.");
+    } catch (error) {
+        console.error("Error during scraping:", error);
     }
 }
 
