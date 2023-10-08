@@ -14,12 +14,12 @@ const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
 const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
 const { extractMgfHrefValues } = require("./scrapers/mgfScraper");
-const recommendationsRouter = require("./routes/api/recommendation"); // Import the recommendations router
-const schedule = require("node-schedule"); // Import the node-schedule library
+const recommendationsRouter = require("./routes/api/recommendation");
+const schedule = require("node-schedule");
 require("dotenv").config();
 require("./config/passport")(passport);
 
-app.use(cors()); // Add CORS middleware to allow all origins
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -29,12 +29,16 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => {
-        console.log("Conectado com sucesso ao MongoDB");
-        // Schedule the scraping task to run every two weeks
-        scheduleScrapingTask();
+        console.log("Connected successfully to MongoDB");
+        // Start the Express server
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}!`);
+            // After the server is started, perform other actions
+            initializeServerActions();
+        });
     })
     .catch((error) => {
-        console.error("Erro de conexão com o banco de dados:", error);
+        console.error("Database connection error:", error);
     });
 
 // Passport middleware
@@ -214,6 +218,22 @@ async function startScraping() {
     }
 }
 
-app.listen(port, () =>
-    console.log(`O Servidor está rodando na porta ${port}!`)
-);
+// Function to perform other actions after the server is started
+async function initializeServerActions() {
+    try {
+        // Check if there are any ads saved in the database
+        const existingAdsCount = await Ad.countDocuments();
+
+        if (+existingAdsCount === 0) {
+            // If no ads are saved, start the initial scraping process
+            console.log("No ads found in the database. Starting initial scraping...");
+            await startScraping();
+        } else {
+            // If there are ads in the database, follow the scheduled scraping task
+            console.log("Ads found in the database. Following the scheduled scraping task...");
+            scheduleScrapingTask();
+        }
+    } catch (error) {
+        console.error("Error while checking for existing ads:", error);
+    }
+}
