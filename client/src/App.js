@@ -13,6 +13,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import AdGrid from "./components/adGrid/AdGrid";
 import EditPreferences from "./components/User/EditPreferences";
+import RecommendedGrid from "./components/adGrid/RecommendedGrid";
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
     // Set User token header User
@@ -45,6 +46,7 @@ class App extends Component {
                         <PrivateRoute exact path="/dashboard" component={Dashboard} />
                         <PrivateRoute exact path="/products" component={AdGrid} />
                         <PrivateRoute exact path="/preferences" component={EditPreferences} />
+                        <PrivateRoute exact path="/recommendation" component={RecommendedGrid} />
                     </Switch>
                 </div>
             </Router>
