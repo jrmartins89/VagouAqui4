@@ -41,7 +41,7 @@ app.use(passport.initialize());
 // Routes
 app.use("/api/users", usersRouter);
 app.use("/api/ads", adsRouter);
-app.use("/api/recommendations", recommendationsRouter);
+app.use("/api/recommendation", recommendationsRouter);
 
 
 // Start scraping function
