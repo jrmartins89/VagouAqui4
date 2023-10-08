@@ -2,32 +2,12 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import axios from "axios"; // Import axios
 import "./Navbar.css";
 
 class Navbar extends Component {
     onLogoutClick = (e) => {
         e.preventDefault();
         this.props.logoutUser();
-    };
-
-    // Refactor the showRecommendations method
-    showRecommendations = async () => {
-        const { isAuthenticated, user } = this.props.auth;
-        if (isAuthenticated && user) {
-            try {
-                // Make an HTTP GET request to fetch recommendations based on user ID
-                console.log(user)
-                const response = await axios.get(`/api/recommendation/`);
-                const recommendedAds = response.data;
-
-                // Handle the recommended ads, e.g., display them or navigate to a new page
-                console.log("Recommended Ads:", recommendedAds);
-            } catch (error) {
-                console.error("Error fetching recommendations:", error);
-                // Handle the error, e.g., display an error message to the user
-            }
-        }
     };
 
     render() {
@@ -46,12 +26,9 @@ class Navbar extends Component {
                                 </Link>
                             )}
                             {isAuthenticated && (
-                                <button
-                                    onClick={this.showRecommendations}
-                                    className="btn btn-show-recommendations"
-                                >
+                                <Link to ="/recommendation" className="btn btn-show-recommendations">
                                     <p>Recomendações</p>
-                                </button>
+                                </Link>
                             )}
                         </div>
                         {isAuthenticated ? (
