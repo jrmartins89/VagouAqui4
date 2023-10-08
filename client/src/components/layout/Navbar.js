@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom"; // Import withRouter
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import axios from "axios"; // Import axios
 import "./Navbar.css";
 
 class Navbar extends Component {
@@ -10,13 +11,22 @@ class Navbar extends Component {
         this.props.logoutUser();
     };
 
-    // Define the showRecommendations method
-    showRecommendations = () => {
-        // Ensure that the user is authenticated and has a userId
+    // Refactor the showRecommendations method
+    showRecommendations = async () => {
         const { isAuthenticated, user } = this.props.auth;
         if (isAuthenticated && user) {
-            // Redirect to the recommendations route with the user's ID
-            this.props.history.push(`/recommendations/${user.id}`);
+            try {
+                // Make an HTTP GET request to fetch recommendations based on user ID
+                console.log(user)
+                const response = await axios.get(`/api/recommendation/`);
+                const recommendedAds = response.data;
+
+                // Handle the recommended ads, e.g., display them or navigate to a new page
+                console.log("Recommended Ads:", recommendedAds);
+            } catch (error) {
+                console.error("Error fetching recommendations:", error);
+                // Handle the error, e.g., display an error message to the user
+            }
         }
     };
 
