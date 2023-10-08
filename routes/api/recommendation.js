@@ -5,7 +5,7 @@ const User = mongoose.model('users'); // Assuming 'users' is the name of your us
 const Ad = mongoose.model('Ad'); // Assuming 'Ad' is the name of your ad model
 
 // Route to fetch content-based recommendations for a user
-router.get('/:userId', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const userId = req.params.userId;
 
