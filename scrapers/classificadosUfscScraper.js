@@ -64,6 +64,13 @@ async function getAdDetails(items) {
                 const neighborhoodRow = table.find('tr:has(td[valign="top"]:contains("Bairro"))');
                 const neighborhoodCell = neighborhoodRow.find('td[valign="top"]:contains("Bairro") + td');
                 const neighborhood = neighborhoodCell.text().trim();
+
+                // Check if any of the critical values is empty
+                if (!price || !gender || !neighborhood) {
+                    console.warn(`Skipping ad with missing values for ${item.link}`);
+                    continue; // Skip this ad and move to the next one
+                }
+
                 const box = $('.box');
                 const title = box.find('h1').text().trim();
                 let description = box.find('[colspan="2"]').text().trim();
