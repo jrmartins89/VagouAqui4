@@ -5,14 +5,14 @@ const Ad = require('../../models/Ads'); // Replace with the actual path to your 
 function extractFeaturesFromAd(ad) {
     // Define regular expressions for feature extraction
     const featureRegex = {
-        houseOrApartment: /(?:house|apartment)/i,
-        genderPreference: /(?:men|women)/i,
-        acceptsPets: /pets allowed/i,
-        leaseLength: /(?:year round|monthly basis)/i,
+        houseOrApartment: /(?:casa|apartamento)/i,
+        genderPreference: /(?:homem|mulher)/i,
+        acceptsPets: /aceita pets/i,
+        leaseLength: /(?:aluguel anual|aluguel mensal)/i,
         budget: /(\d+)/, // Extract the first number as the budget
-        wheelchairAccessible: /wheelchair accessible/i,
-        noiseLevel: /(?:quiet|social)/i,
-        acceptSmoker: /smoker/i,
+        wheelchairAccessible: /acessível a cadeirantes/i,
+        noiseLevel: /(?:tranquilo|barulhento)/i,
+        acceptSmoker: /aceita fumante/i,
     };
 
     // Initialize an object to store the extracted features
