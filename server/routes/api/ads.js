@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Ad = require('../../models/Ads'); // Adjust the path as needed
-const { generateContentBasedRecommendations } = require('./recommendation'); // Import the recommendation function
 
 // Route to fetch ads
 router.get('/all', async (req, res) => {
