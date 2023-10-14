@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const mongoose = require('mongoose');
 const Ad = require('../../models/Ads'); // Replace with the actual path to your Ad model
 
 // Function to extract and create features from ad data
@@ -78,28 +77,13 @@ function cosineSimilarity(userPrefs, listingPrefs) {
     return _.round(_.divide(_.sum(_.multiply(userVector, listingVector)), (_.multiply(_.sum(_.map(userVector, val => Math.pow(val, 2))), _.sum(_.map(listingVector, val => Math.pow(val, 2))))), 2));
 }
 
-// Fetch all ads from the database (you should set up your MongoDB connection)
-mongoose.connect('mongodb://localhost/yourdatabase', { useNewUrlParser: true, useUnifiedTopology: true });
+// Function to fetch ads from the database and generate recommendations
+async function generateRecommendations(userPreferences) {
+    try {
+        // Fetch all ads from the database
+        const ads = await Ad.find({});
 
-Ad.find({}, (err, ads) => {
-    if (err) {
-        console.error('Error fetching ads from the database:', err);
-    } else {
-        // Example user preferences (you should replace this with the user's preferences)
-        const userPreferences = {
-            houseOrApartment: 'Apartment',
-            genderPreference: 'Men',
-            acceptsPets: true,
-            location: 'Downtown',
-            roommates: 'With Roommates',
-            leaseLength: 'year round',
-            budget: 1200,
-            wheelchairAccessible: false,
-            noiseLevel: 'Quiet',
-            acceptSmoker: false,
-        };
-
-        // Create feature vectors for all ads and calculate similarity
+        // Generate recommendations
         const recommendations = ads.map((ad) => {
             const listingFeatures = extractFeaturesFromAd(ad);
             const similarityScore = cosineSimilarity(userPreferences, listingFeatures);
@@ -110,11 +94,34 @@ Ad.find({}, (err, ads) => {
             };
         });
 
-        // Sort ads by similarity score in descending order and get the top recommendations
+        // Sort ads by similarity score in descending order
         recommendations.sort((a, b) => b.similarityScore - a.similarityScore);
 
+        return recommendations;
+    } catch (error) {
+        console.error('Error fetching ads or generating recommendations:', error);
+        return [];
+    }
+}
+
+// Replace this with your actual user preferences
+const userPreferences = {
+    houseOrApartment: 'Apartment',
+    genderPreference: 'Men',
+    acceptsPets: true,
+    location: 'Downtown',
+    roommates: 'With Roommates',
+    leaseLength: 'year round',
+    budget: 1200,
+    wheelchairAccessible: false,
+    noiseLevel: 'Quiet',
+    acceptSmoker: false,
+};
+
+// Generate recommendations based on user preferences
+generateRecommendations(userPreferences)
+    .then((recommendations) => {
         // Display the top N recommendations
         const topN = recommendations.slice(0, 10); // Change 10 to the desired number of recommendations
         console.log('Top Recommendations:', topN);
-    }
-});
+    });
