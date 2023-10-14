@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const passport = require("passport");
 const User = mongoose.model('users'); // Assuming 'users' is the name of your user model
 const Ad = mongoose.model('Ad'); // Assuming 'Ad' is the name of your ad model
 
 // Route to fetch content-based recommendations for a user
-router.get('/', async (req, res) => {
+router.get('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
-        const userId = req.params.userId;
-
+        const userId = req.user.id;
         // Fetch the user's preferences
         const user = await User.findById(userId);
-
+        console.log(user);
         // Fetch all ads from the database
         const allAds = await Ad.find();
 
