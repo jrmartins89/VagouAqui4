@@ -3,42 +3,22 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require("passport");
 const User = mongoose.model('users'); // Assuming 'users' is the name of your user model
-const Ad = mongoose.model('Ad'); // Assuming 'Ad' is the name of your ad model
+
+// Import the function to generate recommendations based on user preferences
+const generateRecommendations = require('./adRepresentation'); // Update with the actual path
 
 // Route to fetch content-based recommendations for a user
-router.get('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
+router.get('/recommendedAds', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         const userId = req.user.id;
         // Fetch the user's preferences
         const user = await User.findById(userId);
-        console.log(user);
-        // Fetch all ads from the database
-        const allAds = await Ad.find();
+        const userPreferences = user.preferences;
+        console.log(userPreferences);
+        // Generate recommendations based on user preferences
+        const recommendations = generateRecommendations(userPreferences);
 
-        // Filter ads based on user preferences
-        const filteredAds = allAds.filter(ad => {
-            return (
-                ad.houseOrApartment === user.preferences.houseOrApartment &&
-                ad.genderPreference === user.preferences.genderPreference &&
-                ad.acceptsPets === user.preferences.acceptsPets &&
-                ad.wheelchairAccessible === user.preferences.wheelchairAccessible &&
-                ad.acceptSmoker === user.preferences.acceptSmoker &&
-                ad.roommates === user.preferences.roommates &&
-                ad.noiseLevel === user.preferences.noiseLevel
-            );
-        });
-
-        // Sort filtered ads by a criteria of your choice, e.g., date posted or popularity
-        filteredAds.sort((a, b) => {
-            // You can change the sorting criteria here
-            // For example, to sort by date in descending order:
-            return b.datePosted - a.datePosted;
-        });
-
-        // Extract the recommended ads (you can limit the number of recommendations)
-        const recommendedAds = filteredAds.slice(0, 10); // Change the number as needed
-
-        res.json(recommendedAds);
+        res.json(recommendations);
     } catch (error) {
         console.error("Error generating content-based recommendations:", error);
         res.status(500).json({ message: 'Error fetching recommendations', error: error.message });
