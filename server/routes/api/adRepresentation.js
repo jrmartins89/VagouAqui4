@@ -104,24 +104,4 @@ async function generateRecommendations(userPreferences) {
     }
 }
 
-// Replace this with your actual user preferences
-const userPreferences = {
-    houseOrApartment: 'Apartment',
-    genderPreference: 'Men',
-    acceptsPets: true,
-    location: 'Downtown',
-    roommates: 'With Roommates',
-    leaseLength: 'year round',
-    budget: 1200,
-    wheelchairAccessible: false,
-    noiseLevel: 'Quiet',
-    acceptSmoker: false,
-};
-
-// Generate recommendations based on user preferences
-generateRecommendations(userPreferences)
-    .then((recommendations) => {
-        // Display the top N recommendations
-        const topN = recommendations.slice(0, 10); // Change 10 to the desired number of recommendations
-        console.log('Top Recommendations:', topN);
-    });
+module.exports = generateRecommendations
