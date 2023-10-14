@@ -68,6 +68,7 @@ export const logoutUser = () => dispatch => {
 
 // Update User Preferences
 export const updateUserPreferences = (updatedPreferences, history) => (dispatch) => {
+    dispatch(setUserLoading()); // Indicate that the update is in progress
     axios
         .put("/api/users/preferences", updatedPreferences)
         .then((res) => {
