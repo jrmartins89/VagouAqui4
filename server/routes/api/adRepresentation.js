@@ -6,7 +6,7 @@ function extractFeaturesFromAd(ad) {
     // Define regular expressions for feature extraction
     const featureRegex = {
         houseOrApartment: /(?:casa|apartamento)/i,
-        genderPreference: /(?:homem|mulher)/i,
+        genderPreference: /(?:homem|mulher|masculino|feminino|masculina|feminina)/i,
         acceptsPets: /aceita pets/i,
         leaseLength: /(?:aluguel anual|aluguel mensal)/i,
         budget: /(?:R\$\s?\d+(?:,\d{1,2})?|\$\s?\d+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)/,
