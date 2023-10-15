@@ -16,17 +16,15 @@ class Register extends Component {
             password2: "",
             errors: {},
             preferences: {
-                houseOrApartment: "Apartment",
-                genderPreference: "Any",
+                houseOrApartment: "apartamento",
+                genderPreference: "tanto faz",
                 acceptsPets: false,
                 location: "",
-                roommates: "Alone",
-                amenities: "",
+                roommates: "sozinho",
                 leaseLength: "",
                 budget: "",
-                securityDeposit: "",
                 wheelchairAccessible: false,
-                noiseLevel: "Quiet",
+                noiseLevel: "tranquilo",
                 acceptSmoker: false,
                 // Add more preference fields as needed
             }
