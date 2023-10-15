@@ -90,7 +90,6 @@ class Register extends Component {
             acceptsPets: "pets",
             roommates: "groups",
             leaseLength: "event",
-            securityDeposit: "security",
             wheelchairAccessible: "accessible",
             noiseLevel: "volume_up",
             acceptSmoker: "smoking_rooms",
