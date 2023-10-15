@@ -8,6 +8,8 @@ function extractFeaturesFromAd(ad) {
         houseOrApartment: /(?:casa|apartamento)/i,
         genderPreference: /(?:homem|mulher|masculino|feminino|masculina|feminina)/i,
         acceptsPets: /(?:aceita pets|pets permitidos)/i,
+        location: /(?:Ribeirão da Ilha|Campeche|Ingleses do Rio Vermelho|Cachoeira do Bom Jesus|Canasvieiras|Lagoa da Conceição|São João do Rio Vermelho|Pântano do Sul|Santo Antônio de Lisboa|Barra da Lagoa|Ratones)/i,
+        roommates: /(?:alugo quarto|aluga-se quarto| quarto disponível|quarto compartilhado)/i,
         leaseLength: /(?:aluguel anual|aluguel mensal|alugo mensal|alugo anual|aluguel temporada)/i,
         budget: /\b(?:R\$\s?\d{3,}(?:,\d{1,2})?|\$\s?\d{3,}(?:,\d{1,2})?|\d{3,}(?:,\d{1,2})?)\b/,
         wheelchairAccessible: /(?:acessível a cadeirantes|acesso à cadeirantes|acesso à cadeira de rodas)/i,
@@ -77,11 +79,23 @@ function extractFeaturesFromAd(ad) {
 
 // Function to calculate cosine similarity between two feature objects
 function cosineSimilarity(userPrefs, listingPrefs) {
-    const userVector = Object.values(userPrefs);
-    const listingVector = Object.values(listingPrefs);
+    // Extract numerical values from userPrefs and listingPrefs
+    const userVector = Object.values(userPrefs).filter(value => typeof value === 'number');
+    const listingVector = Object.values(listingPrefs).filter(value => typeof value === 'number');
+
+    // Check if the vectors are not empty
+    if (userVector.length === 0 || listingVector.length === 0) {
+        return 0; // You can choose an appropriate default value
+    }
 
     // Calculate cosine similarity using lodash
-    return _.round(_.divide(_.sum(_.multiply(userVector, listingVector)), (_.multiply(_.sum(_.map(userVector, val => Math.pow(val, 2))), _.sum(_.map(listingVector, val => Math.pow(val, 2))))), 2));
+    return _.round(
+        _.divide(
+            _.sum(_.multiply(userVector, listingVector)),
+            Math.sqrt(_.sum(userVector.map(val => Math.pow(val, 2))) * _.sum(listingVector.map(val => Math.pow(val, 2)))
+            ),
+            2
+        ));
 }
 
 // Function to fetch ads from the database and generate recommendations
