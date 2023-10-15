@@ -229,7 +229,7 @@ class Register extends Component {
                                     onChange={this.onChange}
                                 >
                                     <option value="masculino">Masculino</option>
-                                    <option value="feminino">Mulheres</option>
+                                    <option value="feminino">Feminino</option>
                                     <option value="tanto faz">Tanto Faz</option>
                                     <option value="ambos">Ambos</option>
                                 </select>
