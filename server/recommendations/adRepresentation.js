@@ -3,83 +3,101 @@ const Ad = require('../models/Ads'); // Replace with the actual path to your Ad 
 
 // Function to extract and create features from ad data
 function extractFeaturesFromAd(ad) {
-    // Define features as sets
-    const featureSets = {
-        houseOrApartment: new Set(['casa', 'apartamento']),
-        genderPreference: new Set(['homem', 'mulher', 'masculino', 'feminino', 'masculina', 'feminina']),
-        acceptsPets: new Set(['aceita pets', 'pets permitidos']),
-        location: new Set(['Ribeirão da Ilha', 'Campeche', 'Ingleses do Rio Vermelho', 'Cachoeira do Bom Jesus', 'Canasvieiras', 'Lagoa da Conceição', 'São João do Rio Vermelho', 'Pântano do Sul', 'Santo Antônio de Lisboa', 'Barra da Lagoa', 'Ratones']),
-        roommates: new Set(['alugo quarto', 'aluga-se quarto', 'quarto disponível', 'quarto compartilhado', 'quarto em republica']),
-        leaseLength: new Set(['aluguel anual', 'aluguel mensal', 'alugo mensal', 'alugo anual', 'aluguel temporada']),
-        noiseLevel: new Set(['tranquilo', 'barulhento', 'local tranquilo', 'local perto do centro']),
-        acceptSmoker: new Set(['aceita fumante', 'fumante permitido']),
+    // Define regular expressions for feature extraction
+    const featureRegex = {
+        houseOrApartment: /(?:casa|apartamento)/i,
+        genderPreference: /(?:homem|mulher|masculino|feminino|masculina|feminina)/i,
+        acceptsPets: /(?:aceita pets|pets permitidos)/i,
+        location: /(?:Ribeirão da Ilha|Campeche|Ingleses do Rio Vermelho|Cachoeira do Bom Jesus|Canasvieiras|Lagoa da Conceição|São João do Rio Vermelho|Pântano do Sul|Santo Antônio de Lisboa|Barra da Lagoa|Ratones)/i,
+        roommates: /(?:alugo quarto|aluga-se quarto| quarto disponível|quarto compartilhado)/i,
+        leaseLength: /(?:aluguel anual|aluguel mensal|alugo mensal|alugo anual|aluguel temporada)/i,
+        budget: /\b(?:R\$\s?\d{3,}(?:,\d{1,2})?|\$\s?\d{3,}(?:,\d{1,2})?|\d{3,}(?:,\d{1,2})?)\b/,
+        wheelchairAccessible: /(?:acessível a cadeirantes|acesso à cadeirantes|acesso à cadeira de rodas)/i,
+        noiseLevel: /(?:tranquilo|barulhento|local tranquilo|local perto do centro)/i,
+        acceptSmoker: /(?:aceita fumante|fumante permitido)/i,
     };
 
     // Initialize an object to store the extracted features
     const features = {};
 
     // Extract features from ad properties
-    Object.keys(featureSets).forEach((feature) => {
-        const keywords = featureSets[feature];
+    Object.keys(featureRegex).forEach((feature) => {
+        const regex = featureRegex[feature];
         const sourceText = ad.description + ad.title + ad.neighborhood; // Combine relevant fields
 
-        // Tokenize the source text into words (case-insensitive)
-        const words = sourceText.toLowerCase().match(/\w+/g);
+        // Check if the regex pattern matches in the source text
+        const match = regex.exec(sourceText);
 
-        // Calculate Jaccard similarity
-        const intersection = _.intersection(keywords, words);
-        const union = _.union(keywords, words);
-        const similarity = intersection.length / union.length;
-
-        // Store the similarity score in features
-        features[feature] = similarity;
+        if (match) {
+            // If a match is found, save the matched value in features
+            features[feature] = match[0];
+        } else {
+            // If no match is found, set the feature to a default value
+            features[feature] = null;
+        }
     });
 
     // Special handling for genderPreference
     if (!features.genderPreference) {
-        features.genderPreference = 0; // Default similarity score
+        features.genderPreference = 'tanto faz';
     }
 
     // Special handling for acceptsPets
     if (!features.acceptsPets) {
-        features.acceptsPets = 0; // Default similarity score
+        features.acceptsPets = false;
     }
 
     // Special handling for leaseLength
     if (!features.leaseLength) {
-        features.leaseLength = 1; // Default similarity score (perfect match)
+        features.leaseLength = 'aluguel anual';
     }
 
+    // Special handling for budget
+    if (!features.budget) {
+        features.budget = null;
+    } else {
+        features.budget = parseInt(features.budget, 10);
+    }
+
+    // Special handling for wheelchairAccessible
+    if (!features.wheelchairAccessible) {
+        features.wheelchairAccessible = false;
+    }
+
+    // Special handling for noiseLevel
+    if (!features.noiseLevel) {
+        features.noiseLevel = 'tranquilo';
+    }
+
+    // Special handling for acceptSmoker
+    if (!features.acceptSmoker) {
+        features.acceptSmoker = false;
+    }
+    if (!features.location) {
+        features.location = ''
+    }
     return features;
 }
 
-// Function to calculate overall similarity between two feature objects
-function calculateOverallSimilarity(userPrefs, listingPrefs) {
-    // Weight factors for different features (you can adjust these)
-    const featureWeights = {
-        houseOrApartment: 1,
-        genderPreference: 1,
-        acceptsPets: 1,
-        location: 1,
-        roommates: 1,
-        leaseLength: 1,
-        noiseLevel: 1,
-        acceptSmoker: 1,
-    };
+// Function to calculate cosine similarity between two feature objects
+function cosineSimilarity(userPrefs, listingPrefs) {
+    // Extract numerical values from userPrefs and listingPrefs
+    const userVector = Object.values(userPrefs).filter(value => typeof value === 'number');
+    const listingVector = Object.values(listingPrefs).filter(value => typeof value === 'number');
 
-    let totalSimilarity = 0;
-    let totalWeight = 0;
-
-    for (const feature of Object.keys(userPrefs)) {
-        totalSimilarity += featureWeights[feature] * userPrefs[feature] * listingPrefs[feature];
-        totalWeight += featureWeights[feature];
+    // Check if the vectors are not empty
+    if (userVector.length === 0 || listingVector.length === 0) {
+        return 0; // You can choose an appropriate default value
     }
 
-    if (totalWeight === 0) {
-        return 0; // Avoid division by zero
-    }
-
-    return totalSimilarity / totalWeight;
+    // Calculate cosine similarity using lodash
+    return _.round(
+        _.divide(
+            _.sum(_.multiply(userVector, listingVector)),
+            Math.sqrt(_.sum(userVector.map(val => Math.pow(val, 2))) * _.sum(listingVector.map(val => Math.pow(val, 2)))
+            ),
+            2
+        ));
 }
 
 // Function to fetch ads from the database and generate recommendations
@@ -91,7 +109,7 @@ async function generateRecommendations(userPreferences) {
         // Generate recommendations
         const recommendations = ads.map((ad) => {
             const listingFeatures = extractFeaturesFromAd(ad);
-            const similarityScore = calculateOverallSimilarity(userPreferences, listingFeatures);
+            const similarityScore = cosineSimilarity(userPreferences, listingFeatures);
 
             return {
                 ad,
@@ -109,4 +127,4 @@ async function generateRecommendations(userPreferences) {
     }
 }
 
-module.exports = generateRecommendations;
+module.exports = generateRecommendations
