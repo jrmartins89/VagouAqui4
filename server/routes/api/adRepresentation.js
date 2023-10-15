@@ -9,7 +9,7 @@ function extractFeaturesFromAd(ad) {
         genderPreference: /(?:homem|mulher|masculino|feminino|masculina|feminina)/i,
         acceptsPets: /(?:aceita pets|pets permitidos)/i,
         leaseLength: /(?:aluguel anual|aluguel mensal|alugo mensal|alugo anual|aluguel temporada)/i,
-        budget: /(?:R\$\s?\d+(?:,\d{1,2})?|\$\s?\d+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)/,
+        budget: /\b(?:R\$\s?\d{3,}(?:,\d{1,2})?|\$\s?\d{3,}(?:,\d{1,2})?|\d{3,}(?:,\d{1,2})?)\b/,
         wheelchairAccessible: /(?:acessível a cadeirantes|acesso à cadeirantes|acesso à cadeira de rodas)/i,
         noiseLevel: /(?:tranquilo|barulhento|local tranquilo|local perto do centro)/i,
         acceptSmoker: /(?:aceita fumante|fumante permitido)/i,
