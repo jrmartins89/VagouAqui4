@@ -7,12 +7,12 @@ function extractFeaturesFromAd(ad) {
     const featureRegex = {
         houseOrApartment: /(?:casa|apartamento)/i,
         genderPreference: /(?:homem|mulher|masculino|feminino|masculina|feminina)/i,
-        acceptsPets: /aceita pets/i,
+        acceptsPets: /(?:aceita pets|pets permitidos)/i,
         leaseLength: /(?:aluguel anual|aluguel mensal|alugo mensal|alugo anual)/i,
         budget: /(?:R\$\s?\d+(?:,\d{1,2})?|\$\s?\d+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)/,
-        wheelchairAccessible: /acessível a cadeirantes/i,
-        noiseLevel: /(?:tranquilo|barulhento)/i,
-        acceptSmoker: /aceita fumante/i,
+        wheelchairAccessible: /(?:acessível a cadeirantes|acesso à cadeirantes|acesso à cadeira de rodas)/i,
+        noiseLevel: /(?:tranquilo|barulhento|local tranquilo|local perto do centro)/i,
+        acceptSmoker: /(?:aceita fumante|fumante permitido)/i,
     };
 
     // Initialize an object to store the extracted features
