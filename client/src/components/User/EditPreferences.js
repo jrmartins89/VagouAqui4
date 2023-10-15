@@ -11,16 +11,16 @@ class EditPreferences extends Component {
         super(props);
         this.state = {
             preferences: {
-                houseOrApartment: "apartamento",
-                genderPreference: "tanto faz",
-                acceptsPets: false,
+                houseOrApartment: "",
+                genderPreference: "",
+                acceptsPets: "",
                 location: "",
-                roommates: "sozinho",
+                roommates: "",
                 leaseLength: "",
                 budget: "",
-                wheelchairAccessible: false,
-                noiseLevel: "tranquilo",
-                acceptSmoker: false,
+                wheelchairAccessible: "",
+                noiseLevel: "",
+                acceptSmoker: "",
                 // Add more preference fields as needed
             },
         };
