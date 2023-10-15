@@ -141,9 +141,10 @@ class EditPreferences extends Component {
                                     value={preferences.genderPreference}
                                     onChange={this.onChange}
                                 >
-                                    <option value="Men">Homens</option>
-                                    <option value="Women">Mulheres</option>
-                                    <option value="Any">Tanto Faz</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Mulheres</option>
+                                    <option value="tanto faz">Tanto Faz</option>
+                                    <option value="ambos">Ambos</option>
                                 </select>
                             </div>
                             {/* Add more preference fields here */}
@@ -158,8 +159,8 @@ class EditPreferences extends Component {
                                     value={preferences.roommates}
                                     onChange={this.onChange}
                                 >
-                                    <option value="Alone">Sozinho</option>
-                                    <option value="With Roommates">Compartilhado</option>
+                                    <option value="sozinho">Sozinho</option>
+                                    <option value="compartihado">Compartilhado</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
@@ -173,8 +174,8 @@ class EditPreferences extends Component {
                                     value={preferences.leaseLength}
                                     onChange={this.onChange}
                                 >
-                                    <option value="year round">Aluguel anual</option>
-                                    <option value="monthly basis">Aluguel temporada</option>
+                                    <option value="aluguel anual">Aluguel anual</option>
+                                    <option value="aluguel mensal">Aluguel temporada</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
