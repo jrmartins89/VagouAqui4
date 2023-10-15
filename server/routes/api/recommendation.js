@@ -13,7 +13,7 @@ router.get('/', passport.authenticate("jwt", { session: false }), async (req, re
         const user = await User.findById(userId);
         const userPreferences = user.preferences;
         // Generate recommendations based on user preferences
-        const recommendations = generateRecommendations(userPreferences);
+        const recommendations = await generateRecommendations(userPreferences);
 
         res.json(recommendations);
     } catch (error) {
