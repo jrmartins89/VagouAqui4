@@ -8,7 +8,7 @@ function extractFeaturesFromAd(ad) {
         houseOrApartment: /(?:casa|apartamento)/i,
         genderPreference: /(?:homem|mulher|masculino|feminino|masculina|feminina)/i,
         acceptsPets: /(?:aceita pets|pets permitidos)/i,
-        leaseLength: /(?:aluguel anual|aluguel mensal|alugo mensal|alugo anual)/i,
+        leaseLength: /(?:aluguel anual|aluguel mensal|alugo mensal|alugo anual|aluguel temporada)/i,
         budget: /(?:R\$\s?\d+(?:,\d{1,2})?|\$\s?\d+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)/,
         wheelchairAccessible: /(?:acessível a cadeirantes|acesso à cadeirantes|acesso à cadeira de rodas)/i,
         noiseLevel: /(?:tranquilo|barulhento|local tranquilo|local perto do centro)/i,
@@ -37,7 +37,7 @@ function extractFeaturesFromAd(ad) {
 
     // Special handling for genderPreference
     if (!features.genderPreference) {
-        features.genderPreference = 'Any';
+        features.genderPreference = 'tanto faz';
     }
 
     // Special handling for acceptsPets
@@ -47,7 +47,7 @@ function extractFeaturesFromAd(ad) {
 
     // Special handling for leaseLength
     if (!features.leaseLength) {
-        features.leaseLength = 'year round';
+        features.leaseLength = 'aluguel anual';
     }
 
     // Special handling for budget
@@ -64,7 +64,7 @@ function extractFeaturesFromAd(ad) {
 
     // Special handling for noiseLevel
     if (!features.noiseLevel) {
-        features.noiseLevel = 'quiet';
+        features.noiseLevel = 'tranquilo';
     }
 
     // Special handling for acceptSmoker
