@@ -22,7 +22,7 @@ const PreferencesSchema = new Schema({
     },
     leaseLength: {
         type: String,
-        enum: ["aluguel anual", "aluguel mensal"]
+        enum: ["aluguel anual", "aluguel temporada"]
     },
     budget: {
         type: String

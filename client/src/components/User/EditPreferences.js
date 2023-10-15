@@ -173,7 +173,7 @@ class EditPreferences extends Component {
                                     onChange={this.onChange}
                                 >
                                     <option value="aluguel anual">Aluguel anual</option>
-                                    <option value="aluguel mensal">Aluguel temporada</option>
+                                    <option value="aluguel temporada">Aluguel temporada</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
