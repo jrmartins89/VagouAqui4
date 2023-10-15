@@ -8,7 +8,7 @@ function extractFeaturesFromAd(ad) {
         houseOrApartment: /(?:casa|apartamento)/i,
         genderPreference: /(?:homem|mulher|masculino|feminino|masculina|feminina)/i,
         acceptsPets: /aceita pets/i,
-        leaseLength: /(?:aluguel anual|aluguel mensal)/i,
+        leaseLength: /(?:aluguel anual|aluguel mensal|alugo mensal|alugo anual)/i,
         budget: /(?:R\$\s?\d+(?:,\d{1,2})?|\$\s?\d+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)/,
         wheelchairAccessible: /acessível a cadeirantes/i,
         noiseLevel: /(?:tranquilo|barulhento)/i,
