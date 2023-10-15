@@ -75,7 +75,7 @@ class Login extends Component {
                                 />
                                 <label htmlFor="email">Email</label>
                                 <span className="red-text">
-                  {errors.email}
+                                    {errors.email}
                                     {errors.emailnotfound}
                 </span>
                             </div>
@@ -92,7 +92,7 @@ class Login extends Component {
                                 />
                                 <label htmlFor="password">Password</label>
                                 <span className="red-text">
-                  {errors.password}
+                                    {errors.password}
                                     {errors.passwordincorrect}
                 </span>
                             </div>
