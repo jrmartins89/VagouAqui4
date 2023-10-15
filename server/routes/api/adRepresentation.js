@@ -73,7 +73,9 @@ function extractFeaturesFromAd(ad) {
     if (!features.acceptSmoker) {
         features.acceptSmoker = false;
     }
-
+    if (!features.location) {
+        features.location = ''
+    }
     return features;
 }
 
