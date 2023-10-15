@@ -31,18 +31,16 @@ router.post("/register", (req, res) => {
                 email: req.body.email,
                 password: req.body.password,
                 preferences: {
-                    houseOrApartment: req.body.houseOrApartment || 'Apartment',
-                    genderPreference: req.body.genderPreference || 'Any',
-                    acceptsPets: req.body.acceptsPets || false,
-                    location: req.body.location || '',
-                    roommates: req.body.roommates || 'Alone',
-                    amenities: req.body.amenities || '',
-                    leaseLength: req.body.leaseLength || 'year round',
-                    budget: req.body.budget || '',
-                    securityDeposit: req.body.securityDeposit || '',
-                    wheelchairAccessible: req.body.wheelchairAccessible ||false,
-                    noiseLevel: req.body.noiseLevel || 'Quiet',
-                    acceptSmoker: req.body.acceptSmoker || false,
+                    houseOrApartment: req.body.preferences.houseOrApartment,
+                    genderPreference: req.body.preferences.genderPreference,
+                    acceptsPets: req.body.preferences.acceptsPets,
+                    location: req.body.preferences.location,
+                    roommates: req.body.preferences.roommates,
+                    leaseLength: req.body.preferences.leaseLength,
+                    budget: req.body.preferences.budget,
+                    wheelchairAccessible: req.body.preferences.wheelchairAccessible,
+                    noiseLevel: req.body.preferences.noiseLevel,
+                    acceptSmoker: req.body.preferences.acceptSmoker,
                 }
             });
 
