@@ -126,8 +126,8 @@ class EditPreferences extends Component {
                                     value={preferences.houseOrApartment}
                                     onChange={this.onChange}
                                 >
-                                    <option value="House">Casa</option>
-                                    <option value="Apartment">Apartamento</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="apartamento">Apartamento</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
