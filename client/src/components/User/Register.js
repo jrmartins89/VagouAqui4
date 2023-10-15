@@ -211,7 +211,7 @@ class Register extends Component {
                                     onChange={this.onChange}
                                 >
                                     <option value="casa">Casa</option>
-                                    <option value="apartmento">Apartamento</option>
+                                    <option value="apartamento">Apartamento</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
@@ -244,7 +244,7 @@ class Register extends Component {
                                     onChange={this.onChange}
                                 >
                                     <option value="sozinho">Sozinho</option>
-                                    <option value="compartihado">Compartilhado</option>
+                                    <option value="compartilhado">Compartilhado</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">

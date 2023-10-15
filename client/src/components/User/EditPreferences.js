@@ -158,7 +158,7 @@ class EditPreferences extends Component {
                                     onChange={this.onChange}
                                 >
                                     <option value="sozinho">Sozinho</option>
-                                    <option value="compartihado">Compartilhado</option>
+                                    <option value="compartilhado">Compartilhado</option>
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
