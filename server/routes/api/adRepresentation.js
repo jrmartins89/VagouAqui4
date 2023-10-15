@@ -9,7 +9,7 @@ function extractFeaturesFromAd(ad) {
         genderPreference: /(?:homem|mulher)/i,
         acceptsPets: /aceita pets/i,
         leaseLength: /(?:aluguel anual|aluguel mensal)/i,
-        budget: /(\d+)/, // Extract the first number as the budget
+        budget: /(?:R\$\s?\d+(?:,\d{1,2})?|\$\s?\d+(?:,\d{1,2})?|\d+(?:,\d{1,2})?)/,
         wheelchairAccessible: /acessível a cadeirantes/i,
         noiseLevel: /(?:tranquilo|barulhento)/i,
         acceptSmoker: /aceita fumante/i,
