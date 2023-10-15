@@ -4,47 +4,38 @@ const Schema = mongoose.Schema;
 const PreferencesSchema = new Schema({
     houseOrApartment: {
         type: String,
-        enum: ["casa", "apartamento"],
-        default: "apartamento"
+        enum: ["casa", "apartamento"]
     },
     genderPreference: {
         type: String,
-        enum: ["masculino", "feminino", "tanto faz","ambos"],
-        default: "ambos"
+        enum: ["masculino", "feminino", "tanto faz","ambos"]
     },
     acceptsPets: {
-        type: Boolean,
-        default: false
+        type: Boolean
     },
     location: {
-        type: String,
-        default: ""
+        type: String
     },
     roommates: {
         type: String,
-        enum: ["sozinho", "compartilhado"],
-        default: "sozinho"
+        enum: ["sozinho", "compartilhado"]
     },
     leaseLength: {
         type: String,
-        enum: ["aluguel anual", "aluguel mensal"],
+        enum: ["aluguel anual", "aluguel mensal"]
     },
     budget: {
-        type: String,
-        default: ""
+        type: String
     },
     wheelchairAccessible: {
-        type: Boolean,
-        default: false
+        type: Boolean
     },
     noiseLevel: {
         type: String,
-        enum: ["tranquilo", "barulhento"],
-        default: "tranquilo"
+        enum: ["tranquilo", "barulhento"]
     },
     acceptSmoker: {
-        type: Boolean,
-        default: false
+        type: Boolean
     },
     // Add more preference fields as needed
 });
