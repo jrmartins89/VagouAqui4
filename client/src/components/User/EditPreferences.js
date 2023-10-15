@@ -179,6 +179,21 @@ class EditPreferences extends Component {
                                 </select>
                             </div>
                             <div className="input-field col s12 form-field">
+                                <div>
+                                    <label>Nível de barulho</label>
+                                </div>
+                                <i className="material-icons prefix">{fieldIcons.noiseLevel}</i>
+                                <select
+                                    id="preferences.noiseLevel"
+                                    name="noiseLevel"
+                                    value={preferences.noiseLevel}
+                                    onChange={this.onChange}
+                                >
+                                    <option value="tranquilo">Silencioso</option>
+                                    <option value="barulhento">Social</option>
+                                </select>
+                            </div>
+                            <div className="input-field col s12 form-field">
                                 <p className="checkbox-label">
                                     <i className="material-icons prefix">{fieldIcons.acceptsPets}</i>
                                     <label>
