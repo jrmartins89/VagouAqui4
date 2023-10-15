@@ -24,7 +24,15 @@ function extractFeaturesFromAd(ad) {
         const sourceText = ad.description + ad.title + ad.neighborhood; // Combine relevant fields
 
         // Check if the regex pattern matches in the source text
-        features[feature] = regex.test(sourceText);
+        const match = regex.exec(sourceText);
+
+        if (match) {
+            // If a match is found, save the matched value in features
+            features[feature] = match[0];
+        } else {
+            // If no match is found, set the feature to a default value
+            features[feature] = null;
+        }
     });
 
     // Special handling for genderPreference
@@ -46,8 +54,7 @@ function extractFeaturesFromAd(ad) {
     if (!features.budget) {
         features.budget = null;
     } else {
-        // Parse the budget as an integer
-        features.budget = parseInt(features.budget[1], 10);
+        features.budget = parseInt(features.budget, 10);
     }
 
     // Special handling for wheelchairAccessible
