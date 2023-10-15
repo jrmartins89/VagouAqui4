@@ -39,7 +39,7 @@ const PreferencesSchema = new Schema({
     },
     noiseLevel: {
         type: String,
-        enum: ["tranquilo", "silencioso"],
+        enum: ["tranquilo", "barulhento"],
         default: "tranquilo"
     },
     acceptSmoker: {
