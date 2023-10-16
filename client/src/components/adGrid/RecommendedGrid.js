@@ -4,7 +4,6 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import axios from "axios";
 
 function RecommendedGrid() {
     const [ads, setAds] = useState([]);
@@ -14,16 +13,18 @@ function RecommendedGrid() {
     const [lightboxImageIndex, setLightboxImageIndex] = useState(-1);
 
     useEffect(() => {
-        axios
-            .get("/api/recommendation/all")
-            .then((res) => {
-                const recommendedAds = res.data;
-                console.log(recommendedAds);
-            })
-            .catch((err) => {
-                console.error("Error fetching recommended ads:", err);
-            });
-    })
+        async function fetchAds() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/recommendation/all');
+                const data = await response.json();
+                console.log(data);
+                setAds(data);
+            } catch (error) {
+                console.error('Error fetching ads:', error);
+            }
+        }
+        fetchAds();
+    }, []);
 
     const totalPages = Math.ceil(ads.length / adsPerPage);
 
