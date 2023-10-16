@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const passport = require("passport");
-const User = mongoose.model('users'); // Assuming 'users' is the name of your user model
+const User = require("../../models/User");// Load User model // Assuming 'users' is the name of your user model
 const generateRecommendations = require('../../recommendations/adRepresentation'); // Import the function to generate recommendations based on user preferences
 
 // Route to fetch content-based recommendations for a user
-router.get('/', passport.authenticate("jwt", { session: false }), async (req, res) => {
+router.get('/all', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         const userId = req.user.id;
         // Fetch the user's preferences
