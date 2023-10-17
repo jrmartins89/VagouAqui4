@@ -4,7 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import axios from "axios";
+import axios from 'axios';
 
 function RecommendedGrid() {
     const [ads, setAds] = useState([]);
@@ -15,16 +15,16 @@ function RecommendedGrid() {
 
     useEffect(() => {
         axios
-            .get("/api/recommendation/all")
+            .get('/api/recommendation/all')
             .then((res) => {
                 const recommendedAds = res.data;
                 console.log(recommendedAds);
                 setAds(recommendedAds);
             })
             .catch((err) => {
-                console.error("Error fetching recommended ads:", err);
+                console.error('Error fetching recommended ads:', err);
             });
-    })
+    }, []); // Make sure to pass an empty dependency array to run this effect only once
 
     const totalPages = Math.ceil(ads.length / adsPerPage);
 
@@ -81,26 +81,23 @@ function RecommendedGrid() {
                 <div className="grid">
                     {ads.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage).map((ad, adIndex) => (
                         <div key={adIndex} className="grid-item">
-                            <h2>{ad.title}</h2>
+                            <h2>{ad.ad.title}</h2>
                             <p className="contact-info">
-                                <h2>Contato: {ad.contactInfo}</h2>
+                                <h2>Contato: {ad.ad.contactInfo}</h2>
                             </p>
                             <Carousel showArrows={true} infiniteLoop={true}>
-                                {ad.imageLinks.map((imageLink, imgIndex) => (
-                                    <div
-                                        key={imgIndex}
-                                        onClick={() => openLightbox(ad.imageLinks, imgIndex)}
-                                    >
+                                {ad.ad.imageLinks.map((imageLink, imgIndex) => (
+                                    <div key={imgIndex} onClick={() => openLightbox(ad.ad.imageLinks, imgIndex)}>
                                         <img src={imageLink} alt={`Ad ${imgIndex}`} className="ad-image" />
                                     </div>
                                 ))}
                             </Carousel>
-                            <p className="ad-description">{ad.description}</p>
+                            <p className="ad-description">{ad.ad.description}</p>
                             <p className="ad-price">
-                                <h3>{ad.price}</h3>
+                                <h3>{ad.ad.price}</h3>
                             </p>
                             <p className="ad-neighborhood">
-                                <h3>{ad.neighborhood}</h3>
+                                <h3>{ad.ad.neighborhood}</h3>
                             </p>
                         </div>
                     ))}
