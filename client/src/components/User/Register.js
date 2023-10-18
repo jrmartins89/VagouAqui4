@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
-import "./Register.css"; // Import the CSS file
+import "./Register.css";
 
 class Register extends Component {
     constructor() {
@@ -16,17 +16,16 @@ class Register extends Component {
             password2: "",
             errors: {},
             preferences: {
-                houseOrApartment: "",
-                genderPreference: "",
-                acceptsPets: "",
+                houseOrApartment: "casa", // Default to "casa"
+                genderPreference: "masculino", // Default to "masculino"
+                acceptsPets: false,
                 location: "",
-                roommates: "",
-                leaseLength: "",
+                roommates: "sozinho", // Default to "sozinho"
+                leaseLength: "aluguel anual", // Default to "aluguel anual"
                 budget: "",
-                wheelchairAccessible: "",
-                noiseLevel: "",
-                acceptSmoker: "",
-                // Add more preference fields as needed
+                wheelchairAccessible: false,
+                noiseLevel: "tranquilo", // Default to "tranquilo"
+                acceptSmoker: false
             }
         };
     }
