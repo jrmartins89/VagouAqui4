@@ -15,8 +15,7 @@ class Landing extends Component {
                             <b>Página Principal</b>
                         </h4>
                         <p className="description">
-                            Portal de anúncios de aluguéis em Florianópolis indexados a partir de técnicas de{" "}
-                            <span className="monospace">WebScrapping</span>
+                            Portal de anúncios de aluguéis em Florianópolis indexados a partir de técnicas de WebScrapping
                         </p>
                         <p className="flow-text grey-text text-darken-1">INE - UFSC - 2023</p>
                         <br />
