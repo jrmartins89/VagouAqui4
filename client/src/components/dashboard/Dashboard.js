@@ -19,8 +19,7 @@ class Dashboard extends Component {
                             <b>Hey there,</b> {user.name.split(" ")[0]}
                         </h4>
                         <p className="flow-text grey-text text-darken-1">
-                            You are logged into
-                            <span className="monospace-text"> VagouAqui</span> 👏
+                            You are logged into VagouAqui
                         </p>
                     </div>
                 </div>
@@ -30,7 +29,7 @@ class Dashboard extends Component {
                             to="/products"
                             className="btn produtos-btn waves-effect waves-light hoverable"
                         >
-                            Produtos
+                            Anúncios
                         </Link>
                     </div>
                 </div>
