@@ -78,16 +78,18 @@
 
 /* Styles for "Cadastro" button */
 .btn-cadastro {
-    background-color: #FF9800; /* Orange color */
+    background-color: #367306;
+    margin-right: 120px;/* Orange color */
 }
 
 /* Styles for "Login" button */
 .btn-login {
-    background-color: #4CAF50; /* Green color */
+    background-color: #041f3b; /* Green color */
+    margin-right: 120px;
 }
 
 /* Styles for "Produtos" button */
 .btn-produtos {
-    background-color: #041f3b; /* Blue color */
+    background-color: #afa74c; /* Blue color */
     margin-right: 120px;
 }
