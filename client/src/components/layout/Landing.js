@@ -25,7 +25,7 @@ class Landing extends Component {
                                     to="/products"
                                     className="btn button btn-produtos waves-effect waves-light hoverable"
                                 >
-                                    Produtos
+                                    Anúncios
                                 </Link>
                             </div>
                         ) : (
