@@ -26,7 +26,7 @@ class Navbar extends Component {
                                 </Link>
                             )}
                             {isAuthenticated && (
-                                <Link to ="/recommendation" className="btn btn-show-recommendations">
+                                <Link to="/recommendation" className="btn btn-show-recommendations">
                                     <p>Recomendações</p>
                                 </Link>
                             )}
