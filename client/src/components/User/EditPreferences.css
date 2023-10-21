@@ -1,9 +1,10 @@
-.container {
+/* Common styles for all screen sizes */
+.edit-preferences-container {
     padding-top: 50px;
     padding-bottom: 50px;
 }
 
-.form-container {
+.edit-preferences-form {
     padding-left: 11.250px;
 }
 
@@ -15,17 +16,7 @@
 
 /* Add this CSS class for spacing between form elements */
 .form-field {
-    position: relative;
     margin-bottom: 20px;
-}
-
-/* Style the icon position for preference field selects */
-.form-field i.material-icons.prefix {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 15px;
-    font-size: 24px;
 }
 
 /* Style the label for preference fields */
@@ -39,8 +30,8 @@
 .form-field input[type="number"],
 .form-field select {
     display: block;
-    width: calc(100% - 40px);
-    padding: 10px 10px 10px 40px;
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -48,7 +39,7 @@
 }
 
 /* Style the checkbox input for preference fields */
-.form-field label input[type="checkbox"] {
+.form-field checkbox-label input[type="checkbox"] {
     position: absolute;
     opacity: 0;
 }
@@ -100,7 +91,7 @@
     .form-field input[type="text"],
     .form-field input[type="number"],
     .form-field select {
-        padding: 8px 8px 8px 40px;
+        padding: 8px;
         font-size: 14px;
     }
 
