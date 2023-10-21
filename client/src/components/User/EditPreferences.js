@@ -47,7 +47,7 @@ class EditPreferences extends Component {
                 [name]: type === "checkbox" ? checked : value,
             },
         }));
-    };
+    }
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -59,193 +59,126 @@ class EditPreferences extends Component {
 
         // Dispatch an action to update user preferences
         this.props.updateUserPreferences(updatedPreferences, this.props.history);
-    };
+    }
 
     render() {
         const { preferences } = this.state;
-        const fieldIcons = {
-            name: "account_circle",
-            email: "email",
-            password: "lock",
-            password2: "lock",
-            location: "location_on",
-            budget: "attach_money",
-            houseOrApartment: "home",
-            genderPreference: "people",
-            acceptsPets: "pets",
-            roommates: "groups",
-            leaseLength: "event",
-            securityDeposit: "security",
-            wheelchairAccessible: "accessible",
-            noiseLevel: "volume_up",
-            acceptSmoker: "smoking_rooms",
-            // Add more fields and icons as needed
-        };
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col s8 offset-s2">
-                        <div className="col s12 form-container">
-                            <h4 className="form-title">
-                                <b>Editar Preferências</b>
-                            </h4>
+            <div className="edit-preferences-container">
+                <div className="edit-preferences-form">
+                    <h4 className="form-title">
+                        <b>Editar Preferências</b>
+                    </h4>
+                    <form noValidate onSubmit={this.onSubmit}>
+                        <div className="form-field">
+                            <label>Bairro de preferência</label>
+                            <input
+                                name="location"
+                                type="text"
+                                value={preferences.location}
+                                onChange={this.onChange}
+                            />
                         </div>
-                        <form noValidate onSubmit={this.onSubmit}>
-                            {/* Preferences Fields */}
-                            <div className="input-field col s12 form-field">
-                                <input
-                                    id="preferences.location"
-                                    name="location"
-                                    type="text"
-                                    value={preferences.location}
-                                    onChange={this.onChange}
-                                    className="validate"
-                                />
-                                <label htmlFor="preferences.location">Bairro de preferência</label>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <input
-                                    id="preferences.budget"
-                                    name="budget"
-                                    type="number"
-                                    value={preferences.budget}
-                                    onChange={this.onChange}
-                                    className="validate"
-                                />
-                                <label htmlFor="preferences.budget">Valor de aluguel (R$):</label>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Prefere casa ou apartamento?</label>
-                                </div>
-                                <select
-                                    id="preferences.houseOrApartment"
-                                    name="houseOrApartment"
-                                    value={preferences.houseOrApartment}
-                                    onChange={this.onChange}
-                                >
-                                    <option value="casa">Casa</option>
-                                    <option value="apartamento">Apartamento</option>
-                                </select>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Procuro anúncios de aluguéis destinados à:</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.genderPreference}</i>
-                                <select
-                                    id="preferences.genderPreference"
-                                    name="genderPreference"
-                                    value={preferences.genderPreference}
-                                    onChange={this.onChange}
-                                >
-                                    <option value="masculino">Masculino</option>
-                                    <option value="feminino">Feminino</option>
-                                    <option value="tanto faz">Tanto Faz</option>
-                                    <option value="ambos">Ambos</option>
-                                </select>
-                            </div>
-                            {/* Add more preference fields here */}
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Aluguel compartilhado?</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.roommates}</i>
-                                <select
-                                    id="preferences.roommates"
-                                    name="roommates"
-                                    value={preferences.roommates}
-                                    onChange={this.onChange}
-                                >
-                                    <option value="sozinho">Sozinho</option>
-                                    <option value="compartilhado">Compartilhado</option>
-                                </select>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Duração do aluguel</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.leaseLength}</i>
-                                <select
-                                    id="preferences.leaseLength"
-                                    name="leaseLength"
-                                    value={preferences.leaseLength}
-                                    onChange={this.onChange}
-                                >
-                                    <option value="aluguel anual">Aluguel anual</option>
-                                    <option value="aluguel temporada">Aluguel temporada</option>
-                                </select>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Nível de barulho</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.noiseLevel}</i>
-                                <select
-                                    id="preferences.noiseLevel"
-                                    name="noiseLevel"
-                                    value={preferences.noiseLevel}
-                                    onChange={this.onChange}
-                                >
-                                    <option value="tranquilo">Silencioso</option>
-                                    <option value="barulhento">Social</option>
-                                </select>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <p className="checkbox-label">
-                                    <i className="material-icons prefix">{fieldIcons.acceptsPets}</i>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            id="preferences.acceptsPets"
-                                            name="acceptsPets"
-                                            checked={preferences.acceptsPets}
-                                            onChange={this.onChange}
-                                        />
-                                        <span className="checkbox-text">Aceita Pets?</span>
-                                    </label>
-                                </p>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <p className="checkbox-label">
-                                    <i className="material-icons prefix">{fieldIcons.wheelchairAccessible}</i>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            id="preferences.wheelchairAccessible"
-                                            name="wheelchairAccessible"
-                                            checked={preferences.wheelchairAccessible}
-                                            onChange={this.onChange}
-                                        />
-                                        <span className="checkbox-text">Acessível à cadeirantes?</span>
-                                    </label>
-                                </p>
-                            </div>
-                            <div className="input-field col s12 form-field">
-                                <p className="checkbox-label">
-                                    <i className="material-icons prefix">{fieldIcons.acceptSmoker}</i>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            id="preferences.acceptSmoker"
-                                            name="acceptSmoker"
-                                            checked={preferences.acceptSmoker}
-                                            onChange={this.onChange}
-                                        />
-                                        <span className="checkbox-text">Fumante?</span>
-                                    </label>
-                                </p>
-                            </div>
-                            <div className="col s12 form-container">
-                                <button
-                                    className="btn btn-large waves-effect waves-light hoverable btn-update"
-                                    type="submit"
-                                >
-                                    Atualizar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <div className="form-field">
+                            <label>Valor de aluguel (R$):</label>
+                            <input
+                                name="budget"
+                                type="number"
+                                value={preferences.budget}
+                                onChange={this.onChange}
+                            />
+                        </div>
+                        <div className="form-field">
+                            <label>Prefere casa ou apartamento?</label>
+                            <select
+                                name="houseOrApartment"
+                                value={preferences.houseOrApartment}
+                                onChange={this.onChange}
+                            >
+                                <option value="casa">Casa</option>
+                                <option value="apartamento">Apartamento</option>
+                            </select>
+                        </div>
+                        <div className="form-field">
+                            <label>Procuro anúncios de aluguéis destinados à:</label>
+                            <select
+                                name="genderPreference"
+                                value={preferences.genderPreference}
+                                onChange={this.onChange}
+                            >
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="tanto faz">Tanto Faz</option>
+                                <option value="ambos">Ambos</option>
+                            </select>
+                        </div>
+                        {/* Add more preference fields here */}
+                        <div className="form-field">
+                            <label>Aluguel compartilhado?</label>
+                            <select
+                                name="roommates"
+                                value={preferences.roommates}
+                                onChange={this.onChange}
+                            >
+                                <option value="sozinho">Sozinho</option>
+                                <option value="compartilhado">Compartilhado</option>
+                            </select>
+                        </div>
+                        <div className="form-field">
+                            <label>Duração do aluguel</label>
+                            <select
+                                name="leaseLength"
+                                value={preferences.leaseLength}
+                                onChange={this.onChange}
+                            >
+                                <option value="aluguel anual">Aluguel anual</option>
+                                <option value="aluguel temporada">Aluguel temporada</option>
+                            </select>
+                        </div>
+                        <div className="form-field">
+                            <label>Nível de barulho</label>
+                            <select
+                                name="noiseLevel"
+                                value={preferences.noiseLevel}
+                                onChange={this.onChange}
+                            >
+                                <option value="tranquilo">Silencioso</option>
+                                <option value="barulhento">Social</option>
+                            </select>
+                        </div>
+                        <div className="form-field checkbox-label">
+                            <input
+                                type="checkbox"
+                                name="acceptsPets"
+                                checked={preferences.acceptsPets}
+                                onChange={this.onChange}
+                            />
+                            <span className="checkbox-text">Aceita Pets?</span>
+                        </div>
+                        <div className="form-field checkbox-label">
+                            <input
+                                type="checkbox"
+                                name="wheelchairAccessible"
+                                checked={preferences.wheelchairAccessible}
+                                onChange={this.onChange}
+                            />
+                            <span className="checkbox-text">Acessível à cadeirantes?</span>
+                        </div>
+                        <div className="form-field checkbox-label">
+                            <input
+                                type="checkbox"
+                                name="acceptSmoker"
+                                checked={preferences.acceptSmoker}
+                                onChange={this.onChange}
+                            />
+                            <span className="checkbox-text">Fumante?</span>
+                        </div>
+                        <div className="form-container">
+                            <button className="btn-update" type="submit">
+                                Atualizar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         );
