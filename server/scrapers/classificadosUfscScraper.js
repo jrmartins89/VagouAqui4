@@ -95,10 +95,10 @@ async function getAdDetails(items) {
                     neighborhood: neighborhood
                 });
             } else {
-                console.error(`Error fetching ad details for ${item.link}: Status ${response.status}`);
+                console.error(`Erro ao pegar detalhes de anúncio em  ${item.link}: Status ${response.status}`);
             }
         } catch (error) {
-            console.error(`Error fetching ad details for ${item.link}: ${error}`);
+            console.error(`Erro ao pegar detalhes de anúncio em  ${item.link}: ${error}`);
         }
     }
     return itemsWithDetails;
