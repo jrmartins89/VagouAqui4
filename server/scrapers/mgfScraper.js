@@ -37,7 +37,7 @@ async function extractMgfHrefValues() {
 
         return adDetails;
     } catch (error) {
-        console.error('Error while scraping href values for ads:', error.message);
+        console.error('Erro durante o scraping do valor de href para os anúncios:', error.message);
     }
 }
 
@@ -97,7 +97,7 @@ async function extractMgfAdDetails(adLinks) {
                 return adDetail;
             }
         } catch (error) {
-            console.error('Error while scraping ad details:', error.message);
+            console.error('Erro durante o scraping de detalhes do anúncio:', error.message);
         }
     });
 
