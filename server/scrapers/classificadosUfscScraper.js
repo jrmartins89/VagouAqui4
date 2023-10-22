@@ -32,7 +32,7 @@ async function getAdLinks(url) {
 
         return items;
     } catch (error) {
-        console.error('Error fetching ad list:', error);
+        console.error('Erro ao pegar a lista de anúncios:', error);
         return [];
     }
 }
