@@ -2,19 +2,23 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const port = process.env.PORT || 5000;
 const passport = require("passport");
-const usersRouter = require("./routes/api/users");
-const app = express();
-const scraperUfsc = require("./scrapers/classificadosUfscScraper");
-const Ad = require("./models/Ads");
+const schedule = require("node-schedule");
 const adsRouter = require("./routes/api/ads");
+const recommendationsRouter = require("./routes/api/recommendation");
+const adsController = require("./controller/adsController");
+const scraperUfsc = require("./scrapers/classificadosUfscScraper");
 const { scrapeIbagyAds } = require("./scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("./scrapers/webQuartoScraper");
 const { getVivaRealAdLinks } = require("./scrapers/vivaRealScraper");
 const { extractMgfHrefValues } = require("./scrapers/mgfScraper");
-const recommendationsRouter = require("./routes/api/recommendation");
-const schedule = require("node-schedule");
+const usersRouter = require("./routes/api/users");
+const Ad = require("./models/Ads");
+const app = express();
+const port = process.env.PORT || 5000;
+require("dotenv").config();
+require("./config/passport")(passport);
+
 // Define an array of URLs
 const urls = [
     {
@@ -50,14 +54,15 @@ const urls = [
     {
         "url": "https://classificados.ufsc.br/index.php?catid=74"
     }
-]
-
-require("dotenv").config();
-require("./config/passport")(passport);
+];
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize()); // Passport middleware
+app.use("/api/users", usersRouter); // User route
+app.use("/api/ads", adsRouter); // Ad route
+app.use("/api/recommendation", recommendationsRouter); // Recommendation route
 
 mongoose
     .connect(process.env.MONGODB_URI, {
@@ -77,117 +82,6 @@ mongoose
         console.error("Erro de conexão com o banco de dados:", error);
     });
 
-// Passport middleware
-app.use(passport.initialize());
-
-// Routes
-app.use("/api/users", usersRouter);
-app.use("/api/ads", adsRouter);
-app.use("/api/recommendation", recommendationsRouter);
-
-// Function to scrape and save new ads, avoiding duplicates
-async function scrapeAndSaveNewAds(scraper, source, urls, scrapeFunction, getDetailsFunction) {
-    try {
-        if (urls) {
-            for (const urlInfo of urls) {
-                // Fetch ads using the provided scrapeFunction
-                const adItems = await scrapeFunction(urlInfo.url);
-
-                // Fetch existing ads from the database
-                const existingAds = await Ad.find({}, "link");
-
-                // Filter new ads
-                const newAdItems = adItems.filter(
-                    (item) =>
-                        !existingAds.some((existingAd) => existingAd.link === item.link)
-                );
-
-                if (newAdItems.length > 0) {
-                    // Fetch ad details using the provided getDetailsFunction if available
-                    const itemsWithDetails = getDetailsFunction
-                        ? await getDetailsFunction(newAdItems)
-                        : newAdItems;
-
-                    // Map and save new ads
-                    const finalItems = itemsWithDetails.map((item) => ({
-                        title: item.title,
-                        link: item.link,
-                        description: item.description,
-                        price: item.price,
-                        imageLinks: item.imageLinks,
-                        neighborhood: item.neighborhood,
-                        contactInfo: item.contactInfo,
-                    }));
-
-                    await saveNewAds(finalItems, source);
-                } else {
-                    console.log(`Sem novos anúncios de ${source} para salvar.`);
-                }
-            }
-        } else {
-            // Fetch ads using the provided scrapeFunction
-            const adItems = await scrapeFunction();
-
-            // Fetch existing ads from the database
-            const existingAds = await Ad.find({}, "link");
-
-            // Filter new ads
-            const newAdItems = adItems.filter(
-                (item) =>
-                    !existingAds.some((existingAd) => existingAd.link === item.link)
-            );
-
-            if (newAdItems.length > 0) {
-                // Map and save new ads
-                const finalItems = newAdItems.map((item) => ({
-                    title: item.title,
-                    link: item.link || "",
-                    description: item.description || "",
-                    price: item.price || "",
-                    imageLinks: item.imageLinks || "",
-                    neighborhood: item.neighborhood,
-                    contactInfo: item.contactInfo,
-                    source: source,
-                }));
-
-                await saveNewAds(finalItems, source);
-            } else {
-                console.log(`Sem novos anúncios de ${source} para salvar.`);
-            }
-        }
-    } catch (error) {
-        console.error(`Erro durante o scraping de anúncios de ${source}:`, error);
-    }
-}
-
-// Function to save new ads to the database, avoiding duplicates
-async function saveNewAds(newAds, source) {
-    try {
-        const existingAds = await Ad.find({}, "link");
-        const newAdsToInsert = newAds.filter(
-            (newAd) => !existingAds.some((existingAd) => existingAd.link === newAd.link)
-        );
-
-        if (newAdsToInsert.length > 0) {
-            const finalAds = newAdsToInsert.map((item) => ({
-                title: item.title,
-                link: item.link || "",
-                description: item.description || "",
-                price: item.price || "",
-                imageLinks: item.imageLinks || "",
-                neighborhood: item.neighborhood,
-                contactInfo: item.contactInfo,
-                source: source,
-            }));
-
-            await Ad.insertMany(finalAds);
-        } else {
-            console.log(`Sem novos anúncios de ${source} para salvar.`);
-        }
-    } catch (error) {
-        console.error(`Erro durante o scraping de anúncios de ${source}:`, error);
-    }
-}
 
 // Schedule the scraping task to run every two weeks
 function scheduleScrapingTask() {
@@ -202,8 +96,8 @@ async function startScraping() {
     try {
         console.log("O processo de Scraping começou.");
 
-        // Call the scraping functions for each source
-        await scrapeAndSaveNewAds(
+        // Scrape and save ads from Classificados UFSC
+        await adsController.scrapeAndSaveNewAds(
             scraperUfsc,
             "Classificados UFSC",
             urls,
@@ -212,7 +106,8 @@ async function startScraping() {
         );
         console.log("O processo de Scraping para Classificados UFSC foi finalizado.");
 
-        await scrapeAndSaveNewAds(
+        // Scrape and save ads from Ibagy
+        await adsController.scrapeAndSaveNewAds(
             null,
             "Ibagy",
             null,
@@ -221,7 +116,8 @@ async function startScraping() {
         );
         console.log("O processo de Scraping para Ibagy foi finalizado.");
 
-        await scrapeAndSaveNewAds(
+        // Scrape and save ads from WebQuarto
+        await adsController.scrapeAndSaveNewAds(
             null,
             "WebQuarto",
             null,
@@ -230,16 +126,18 @@ async function startScraping() {
         );
         console.log("O processo de Scraping para WebQuarto foi finalizado.");
 
-        await scrapeAndSaveNewAds(
+        // Scrape and save ads from VivaReal
+        await adsController.scrapeAndSaveNewAds(
             null,
             "vivaReal",
             null,
             getVivaRealAdLinks,
             null
         );
-        console.log("O processo de Scraping para vivaReal foi finalizado.");
+        console.log("O processo de Scraping para VivaReal foi finalizado.");
 
-        await scrapeAndSaveNewAds(
+        // Scrape and save ads from MGF
+        await adsController.scrapeAndSaveNewAds(
             null,
             "MGF",
             null,
