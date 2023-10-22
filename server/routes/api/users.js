@@ -130,7 +130,7 @@ router.put("/preferences", passport.authenticate("jwt", { session: false }), (re
     )
         .then((updatedUser) => {
             if (!updatedUser) {
-                return res.status(404).json({ userNotFound: "User not found" });
+                return res.status(404).json({ userNotFound: "Usuário não encontrado" });
             }
             res.json(updatedUser.preferences); // Respond with the updated preferences
         })
@@ -148,13 +148,13 @@ router.get("/preferences", passport.authenticate("jwt", { session: false }), (re
     User.findById(req.user.id)
         .then((user) => {
             if (!user) {
-                return res.status(404).json({ userNotFound: "User not found" });
+                return res.status(404).json({ userNotFound: "Usuário não encontrado" });
             }
             res.json(user.preferences); // Respond with the user's preferences
         })
         .catch((err) => {
             console.log(err);
-            return res.status(500).json({ error: "Server error" });
+            return res.status(500).json({ error: "Erro do Servidor" });
         });
 });
 
