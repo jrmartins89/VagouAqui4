@@ -19,7 +19,7 @@ function AdGrid() {
                 const data = await response.json();
                 setAds(data);
             } catch (error) {
-                console.error('Error fetching ads:', error);
+                console.error('Erro ao listar anúncios:', error);
             }
         }
         fetchAds();
