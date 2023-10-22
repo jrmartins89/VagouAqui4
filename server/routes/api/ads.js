@@ -8,7 +8,7 @@ router.get('/all', async (req, res) => {
         const ads = await Ad.find();
         res.json(ads);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching ads', error: error.message });
+        res.status(500).json({ message: 'Erro ao listar anúncios', error: error.message });
     }
 });
 
