@@ -22,7 +22,7 @@ function RecommendedGrid() {
                 setAds(recommendedAds);
             })
             .catch((err) => {
-                console.error('Error fetching recommended ads:', err);
+                console.error('Erro ao listar anúncios recomendados:', err);
             });
     }, []); // Make sure to pass an empty dependency array to run this effect only once
 
