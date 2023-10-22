@@ -16,8 +16,8 @@ router.get('/all', passport.authenticate("jwt", { session: false }), async (req,
 
         res.json(recommendations);
     } catch (error) {
-        console.error("Error generating content-based recommendations:", error);
-        res.status(500).json({ message: 'Error fetching recommendations', error: error.message });
+        console.error("Erro ao gerar os anúncios recomendados baseados em conteúdo:", error);
+        res.status(500).json({ message: 'Erro ao listar as recomendações', error: error.message });
     }
 });
 
