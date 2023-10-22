@@ -45,10 +45,10 @@ async function scrapeWebQuartoadsPage(pageNumber) {
 
             return ads;
         } else {
-            console.error(`Failed to fetch the json data for page ${pageNumber}. Status code: ${response.status}`);
+            console.error(`Erro ao listar o json de dados para a página ${pageNumber}. Código do status: ${response.status}`);
         }
     } catch (error) {
-        console.error(`Error while scraping page ${pageNumber}:`, error.message);
+        console.error(`Erro durante o scrapping da página ${pageNumber}:`, error.message);
     }
 }
 
