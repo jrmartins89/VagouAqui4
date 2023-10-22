@@ -35,7 +35,7 @@ class EditPreferences extends Component {
                 this.setState({ preferences: userPreferences });
             })
             .catch((err) => {
-                console.error("Error fetching user preferences:", err);
+                console.error("Erro ao listar as preferências do usuário:", err);
             });
     }
 
