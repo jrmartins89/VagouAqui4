@@ -67,7 +67,7 @@ async function getAdDetails(items) {
 
                 // Check if any of the critical values is empty
                 if (!price || !gender || !neighborhood) {
-                    console.warn(`Skipping ad with missing values for ${item.link}`);
+                    console.warn(`Faltaram informações para o anúncio: ${item.link}. Ele será ignorado`);
                     continue; // Skip this ad and move to the next one
                 }
 
