@@ -136,7 +136,7 @@ router.put("/preferences", passport.authenticate("jwt", { session: false }), (re
         })
         .catch((err) => {
             console.log(err);
-            return res.status(500).json({ error: "Server error" });
+            return res.status(500).json({ error: "Erro do Servidor" });
         });
 });
 
