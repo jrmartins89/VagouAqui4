@@ -65,16 +65,16 @@ mongoose
         useUnifiedTopology: true,
     })
     .then(() => {
-        console.log("Connected successfully to MongoDB");
+        console.log("Conexão bem sucedida com o MongoDB");
         // Start the Express server
         app.listen(port, () => {
-            console.log(`Server is running on port ${port}!`);
+            console.log(`O servidor está rodando na porta: ${port}!`);
             // After the server is started, perform other actions
             initializeServerActions();
         });
     })
     .catch((error) => {
-        console.error("Database connection error:", error);
+        console.error("Erro de conexão com o banco de dados:", error);
     });
 
 // Passport middleware
@@ -121,7 +121,7 @@ async function scrapeAndSaveNewAds(scraper, source, urls, scrapeFunction, getDet
 
                     await saveNewAds(finalItems, source);
                 } else {
-                    console.log(`No new ${source} ads to save`);
+                    console.log(`Sem novos anúncios de ${source} para salvar.`);
                 }
             }
         } else {
@@ -152,11 +152,11 @@ async function scrapeAndSaveNewAds(scraper, source, urls, scrapeFunction, getDet
 
                 await saveNewAds(finalItems, source);
             } else {
-                console.log(`No new ${source} ads to save`);
+                console.log(`Sem novos anúncios de ${source} para salvar.`);
             }
         }
     } catch (error) {
-        console.error(`Error during scraping ${source} ads:`, error);
+        console.error(`Erro durante o scraping de anúncios de ${source}:`, error);
     }
 }
 
@@ -182,10 +182,10 @@ async function saveNewAds(newAds, source) {
 
             await Ad.insertMany(finalAds);
         } else {
-            console.log(`No new ads to save from ${source}`);
+            console.log(`Sem novos anúncios de ${source} para salvar.`);
         }
     } catch (error) {
-        console.error(`Error during scraping ${source} ads:`, error);
+        console.error(`Erro durante o scraping de anúncios de ${source}:`, error);
     }
 }
 
@@ -200,7 +200,7 @@ function scheduleScrapingTask() {
 // Start scraping function
 async function startScraping() {
     try {
-        console.log("Scraping process started.");
+        console.log("O processo de Scraping começou.");
 
         // Call the scraping functions for each source
         await scrapeAndSaveNewAds(
@@ -210,7 +210,7 @@ async function startScraping() {
             scraperUfsc.getAdLinks,
             scraperUfsc.getAdDetails
         );
-        console.log("Scraping process for Classificados UFSC finished.");
+        console.log("O processo de Scraping para Classificados UFSC foi finalizado.");
 
         await scrapeAndSaveNewAds(
             null,
@@ -219,7 +219,7 @@ async function startScraping() {
             scrapeIbagyAds,
             null
         );
-        console.log("Scraping process for Ibagy finished.");
+        console.log("O processo de Scraping para Ibagy foi finalizado.");
 
         await scrapeAndSaveNewAds(
             null,
@@ -228,7 +228,7 @@ async function startScraping() {
             scrapeWebQuartoads,
             null
         );
-        console.log("Scraping process for WebQuarto finished.");
+        console.log("O processo de Scraping para WebQuarto foi finalizado.");
 
         await scrapeAndSaveNewAds(
             null,
@@ -237,7 +237,7 @@ async function startScraping() {
             getVivaRealAdLinks,
             null
         );
-        console.log("Scraping process for vivaReal finished.");
+        console.log("O processo de Scraping para vivaReal foi finalizado.");
 
         await scrapeAndSaveNewAds(
             null,
@@ -246,11 +246,11 @@ async function startScraping() {
             extractMgfHrefValues,
             null
         );
-        console.log("Scraping process for MGF finished.");
+        console.log("O processo de Scraping para MGF foi finalizado.");
 
-        console.log("All scraping processes have finished.");
+        console.log("Todos os processos de scraping foram finalizados.");
     } catch (error) {
-        console.error("Error during scraping:", error);
+        console.error("Erro durante o scraping:", error);
     }
 }
 
@@ -262,14 +262,14 @@ async function initializeServerActions() {
 
         if (+existingAdsCount === 0) {
             // If no ads are saved, start the initial scraping process
-            console.log("No ads found in the database. Starting initial scraping...");
+            console.log("Nenhum anúncio encontrado no banco de dados. Iniciando o processo inicial de scraping.");
             await startScraping();
         } else {
             // If there are ads in the database, follow the scheduled scraping task
-            console.log("Ads found in the database. Following the scheduled scraping task...");
+            console.log("Foram encontrados anúncios no banco de dados. Seguindo a programação do processo de scraping.");
             scheduleScrapingTask();
         }
     } catch (error) {
-        console.error("Error while checking for existing ads:", error);
+        console.error("Erro durante a verificação de anúncios existentes:", error);
     }
 }
