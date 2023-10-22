@@ -60,7 +60,7 @@ async function generateRecommendations(userPreferences) {
         // Return the recommended ads as a JSON object
         return recommendations.slice(0, sampleSize);
     } catch (error) {
-        console.error('Error fetching ads or generating recommendations:', error);
+        console.error('Erro ao listar anúncios ou gerar recomendações:', error);
         return [];
     }
 }
