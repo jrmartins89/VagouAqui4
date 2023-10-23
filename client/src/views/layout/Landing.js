@@ -3,25 +3,21 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import "./Landing.css"; // Import the CSS file
+import "./Landing.css"; // Import the updated CSS file
 
 class Landing extends Component {
     render() {
         const { user } = this.props.auth;
 
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col s12 center-align">
-                        <h4>
-                            <b>Seja bem vindo,</b> {user.name.split(" ")[0]}
-                        </h4>
-                        <p className="flow-text grey-text text-darken-1">
-                            Você está logado no VagouAqui :D
-                        </p>
-                    </div>
-                </div>
-                <div className="row">
+            <div className="landing-container"> {/* Apply the background image */}
+                <div className="welcome-text">
+                    <h4>
+                        <b>Seja bem vindo,</b> {user.name.split(" ")[0]}
+                    </h4>
+                    <p className="flow-text grey-text text-darken-1">
+                        Você está logado no VagouAqui :D
+                    </p>
                     <div className="col s6">
                         <Link
                             to="/products"

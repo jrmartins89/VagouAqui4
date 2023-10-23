@@ -45,6 +45,27 @@ h4 {
     color: white;
 }
 
+/* Landing.css */
+.landing-container {
+    background-image: url('https://media.gettyimages.com/id/1335298641/pt/foto/university-dorm-room.jpg?s=2048x2048&w=gi&k=20&c=btasSUtGcax0xA-N4T7CTF-FyvVKU2jKsKEk-nyv4pI=');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    opacity: 0.9; /* Adjust the opacity as needed */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.welcome-text {
+    color: #fff; /* Text color for better visibility on the background */
+}
+
+
 /* Responsive styles */
 @media (max-width: 768px) {
     /* Adjust styles for screens with a maximum width of 768px (e.g., tablets) */
