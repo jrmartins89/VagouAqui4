@@ -25,11 +25,11 @@ async function extractVivaRealImageLinks(adLink) {
 
             return imageLinks;
         } else {
-            console.error(`Failed to fetch image links for ad: ${adLink}. Status code: ${response.status}`);
+            console.error(`Erro ao realizar o scraping dos links de imagem do anúncio: ${adLink}. Código do status: ${response.status}`);
             return [];
         }
     } catch (error) {
-        console.error(`Error while scraping image links for ad: ${adLink}`, error.message);
+        console.error(`Erro ao realizar o scraping dos links de imagem do anúncio: ${adLink}`, error.message);
         return [];
     }
 }
