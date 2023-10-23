@@ -14,10 +14,10 @@ class Landing extends Component {
                 <div className="row">
                     <div className="col s12 center-align">
                         <h4>
-                            <b>Hey there,</b> {user.name.split(" ")[0]}
+                            <b>Seja bem vindo,</b> {user.name.split(" ")[0]}
                         </h4>
                         <p className="flow-text grey-text text-darken-1">
-                            You are logged into VagouAqui
+                            Você está logado no VagouAqui :D
                         </p>
                     </div>
                 </div>
