@@ -35,11 +35,11 @@ async function scrapeIbagyAds() {
                     const uniqueAdsLinks = Array.from(adsLinks);
                     return uniqueAdsLinks;
                 } else {
-                    console.error('Failed to fetch the page. Status code:', response.status);
+                    console.error('Erro ao realizar a busca da página. Código do status:', response.status);
                     return [];
                 }
             } catch (error) {
-                console.error('Error fetching page:', error.message);
+                console.error('Erro ao fazer o scraping de informações da página:', error.message);
                 return [];
             }
         });
@@ -84,7 +84,7 @@ async function scrapeIbagyAdsDetails(adLinks) {
                 };
                 adDetailsArray.push(adDetails);
             } else {
-                console.error('Failed to fetch ad details from:', link);
+                console.error('Erro ao buscar detalhes de anúncios de:', link);
             }
         });
 
@@ -100,7 +100,7 @@ function extractNeighborhood(address) {
     if (neighborhoodMatch) {
         return neighborhoodMatch[2].trim();
     } else {
-        return 'Neighborhood not found';
+        return 'Bairro não encontrado';
     }
 }
 
