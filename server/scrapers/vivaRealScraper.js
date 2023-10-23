@@ -79,10 +79,10 @@ async function getVivaRealAdLinks() {
             const adDetailsArray = await Promise.all(adDetailsPromises);
             return adDetailsArray;
         } else {
-            console.error(`Failed to fetch ad details. Status code: ${response.status}`);
+            console.error(`Erro ao buscar detalhes de anúncios. Código do status: ${response.status}`);
         }
     } catch (error) {
-        console.error('Error while scraping ad details:', error.message);
+        console.error('Erro durante o scraping de informações sobre um anúncio:', error.message);
     }
 }
 
@@ -96,7 +96,7 @@ async function extractDescription(adLink) {
             return adDescription;
         }
     } catch (error) {
-        console.error('Error while scraping description:', error.message);
+        console.error('Erro ao realizar o scraping da descrição do anúncio:', error.message);
     }
 }
 
