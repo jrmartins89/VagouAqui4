@@ -5,15 +5,15 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
-import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
-import Register from "./components/User/Register";
-import Login from "./components/User/Login";
-import PrivateRoute from "./components/privateRoute/PrivateRoute";
-import Dashboard from "./components/dashboard/Dashboard";
-import AdGrid from "./components/adGrid/AdGrid";
-import EditPreferences from "./components/User/EditPreferences";
-import RecommendedGrid from "./components/adGrid/RecommendedGrid";
+import Navbar from "./views/layout/Navbar";
+import Landing from "./views/layout/Landing";
+import Register from "./views/User/Register";
+import Login from "./views/User/Login";
+import PrivateRoute from "./views/privateRoute/PrivateRoute";
+import Dashboard from "./views/dashboard/Dashboard";
+import AdGrid from "./views/adGrid/AdGrid";
+import EditPreferences from "./views/User/EditPreferences";
+import RecommendedGrid from "./views/adGrid/RecommendedGrid";
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
     // Set User token header User
