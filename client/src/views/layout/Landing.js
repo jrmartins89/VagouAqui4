@@ -1,51 +1,34 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux"; // Import connect from React Redux
 import "./Landing.css"; // Import the CSS file
 
 class Landing extends Component {
     render() {
-        const { isAuthenticated } = this.props.auth;
+        const { user } = this.props.auth;
 
         return (
-            <div className="container-valign container valign-wrapper">
+            <div className="container">
                 <div className="row">
                     <div className="col s12 center-align">
-                        <h4 className="title">
-                            <b>Página Principal</b>
+                        <h4>
+                            <b>Hey there,</b> {user.name.split(" ")[0]}
                         </h4>
-                        <p className="description">
-                            Portal de anúncios de aluguéis em Florianópolis indexados a partir de técnicas de WebScrapping
+                        <p className="flow-text grey-text text-darken-1">
+                            You are logged into VagouAqui
                         </p>
-                        <p className="flow-text grey-text text-darken-1">INE - UFSC - 2023</p>
-                        <br />
-                        {isAuthenticated ? (
-                            <div className="col s6">
-                                <Link
-                                    to="/products"
-                                    className="btn button btn-produtos waves-effect waves-light hoverable"
-                                >
-                                    Anúncios
-                                </Link>
-                            </div>
-                        ) : (
-                            <div className="col s6">
-                                <Link
-                                    to="/register"
-                                    className="btn button btn-cadastro waves-effect waves-light hoverable"
-                                >
-                                    Cadastro
-                                </Link>
-                            </div>
-                        )}
-                        <div className="col s6">
-                            <Link
-                                to="/login"
-                                className="btn button btn-login waves-effect waves-light hoverable"
-                            >
-                                Log In
-                            </Link>
-                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s6">
+                        <Link
+                            to="/products"
+                            className="btn produtos-btn waves-effect waves-light hoverable"
+                        >
+                            Anúncios
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -53,8 +36,13 @@ class Landing extends Component {
     }
 }
 
+Landing.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Landing); // Connect the component to Redux
+export default connect(mapStateToProps, { logoutUser })(Landing);

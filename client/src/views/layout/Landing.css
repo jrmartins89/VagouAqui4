@@ -1,95 +1,60 @@
-/* Styles for the outer container */
-.container-valign {
-    height: 75vh;
+/* Landing.css */
+
+/* Container styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* Styles for the title */
-.title {
+/* Greeting styles */
+h4 {
     font-size: 24px;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-/* Styles for the description */
-.description {
+/* Description text styles */
+.flow-text {
+    font-size: 18px;
     text-align: center;
-    font-size: 16px;
     color: #555;
+    margin-top: 10px;
 }
 
-/* Styles for buttons */
-.button {
-    height: auto;
-    display: flex;
-    align-items: center;
-    border: none;
-    border-radius: 4px;
-    padding: 6px 12px;
-    text-decoration: none;
-    white-space: normal;
-    margin: 10px auto; /* Center buttons horizontally */
+/* Button styles */
+.btn {
+    width: 140px;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: 20px;
     cursor: pointer;
-    background-color: #007bff; /* Default button color */
+}
+
+/* "Produtos" button */
+.produtos-btn {
+    background-color: #2196F3; /* Blue color */
     color: white;
 }
 
-/* Responsive styles for buttons */
-@media (max-width: 576px) {
-    .button {
-        padding: 8px 16px;
-        font-size: 0.9rem;
+/* "Logout" button */
+.logout-btn {
+    background-color: #FF5733; /* Red color */
+    color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    /* Adjust styles for screens with a maximum width of 768px (e.g., tablets) */
+    h4 {
+        font-size: 20px;
     }
-}
-
-/* Responsive styles for Mobile M */
-@media (min-width: 577px) and (max-width: 767px) {
-    .button {
-        /* Add specific styles for Mobile M if needed */
+    .flow-text {
+        font-size: 16px;
     }
-}
-
-/* Responsive styles for Mobile L */
-@media (min-width: 768px) and (max-width: 991px) {
-    .button {
-        /* Add specific styles for Mobile L if needed */
+    .btn {
+        width: 120px;
     }
-}
-
-/* Responsive styles for Tablet */
-@media (min-width: 992px) and (max-width: 1199px) {
-    .button {
-        /* Add specific styles for Tablet if needed */
-    }
-}
-
-/* Responsive styles for Laptop */
-@media (min-width: 1200px) and (max-width: 1399px) {
-    .button {
-        /* Add specific styles for Laptop if needed */
-    }
-}
-
-/* Responsive styles for Laptop Large */
-@media (min-width: 1400px) {
-    .button {
-        /* Add specific styles for Laptop Large if needed */
-    }
-}
-
-/* Styles for "Cadastro" button */
-.btn-cadastro {
-    background-color: #367306;
-    margin-right: 120px;/* Orange color */
-}
-
-/* Styles for "Login" button */
-.btn-login {
-    background-color: #041f3b; /* Green color */
-    margin-right: 120px;
-}
-
-/* Styles for "Produtos" button */
-.btn-produtos {
-    background-color: #afa74c; /* Blue color */
-    margin-right: 120px;
 }
