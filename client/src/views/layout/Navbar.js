@@ -21,12 +21,12 @@ class Navbar extends Component {
                         </Link>
                         <div className="nav-buttons"> {/* Wrap the buttons in a div */}
                             {isAuthenticated && (
-                                <Link to="/preferences" className="btn btn-edit-prefs">
+                                <Link to="/preferences" className="btn-edit-prefs">
                                     <p>Editar Preferências</p>
                                 </Link>
                             )}
                             {isAuthenticated && (
-                                <Link to="/recommendation" className="btn btn-show-recommendations">
+                                <Link to="/recommendation" className="btn-show-recommendations">
                                     <p>Recomendações</p>
                                 </Link>
                             )}
