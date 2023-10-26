@@ -98,21 +98,21 @@ class Register extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect btn-back">
+                    <div className="form-container">
+                        <Link to="/" className="btn-flat">
                             <i className="material-icons left">keyboard_backspace</i> Voltar ao início
                         </Link>
-                        <div className="col s12 form-container">
+                        <div className="form-container">
                             <h4 className="form-title">
                                 <b>Cadastre-se</b> abaixo
                             </h4>
-                            <p className="grey-text text-darken-1">
+                            <p className="form-container">
                                 Já possui uma conta? <Link to="/login" className="login-link">Fazer log in</Link>
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">{fieldIcons.name}</i>
+                            <div className="form-field">
+                                <i className={classnames("material-icons prefix", fieldIcons.name)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.name}
@@ -124,11 +124,11 @@ class Register extends Component {
                                         invalid: errors.name
                                     })}
                                 />
-                                <label htmlFor="name">Nome</label>
+                                <label htmlFor="name" className="form-label">Nome</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">{fieldIcons.email}</i>
+                            <div className="form-field">
+                                <i className={classnames("material-icons prefix", fieldIcons.email)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -140,11 +140,11 @@ class Register extends Component {
                                         invalid: errors.email
                                     })}
                                 />
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email" className="form-label">Email</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">{fieldIcons.password}</i>
+                            <div className="form-field">
+                                <i className={classnames("material-icons prefix", fieldIcons.password)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -156,11 +156,11 @@ class Register extends Component {
                                         invalid: errors.password
                                     })}
                                 />
-                                <label htmlFor="password">Digitar Senha</label>
+                                <label htmlFor="password" className="form-label">Digitar Senha</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">{fieldIcons.password2}</i>
+                            <div className="form-field">
+                                <i className={classnames("material-icons prefix", fieldIcons.password2)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password2}
@@ -172,13 +172,13 @@ class Register extends Component {
                                         invalid: errors.password2
                                     })}
                                 />
-                                <label htmlFor="password2">Confirmar Senha</label>
+                                <label htmlFor="password2" className="form-label">Confirmar Senha</label>
                                 <span className="red-text">{errors.password2}</span>
                             </div>
 
                             {/* Preferences Fields */}
-                            <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">{fieldIcons.location}</i>
+                            <div className="form-field">
+                                <i className={classnames("material-icons prefix", fieldIcons.location)}></i>
                                 <input
                                     id="preferences.location"
                                     name="location"
@@ -186,10 +186,10 @@ class Register extends Component {
                                     value={preferences.location}
                                     onChange={this.onChange}
                                 />
-                                <label htmlFor="preferences.location">Bairro preferencial para locação</label>
+                                <label htmlFor="preferences.location" className="form-label">Bairro preferencial para locação</label>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <i className="material-icons prefix">{fieldIcons.budget}</i>
+                            <div className="form-field">
+                                <i className={classnames("material-icons prefix", fieldIcons.budget)}></i>
                                 <input
                                     id="preferences.budget"
                                     name="budget"
@@ -197,32 +197,30 @@ class Register extends Component {
                                     value={preferences.budget}
                                     onChange={this.onChange}
                                 />
-                                <label htmlFor="preferences.budget">Procuro anúncios em torno de (R$):</label>
+                                <label htmlFor="preferences.budget" className="form-label">Procuro anúncios em torno de (R$):</label>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Prefere casa ou apartamento?</label>
-                                </div>
+                            <div className="form-field">
+                                <label className="form-label">Prefere casa ou apartamento?</label>
                                 <select
                                     id="preferences.houseOrApartment"
                                     name="houseOrApartment"
                                     value={preferences.houseOrApartment}
                                     onChange={this.onChange}
+                                    className="form-select"
                                 >
                                     <option value="casa">Casa</option>
                                     <option value="apartamento">Apartamento</option>
                                 </select>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Procuro anúncios de aluguéis destinados à:</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.genderPreference}</i>
+                            <div className="form-field">
+                                <label className="form-label">Procuro anúncios de aluguéis destinados à:</label>
+                                <i className={classnames("material-icons prefix", fieldIcons.genderPreference)}></i>
                                 <select
                                     id="preferences.genderPreference"
                                     name="genderPreference"
                                     value={preferences.genderPreference}
                                     onChange={this.onChange}
+                                    className="form-select"
                                 >
                                     <option value="masculino">Masculino</option>
                                     <option value="feminino">Feminino</option>
@@ -231,54 +229,51 @@ class Register extends Component {
                                 </select>
                             </div>
                             {/* Add more preference fields here */}
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Aluguel compartilhado?</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.roommates}</i>
+                            <div className="form-field">
+                                <label className="form-label">Aluguel compartilhado?</label>
+                                <i className={classnames("material-icons prefix", fieldIcons.roommates)}></i>
                                 <select
                                     id="preferences.roommates"
                                     name="roommates"
                                     value={preferences.roommates}
                                     onChange={this.onChange}
+                                    className="form-select"
                                 >
                                     <option value="sozinho">Sozinho</option>
                                     <option value="compartilhado">Compartilhado</option>
                                 </select>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Duração do aluguel</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.leaseLength}</i>
+                            <div className="form-field">
+                                <label className="form-label">Duração do aluguel</label>
+                                <i className={classnames("material-icons prefix", fieldIcons.leaseLength)}></i>
                                 <select
                                     id="preferences.leaseLength"
                                     name="leaseLength"
                                     value={preferences.leaseLength}
                                     onChange={this.onChange}
+                                    className="form-select"
                                 >
                                     <option value="aluguel anual">Aluguel anual</option>
                                     <option value="aluguel temporada">Aluguel temporada</option>
                                 </select>
                             </div>
-                            <div className="input-field col s12 form-field">
-                                <div>
-                                    <label>Nível de barulho</label>
-                                </div>
-                                <i className="material-icons prefix">{fieldIcons.noiseLevel}</i>
+                            <div className="form-field">
+                                <label className="form-label">Nível de barulho</label>
+                                <i className={classnames("material-icons prefix", fieldIcons.noiseLevel)}></i>
                                 <select
                                     id="preferences.noiseLevel"
                                     name="noiseLevel"
                                     value={preferences.noiseLevel}
                                     onChange={this.onChange}
+                                    className="form-select"
                                 >
                                     <option value="tranquilo">Silencioso</option>
                                     <option value="barulhento">Social</option>
                                 </select>
                             </div>
-                            <div className="input-field col s12 form-field">
+                            <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className="material-icons prefix">{fieldIcons.acceptsPets}</i>
+                                    <i className={classnames("material-icons prefix", fieldIcons.acceptsPets)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -291,9 +286,9 @@ class Register extends Component {
                                     </label>
                                 </p>
                             </div>
-                            <div className="input-field col s12 form-field">
+                            <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className="material-icons prefix">{fieldIcons.wheelchairAccessible}</i>
+                                    <i className={classnames("material-icons prefix", fieldIcons.wheelchairAccessible)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -306,9 +301,9 @@ class Register extends Component {
                                     </label>
                                 </p>
                             </div>
-                            <div className="input-field col s12 form-field">
+                            <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className="material-icons prefix">{fieldIcons.acceptSmoker}</i>
+                                    <i className={classnames("material-icons prefix", fieldIcons.acceptSmoker)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -323,7 +318,7 @@ class Register extends Component {
                             </div>
                             {/* Add more preference fields here */}
 
-                            <div className="col s12 form-container">
+                            <div className="form-container">
                                 <button
                                     className="btn btn-large waves-effect waves-light hoverable btn-register"
                                     type="submit"
