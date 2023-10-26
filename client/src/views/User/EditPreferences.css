@@ -95,8 +95,20 @@
 /* Responsive styles */
 
 @media screen and (max-width: 576px) {
+    .edit-preferences-container {
+        padding-top: 20px;
+        padding-bottom: 18px;
+        margin-left: -153px;
+        margin-right: -12px;
+    }
+
     .form-title {
         font-size: 20px;
+        margin-left: -80px;
+    }
+
+    .form-field {
+        margin-left: 30px;
     }
 
     .form-field label {
@@ -117,17 +129,150 @@
     .btn-update {
         font-size: 16px;
         padding: 8px 16px;
+        margin-left: 71px;
     }
 }
 
 @media screen and (min-width: 577px) and (max-width: 768px) {
+    .edit-preferences-container {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .form-title {
+        font-size: 22px;
+        margin-left: -100px;
+    }
+
+    .form-field {
+        margin-left: 45px;
+    }
+
+    .form-field label {
+        font-size: 16px;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="number"],
+    .form-field select {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-field label span {
+        font-size: 16px;
+    }
+
+    .btn-update {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .edit-preferences-container {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .form-title {
+        font-size: 24px;
+        margin-left: -120px;
+    }
+
+    .form-field {
+        margin-left: 60px;
+    }
+
+    .form-field label {
+        font-size: 18px;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="number"],
+    .form-field select {
+        padding: 12px;
+        font-size: 18px;
+    }
+
+    .form-field label span {
+        font-size: 18px;
+    }
+
+    .btn-update {
+        font-size: 20px;
+        padding: 12px 24px;
+    }
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    .edit-preferences-container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .form-title {
+        font-size: 26px;
+        margin-left: -140px;
+    }
+
+    .form-field {
+        margin-left: 75px;
+    }
+
+    .form-field label {
+        font-size: 20px;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="number"],
+    .form-field select {
+        padding: 14px;
+        font-size: 20px;
+    }
+
+    .form-field label span {
+        font-size: 20px;
+    }
+
+    .btn-update {
+        font-size: 22px;
+        padding: 14px 28px;
+    }
 }
 
 @media screen and (min-width: 1441px) and (max-width: 1680px) {
+    .edit-preferences-container {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .form-title {
+        font-size: 28px;
+        margin-left: -160px;
+    }
+
+    .form-field {
+        margin-left: 90px;
+    }
+
+    .form-field label {
+        font-size: 22px;
+    }
+
+    .form-field input[type="text"],
+    .form-field input[type="number"],
+    .form-field select {
+        padding: 16px;
+        font-size: 22px;
+    }
+
+    .form-field label span {
+        font-size: 22px;
+    }
+
+    .btn-update {
+        font-size: 24px;
+        padding: 16px 32px;
+    }
 }
