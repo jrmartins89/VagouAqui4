@@ -2,15 +2,27 @@
 
 /* Container for the login form */
 .container {
-    padding: 20px;
-    background-color: #f5f5f5;
+    background-image: url('https://media.gettyimages.com/id/83375946/pt/foto/college-dorm-hallway.jpg?s=612x612&w=0&k=20&c=KnkPhSTzkyEHq2YBUAPpV0cLeVCih4324ZrvIrfNBUI=');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 /* Form input fields */
 .input-field {
     margin-bottom: 20px;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+
 }
 
 /* Error message styles */
@@ -27,7 +39,6 @@
     width: 100%; /* Button takes full width of the container */
     color: #000000;
     text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
-
 }
 
 .btn-large:hover {
@@ -54,13 +65,18 @@ label {
 h4 {
     font-size: 24px;
     margin-bottom: 20px;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+
 }
 
 /* Link style */
 a {
-    color: #2196F3;
     text-decoration: none;
     font-weight: bold;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+
 }
 
 a:hover {
