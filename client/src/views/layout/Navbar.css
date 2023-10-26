@@ -67,11 +67,11 @@
 .btn-logout {
     background-color: #9d0101;
     color: #fff;
-    margin: 0;
     padding: 6px 8px;
     line-height: 1;
     white-space: nowrap;
     font-size: 0.8rem;
+    margin-bottom: 20px;
 }
 
 /* Media queries and responsive styles */
