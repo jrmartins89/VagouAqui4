@@ -22,10 +22,12 @@
 /* Submit button */
 .btn-large {
     background-color: #2196F3;
-    color: #fff;
     font-weight: bold;
     transition: background-color 0.3s ease-in-out;
     width: 100%; /* Button takes full width of the container */
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+
 }
 
 .btn-large:hover {
