@@ -17,13 +17,13 @@ class MainPage extends Component {
                         <p className="description">
                             Portal de anúncios de aluguéis em Florianópolis indexados a partir de técnicas de WebScrapping
                         </p>
-                        <p className="flow-text grey-text text-darken-1">INE - UFSC - 2023</p>
+                        <p className="description">INE - UFSC - 2023</p>
                         <br />
                         {isAuthenticated ? (
                             <div className="col s6">
                                 <Link
                                     to="/products"
-                                    className="btn button btn-produtos waves-effect waves-light hoverable"
+                                    className="btn button btn-produtos"
                                 >
                                     Anúncios
                                 </Link>
@@ -32,7 +32,7 @@ class MainPage extends Component {
                             <div className="col s6">
                                 <Link
                                     to="/register"
-                                    className="btn button btn-cadastro waves-effect waves-light hoverable"
+                                    className="btn button btn-cadastro"
                                 >
                                     Cadastro
                                 </Link>
@@ -41,7 +41,7 @@ class MainPage extends Component {
                         <div className="col s6">
                             <Link
                                 to="/login"
-                                className="btn button btn-login waves-effect waves-light hoverable"
+                                className="btn button btn-login"
                             >
                                 Log In
                             </Link>
