@@ -12,9 +12,6 @@
     justify-content: space-between;
     align-items: center;
     height: 48px;
-    color: #000000;
-    text-shadow: -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff, 0.5px 0.5px 0 #ffffff; /* Add text shadow for black outline */
-
 }
 
 /* Style the "Edit Preferences" button */
@@ -41,8 +38,6 @@
     white-space: normal;
     font-size: 0.8rem;
     color: #000000;
-    text-shadow: -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff, 0.5px 0.5px 0 #ffffff; /* Add text shadow for black outline */
-
 }
 
 /* Position the "Show Recommendations" button next to the "Edit Preferences" button */
