@@ -13,15 +13,15 @@ class Landing extends Component {
             <div className="landing-container"> {/* Apply the background image */}
                 <div className="welcome-text">
                     <h4>
-                        <b>Seja bem vindo,</b> {user.name.split(" ")[0]}
+                        <b>Seja bem vindo(a),</b> {user.name.split(" ")[0]}
                     </h4>
-                    <p className="flow-text grey-text text-darken-1">
-                        Você está logado no VagouAqui :D
+                    <p className="welcome-text">
+                        <b>Você está logado(a) no VagouAqui :D</b>
                     </p>
                     <div className="col s6">
                         <Link
                             to="/products"
-                            className="btn produtos-btn waves-effect waves-light hoverable"
+                            className="btn produtos-btn"
                         >
                             Anúncios
                         </Link>
