@@ -13,14 +13,14 @@ class EditPreferences extends Component {
             preferences: {
                 houseOrApartment: "",
                 genderPreference: "",
-                acceptsPets: "",
+                acceptsPets: false,
                 location: "",
                 roommates: "",
                 leaseLength: "",
                 budget: "",
-                wheelchairAccessible: "",
+                wheelchairAccessible: false,
                 noiseLevel: "",
-                acceptSmoker: "",
+                acceptSmoker: false,
                 // Add more preference fields as needed
             },
         };
@@ -153,7 +153,7 @@ class EditPreferences extends Component {
                                 checked={preferences.acceptsPets}
                                 onChange={this.onChange}
                             />
-                            <span className="checkbox-text">Aceita Pets?</span>
+                            <span className="checkbox-text"><b>Aceita Pets?</b></span>
                         </div>
                         <div className="form-field checkbox-label">
                             <input
@@ -162,7 +162,7 @@ class EditPreferences extends Component {
                                 checked={preferences.wheelchairAccessible}
                                 onChange={this.onChange}
                             />
-                            <span className="checkbox-text">Acessível à cadeirantes?</span>
+                            <span className="checkbox-text"><b>Acessível à cadeirantes?</b></span>
                         </div>
                         <div className="form-field checkbox-label">
                             <input
@@ -171,7 +171,7 @@ class EditPreferences extends Component {
                                 checked={preferences.acceptSmoker}
                                 onChange={this.onChange}
                             />
-                            <span className="checkbox-text">Fumante?</span>
+                            <span className="checkbox-text"><b>Fumante?</b></span>
                         </div>
                         <div className="form-container">
                             <button className="btn-update" type="submit">
