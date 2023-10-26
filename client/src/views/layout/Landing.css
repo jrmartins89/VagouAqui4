@@ -36,9 +36,6 @@ h4 {
 /* "Produtos" button */
 .produtos-btn {
     background-color: #2196F3; /* Blue color */
-    color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
-
 }
 
 /* "Logout" button */
@@ -62,12 +59,6 @@ h4 {
     align-items: center;
     text-align: center;
 }
-
-.welcome-text {
-    color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
-}
-
 
 /* Responsive styles */
 @media (max-width: 768px) {

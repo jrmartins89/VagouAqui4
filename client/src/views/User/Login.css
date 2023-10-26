@@ -20,9 +20,6 @@
 /* Form input fields */
 .input-field {
     margin-bottom: 20px;
-    color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
-
 }
 
 /* Error message styles */
@@ -37,8 +34,6 @@
     font-weight: bold;
     transition: background-color 0.3s ease-in-out;
     width: 100%; /* Button takes full width of the container */
-    color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
 
 .btn-large:hover {
@@ -74,9 +69,6 @@ h4 {
 a {
     text-decoration: none;
     font-weight: bold;
-    color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
-
 }
 
 a:hover {

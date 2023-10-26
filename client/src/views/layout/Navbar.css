@@ -37,7 +37,7 @@
     line-height: 1;
     white-space: normal;
     font-size: 0.8rem;
-    color: #000000;
+    color: #ffffff;
 }
 
 /* Position the "Show Recommendations" button next to the "Edit Preferences" button */
@@ -72,9 +72,6 @@
     white-space: nowrap;
     font-size: 0.8rem;
     margin-bottom: 20px;
-    color: #000000;
-    text-shadow: -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff, 0.5px 0.5px 0 #ffffff; /* Add text shadow for black outline */
-
 }
 
 /* Media queries and responsive styles */
