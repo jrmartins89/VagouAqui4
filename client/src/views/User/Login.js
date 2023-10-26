@@ -52,13 +52,13 @@ class Login extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
+                        <Link to="/">
                             <i className="material-icons left">keyboard_backspace</i> Voltar ao início
                         </Link>
                         <div className="col s12 heading">
                             <h4>Faça o login</h4>
-                            <p className="grey-text text-darken-1">
-                                Ainda não é cadastrado? <Link to="/register">Cadastre-se</Link>
+                            <p className="col s12 heading">
+                               <b> Ainda não é cadastrado?</b> <Link to="/register">Cadastre-se</Link>
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
