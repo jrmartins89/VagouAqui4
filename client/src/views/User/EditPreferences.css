@@ -2,16 +2,24 @@
 .edit-preferences-container {
     padding-top: 50px;
     padding-bottom: 50px;
+    background-image: url('https://media.gettyimages.com/id/1317794799/pt/foto/interior-view-of-a-dormitory-at-ludgrove-school-an-independent-preparatory-boarding-school-in.jpg?s=612x612&w=0&k=20&c=smdb9Mm4Cob81lalCjFOKF_frGQucRGLqsJntt7WY2w=');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .edit-preferences-form {
     padding-left: 11.250px;
+    margin-left: 180px;
 }
 
 .form-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    margin-left: -120px;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
 
 /* Add this CSS class for spacing between form elements */
@@ -23,7 +31,8 @@
 /* Style the label for preference fields */
 .form-field label {
     font-size: 16px;
-    color: #333;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
 
 /* Style the input for preference fields */
@@ -36,11 +45,13 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    color: #333;
+    font-weight: bold;
+    color: #fff; /* Set text color to white */
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Add text shadow for black outline */
 }
 
 /* Style the checkbox input for preference fields */
-.form-field checkbox-label input[type="checkbox"] {
+.form-field .checkbox-label input[type="checkbox"] {
     position: absolute;
     opacity: 0;
 }
@@ -56,7 +67,8 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: #333;
+    color: #fff; /* Set text color to white */
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Add text shadow for black outline */
 }
 
 .checkbox-text {
@@ -76,7 +88,7 @@
     border-radius: 4px;
     padding: 10px 20px;
     cursor: pointer;
-    margin-left: 60px;
+    margin-left: 100px;
 }
 
 /* Responsive styles */
