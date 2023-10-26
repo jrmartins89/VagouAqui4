@@ -19,7 +19,7 @@ h4 {
 .flow-text {
     font-size: 18px;
     text-align: center;
-    color: #555;
+    color: #000000;
     margin-top: 10px;
 }
 
@@ -62,7 +62,7 @@ h4 {
 }
 
 .welcome-text {
-    color: #fff; /* Text color for better visibility on the background */
+    color: #000000; /* Text color for better visibility on the background */
 }
 
 
