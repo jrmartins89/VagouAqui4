@@ -36,7 +36,9 @@ h4 {
 /* "Produtos" button */
 .produtos-btn {
     background-color: #2196F3; /* Blue color */
-    color: white;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+
 }
 
 /* "Logout" button */
@@ -62,7 +64,8 @@ h4 {
 }
 
 .welcome-text {
-    color: #000000; /* Text color for better visibility on the background */
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
 
 
