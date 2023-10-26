@@ -263,7 +263,7 @@
     .form-field input[type="text"],
     .form-field input[type="number"],
     .form-field select {
-        padding: 16px;
+        padding: 6px;
         font-size: 22px;
     }
 
