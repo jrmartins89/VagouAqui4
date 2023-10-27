@@ -96,7 +96,7 @@ class Register extends Component {
         };
 
         return (
-            <div className="container">
+            <div className="register-container">
                 <div className="row">
                     <div className="form-container">
                         <Link to="/" className="btn-flat">
