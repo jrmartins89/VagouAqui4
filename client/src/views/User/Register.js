@@ -178,7 +178,7 @@ class Register extends Component {
 
                             {/* Preferences Fields */}
                             <div className="form-field-input">
-                                <i className={classnames("material-icons prefix", fieldIcons.location)}></i>
+                                <i className={classnames("", fieldIcons.location)}></i>
                                 <input
                                     id="preferences.location"
                                     name="location"
@@ -189,7 +189,7 @@ class Register extends Component {
                                 <label htmlFor="preferences.location" className="form-label">Bairro preferencial para locação</label>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("material-icons prefix", fieldIcons.budget)}></i>
+                                <i className={classnames("", fieldIcons.budget)}></i>
                                 <input
                                     id="preferences.budget"
                                     name="budget"
