@@ -17,6 +17,9 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    margin-left: -120px;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
 
 .login-link {
@@ -25,8 +28,8 @@
 
 /* Add this CSS class for spacing between form elements */
 .form-field {
-    position: relative; /* Ensure relative positioning for the container */
-    margin-bottom: 20px; /* You can adjust the margin to control the spacing between form fields */
+    margin-bottom: 20px;
+    margin-left: 60px;
 }
 
 /* Style the icon position for preference field selects */
@@ -40,8 +43,9 @@
 
 /* Style the label for preference fields */
 .form-field label {
-    font-size: 16px; /* Adjust font size as needed */
-    color: #333; /* Text color */
+    font-size: 16px;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
 
 /* Style the select input for preference fields */
