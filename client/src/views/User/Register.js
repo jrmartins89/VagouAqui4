@@ -214,7 +214,7 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <label className="form-label">Procuro anúncios de aluguéis destinados à:</label>
-                                <i className={classnames("material-icons prefix", fieldIcons.genderPreference)}></i>
+                                <i className={classnames("", fieldIcons.genderPreference)}></i>
                                 <select
                                     id="preferences.genderPreference"
                                     name="genderPreference"
@@ -231,7 +231,7 @@ class Register extends Component {
                             {/* Add more preference fields here */}
                             <div className="form-field">
                                 <label className="form-label">Aluguel compartilhado?</label>
-                                <i className={classnames("material-icons prefix", fieldIcons.roommates)}></i>
+                                <i className={classnames("", fieldIcons.roommates)}></i>
                                 <select
                                     id="preferences.roommates"
                                     name="roommates"
@@ -245,7 +245,7 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <label className="form-label">Duração do aluguel</label>
-                                <i className={classnames("material-icons prefix", fieldIcons.leaseLength)}></i>
+                                <i className={classnames("", fieldIcons.leaseLength)}></i>
                                 <select
                                     id="preferences.leaseLength"
                                     name="leaseLength"
@@ -259,7 +259,7 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <label className="form-label">Nível de barulho</label>
-                                <i className={classnames("material-icons prefix", fieldIcons.noiseLevel)}></i>
+                                <i className={classnames("", fieldIcons.noiseLevel)}></i>
                                 <select
                                     id="preferences.noiseLevel"
                                     name="noiseLevel"
@@ -273,7 +273,7 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className={classnames("material-icons prefix", fieldIcons.acceptsPets)}></i>
+                                    <i className={classnames("", fieldIcons.acceptsPets)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -288,7 +288,7 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className={classnames("material-icons prefix", fieldIcons.wheelchairAccessible)}></i>
+                                    <i className={classnames("", fieldIcons.wheelchairAccessible)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -303,7 +303,7 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className={classnames("material-icons prefix", fieldIcons.acceptSmoker)}></i>
+                                    <i className={classnames("", fieldIcons.acceptSmoker)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -318,9 +318,9 @@ class Register extends Component {
                             </div>
                             {/* Add more preference fields here */}
 
-                            <div className="form-container">
+                            <div className="form-button-container">
                                 <button
-                                    className="btn btn-large waves-effect waves-light hoverable btn-register"
+                                    className="btn btn-large"
                                     type="submit"
                                 >
                                     Salvar
