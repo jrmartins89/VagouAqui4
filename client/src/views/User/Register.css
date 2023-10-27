@@ -10,17 +10,17 @@
 }
 
 .form-container {
-    padding-left: 11.250px;
+    padding-left: 149.25px;
 }
 .form-container-login{
-    padding-left: 540px;
+    margin-left: 365px;
 }
 
 .form-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    margin-left: -120px;
+    margin-left: -256px;
     color: #000000;
     text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
@@ -74,9 +74,24 @@
 .form-field label input[type="checkbox"] {
     position: absolute;
     opacity: 0;
-    margin-left: -43px;
 }
 
+.btn-large-register{
+    height: auto;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    padding: 13px 44px;
+    text-decoration: none;
+    white-space: normal;
+    margin: 10px auto; /* Center buttons horizontally */
+    cursor: pointer;
+    background-color: #007bff; /* Default button color */
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
 .form-label{
     font-size: 20px;
     color: #000000;
@@ -87,7 +102,5 @@
     padding-left: 30px; /* Add space for the checkbox */
     font-size: 16px; /* Adjust font size as needed */
     color: #333; /* Text color */
-    margin-left: -43px;
+    margin-left: -2px;
 }
-
-/* Add more styles as needed */

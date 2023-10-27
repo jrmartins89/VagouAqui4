@@ -320,7 +320,7 @@ class Register extends Component {
 
                             <div className="form-button-container">
                                 <button
-                                    className="btn btn-large"
+                                    className="btn-large-register"
                                     type="submit"
                                 >
                                     Salvar
