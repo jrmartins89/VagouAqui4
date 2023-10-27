@@ -84,6 +84,12 @@
     opacity: 0;
 }
 
+.btn-flat-register{
+    color: #2196F3;
+    font-weight: bold;
+    width: 100%;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+}
 .btn-large-register{
     height: auto;
     display: flex;
@@ -103,6 +109,7 @@
 .form-label{
     font-size: 20px;
     color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
 
 /* Style the checkbox label for preference fields */

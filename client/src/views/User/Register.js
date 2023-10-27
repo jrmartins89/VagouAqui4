@@ -101,7 +101,7 @@ class Register extends Component {
                 <div className="image-container">
                 <div className="row">
                     <div className="form-container">
-                        <Link to="/" className="btn-flat">
+                        <Link to="/" className="btn-flat-register">
                             <i className="material-icons left">keyboard_backspace</i> Voltar ao início
                         </Link>
                         <div className="form-container">
