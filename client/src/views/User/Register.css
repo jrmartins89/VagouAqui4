@@ -12,6 +12,9 @@
 .form-container {
     padding-left: 11.250px;
 }
+.form-container-login{
+    padding-left: 540px;
+}
 
 .form-title {
     font-size: 24px;

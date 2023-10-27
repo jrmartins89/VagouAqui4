@@ -106,7 +106,7 @@ class Register extends Component {
                             <h4 className="form-title">
                                 <b>Cadastre-se</b> abaixo
                             </h4>
-                            <p className="form-container">
+                            <p className="form-container-login">
                                 Já possui uma conta? <Link to="/login" className="login-link">Fazer log in</Link>
                             </p>
                         </div>
