@@ -323,7 +323,7 @@ class Register extends Component {
                                     className="btn btn-large waves-effect waves-light hoverable btn-register"
                                     type="submit"
                                 >
-                                    Cadastra-se
+                                    Salvar
                                 </button>
                             </div>
                         </form>
