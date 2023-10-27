@@ -28,8 +28,9 @@
 
 /* Add this CSS class for spacing between form elements */
 .form-field {
-    margin-bottom: 20px;
-    margin-left: 60px;
+    margin-bottom: 22px;
+    margin-left: 90px;
+    margin-right: 20px;
 }
 
 /* Style the icon position for preference field selects */
