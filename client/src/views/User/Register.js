@@ -96,14 +96,16 @@ class Register extends Component {
         };
 
         return (
+
             <div className="register-container">
+                <div className="image-container">
                 <div className="row">
                     <div className="form-container">
                         <Link to="/" className="btn-flat">
                             <i className="material-icons left">keyboard_backspace</i> Voltar ao início
                         </Link>
                         <div className="form-container">
-                            <h4 className="form-title">
+                            <h4 className="form-title-register">
                                 <b>Cadastre-se</b> abaixo
                             </h4>
                             <p className="form-container-login">
@@ -329,6 +331,7 @@ class Register extends Component {
                         </form>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }
