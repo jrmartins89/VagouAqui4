@@ -112,7 +112,7 @@ class Register extends Component {
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-field-input">
-                                <i className={classnames("material-icons prefix", fieldIcons.name)}></i>
+                                <i className={classnames("", fieldIcons.name)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.name}
@@ -128,7 +128,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("material-icons prefix", fieldIcons.email)}></i>
+                                <i className={classnames("", fieldIcons.email)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -144,7 +144,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("material-icons prefix", fieldIcons.password)}></i>
+                                <i className={classnames("", fieldIcons.password)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -160,7 +160,7 @@ class Register extends Component {
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("material-icons prefix", fieldIcons.password2)}></i>
+                                <i className={classnames("", fieldIcons.password2)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password2}
