@@ -111,7 +111,7 @@ class Register extends Component {
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className="form-field">
+                            <div className="form-field-input">
                                 <i className={classnames("material-icons prefix", fieldIcons.name)}></i>
                                 <input
                                     onChange={this.onChange}
@@ -127,7 +127,7 @@ class Register extends Component {
                                 <label htmlFor="name" className="form-label">Nome</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
-                            <div className="form-field">
+                            <div className="form-field-input">
                                 <i className={classnames("material-icons prefix", fieldIcons.email)}></i>
                                 <input
                                     onChange={this.onChange}
@@ -143,7 +143,7 @@ class Register extends Component {
                                 <label htmlFor="email" className="form-label">Email</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
-                            <div className="form-field">
+                            <div className="form-field-input">
                                 <i className={classnames("material-icons prefix", fieldIcons.password)}></i>
                                 <input
                                     onChange={this.onChange}
@@ -159,7 +159,7 @@ class Register extends Component {
                                 <label htmlFor="password" className="form-label">Digitar Senha</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
-                            <div className="form-field">
+                            <div className="form-field-input">
                                 <i className={classnames("material-icons prefix", fieldIcons.password2)}></i>
                                 <input
                                     onChange={this.onChange}
@@ -177,7 +177,7 @@ class Register extends Component {
                             </div>
 
                             {/* Preferences Fields */}
-                            <div className="form-field">
+                            <div className="form-field-input">
                                 <i className={classnames("material-icons prefix", fieldIcons.location)}></i>
                                 <input
                                     id="preferences.location"
@@ -188,7 +188,7 @@ class Register extends Component {
                                 />
                                 <label htmlFor="preferences.location" className="form-label">Bairro preferencial para locação</label>
                             </div>
-                            <div className="form-field">
+                            <div className="form-field-input">
                                 <i className={classnames("material-icons prefix", fieldIcons.budget)}></i>
                                 <input
                                     id="preferences.budget"
