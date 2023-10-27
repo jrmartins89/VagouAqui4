@@ -74,6 +74,7 @@
 .form-field label input[type="checkbox"] {
     position: absolute;
     opacity: 0;
+    margin-left: -43px;
 }
 
 .form-label{
