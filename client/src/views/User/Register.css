@@ -73,6 +73,11 @@
     opacity: 0;
 }
 
+.form-label{
+    font-size: 16px;
+    color: #000000;
+}
+
 /* Style the checkbox label for preference fields */
 .form-field label span {
     padding-left: 30px; /* Add space for the checkbox */
