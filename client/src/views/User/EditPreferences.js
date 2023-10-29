@@ -47,7 +47,7 @@ class EditPreferences extends Component {
                 [name]: type === "checkbox" ? checked : value,
             },
         }));
-    }
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -59,7 +59,7 @@ class EditPreferences extends Component {
 
         // Dispatch an action to update user preferences
         this.props.updateUserPreferences(updatedPreferences, this.props.history);
-    }
+    };
 
     render() {
         const { preferences } = this.state;
