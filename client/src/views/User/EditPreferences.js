@@ -188,7 +188,7 @@ class EditPreferences extends Component {
                                 </label>
                             </p>
                         </div>
-                        <div className="form-container">
+                        <div className="form-container-preferences">
                             <button className="btn-update" type="submit">
                                 Atualizar
                             </button>
