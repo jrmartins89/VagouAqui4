@@ -27,7 +27,9 @@
     padding: 4px 6px;
     text-decoration: none;
     white-space: normal;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    margin-left: 0px;
+    margin-top: 10px;
 }
 
 .btn-edit-prefs p,
@@ -37,14 +39,6 @@
     line-height: 1;
     white-space: normal;
     font-size: 0.8rem;
-    color: #ffffff;
-}
-
-/* Position the "Show Recommendations" button next to the "Edit Preferences" button */
-.btn-show-recommendations {
-    margin-left: 0px;
-    font-weight: bold;
-    margin-top: 10px;
 }
 
 /* Style the user info container */
