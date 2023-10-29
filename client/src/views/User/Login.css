@@ -96,3 +96,8 @@
 .login-button:hover {
     background-color: #1976D2;
 }
+
+/* Change font color of placeholders for email and password fields */
+.input-field input::placeholder {
+    color: #000000; /* Change this color to your desired color */
+}
