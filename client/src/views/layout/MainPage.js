@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux"; // Import connect from React Redux
-import "./MainPage.css"; // Import the CSS file
+import { connect } from "react-redux";
+import "./MainPage.css";
 
 class MainPage extends Component {
     render() {
         const { isAuthenticated } = this.props.auth;
 
         return (
-            <div className="container-valign container valign-wrapper">
+            <div className="container-valign">
                 <div className="row">
                     <div className="col s12 center-align">
                         <h4 className="title">
@@ -21,28 +21,19 @@ class MainPage extends Component {
                         <br />
                         {isAuthenticated ? (
                             <div className="col s6">
-                                <Link
-                                    to="/products"
-                                    className="btn button btn-produtos"
-                                >
+                                <Link to="/products" className="btn button btn-produtos">
                                     Anúncios
                                 </Link>
                             </div>
                         ) : (
                             <div className="col s6">
-                                <Link
-                                    to="/register"
-                                    className="btn button btn-cadastro"
-                                >
+                                <Link to="/register" className="btn button btn-cadastro">
                                     Cadastro
                                 </Link>
                             </div>
                         )}
                         <div className="col s6">
-                            <Link
-                                to="/login"
-                                className="btn button btn-login"
-                            >
+                            <Link to="/login" className="btn button btn-login">
                                 Log In
                             </Link>
                         </div>
@@ -57,4 +48,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps)(MainPage); // Connect the component to Redux
+export default connect(mapStateToProps)(MainPage);
