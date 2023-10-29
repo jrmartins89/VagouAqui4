@@ -146,32 +146,47 @@ class EditPreferences extends Component {
                                 <option value="barulhento">Social</option>
                             </select>
                         </div>
-                        <div className="form-field checkbox-label">
-                            <input
-                                type="checkbox"
-                                name="acceptsPets"
-                                checked={preferences.acceptsPets}
-                                onChange={this.onChange}
-                            />
-                            <span className="checkbox-text"><b>Aceita Pets?</b></span>
+                        <div className="input-field col s12 form-field">
+                            <p className="checkbox-label">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        id="preferences.acceptsPets"
+                                        name="acceptsPets"
+                                        checked={preferences.acceptsPets}
+                                        onChange={this.onChange}
+                                    />
+                                    <span className="checkbox-text">Aceita Pets?</span>
+                                </label>
+                            </p>
                         </div>
-                        <div className="form-field checkbox-label">
-                            <input
-                                type="checkbox"
-                                name="wheelchairAccessible"
-                                checked={preferences.wheelchairAccessible}
-                                onChange={this.onChange}
-                            />
-                            <span className="checkbox-text"><b>Acessível à cadeirantes?</b></span>
+                        <div className="input-field col s12 form-field">
+                            <p className="checkbox-label">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        id="preferences.wheelchairAccessible"
+                                        name="wheelchairAccessible"
+                                        checked={preferences.wheelchairAccessible}
+                                        onChange={this.onChange}
+                                    />
+                                    <span className="checkbox-text">Acessível à cadeirantes?</span>
+                                </label>
+                            </p>
                         </div>
-                        <div className="form-field checkbox-label">
-                            <input
-                                type="checkbox"
-                                name="acceptSmoker"
-                                checked={preferences.acceptSmoker}
-                                onChange={this.onChange}
-                            />
-                            <span className="checkbox-text"><b>Fumante?</b></span>
+                        <div className="input-field col s12 form-field">
+                            <p className="checkbox-label">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        id="preferences.acceptSmoker"
+                                        name="acceptSmoker"
+                                        checked={preferences.acceptSmoker}
+                                        onChange={this.onChange}
+                                    />
+                                    <span className="checkbox-text">Fumante?</span>
+                                </label>
+                            </p>
                         </div>
                         <div className="form-container">
                             <button className="btn-update" type="submit">
