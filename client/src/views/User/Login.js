@@ -99,7 +99,7 @@ class Login extends Component {
                             <div className="col s12">
                                 <button
                                     type="submit"
-                                    className="btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="btn-large"
                                 >
                                     Login
                                 </button>
