@@ -73,6 +73,8 @@
 
 .checkbox-text {
     padding-left: 10px;
+    font-weight: bold;
+    color: #000000;
 }
 
 /* Additional styles for form elements */
