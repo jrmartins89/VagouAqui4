@@ -17,7 +17,7 @@ class Navbar extends Component {
                 <nav className="z-depth-0">
                     <div className="nav-wrapper">
                         <Link to="/" className="col s5 brand-logo center black-text">
-                            Início
+                           <b> Início</b>
                         </Link>
                         <div className="nav-buttons"> {/* Wrap the buttons in a div */}
                             {isAuthenticated && (
