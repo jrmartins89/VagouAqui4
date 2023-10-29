@@ -318,8 +318,6 @@ class Register extends Component {
                                     </label>
                                 </p>
                             </div>
-                            {/* Add more preference fields here */}
-
                             <div className="form-button-container">
                                 <button
                                     className="btn-large-register"
