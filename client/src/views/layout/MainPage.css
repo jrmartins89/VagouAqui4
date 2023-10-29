@@ -1,10 +1,13 @@
 /* Styles for the outer container */
 .container-valign {
-    height: 75vh;
+    height: 95vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url('https://media.gettyimages.com/id/1335298641/pt/foto/university-dorm-room.jpg?s=612x612&w=0&k=20&c=pU32Yo1uwPq4Tu0W9K1B9d94gp0Q8OcOIamG0cCRJJg=');
+    background-size: cover;
+    background-position: center;
 }
 
 /* Styles for the title */
