@@ -1,13 +1,14 @@
-/* login.css */
+/* Login.css */
 
 /* Container for the login form */
-.container {
+.login-container {
     background-image: url('https://media.gettyimages.com/id/83375946/pt/foto/college-dorm-hallway.jpg?s=612x612&w=0&k=20&c=KnkPhSTzkyEHq2YBUAPpV0cLeVCih4324ZrvIrfNBUI=');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     height: 100vh;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -17,69 +18,81 @@
     padding-bottom: 50px;
 }
 
-/* Form input fields */
-.input-field {
+/* Content within the login container */
+.login-content {
+    width: 100%;
+    max-width: 400px; /* Adjust the max width as needed */
+    background: #fff; /* Background color for the content */
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+
+/* Back link style */
+.back-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #2196F3;
+    display: block;
     margin-bottom: 20px;
 }
 
-/* Error message styles */
-.red-text {
-    color: red;
-    font-size: 14px;
-}
-
-/* Submit button */
-.btn-large {
-    background-color: #2196F3;
-    font-weight: bold;
-    transition: background-color 0.3s ease-in-out;
-    width: 100%; /* Button takes full width of the container */
-}
-
-.btn-large:hover {
-    background-color: #1976D2;
-}
-
-/* Back to home button */
-.btn-flat {
-    color: #2196F3;
-    font-weight: bold;
-    width: 100%; /* Button takes full width of the container */
-}
-
-.btn-flat:hover {
+.back-link:hover {
     text-decoration: underline;
-}
-
-/* Form labels */
-label {
-    font-weight: bold;
 }
 
 /* Heading style */
-h4 {
-    font-size: 24px;
+.heading {
+    text-align: center;
     margin-bottom: 20px;
-    color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+}
 
+.heading h4 {
+    font-size: 24px;
+    color: #000000;
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 
 /* Link style */
-a {
+.heading a {
     text-decoration: none;
     font-weight: bold;
+    color: #2196F3;
 }
 
-a:hover {
+.heading a:hover {
     text-decoration: underline;
 }
 
-/* Media query for small screens */
-@media (max-width: 768px) {
-    /* Adjust styles for smaller screens */
-    .container {
-        max-width: 100%; /* Allow the container to take full width on small screens */
-        margin: 0 10px; /* Add some horizontal margin for spacing */
-    }
+/* Form input fields */
+.input-field {
+    margin-bottom: 20px;
+    position: relative;
+    color: #000000;
+}
+
+/* Error message styles */
+.error-text {
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+}
+
+/* Submit button style */
+.login-button {
+    background-color: #2196F3;
+    color: #fff;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.login-button:hover {
+    background-color: #1976D2;
 }

@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import classnames from "classnames";
-import "./Login.css"; // Import the CSS file
+import "./Login.css"; // Import the custom CSS file
 
 class Login extends Component {
     constructor() {
@@ -12,7 +11,7 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            errors: {}
+            errors: {},
         };
     }
 
@@ -28,7 +27,7 @@ class Login extends Component {
         }
         if (nextProps.errors) {
             this.setState({
-                errors: nextProps.errors
+                errors: nextProps.errors,
             });
         }
     }
@@ -41,7 +40,7 @@ class Login extends Component {
         e.preventDefault();
         const userData = {
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
         };
         this.props.loginUser(userData);
     };
@@ -49,63 +48,53 @@ class Login extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/">
-                            <i className="material-icons left">keyboard_backspace</i> Voltar ao início
-                        </Link>
-                        <div className="col s12 heading">
-                            <h4>Faça o login</h4>
-                            <p className="col s12 heading">
-                               <b> Ainda não é cadastrado?</b> <Link to="/register">Cadastre-se</Link>
-                            </p>
-                        </div>
-                        <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email || errors.emailnotfound}
-                                    id="email"
-                                    type="email"
-                                    className={classnames("", {
-                                        invalid: errors.email || errors.emailnotfound
-                                    })}
-                                />
-                                <label htmlFor="email">Email</label>
-                                <span className="red-text">
-                                    {errors.email}
-                                    {errors.emailnotfound}
-                </span>
-                            </div>
-                            <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password || errors.passwordincorrect}
-                                    id="password"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password || errors.passwordincorrect
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
-                                <span className="red-text">
-                                    {errors.password}
-                                    {errors.passwordincorrect}
-                </span>
-                            </div>
-                            <div className="col s12">
-                                <button
-                                    type="submit"
-                                    className="btn-large"
-                                >
-                                    Login
-                                </button>
-                            </div>
-                        </form>
+            <div className="login-container">
+                <div className="login-content">
+                    <Link to="/" className="back-link">
+                        Voltar ao início
+                    </Link>
+                    <div className="heading">
+                        <h4>Faça o login</h4>
+                        <p>
+                            <b>Ainda não é cadastrado?</b>{" "}
+                            <Link to="/register">Cadastre-se</Link>
+                        </p>
                     </div>
+                    <form noValidate onSubmit={this.onSubmit}>
+                        <div className="input-field">
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.email}
+                                error={errors.email || errors.emailnotfound}
+                                id="email"
+                                type="email"
+                                placeholder="Email"
+                            />
+                            <span className="error-text">
+                {errors.email}
+                                {errors.emailnotfound}
+              </span>
+                        </div>
+                        <div className="input-field">
+                            <input
+                                onChange={this.onChange}
+                                value={this.state.password}
+                                error={errors.password || errors.passwordincorrect}
+                                id="password"
+                                type="password"
+                                placeholder="Password"
+                            />
+                            <span className="error-text">
+                {errors.password}
+                                {errors.passwordincorrect}
+              </span>
+                        </div>
+                        <div className="button-container">
+                            <button type="submit" className="login-button">
+                                Login
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         );
@@ -115,12 +104,12 @@ class Login extends Component {
 Login.propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    errors: state.errors
+    errors: state.errors,
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);
