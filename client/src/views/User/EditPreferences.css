@@ -89,7 +89,7 @@
     border-radius: 4px;
     padding: 10px 20px;
     cursor: pointer;
-    margin-left: 100px;
+    margin-left: 300px;
     color: #000000; /* Set text color to white */
     text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
 }
