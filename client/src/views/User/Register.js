@@ -91,7 +91,7 @@ class Register extends Component {
                                 <b>Cadastre-se</b> abaixo
                             </h4>
                             <p className="form-container-login">
-                                Já possui uma conta? <Link to="/login" className="login-link">Fazer log in</Link>
+                                Já possui uma conta? <Link to="/login" className="login-link"><b>Fazer log in</b></Link>
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
