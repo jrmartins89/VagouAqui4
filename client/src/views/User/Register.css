@@ -140,6 +140,9 @@
         padding-left: 10px;
         font-size: 14px;
     }
+    .btn-large-register {
+        margin-left: 40px;
+    }
 }
 
 /* Additional responsive styles for other screen sizes can be added here */
