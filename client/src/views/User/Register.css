@@ -117,6 +117,9 @@
 
 /* Responsive styles for smaller screens (e.g., mobile devices) */
 @media (max-width: 600px) {
+    .image-container {
+        background-size: contain;
+    }
     .form-container {
         padding-left: 20px;
     }
@@ -188,5 +191,8 @@
     .form-field, .form-field-input {
         margin-left: 20px;
         margin-right: 20px;
+    }
+    .image-container {
+        background-size: contain;
     }
 }
