@@ -22,19 +22,19 @@ class MainPage extends Component {
                         {isAuthenticated ? (
                             <div className="col s6">
                                 <Link to="/products" className="btn button btn-produtos">
-                                    Anúncios
+                                    <b>Anúncios</b>
                                 </Link>
                             </div>
                         ) : (
                             <div className="col s6">
                                 <Link to="/register" className="btn button btn-cadastro">
-                                    Cadastro
+                                    <b>Cadastro</b>
                                 </Link>
                             </div>
                         )}
                         <div className="col s6">
                             <Link to="/login" className="btn button btn-login">
-                                Log In
+                            <b>Log In</b>
                             </Link>
                         </div>
                     </div>
