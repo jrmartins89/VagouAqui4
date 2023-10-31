@@ -1,10 +1,11 @@
 /* Register.css */
 
+/* Base styles for the component */
 .register-container {
     padding-bottom: 50px;
 }
 
-.image-container{
+.image-container {
     background-image: url('https://media.gettyimages.com/id/1321503267/pt/foto/a-college-dorm-with-classic-furniture-and-an-old-tv-in-the-morning.jpg?s=612x612&w=0&k=20&c=6ijRY0Kds8MbNTIUFSCv-GCdysbN5s4vGAUWfhl71Lk=');
     background-size: cover;
     background-repeat: repeat repeat;
@@ -20,7 +21,8 @@
 .form-container {
     padding-left: 149.25px;
 }
-.form-container-login{
+
+.form-container-login {
     margin-left: 365px;
 }
 
@@ -30,7 +32,7 @@
     margin-bottom: 20px;
     margin-left: -256px;
     color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 
 .login-link {
@@ -53,29 +55,28 @@
 /* Style the icon position for preference field selects */
 .form-field i.material-icons.prefix {
     position: absolute;
-    top: 50%; /* Vertically center the icon */
-    transform: translateY(-50%); /* Center the icon vertically */
-    left: 15px; /* Adjust the left distance as needed */
-    font-size: 24px; /* Adjust the icon size as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    font-size: 24px;
 }
 
 /* Style the label for preference fields */
 .form-field label {
     font-size: 16px;
     color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 
 /* Style the select input for preference fields */
 .form-field select {
     display: block;
-    width: calc(100% - 40px); /* Adjust width considering the icon width and left spacing */
-    /* Add space for the icon on the left */
+    width: calc(100% - 40px);
     padding: 10px 10px 10px 40px;
-    border: 1px solid #ccc; /* Border color */
+    border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px; /* Adjust font size as needed */
-    color: #333; /* Text color */
+    font-size: 16px;
+    color: #333;
 }
 
 /* Style the checkbox input for preference fields */
@@ -84,13 +85,14 @@
     opacity: 0;
 }
 
-.btn-flat-register{
+.btn-flat-back {
     color: #2196F3;
     font-weight: bold;
     width: 100%;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
-.btn-large-register{
+
+.btn-large-register {
     height: auto;
     display: flex;
     align-items: center;
@@ -99,23 +101,90 @@
     padding: 13px 44px;
     text-decoration: none;
     white-space: normal;
-    margin-left: 500px; /* Center buttons horizontally */
+    margin-left: 500px;
     cursor: pointer;
-    background-color: #007bff; /* Default button color */
+    background-color: #007bff;
     color: white;
     font-size: 25px;
     font-weight: bold;
 }
-.form-label{
+
+.form-label {
     font-size: 20px;
     color: #000000;
-    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff; /* Add text shadow for black outline */
+    text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 
-/* Style the checkbox label for preference fields */
-.form-field label span {
-    padding-left: 30px; /* Add space for the checkbox */
-    font-size: 16px; /* Adjust font size as needed */
-    color: #333; /* Text color */
-    margin-left: -2px;
+/* Responsive styles for smaller screens (e.g., mobile devices) */
+@media (max-width: 600px) {
+    .form-container {
+        padding-left: 20px;
+    }
+    .form-field, .form-field-input {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .form-field i.material-icons.prefix {
+        left: 5px;
+        font-size: 20px;
+    }
+    .form-label {
+        font-size: 18px;
+    }
+    .form-field select {
+        width: calc(100% - 10px);
+        padding: 10px 10px 10px 20px;
+        font-size: 14px;
+    }
+    .form-field label span {
+        padding-left: 10px;
+        font-size: 14px;
+    }
+
+    .ima
+}
+
+/* Additional responsive styles for other screen sizes can be added here */
+
+/* Styles for screens with a maximum width of 1200px (e.g., tablets) */
+@media (max-width: 1200px) {
+    .image-container {
+        background-size: contain;
+    }
+    .form-title-register {
+        font-size: 20px;
+        margin-left: -156px;
+    }
+}
+
+/* Styles for screens with a maximum width of 768px (e.g., tablets) */
+@media (max-width: 768px) {
+    .form-field, .form-field-input {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .form-field i.material-icons.prefix {
+        left: 5px;
+        font-size: 18px;
+    }
+    .form-label {
+        font-size: 16px;
+    }
+    .form-field select {
+        width: calc(100% - 10px);
+        padding: 10px 10px 10px 20px;
+        font-size: 14px;
+    }
+    .form-field label span {
+        padding-left: 10px;
+        font-size: 14px;
+    }
+}
+
+/* Styles for screens with a maximum width of 992px (e.g., small laptops) */
+@media (max-width: 992px) {
+    .form-field, .form-field-input {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
