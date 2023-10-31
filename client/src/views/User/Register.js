@@ -77,24 +77,6 @@ class Register extends Component {
     render() {
         const { errors, preferences } = this.state;
 
-        const fieldIcons = {
-            name: "account_circle",
-            email: "email",
-            password: "lock",
-            password2: "lock",
-            location: "location_on",
-            budget: "attach_money",
-            houseOrApartment: "home",
-            genderPreference: "people",
-            acceptsPets: "pets",
-            roommates: "groups",
-            leaseLength: "event",
-            wheelchairAccessible: "accessible",
-            noiseLevel: "volume_up",
-            acceptSmoker: "smoking_rooms",
-            // Add more fields and icons as needed
-        };
-
         return (
 
             <div className="register-container">
@@ -114,7 +96,6 @@ class Register extends Component {
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-field-input">
-                                <i className={classnames("", fieldIcons.name)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.name}
@@ -130,7 +111,6 @@ class Register extends Component {
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("", fieldIcons.email)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.email}
@@ -146,7 +126,6 @@ class Register extends Component {
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("", fieldIcons.password)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password}
@@ -162,7 +141,6 @@ class Register extends Component {
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("", fieldIcons.password2)}></i>
                                 <input
                                     onChange={this.onChange}
                                     value={this.state.password2}
@@ -180,7 +158,6 @@ class Register extends Component {
 
                             {/* Preferences Fields */}
                             <div className="form-field-input">
-                                <i className={classnames("", fieldIcons.location)}></i>
                                 <input
                                     id="preferences.location"
                                     name="location"
@@ -191,7 +168,6 @@ class Register extends Component {
                                 <label htmlFor="preferences.location" className="form-label">Bairro preferencial para locação</label>
                             </div>
                             <div className="form-field-input">
-                                <i className={classnames("", fieldIcons.budget)}></i>
                                 <input
                                     id="preferences.budget"
                                     name="budget"
@@ -216,7 +192,6 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <label className="form-label">Procuro anúncios de aluguéis destinados à:</label>
-                                <i className={classnames("", fieldIcons.genderPreference)}></i>
                                 <select
                                     id="preferences.genderPreference"
                                     name="genderPreference"
@@ -233,7 +208,6 @@ class Register extends Component {
                             {/* Add more preference fields here */}
                             <div className="form-field">
                                 <label className="form-label">Aluguel compartilhado?</label>
-                                <i className={classnames("", fieldIcons.roommates)}></i>
                                 <select
                                     id="preferences.roommates"
                                     name="roommates"
@@ -247,7 +221,6 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <label className="form-label">Duração do aluguel</label>
-                                <i className={classnames("", fieldIcons.leaseLength)}></i>
                                 <select
                                     id="preferences.leaseLength"
                                     name="leaseLength"
@@ -261,7 +234,6 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <label className="form-label">Nível de barulho</label>
-                                <i className={classnames("", fieldIcons.noiseLevel)}></i>
                                 <select
                                     id="preferences.noiseLevel"
                                     name="noiseLevel"
@@ -275,7 +247,6 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className={classnames("", fieldIcons.acceptsPets)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -290,7 +261,6 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className={classnames("", fieldIcons.wheelchairAccessible)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
@@ -305,7 +275,6 @@ class Register extends Component {
                             </div>
                             <div className="form-field">
                                 <p className="checkbox-label">
-                                    <i className={classnames("", fieldIcons.acceptSmoker)}></i>
                                     <label>
                                         <input
                                             type="checkbox"
