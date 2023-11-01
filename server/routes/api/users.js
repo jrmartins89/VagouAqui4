@@ -40,6 +40,7 @@ router.post("/register", (req, res) => {
                     wheelchairAccessible: req.body.preferences.wheelchairAccessible,
                     noiseLevel: req.body.preferences.noiseLevel,
                     acceptSmoker: req.body.preferences.acceptSmoker,
+                    hasFurniture: req.body.preferences.hasFurniture
                 }
             });
 

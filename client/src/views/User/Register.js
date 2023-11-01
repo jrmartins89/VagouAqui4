@@ -16,16 +16,17 @@ class Register extends Component {
             password2: "",
             errors: {},
             preferences: {
-                houseOrApartment: "casa", // Default to "casa"
-                genderPreference: "masculino", // Default to "masculino"
+                houseOrApartment: "casa",
+                genderPreference: "masculino",
                 acceptsPets: false,
                 location: "",
-                roommates: "sozinho", // Default to "sozinho"
-                leaseLength: "aluguel anual", // Default to "aluguel anual"
+                roommates: "sozinho",
+                leaseLength: "aluguel anual",
                 budget: "",
                 wheelchairAccessible: false,
-                noiseLevel: "tranquilo", // Default to "tranquilo"
-                acceptSmoker: false
+                noiseLevel: "tranquilo",
+                acceptSmoker: false,
+                hasFurniture:false
             }
         };
     }
@@ -57,7 +58,6 @@ class Register extends Component {
                 }
             }));
         } else {
-            // Handle changes in non-preference fields
             this.setState({ [e.target.id]: e.target.value });
         }
     };
@@ -284,6 +284,20 @@ class Register extends Component {
                                             onChange={this.onChange}
                                         />
                                         <span className="checkbox-text">Fumante?</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div className="form-field">
+                                <p className="checkbox-label">
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            id="preferences.hasFurniture"
+                                            name="hasFurniture"
+                                            checked={preferences.hasFurniture}
+                                            onChange={this.onChange}
+                                        />
+                                        <span className="checkbox-text">Local mobiliado?</span>
                                     </label>
                                 </p>
                             </div>

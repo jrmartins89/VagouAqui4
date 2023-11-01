@@ -3,8 +3,8 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { updateUserPreferences } from "../../actions/authActions";
-import "./EditPreferences.css"; // Import the CSS file
-import axios from "axios"; // Import axios for making API requests
+import "./EditPreferences.css";
+import axios from "axios";
 
 class EditPreferences extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class EditPreferences extends Component {
                 wheelchairAccessible: false,
                 noiseLevel: "",
                 acceptSmoker: false,
-                // Add more preference fields as needed
+                hasFurniture: false
             },
         };
     }
@@ -185,6 +185,20 @@ class EditPreferences extends Component {
                                         onChange={this.onChange}
                                     />
                                     <span className="checkbox-text">Fumante?</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div className="form-field">
+                            <p className="checkbox-label">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        id="preferences.hasFurniture"
+                                        name="hasFurniture"
+                                        checked={preferences.hasFurniture}
+                                        onChange={this.onChange}
+                                    />
+                                    <span className="checkbox-text">Local mobiliado?</span>
                                 </label>
                             </p>
                         </div>

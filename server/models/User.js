@@ -37,7 +37,9 @@ const PreferencesSchema = new Schema({
     acceptSmoker: {
         type: Boolean
     },
-    // Add more preference fields as needed
+    hasFurniture: {
+        type: Boolean
+    },
 });
 
 const UserSchema = new Schema({
