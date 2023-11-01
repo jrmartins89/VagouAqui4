@@ -1,4 +1,4 @@
-const Ad = require('../models/Ads'); // Replace with the actual path to your Ad model
+const Ad = require('../models/Ads');
 
 // Function to fetch ads from the database and generate recommendations
 async function generateRecommendations(userPreferences) {
@@ -36,6 +36,7 @@ async function generateRecommendations(userPreferences) {
                 wheelchairAccessible: ad.description.match(/acessível a cadeirantes|acesso à cadeirantes|acesso à cadeira de rodas/i),
                 noiseLevel: ad.description.match(/tranquilo|barulhento|local tranquilo|local perto do centro/i),
                 acceptSmoker: ad.description.match(/aceita fumante|fumante permitido/i),
+                hasFurniture:ad.description.match(/mobiliado |tem mobilia|possui móveis| possui moveis|tem algumas mobilias|mobilia inclusa/i)
             };
 
             // Calculate a score for the ad based on user preferences
