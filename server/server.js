@@ -83,11 +83,19 @@ mongoose
     });
 
 
-// Schedule the scraping task to run every two weeks
+// Schedule the task to run every Sunday at 11:00 p.m. (Brasilia time)
 function scheduleScrapingTask() {
-    // Schedule the task to run every two weeks (on Sunday at midnight)
-    schedule.scheduleJob({ hour: 23, minute: 0, dayOfWeek: 5 }, function () {
-        startScraping();
+    schedule.scheduleJob("0 23 * * 0", async function () {
+        try {
+            // Remove existing ads from the 'ads' collection
+            await Ad.deleteMany({});
+            console.log("Base atual de anúncios foi excluída com sucesso.");
+
+            // Start the scraping process
+            await startScraping();
+        } catch (error) {
+            console.error("Erro durante o processo de scraping:", error);
+        }
     });
 }
 
