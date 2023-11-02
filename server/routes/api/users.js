@@ -177,4 +177,19 @@ router.get("/me", passport.authenticate("jwt", { session: false }), (req, res) =
         });
 });
 
+// @route DELETE api/users/delete
+// @desc Delete the user's account
+// @access Private (requires authentication)
+router.delete("/delete", passport.authenticate("jwt", { session: false }), (req, res) => {
+    // User is authenticated, proceed with account deletion
+    User.findByIdAndRemove(req.user.id)
+        .then(() => {
+            res.json({ success: true, message: "Conta de usuário excluída com sucesso" });
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ error: "Erro do Servidor" });
+        });
+});
+
 module.exports = router;
