@@ -35,6 +35,10 @@
     font-weight: bold;
 }
 
+.btn-secondary{
+    font-weight: bold;
+}
+
 .text-warning{
     font-weight: bold;
     color: #9d0101;
