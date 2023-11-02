@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios"; // For making API requests
-import "./UserProfile.css";
+import "./UserPage.css";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 class UserPage extends Component {
     constructor() {
