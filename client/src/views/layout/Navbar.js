@@ -19,7 +19,7 @@ class Navbar extends Component {
                         <Link to="/" className="col s5 brand-logo center black-text">
                            <b> Início</b>
                         </Link>
-                        <div className="nav-buttons"> {/* Wrap the buttons in a div */}
+                        <div className="nav-buttons">
                             {isAuthenticated && (
                                 <Link to="/preferences" className="btn-edit-prefs">
                                     <p>Editar Preferências</p>
@@ -53,5 +53,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-// Wrap the Navbar component with withRouter to access the history object
 export default withRouter(connect(mapStateToProps, { logoutUser })(Navbar));
