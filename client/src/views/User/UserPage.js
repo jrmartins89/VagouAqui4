@@ -52,4 +52,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps)(withRouter(UserProfile));
+export default connect(mapStateToProps)(withRouter(UserPage));
