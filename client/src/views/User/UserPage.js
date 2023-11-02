@@ -86,7 +86,7 @@ class UserPage extends Component {
                                     Tem certeza de que deseja excluir a sua conta?
                                 </p>
                                 <button
-                                    className="btn btn-danger"
+                                    className="btn btn-danger-delete"
                                     onClick={this.confirmDelete}
                                 >
                                     Confirmar Exclusão
@@ -100,7 +100,7 @@ class UserPage extends Component {
                             </div>
                         ) : (
                             <button
-                                className="btn btn-danger"
+                                className="btn btn-danger-delete"
                                 onClick={this.handleDeleteAccount}
                             >
                                 Deletar conta
