@@ -48,7 +48,7 @@ class App extends Component {
                         <PrivateRoute exact path="/products" component={AdGrid} />
                         <PrivateRoute exact path="/preferences" component={EditPreferences} />
                         <PrivateRoute exact path="/recommendation" component={RecommendedGrid} />
-                        <PrivateRoute exact path="/user-page" component={UserPage} />
+                        <PrivateRoute exact path="/me" component={UserPage} />
                     </Switch>
                 </div>
             </Router>
