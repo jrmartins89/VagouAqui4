@@ -1,4 +1,3 @@
-// Import necessary modules and libraries
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -25,24 +24,20 @@ class MainPage extends Component {
                                 <Link to="/products" className="btn button btn-produtos">
                                     <b>Anúncios</b>
                                 </Link>
+                                <Link to="/me" className="btn button btn-profile">
+                                    <b>Perfil</b>
+                                </Link>
                             </div>
                         ) : (
                             <div className="col s6">
                                 <Link to="/register" className="btn button btn-cadastro">
                                     <b>Cadastro</b>
                                 </Link>
+                                <Link to="/login" className="btn button btn-login">
+                                    <b>Log In</b>
+                                </Link>
                             </div>
                         )}
-                        {isAuthenticated && (
-                            <Link to="/me" className="btn button btn-profile">
-                                <b>Perfil</b>
-                            </Link>
-                        )}
-                        <div className="col s6">
-                            <Link to="/login" className="btn button btn-login">
-                                <b>Log In</b>
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </div>

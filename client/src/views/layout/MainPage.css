@@ -58,6 +58,11 @@
     background-color: #f39c12; /* Choose your desired color */
 }
 
+.row .col.s6{
+    margin-left:190px;
+    width: 50%;
+}
+
 /* Responsive styles for buttons */
 @media (max-width: 576px) {
     .button {
