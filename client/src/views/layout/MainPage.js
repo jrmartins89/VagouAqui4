@@ -21,19 +21,19 @@ class MainPage extends Component {
                         <br />
                         {isAuthenticated ? (
                             <div className="col s6">
-                                <Link to="/products" className="btn button btn-produtos">
+                                <Link to="/products" className="btn btn-produtos">
                                     <b>Anúncios</b>
                                 </Link>
-                                <Link to="/me" className="btn button btn-profile">
+                                <Link to="/me" className="btn btn-profile">
                                     <b>Perfil</b>
                                 </Link>
                             </div>
                         ) : (
                             <div className="col s6">
-                                <Link to="/register" className="btn button btn-cadastro">
+                                <Link to="/register" className="btn btn-cadastro">
                                     <b>Cadastro</b>
                                 </Link>
-                                <Link to="/login" className="btn button btn-login">
+                                <Link to="/login" className="btn btn-login">
                                     <b>Log In</b>
                                 </Link>
                             </div>

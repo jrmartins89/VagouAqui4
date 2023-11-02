@@ -10,6 +10,11 @@
     background-position: center;
 }
 
+.row .col.s6 {
+    width: 50%;
+    margin-left: 190px;
+}
+
 /* Styles for the title */
 .title {
     font-size: 24px;
@@ -41,6 +46,7 @@
 /* Styles for "Cadastro" button */
 .btn-cadastro {
     background-color: #367306;
+    margin-right: 50px;
 }
 
 /* Styles for "Login" button */
@@ -51,6 +57,7 @@
 /* Styles for "Produtos" button */
 .btn-produtos {
     background-color: #afa74c;
+    margin-right: 50px;
 }
 
 /* Styles for "User Profile" button */
