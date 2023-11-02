@@ -4,6 +4,7 @@ import "./UserPage.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { logoutUser } from "../../actions/authActions"; // Import the logoutUser action
 
 class UserPage extends Component {
     constructor() {
@@ -40,6 +41,8 @@ class UserPage extends Component {
         axios
             .delete("/api/users/delete")
             .then(() => {
+                // Dispatch the logoutUser action to log the user out
+                this.props.logoutUser();
                 // Redirect to the home page after successful deletion
                 this.props.history.push("/");
             })
@@ -118,4 +121,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps)(withRouter(UserPage));
+export default connect(mapStateToProps, { logoutUser })(withRouter(UserPage));
