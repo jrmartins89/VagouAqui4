@@ -1,37 +1,44 @@
-import React, { Component } from 'react';
-import './UserPage.css';
-import PropTypes from "prop-types";
+import React, { Component } from "react";
+import axios from "axios"; // For making API requests
+import "./UserProfile.css";
+import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom"; // Import the CSS file
 
 class UserPage extends Component {
-    render() {
-        const { user } = this.props; // Assuming user data is passed as a prop
+    constructor() {
+        super();
+        this.state = {
+            user: null,
+            error: null,
+        };
+    }
 
-        if (!user) {
-            return null; // Return nothing if user data is not available
-        }
+    componentDidMount() {
+        // Make an API request to get the user's information
+        axios
+            .get("/api/users/me") // Assuming your API route is configured correctly
+            .then((response) => {
+                this.setState({ user: response.data });
+            })
+            .catch((error) => {
+                this.setState({ error: "Error fetching user information" });
+            });
+    }
+
+    render() {
+        const { user, error } = this.state;
 
         return (
             <div className="user-profile">
                 <h2>User Profile</h2>
-                <div className="user-info">
-                    <div>
-                        <strong>Name:</strong> {user.name}
+                {error && <p className="error">{error}</p>}
+                {user && (
+                    <div className="user-info">
+                        <p>Name: {user.name}</p>
+                        <p>Email: {user.email}</p>
+                        {/* Display other user properties as needed */}
                     </div>
-                    <div>
-                        <strong>Email:</strong> {user.email}
-                    </div>
-                    <div>
-                        <strong>Preferences:</strong>
-                        <ul>
-                            <li>House or Apartment: {user.preferences.houseOrApartment}</li>
-                            <li>Gender Preference: {user.preferences.genderPreference}</li>
-                            <li>Accepts Pets: {user.preferences.acceptsPets ? 'Yes' : 'No'}</li>
-                            {/* Add more preference fields here */}
-                        </ul>
-                    </div>
-                </div>
+                )}
             </div>
         );
     }
@@ -45,5 +52,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-
-export default connect(mapStateToProps)(withRouter(UserPage));
+export default connect(mapStateToProps)(withRouter(UserProfile));
