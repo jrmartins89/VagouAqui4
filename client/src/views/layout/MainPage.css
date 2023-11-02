@@ -46,7 +46,7 @@
 /* Styles for "Cadastro" button */
 .btn-cadastro {
     background-color: #367306;
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
 /* Styles for "Login" button */
@@ -57,12 +57,16 @@
 /* Styles for "Produtos" button */
 .btn-produtos {
     background-color: #afa74c;
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
 /* Styles for "User Profile" button */
 .btn-profile {
     background-color: #f39c12;
+}
+
+.main-buttons {
+    margin-left: 10px;
 }
 
 /* Responsive styles for different screen sizes and tablets */

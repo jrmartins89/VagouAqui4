@@ -20,7 +20,7 @@ class MainPage extends Component {
                         <p className="description">INE - UFSC - 2023</p>
                         <br />
                         {isAuthenticated ? (
-                            <div className="col s6">
+                            <div className="main-buttons">
                                 <Link to="/products" className="btn btn-produtos">
                                     <b>Anúncios</b>
                                 </Link>
@@ -29,7 +29,7 @@ class MainPage extends Component {
                                 </Link>
                             </div>
                         ) : (
-                            <div className="col s6">
+                            <div className="main-buttons">
                                 <Link to="/register" className="btn btn-cadastro">
                                     <b>Cadastro</b>
                                 </Link>
