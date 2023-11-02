@@ -1,12 +1,16 @@
 .user-profile {
+    background-image: url('https://media.gettyimages.com/id/660340054/pt/foto/space-problem-in-bedroom-interior.jpg?s=612x612&w=0&k=20&c=k8AlqAdhbcVz-hWlmOq49cB5U29P99LJV1H6A4jlgew=');
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-content: center;
     padding: 20px;
     margin-left: 508px;
-    margin-top: 10px;
+    margin-top: 500px;
     max-width: 400px;
 }
 
 .user-profile-info {
-    margin-top: 10px;
+    margin-top: -541px;
 }
 
 .user-info div {
@@ -16,4 +20,11 @@
 .user-profile-label{
     font-size: 20px;
     margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.user-profile-value{
+    font-size: 20px;
+    color: #041f3b;
+    font-weight: bold;
 }

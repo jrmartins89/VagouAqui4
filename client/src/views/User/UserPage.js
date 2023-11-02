@@ -31,22 +31,24 @@ class UserPage extends Component {
 
         return (
             <div className="user-profile">
-                <h2>Perfil</h2>
                 {error && <p className="error">{error}</p>}
                 {user && (
                     <div className="user-profile-info">
-                        <p className="user-profile-label">Nome:</p><b>{user.name}</b>
-                        <p className="user-profile-label">Email:</p><b>{user.email}</b>
-                        <p className="user-profile-label">Prefiro casa ou apartamento:</p><b>{user.preferences.houseOrApartment}</b>
-                        <p className="user-profile-label">Anúncios com colegas de quarto do gênero:</p><b>{user.preferences.genderPreference}</b>
-                        <p className="user-profile-label">Anúncios com pets:</p><b>{user.preferences.acceptsPets ? 'Sim' : 'Não'}</b>
-                        <p className="user-profile-label">Preferência por anúncios localizados em:</p><b>{user.preferences.location}</b>
-                        <p className="user-profile-label">Preferência por anúncios de aluguéis compartilhados:</p><b>{user.preferences.roommates}</b>
-                        <p className="user-profile-label">Preferência por anúncios do tipo:</p><b>{user.preferences.leaseLength}</b>
-                        <p className="user-profile-label">Preferência por anúncios que aceitem fumante:</p><b>{user.preferences.acceptSmoker ? 'Sim' : 'Não'}</b>
-                        <p className="user-profile-label">Preferência por anúncios que possuem mobília:</p><b>{user.preferences.hasFurniture ? 'Sim' : 'Não'}</b>
-                        <p className="user-profile-label">Preferência por anúncios de locais com nível de barulho:</p><b>{user.preferences.noiseLevel}</b>
-                        <p className="user-profile-label">Preferência por anúncios de locais acessíveis à cadeirantes:</p><b>{user.preferences.wheelchairAccessible ? 'Sim' : 'Não'}</b>
+                        <div>
+                        <h2>Perfil</h2>
+                        <p className="user-profile-label"><b>Nome:</b></p><b className="user-profile-value">{user.name}</b>
+                        <p className="user-profile-label"><b>Email:</b></p><b className="user-profile-value">{user.email}</b>
+                        <p className="user-profile-label"><b>Prefiro casa ou apartamento:</b></p><b className="user-profile-value">{user.preferences.houseOrApartment}</b>
+                        <p className="user-profile-label"><b>Anúncios com colegas de quarto do gênero:</b></p><b className="user-profile-value">{user.preferences.genderPreference}</b>
+                        <p className="user-profile-label"><b>Anúncios com pets:</b></p><b className="user-profile-value">{user.preferences.acceptsPets ? 'Sim' : 'Não'}</b>
+                        <p className="user-profile-label"><b>Preferência por anúncios localizados em:</b></p><b className="user-profile-value">{user.preferences.location}</b>
+                        <p className="user-profile-label"><b>Preferência por anúncios de aluguéis compartilhados:</b></p><b className="user-profile-value">{user.preferences.roommates}</b>
+                        <p className="user-profile-label"><b>Preferência por anúncios do tipo:</b></p><b className="user-profile-value">{user.preferences.leaseLength}</b>
+                        <p className="user-profile-label"><b>Preferência por anúncios que aceitem fumante:</b></p><b className="user-profile-value">{user.preferences.acceptSmoker ? 'Sim' : 'Não'}</b>
+                        <p className="user-profile-label"><b>Preferência por anúncios que possuem mobília:</b></p><b className="user-profile-value">{user.preferences.hasFurniture ? 'Sim' : 'Não'}</b>
+                        <p className="user-profile-label"><b>Preferência por anúncios de locais com nível de barulho:</b></p><b className="user-profile-value">{user.preferences.noiseLevel}</b>
+                        <p className="user-profile-label"><b>Preferência por anúncios de locais acessíveis à cadeirantes:</b></p><b className="user-profile-value">{user.preferences.wheelchairAccessible ? 'Sim' : 'Não'}</b>
+                        </div>
                     </div>
                 )}
             </div>
