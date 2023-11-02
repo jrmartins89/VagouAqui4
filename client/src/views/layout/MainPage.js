@@ -34,7 +34,7 @@ class MainPage extends Component {
                             </div>
                         )}
                         {isAuthenticated && (
-                            <Link to="/user-profile" className="btn button btn-profile">
+                            <Link to="/me" className="btn button btn-profile">
                                 <b>Perfil</b>
                             </Link>
                         )}
