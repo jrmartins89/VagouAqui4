@@ -1,10 +1,11 @@
-/* Updated Navbar.css */
-
 /* Style the navigation bar */
 .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.home-link{
+    margin-left: -32px;
+}
 /* Style the navigation links and logo */
 .nav-wrapper {
     background-color: #68917d;
