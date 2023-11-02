@@ -53,6 +53,11 @@
     background-color: #afa74c;
 }
 
+/* Styles for "User Profile" button */
+.btn-profile {
+    background-color: #f39c12; /* Choose your desired color */
+}
+
 /* Responsive styles for buttons */
 @media (max-width: 576px) {
     .button {

@@ -1,7 +1,8 @@
+// Import necessary modules and libraries
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import "./MainPage.css";
+import "./MainPage.css"; // Import the CSS styles for MainPage
 
 class MainPage extends Component {
     render() {
@@ -32,9 +33,14 @@ class MainPage extends Component {
                                 </Link>
                             </div>
                         )}
+                        {isAuthenticated && (
+                            <Link to="/user-profile" className="btn button btn-profile">
+                                <b>Perfil</b>
+                            </Link>
+                        )}
                         <div className="col s6">
                             <Link to="/login" className="btn button btn-login">
-                            <b>Log In</b>
+                                <b>Log In</b>
                             </Link>
                         </div>
                     </div>
