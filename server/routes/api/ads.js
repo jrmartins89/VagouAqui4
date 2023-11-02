@@ -6,8 +6,7 @@ const Ad = require('../../models/Ads'); // Adjust the path as needed
 router.get('/all', async (req, res) => {
     try {
         const ads = await Ad.find();
-        const lastScrapingDate = process.env.LAST_SCRAPING_DATE; // Use 'N/A' if the variable is not set
-        res.json({ads, lastScrapingDate});
+        res.json(ads);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao listar anúncios', error: error.message });
     }
