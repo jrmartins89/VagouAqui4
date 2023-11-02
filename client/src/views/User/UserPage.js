@@ -82,7 +82,7 @@ class UserPage extends Component {
                     </div>
                 {confirmDelete ? (
                             <div>
-                                <p>
+                                <p className="text-warning">
                                     Tem certeza de que deseja excluir a sua conta?
                                 </p>
                                 <button

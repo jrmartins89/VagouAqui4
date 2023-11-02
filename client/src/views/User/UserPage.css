@@ -28,3 +28,12 @@
     color: #041f3b;
     font-weight: bold;
 }
+
+.btn-danger{
+    margin-right: 10px;
+}
+
+.text-warning{
+    font-weight: bold;
+    color: #9d0101;
+}
