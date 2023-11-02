@@ -93,6 +93,10 @@ function scheduleScrapingTask() {
 
             // Start the scraping process
             await startScraping();
+
+            // Update the last scraping date environment variable
+            const now = new Date();
+            process.env.LAST_SCRAPING_DATE = now.toISOString();
         } catch (error) {
             console.error("Erro durante o processo de scraping:", error);
         }
