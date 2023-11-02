@@ -35,18 +35,18 @@ class UserPage extends Component {
                 {error && <p className="error">{error}</p>}
                 {user && (
                     <div className="user-profile-info">
-                        <p>Nome: {user.name}</p>
-                        <p>Email: {user.email}</p>
-                        <p>Prefiro casa ou apartamento: {user.preferences.houseOrApartment}</p>
-                        <p>Anúncios com colegas de quarto do gênero: {user.preferences.genderPreference}</p>
-                        <p>Anúncios com pets: {user.preferences.acceptsPets ? 'Sim' : 'Não'}</p>
-                        <p>Preferência por anúncios localizados em: {user.preferences.location}</p>
-                        <p>Preferência por anúncios de aluguéis compartilhados: {user.preferences.roommates}</p>
-                        <p>Preferência por anúncios do tipo: {user.preferences.leaseLength}</p>
-                        <p>Preferência por anúncios que aceitem fumante: {user.preferences.acceptSmoker ? 'Sim' : 'Não'}</p>
-                        <p>Preferência por anúncios que possuem mobília: {user.preferences.hasFurniture ? 'Sim' : 'Não'}</p>
-                        <p>Preferência por anúncios de locais com nível de barulho: {user.preferences.noiseLevel}</p>
-                        <p>Preferência por anúncios de locais acessíveis à cadeirantes: {user.preferences.wheelchairAccessible ? 'Sim' : 'Não'}</p>
+                        <p className="user-profile-label">Nome:</p><b>{user.name}</b>
+                        <p className="user-profile-label">Email:</p><b>{user.email}</b>
+                        <p className="user-profile-label">Prefiro casa ou apartamento:</p><b>{user.preferences.houseOrApartment}</b>
+                        <p className="user-profile-label">Anúncios com colegas de quarto do gênero:</p><b>{user.preferences.genderPreference}</b>
+                        <p className="user-profile-label">Anúncios com pets:</p><b>{user.preferences.acceptsPets ? 'Sim' : 'Não'}</b>
+                        <p className="user-profile-label">Preferência por anúncios localizados em:</p><b>{user.preferences.location}</b>
+                        <p className="user-profile-label">Preferência por anúncios de aluguéis compartilhados:</p><b>{user.preferences.roommates}</b>
+                        <p className="user-profile-label">Preferência por anúncios do tipo:</p><b>{user.preferences.leaseLength}</b>
+                        <p className="user-profile-label">Preferência por anúncios que aceitem fumante:</p><b>{user.preferences.acceptSmoker ? 'Sim' : 'Não'}</b>
+                        <p className="user-profile-label">Preferência por anúncios que possuem mobília:</p><b>{user.preferences.hasFurniture ? 'Sim' : 'Não'}</b>
+                        <p className="user-profile-label">Preferência por anúncios de locais com nível de barulho:</p><b>{user.preferences.noiseLevel}</b>
+                        <p className="user-profile-label">Preferência por anúncios de locais acessíveis à cadeirantes:</p><b>{user.preferences.wheelchairAccessible ? 'Sim' : 'Não'}</b>
                     </div>
                 )}
             </div>

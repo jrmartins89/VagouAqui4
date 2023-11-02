@@ -12,3 +12,8 @@
 .user-info div {
     margin: 10px 0;
 }
+
+.user-profile-label{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
