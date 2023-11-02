@@ -1,3 +1,4 @@
+/* Default styles for all screens */
 .user-profile {
     background-image: url('https://media.gettyimages.com/id/660340054/pt/foto/space-problem-in-bedroom-interior.jpg?s=612x612&w=0&k=20&c=k8AlqAdhbcVz-hWlmOq49cB5U29P99LJV1H6A4jlgew=');
     background-size: contain;
@@ -17,29 +18,87 @@
     margin: 10px 0;
 }
 
-.user-profile-label{
+.user-profile-label {
     font-size: 20px;
     margin-bottom: 5px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.user-profile-value{
+.user-profile-value {
     font-size: 20px;
     color: #041f3b;
     font-weight: bold;
 }
 
-.btn-danger-delete{
+.btn-danger-delete {
     margin-right: 10px;
     padding: 1px;
     font-weight: bold;
 }
 
-.btn-secondary{
+.btn-secondary {
     font-weight: bold;
 }
 
-.text-warning{
+.text-warning {
     font-weight: bold;
     color: #9d0101;
+}
+
+/* Media query for small screens */
+@media screen and (max-width: 576px) {
+    .user-profile {
+        /* Adjust styles for small screens */
+        max-width: 100%;
+        background-size: contain;
+        background-position: center;
+        padding: 10px;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .user-profile-info {
+        margin-top: 0;
+    }
+    .user-info div {
+        margin: 5px 0;
+    }
+    .user-profile-label {
+        font-size: 18px;
+    }
+    .user-profile-value {
+        font-size: 18px;
+    }
+    .btn-danger-delete {
+        margin-right: 5px;
+    }
+    .btn-secondary {
+        margin-right: 5px;
+    }
+    .text-warning {
+        font-size: 18px;
+    }
+}
+
+/* Media query for medium screens */
+@media screen and (min-width: 577px) and (max-width: 992px) {
+    .user-profile {
+        /* Adjust styles for medium screens */
+        max-width: 300px;
+    }
+}
+
+/* Media query for large screens */
+@media screen and (min-width: 993px) {
+    .user-profile {
+        /* Adjust styles for large screens */
+        max-width: 400px;
+    }
+}
+
+/* Media query for tablets */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .user-profile {
+        /* Adjust styles for tablets */
+        max-width: 300px;
+    }
 }
