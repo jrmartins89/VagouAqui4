@@ -55,18 +55,50 @@
 
 /* Styles for "User Profile" button */
 .btn-profile {
-    background-color: #f39c12; /* Choose your desired color */
+    background-color: #f39c12;
 }
 
-.row .col.s6{
-    margin-left:190px;
-    width: 50%;
-}
+/* Responsive styles for different screen sizes and tablets */
 
-/* Responsive styles for buttons */
-@media (max-width: 576px) {
+/* Styles for small screens (s) */
+@media screen and (max-width: 576px) {
+    .container-valign {
+        height: 80vh; /* Adjust container height for small screens */
+    }
+
     .button {
         padding: 8px 16px;
         font-size: 0.9rem;
+    }
+}
+
+/* Styles for medium screens (m) */
+@media screen and (min-width: 577px) and (max-width: 992px) {
+    .container-valign {
+        height: 90vh; /* Adjust container height for medium screens */
+    }
+
+    .button {
+        padding: 10px 18px;
+        font-size: 1rem;
+    }
+}
+
+/* Styles for large screens (l) */
+@media screen and (min-width: 993px) {
+    .container-valign {
+        height: 100vh; /* Adjust container height for large screens */
+    }
+
+    .button {
+        padding: 12px 20px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Styles for tablets */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .container-valign {
+        height: 85vh; /* Adjust container height for tablets */
     }
 }
