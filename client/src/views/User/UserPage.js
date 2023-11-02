@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios"; // For making API requests
+import axios from "axios";
 import "./UserPage.css";
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 class UserPage extends Component {
@@ -11,23 +11,51 @@ class UserPage extends Component {
         this.state = {
             user: null,
             error: null,
+            confirmDelete: false,
         };
     }
 
     componentDidMount() {
-        // Make an API request to get the user's information
+        this.fetchUserData();
+    }
+
+    fetchUserData = () => {
         axios
-            .get("/api/users/me") // Assuming your API route is configured correctly
+            .get("/api/users/me")
             .then((response) => {
                 this.setState({ user: response.data });
             })
             .catch((error) => {
                 this.setState({ error: "Error fetching user information" });
             });
-    }
+    };
+
+    handleDeleteAccount = () => {
+        // Show confirmation dialog
+        this.setState({ confirmDelete: true });
+    };
+
+    confirmDelete = () => {
+        // User confirmed account deletion
+        axios
+            .delete("/api/users/delete")
+            .then(() => {
+                // Redirect to the home page after successful deletion
+                this.props.history.push("/");
+            })
+            .catch((error) => {
+                console.log(error);
+                // Handle deletion error
+            });
+    };
+
+    cancelDelete = () => {
+        // User canceled account deletion
+        this.setState({ confirmDelete: false });
+    };
 
     render() {
-        const { user, error } = this.state;
+        const { user, error, confirmDelete } = this.state;
 
         return (
             <div className="user-profile">
@@ -48,7 +76,33 @@ class UserPage extends Component {
                         <p className="user-profile-label"><b>Preferência por anúncios que possuem mobília:</b></p><b className="user-profile-value">{user.preferences.hasFurniture ? 'Sim' : 'Não'}</b>
                         <p className="user-profile-label"><b>Preferência por anúncios de locais com nível de barulho:</b></p><b className="user-profile-value">{user.preferences.noiseLevel}</b>
                         <p className="user-profile-label"><b>Preferência por anúncios de locais acessíveis à cadeirantes:</b></p><b className="user-profile-value">{user.preferences.wheelchairAccessible ? 'Sim' : 'Não'}</b>
-                        </div>
+                    </div>
+                {confirmDelete ? (
+                            <div>
+                                <p>
+                                    Tem certeza de que deseja excluir a sua conta?
+                                </p>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={this.confirmDelete}
+                                >
+                                    Confirmar Exclusão
+                                </button>
+                                <button
+                                    className="btn btn-secondary"
+                                    onClick={this.cancelDelete}
+                                >
+                                    Cancelar
+                                </button>
+                            </div>
+                        ) : (
+                            <button
+                                className="btn btn-danger"
+                                onClick={this.handleDeleteAccount}
+                            >
+                                Deletar conta
+                            </button>
+                        )}
                     </div>
                 )}
             </div>
