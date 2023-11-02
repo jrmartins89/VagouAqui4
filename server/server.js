@@ -93,10 +93,6 @@ function scheduleScrapingTask() {
 
             // Start the scraping process
             await startScraping();
-
-            // Update the last scraping date environment variable
-            const now = new Date();
-            process.env.LAST_SCRAPING_DATE = now.toISOString();
         } catch (error) {
             console.error("Erro durante o processo de scraping:", error);
         }
@@ -159,6 +155,10 @@ async function startScraping() {
         console.log("O processo de Scraping para MGF foi finalizado.");
 
         console.log("Todos os processos de scraping foram finalizados.");
+        const now = new Date();
+        process.env.LAST_SCRAPING_DATE = now.toISOString();
+        console.log(now.toISOString());
+        console.log("LAST_SCRAPING_DATE foi atualizado:", process.env.LAST_SCRAPING_DATE);
     } catch (error) {
         console.error("Erro durante o scraping:", error);
     }
