@@ -34,7 +34,7 @@ class UserPage extends Component {
                 <h2>User Profile</h2>
                 {error && <p className="error">{error}</p>}
                 {user && (
-                    <div className="user-info">
+                    <div className="user-profile-info">
                         <p>Name: {user.name}</p>
                         <p>Email: {user.email}</p>
                         {/* Display other user properties as needed */}
