@@ -8,6 +8,7 @@ import axios from "axios";
 
 function AdGrid() {
     const [ads, setAds] = useState([]);
+    const [lastScrapingDate, setLastScrapingDate] = useState(""); // New state variable for last scraping date
     const [currentPage, setCurrentPage] = useState(1);
     const [adsPerPage] = useState(15);
     const [lightboxImages, setLightboxImages] = useState([]);
@@ -19,6 +20,10 @@ function AdGrid() {
                 const response = await axios.get('/api/ads/all');
                 const data = response.data;
                 setAds(data);
+                if(!data.lastScrapingDate){
+                    data.lastScrapingDate='N/A'
+                }
+                setLastScrapingDate(data.lastScrapingDate); // Set the last scraping date
             } catch (error) {
                 console.error('Erro ao listar anúncios:', error);
             }
@@ -77,6 +82,9 @@ function AdGrid() {
 
     return (
         <div>
+            <div className="last-scraping-date">
+               Anúncios atualizados pela última vez em: {lastScrapingDate}
+            </div>
             <div className="grid-container">
                 <div className="grid">
                     {ads.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage).map((ad, adIndex) => (
