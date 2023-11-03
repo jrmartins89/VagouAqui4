@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { logoutUser } from "../../actions/usersController";
 import { Link } from "react-router-dom";
 import "./Landing.css"; // Import the updated CSS file
 

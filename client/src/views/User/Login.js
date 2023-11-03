@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
+import { loginUser } from "../../actions/usersController";
 import "./Login.css"; // Import the custom CSS file
 
 class Login extends Component {

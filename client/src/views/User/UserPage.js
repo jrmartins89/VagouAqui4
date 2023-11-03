@@ -4,7 +4,7 @@ import "./UserPage.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logoutUser } from "../../actions/authActions"; // Import the logoutUser action
+import { logoutUser } from "../../actions/usersController"; // Import the logoutUser action
 
 class UserPage extends Component {
     constructor() {
