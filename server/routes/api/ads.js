@@ -1,29 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Ad = require('../../models/Ads'); // Adjust the path as needed
+const adController = require('../../controller/adsController'); // Import the controller
 
-// Route to fetch ads
-router.get('/all', async (req, res) => {
-    try {
-        const ads = await Ad.find();
-        res.json(ads);
-    } catch (error) {
-        res.status(500).json({ message: 'Erro ao listar anúncios', error: error.message });
-    }
-});
+// Route to fetch all ads
+router.get('/all', adController.getAllAds);
 
-// New route to fetch LAST_SCRAPING_DATE
-router.get('/lastScrapingDate', (req, res) => {
-    try {
-        const lastScrapingDate = process.env.LAST_SCRAPING_DATE;
-        if (lastScrapingDate) {
-            res.json({ lastScrapingDate });
-        } else {
-            res.status(404).json({ message: 'LAST_SCRAPING_DATE not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Erro ao buscar LAST_SCRAPING_DATE', error: error.message });
-    }
-});
+// Route to fetch LAST_SCRAPING_DATE
+router.get('/lastScrapingDate', adController.getLastScrapingDate);
 
 module.exports = router;

@@ -204,6 +204,32 @@ async function startScraping() {
     }
 }
 
+// Function to fetch all ads
+const getAllAds = async (req, res) => {
+    try {
+        const ads = await Ad.find();
+        res.json(ads);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao listar anúncios', error: error.message });
+    }
+};
+
+// Function to fetch the LAST_SCRAPING_DATE
+const getLastScrapingDate = (req, res) => {
+    try {
+        const lastScrapingDate = process.env.LAST_SCRAPING_DATE;
+        if (lastScrapingDate) {
+            res.json({ lastScrapingDate });
+        } else {
+            res.status(404).json({ message: 'LAST_SCRAPING_DATE not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar LAST_SCRAPING_DATE', error: error.message });
+    }
+};
+
 module.exports = {
     startScraping,
+    getAllAds,
+    getLastScrapingDate,
 };
