@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/usersController";
+import { setCurrentUser, logoutUser } from "./actions/authActions.js";
 import { Provider } from "react-redux";
 import store from "./store";
 import Navbar from "./views/layout/Navbar";
