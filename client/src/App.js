@@ -9,7 +9,7 @@ import Navbar from "./views/layout/Navbar";
 import Landing from "./views/layout/MainPage";
 import Register from "./views/User/Register";
 import Login from "./views/User/Login";
-import PrivateRoute from "./views/privateRoute/PrivateRoute";
+import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./views/layout/Landing";
 import AdGrid from "./views/adGrid/AdGrid";
 import EditPreferences from "./views/User/EditPreferences";
