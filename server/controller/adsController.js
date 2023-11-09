@@ -4,6 +4,8 @@ const { scrapeIbagyAds } = require("../scrapers/ibagyScraper");
 const { scrapeWebQuartoads } = require("../scrapers/webQuartoScraper");
 const { getVivaRealAdLinks } = require("../scrapers/vivaRealScraper");
 const { extractMgfHrefValues } = require("../scrapers/mgfScraper");
+const moment = require('moment-timezone');
+
 // Define an array of URLs
 const urls = [
     {
@@ -195,9 +197,9 @@ async function startScraping() {
         console.log("O processo de Scraping para MGF foi finalizado.");
 
         console.log("Todos os processos de scraping foram finalizados.");
-        const now = new Date();
-        process.env.LAST_SCRAPING_DATE = now.toISOString();
-        console.log(now.toISOString());
+        const now = moment().tz("America/Sao_Paulo").format(); // Get current date in UTC-03:00 format
+        process.env.LAST_SCRAPING_DATE = now;
+        console.log(now);
         console.log("LAST_SCRAPING_DATE foi atualizado:", process.env.LAST_SCRAPING_DATE);
     } catch (error) {
         console.error("Erro durante o scraping:", error);

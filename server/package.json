@@ -33,6 +33,7 @@
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^9.0.1",
     "lodash": "^4.17.21",
+    "moment-timezone": "^0.5.43",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.2",
     "node-cron": "^3.0.2",
