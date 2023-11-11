@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const passport = require("passport");
-const User = require("../../models/User");// Load User model // Assuming 'users' is the name of your user model
-const generateRecommendations = require('../../recommendations/adRecommendation'); // Import the function to generate recommendations based on user preferences
+const User = require("../../models/User"); // Carrega o modelo User
+const generateRecommendations = require('../../recommendations/adRecommendation'); // Importa a função para gerar recomendações com base nas preferências do usuário
 
-// Route to fetch content-based recommendations for a user
+// Rota para obter recomendações baseadas em conteúdo para um usuário
 router.get('/all', passport.authenticate("jwt", { session: false }), async (req, res) => {
     try {
         const userId = req.user.id;
-        // Fetch the user's preferences
+        // Busca as preferências do usuário
         const user = await User.findById(userId);
         const userPreferences = user.preferences;
-        // Generate recommendations based on user preferences
+        // Gera recomendações com base nas preferências do usuário
         const recommendations = await generateRecommendations(userPreferences);
 
         res.json(recommendations);

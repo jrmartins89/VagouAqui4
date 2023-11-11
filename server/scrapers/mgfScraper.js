@@ -1,12 +1,12 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const {extractContactInfoFromDescription} = require("./contactInfoScraper");
+const { extractContactInfoFromDescription } = require("./contactInfoScraper");
 
-// Function to scrape and display href values from MGF ad page
+// Função para fazer scraping e exibir valores de href da página de anúncios do MGF
 async function extractMgfHrefValues() {
     try {
         const baseUrl = 'https://www.mgfimoveis.com.br/aluguel/kitnet/sc-florianopolis?page=';
-        const adLinks = new Set(); // Use a Set to store unique URLs
+        const adLinks = new Set(); // Usa um Set para armazenar URLs únicos
 
         const getPageLinks = async (pageNumber) => {
             const url = `${baseUrl}${pageNumber}`;
@@ -19,7 +19,7 @@ async function extractMgfHrefValues() {
                 adList.children().each((index, element) => {
                     const adLink = $(element).find('a.h-100.d-flex.flex-column').attr('href');
                     if (adLink) {
-                        adLinks.add(adLink); // Add the URL to the Set to ensure uniqueness
+                        adLinks.add(adLink); // Adiciona a URL ao Set para garantir unicidade
                     }
                 });
             }
@@ -32,7 +32,7 @@ async function extractMgfHrefValues() {
 
         await Promise.all(pagePromises);
 
-        const adLinksArray = Array.from(adLinks); // Convert Set to an array
+        const adLinksArray = Array.from(adLinks); // Converte Set para um array
         const adDetails = await extractMgfAdDetails(adLinksArray);
 
         return adDetails;
@@ -54,15 +54,15 @@ async function extractMgfAdDetails(adLinks) {
                 const contactInfo = contactInfoContent.length === 0 ? adLink : contactInfoContent
                 const adPrice = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > div:nth-child(2) > div > div.card.border-secondary.rounded-4.shadow.mb-4.p-3 > h3').text().trim();
                 const neighborhoodContent = $('body > main > div.row.justify-content-center > article > div:nth-child(2) > header > h2 > a.lead.link-dark.align-middle').text();
-                // Split the input string based on the comma
+                // Divide a string de entrada com base na vírgula
                 const parts = neighborhoodContent.split(',');
                 let neighborhood;
-                // Extract the neighborhood (assuming it's the first part)
+                // Extrai o bairro (assumindo que seja a primeira parte)
                 if (parts.length >= 1) {
-                     neighborhood = parts[0].trim();
+                    neighborhood = parts[0].trim();
                 }
 
-                // Find and save the image carrousel
+                // Encontra e salva o carrossel de imagens
                 const imageCarrousel = [];
                 $('.carousel-item').each((index, element) => {
                     const source = $(element).find('source');
@@ -72,7 +72,7 @@ async function extractMgfAdDetails(adLinks) {
                     }
                 });
 
-                // Iterate through imageCarrousel and extract image links
+                // Itera através do imageCarrousel e extrai links de imagem
                 const imageLinks = [];
                 imageCarrousel.forEach((srcset) => {
                     const regex = /([^\s,]+)/g;
@@ -81,8 +81,6 @@ async function extractMgfAdDetails(adLinks) {
                         imageLinks.push(matches[0]);
                     }
                 });
-
-
 
                 const adDetail = {
                     title: adTitle,

@@ -1,15 +1,15 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const axiosRateLimit = require('axios-rate-limit');
-const {extractContactInfoFromDescription} = require("./contactInfoScraper");
+const { extractContactInfoFromDescription } = require("./contactInfoScraper");
 
-// Create an instance of axios with rate limiting (1 request per second)
+// Cria uma instância do axios com limitação de taxa (1 requisição por segundo)
 const axiosInstance = axiosRateLimit(axios.create(), {
     maxRequests: 1,
-    perMilliseconds: 1000, // 1 request per second
+    perMilliseconds: 1000, // 1 requisição por segundo
 });
 
-// Function to scrape image links from VivaReal ad page
+// Função para fazer scraping dos links de imagem da página de anúncio do VivaReal
 async function extractVivaRealImageLinks(adLink) {
     try {
         const response = await axiosInstance.get(adLink);
@@ -17,10 +17,10 @@ async function extractVivaRealImageLinks(adLink) {
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
 
-            // Find the main content of the ad page
+            // Encontra o conteúdo principal da página de anúncio
             const imageElements = $('.carousel__image');
 
-            // Extract image links from the src attribute
+            // Extrai os links de imagem do atributo src
             const imageLinks = imageElements.map((index, element) => $(element).attr('src')).get();
 
             return imageLinks;
@@ -34,7 +34,7 @@ async function extractVivaRealImageLinks(adLink) {
     }
 }
 
-// Function to scrape VivaReal ad details
+// Função para fazer scraping dos detalhes de anúncios no VivaReal
 async function getVivaRealAdLinks() {
     try {
         const response = await axios.get('https://www.vivareal.com.br/aluguel/santa-catarina/florianopolis/kitnet_residencial/');
@@ -42,10 +42,10 @@ async function getVivaRealAdLinks() {
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
 
-            // Find the main content of the ad
+            // Encontra o conteúdo principal do anúncio
             const adList = $('.js-card-selector');
 
-            // Create an array to store promises for ad details and image links
+            // Cria um array para armazenar promessas para detalhes e links de imagem do anúncio
             const adDetailsPromises = adList.map(async (index, element) => {
                 const adTitleElement = $(element).find('a.property-card__content-link.js-card-title');
                 const adTitle = adTitleElement.text().trim();
@@ -53,13 +53,13 @@ async function getVivaRealAdLinks() {
                 const adPrice = $(element).find('.property-card__price').text().trim();
                 const address = $(element).find('.property-card__address').text().trim();
 
-                // Use await to resolve the description promise
+                // Usa await para resolver a promessa da descrição
                 const adDescription = await extractDescription(adLink);
                 const contactInfo = extractContactInfoFromDescription(adDescription);
-                // Extract neighborhood using the extractNeighborhood function
+                // Extrai o bairro usando a função extractNeighborhood
                 const neighborhood = extractNeighborhood(address);
 
-                // Fetch image links and ad details in parallel
+                // Busca links de imagem e detalhes do anúncio em paralelo
                 const [imageLinks, adDetails] = await Promise.all([
                     extractVivaRealImageLinks(adLink),
                     Promise.resolve({
@@ -75,7 +75,7 @@ async function getVivaRealAdLinks() {
                 return { ...adDetails, imageLinks };
             }).get();
 
-            // Wait for all ad details promises to resolve
+            // Aguarda a resolução de todas as promessas de detalhes do anúncio
             const adDetailsArray = await Promise.all(adDetailsPromises);
             return adDetailsArray;
         } else {
@@ -100,22 +100,22 @@ async function extractDescription(adLink) {
     }
 }
 
-// Function to extract neighborhood from address
+// Função para extrair o bairro do endereço
 function extractNeighborhood(address) {
-    // Split the address by commas and dashes
+    // Divide o endereço por vírgulas e hifens
     const parts = address.split(/,|-/);
 
-    // Find the first non-empty part that represents the neighborhood
+    // Encontra a primeira parte não vazia que representa o bairro
     for (let i = 0; i < parts.length; i++) {
         const trimmedPart = parts[i].trim();
 
-        // Check if the part contains only letters or spaces (potential neighborhood)
+        // Verifica se a parte contém apenas letras ou espaços (potencial bairro)
         if (/^[A-Za-z\s]+$/.test(trimmedPart)) {
             return trimmedPart;
         }
     }
 
-    // If no neighborhood is found, return null
+    // Se nenhum bairro for encontrado, retorna null
     return null;
 }
 

@@ -5,14 +5,15 @@ const axiosRateLimit = require('axios-rate-limit');
 const { scrapeImagesClassificadosUfsc } = require('./imageScraper');
 const { extractContactInfoFromDescription } = require('./contactInfoScraper');
 
-// Create an Axios instance with rate limiting and retries
+// Cria uma instância Axios com limite de taxa e tentativas de repetição
 const axiosInstance = axiosRateLimit(axios.create(), {
-    maxRequests: 2, // Adjust this value as needed
-    perMilliseconds: 1000, // Adjust this value as needed
+    maxRequests: 2, // Ajuste esse valor conforme necessário
+    perMilliseconds: 1000, // Ajuste esse valor conforme necessário
 });
 
 axiosRetry(axiosInstance, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
+// Função para obter os links dos anúncios a partir de uma URL
 async function getAdLinks(url) {
     try {
         const response = await axiosInstance.get(url);
@@ -37,12 +38,13 @@ async function getAdLinks(url) {
     }
 }
 
+// Função para verificar se um link é válido
 function isValidLink(link) {
     const linkPattern = /^https:\/\/classificados\.inf\.ufsc\.br\/detail/;
     return linkPattern.test(link);
 }
 
-//function to get details from adLinks
+// Função para obter detalhes dos anúncios a partir dos links
 async function getAdDetails(items) {
     const itemsWithDetails = [];
 
@@ -65,10 +67,10 @@ async function getAdDetails(items) {
                 const neighborhoodCell = neighborhoodRow.find('td[valign="top"]:contains("Bairro") + td');
                 const neighborhood = neighborhoodCell.text().trim();
 
-                // Check if any of the critical values is empty
+                // Verifica se algum dos valores críticos está vazio
                 if (!price || !gender || !neighborhood) {
                     console.warn(`Faltaram informações para o anúncio: ${item.link}. Ele será ignorado`);
-                    continue; // Skip this ad and move to the next one
+                    continue; // Pula este anúncio e passa para o próximo
                 }
 
                 const box = $('.box');
@@ -82,9 +84,9 @@ async function getAdDetails(items) {
                 const imageUrls = item.link + '&show_still=1';
 
                 const adImages = await scrapeImagesClassificadosUfsc(imageUrls);
-                // Extract contact information from the description
+                // Extrai informações de contato da descrição
                 let contactInfo = extractContactInfoFromDescription(description);
-                    contactInfo = contactInfo.length === 0 ? item.link : contactInfo;
+                contactInfo = contactInfo.length === 0 ? item.link : contactInfo;
                 itemsWithDetails.push({
                     title: title,
                     link: item.link,
@@ -95,10 +97,10 @@ async function getAdDetails(items) {
                     neighborhood: neighborhood
                 });
             } else {
-                console.error(`Erro ao pegar detalhes de anúncio em  ${item.link}: Status ${response.status}`);
+                console.error(`Erro ao pegar detalhes de anúncio em ${item.link}: Status ${response.status}`);
             }
         } catch (error) {
-            console.error(`Erro ao pegar detalhes de anúncio em  ${item.link}: ${error}`);
+            console.error(`Erro ao pegar detalhes de anúncio em ${item.link}: ${error}`);
         }
     }
     return itemsWithDetails;

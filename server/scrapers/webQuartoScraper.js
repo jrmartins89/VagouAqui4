@@ -3,17 +3,17 @@ const cheerio = require('cheerio');
 const { extractContactInfoFromDescription } = require('./contactInfoScraper');
 const axiosRateLimit = require('axios-rate-limit');
 
-// Create an axios instance with rate limiting
+// Cria uma instância do axios com limitação de taxa
 const axiosInstance = axiosRateLimit(axios.create(), {
-    maxRequests: 1, // Number of requests per second
-    perMilliseconds: 1000, // Milliseconds per request (in this case, 1 request per second)
+    maxRequests: 1, // Número de requisições por segundo
+    perMilliseconds: 1000, // Milissegundos por requisição (neste caso, 1 requisição por segundo)
 });
 
-// Define a function to scrape a single page
+// Define uma função para fazer scraping de uma única página do WebQuarto
 async function scrapeWebQuartoadsPage(pageNumber) {
     try {
         const url = `https://www.webquarto.com.br/busca/quartos/florianopolis-sc?page=${pageNumber}`;
-        const response = await axiosInstance.get(url); // Use the rate-limited axios instance
+        const response = await axiosInstance.get(url); // Usa a instância do axios com limitação de taxa
 
         if (response.status === 200) {
             const $ = cheerio.load(response.data);
@@ -48,11 +48,11 @@ async function scrapeWebQuartoadsPage(pageNumber) {
             console.error(`Erro ao listar o json de dados para a página ${pageNumber}. Código do status: ${response.status}`);
         }
     } catch (error) {
-        console.error(`Erro durante o scrapping da página ${pageNumber}:`, error.message);
+        console.error(`Erro durante o scraping da página ${pageNumber}:`, error.message);
     }
 }
 
-// Define a function to scrape all pages from 1 to 8
+// Define uma função para fazer scraping de todas as páginas de 1 a 8
 async function scrapeWebQuartoads() {
     const allAds = [];
     for (let pageNumber = 1; pageNumber <= 8; pageNumber++) {

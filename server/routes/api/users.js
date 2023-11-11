@@ -4,19 +4,16 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
-const User = require("../../models/User");// Load User model
-const validateRegisterInput = require("../../validation/register");// Load input validation
+const User = require("../../models/User"); // Carrega o modelo User
+const validateRegisterInput = require("../../validation/register"); // Carrega a validação de entrada para registro
 const validateLoginInput = require("../../validation/login");
 
-// @route POST api/users/register
-// @desc Register user
-// @access Public
+// Rota POST para registro de usuário
 router.post("/register", (req, res) => {
-    // Form validation
-
+    // Validação do formulário
     const { errors, isValid } = validateRegisterInput(req.body);
 
-    // Check validation
+    // Verifica a validação
     if (!isValid) {
         return res.status(400).json(errors);
     }
@@ -44,7 +41,7 @@ router.post("/register", (req, res) => {
                 }
             });
 
-            // Hash password before saving in database
+            // Hash da senha antes de salvar no banco de dados
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
@@ -59,15 +56,12 @@ router.post("/register", (req, res) => {
     });
 });
 
-// @route POST api/users/login
-// @desc Login user and return JWT token
-// @access Public
+// Rota POST para login de usuário e retorno do token JWT
 router.post("/login", (req, res) => {
-    // Form validation
-
+    // Validação do formulário
     const { errors, isValid } = validateLoginInput(req.body);
 
-    // Check validation
+    // Verifica a validação
     if (!isValid) {
         return res.status(400).json(errors);
     }
@@ -75,29 +69,29 @@ router.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    // Find user by email
+    // Encontrar usuário por email
     User.findOne({ email }).then(user => {
-        // Check if user exists
+        // Verifica se o usuário existe
         if (!user) {
             return res.status(404).json({ emailnotfound: "O email não foi encontrado" });
         }
 
-        // Check password
+        // Verifica a senha
         bcrypt.compare(password, user.password).then(isMatch => {
             if (isMatch) {
-                // User matched
-                // Create JWT Payload
+                // Usuário correspondido
+                // Criação do Payload JWT
                 const payload = {
                     id: user.id,
                     name: user.name
                 };
 
-                // Sign token
+                // Assina o token
                 jwt.sign(
                     payload,
                     keys.secretOrKey,
                     {
-                        expiresIn: 31556926 // 1 year in seconds
+                        expiresIn: 31556926 // 1 ano em segundos
                     },
                     (err, token) => {
                         res.json({
@@ -115,25 +109,22 @@ router.post("/login", (req, res) => {
     });
 });
 
-
-// @route PUT api/users/preferences
-// @desc Update user preferences
-// @access Private (requires authentication)
+// Rota PUT para atualizar as preferências do usuário
 router.put("/preferences", passport.authenticate("jwt", { session: false }), (req, res) => {
-    // User is authenticated, proceed with preference update
+    // O usuário está autenticado, prossegue com a atualização de preferências
     const updatedPreferences = req.body;
 
-    // Update the user's preferences in the database
+    // Atualiza as preferências do usuário no banco de dados
     User.findOneAndUpdate(
-        { _id: req.user.id }, // User ID from the JWT payload
-        { $set: { "preferences": updatedPreferences } }, // Specify "preferences" field
+        { _id: req.user.id }, // ID do usuário proveniente do payload do JWT
+        { $set: { "preferences": updatedPreferences } }, // Especifica o campo "preferences"
         { new: true }
     )
         .then((updatedUser) => {
             if (!updatedUser) {
                 return res.status(404).json({ userNotFound: "Usuário não encontrado" });
             }
-            res.json(updatedUser.preferences); // Respond with the updated preferences
+            res.json(updatedUser.preferences); // Responde com as preferências atualizadas
         })
         .catch((err) => {
             console.log(err);
@@ -141,17 +132,15 @@ router.put("/preferences", passport.authenticate("jwt", { session: false }), (re
         });
 });
 
-// @route GET api/users/preferences
-// @desc Get user preferences
-// @access Private (requires authentication)
+// Rota GET para obter as preferências do usuário
 router.get("/preferences", passport.authenticate("jwt", { session: false }), (req, res) => {
-    // User is authenticated, retrieve their preferences
+    // O usuário está autenticado, recupera suas preferências
     User.findById(req.user.id)
         .then((user) => {
             if (!user) {
                 return res.status(404).json({ userNotFound: "Usuário não encontrado" });
             }
-            res.json(user.preferences); // Respond with the user's preferences
+            res.json(user.preferences); // Responde com as preferências do usuário
         })
         .catch((err) => {
             console.log(err);
@@ -159,17 +148,15 @@ router.get("/preferences", passport.authenticate("jwt", { session: false }), (re
         });
 });
 
-// @route GET api/users/me
-// @desc Get the current user's information
-// @access Private (requires authentication)
+// Rota GET para obter as informações do usuário atual
 router.get("/me", passport.authenticate("jwt", { session: false }), (req, res) => {
-    // User is authenticated, retrieve their information
+    // O usuário está autenticado, recupera suas informações
     User.findById(req.user.id)
         .then((user) => {
             if (!user) {
                 return res.status(404).json({ userNotFound: "Usuário não encontrado" });
             }
-            res.json(user); // Respond with the user's information
+            res.json(user); // Responde com as informações do usuário
         })
         .catch((err) => {
             console.log(err);
@@ -177,11 +164,9 @@ router.get("/me", passport.authenticate("jwt", { session: false }), (req, res) =
         });
 });
 
-// @route DELETE api/users/delete
-// @desc Delete the user's account
-// @access Private (requires authentication)
+// Rota DELETE para excluir a conta do usuário
 router.delete("/delete", passport.authenticate("jwt", { session: false }), (req, res) => {
-    // User is authenticated, proceed with account deletion
+    // O usuário está autenticado, prossegue com a exclusão da conta
     User.findByIdAndRemove(req.user.id)
         .then(() => {
             res.json({ success: true, message: "Conta de usuário excluída com sucesso" });

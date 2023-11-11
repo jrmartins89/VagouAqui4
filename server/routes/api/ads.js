@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const adController = require('../../controller/adsController'); // Import the controller
+const adController = require('../../controller/adsController'); // Importa o controlador
 
-// Route to fetch all ads
+// Rota para obter todos os anúncios
 router.get('/all', adController.getAllAds);
 
-// Route to fetch LAST_SCRAPING_DATE
+// Rota para obter LAST_SCRAPING_DATE
 router.get('/lastScrapingDate', adController.getLastScrapingDate);
 
 module.exports = router;

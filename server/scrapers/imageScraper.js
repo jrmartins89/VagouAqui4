@@ -2,6 +2,7 @@ const https = require('https');
 const cheerio = require('cheerio');
 const imageUrlPattern = /https:\/\/cdn\.vistahost\.com\.br\/ibagyimo\/vista\.imobi\/fotos\//;
 
+// Função para fazer scraping de imagens do Classificados UFSC
 async function scrapeImagesClassificadosUfsc(imageUrls) {
     return new Promise((resolve, reject) => {
         https.get(imageUrls, (response) => {
@@ -32,7 +33,7 @@ async function scrapeImagesClassificadosUfsc(imageUrls) {
     });
 }
 
-
+// Função para fazer scraping de imagens do Ibagy
 async function scrapeImagesIbagy(url) {
     return new Promise((resolve, reject) => {
         https.get(url, (response) => {
@@ -45,7 +46,7 @@ async function scrapeImagesIbagy(url) {
             response.on('end', () => {
                 const $ = cheerio.load(data);
 
-                const images = new Set(); // Use a Set to store unique image URLs
+                const images = new Set(); // Usa um Set para armazenar URLs de imagens únicas
 
                 $('img').each((index, element) => {
                     const imageUrl = $(element).attr('src');
@@ -54,7 +55,7 @@ async function scrapeImagesIbagy(url) {
                     }
                 });
 
-                // Transform the Set back to an array
+                // Converte o Set de volta para um array
                 const uniqueImages = Array.from(images);
                 resolve(uniqueImages);
             });
