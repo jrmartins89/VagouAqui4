@@ -7,8 +7,8 @@ const { extractContactInfoFromDescription } = require('./contactInfoScraper');
 
 // Cria uma instância Axios com limite de taxa e tentativas de repetição
 const axiosInstance = axiosRateLimit(axios.create(), {
-    maxRequests: 2, // Ajuste esse valor conforme necessário
-    perMilliseconds: 1000, // Ajuste esse valor conforme necessário
+    maxRequests: 2, // Número de requisições por segundo
+    perMilliseconds: 1000, // Milissegundos por requisição (neste caso, 1 requisição por segundo)
 });
 
 axiosRetry(axiosInstance, { retries: 3, retryDelay: axiosRetry.exponentialDelay });

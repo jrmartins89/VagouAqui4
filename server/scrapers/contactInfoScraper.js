@@ -18,7 +18,7 @@ function extractContactInfoFromDescription(description) {
         /\d{2} \d{3} \d{3} \d{3}/        // xx xxx xxx xxx
     ];
 
-    const uniqueContactInfo = new Set(); // Use um Set para armazenar números de telefone únicos
+    const uniqueContactInfo = new Set(); // Usar um Set para armazenar números de telefone únicos porque evita duplicatas
 
     phonePatterns.forEach(pattern => {
         const matches = description.match(pattern);
@@ -28,16 +28,16 @@ function extractContactInfoFromDescription(description) {
         }
     });
 
-    // Converta o Set de volta para um array antes de retornar
+    // converte o Set de volta para um array antes de retornar
     return Array.from(uniqueContactInfo);
 }
 
 // Função para extrair o ID do link do anúncio
 function extractIdfromAdLink(adLink) {
-    // Divida o adLink por "/" para extrair partes individuais
+    // dividir o adLink por "/" para extrair partes individuais
     const parts = adLink.split("/");
 
-    // Percorra as partes para encontrar uma parte que se assemelhe a um ID
+    // laço para percorrer as partes para encontrar uma parte que se assemelhe a um ID
     for (const part of parts) {
         // Verifique se a parte é um ID numérico (assumindo que os IDs são numéricos)
         if (/^\d+$/.test(part)) {

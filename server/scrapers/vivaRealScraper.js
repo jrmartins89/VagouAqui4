@@ -5,8 +5,8 @@ const { extractContactInfoFromDescription } = require("./contactInfoScraper");
 
 // Cria uma instância do axios com limitação de taxa (1 requisição por segundo)
 const axiosInstance = axiosRateLimit(axios.create(), {
-    maxRequests: 1,
-    perMilliseconds: 1000, // 1 requisição por segundo
+    maxRequests: 1, // Número de requisições por segundo
+    perMilliseconds: 1000, // Milissegundos por requisição (neste caso, 1 requisição por segundo)
 });
 
 // Função para fazer scraping dos links de imagem da página de anúncio do VivaReal
