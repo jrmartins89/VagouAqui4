@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions.js";
-import "./Login.css"; // Import the custom CSS file
+import "./Login.css"; // Importa o arquivo CSS personalizado
 
 class Login extends Component {
     constructor() {
@@ -71,9 +71,9 @@ class Login extends Component {
                                 placeholder="Email"
                             />
                             <span className="error-text">
-                {errors.email}
+                                {errors.email}
                                 {errors.emailnotfound}
-              </span>
+                            </span>
                         </div>
                         <div className="input-field">
                             <input
@@ -85,9 +85,9 @@ class Login extends Component {
                                 placeholder="Password"
                             />
                             <span className="error-text">
-                {errors.password}
+                                {errors.password}
                                 {errors.passwordincorrect}
-              </span>
+                            </span>
                         </div>
                         <div className="button-container">
                             <button type="submit" className="login-button">

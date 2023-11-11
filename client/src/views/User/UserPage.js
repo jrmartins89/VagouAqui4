@@ -4,7 +4,7 @@ import "./UserPage.css";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logoutUser } from "../../actions/authActions.js"; // Import the logoutUser action
+import { logoutUser } from "../../actions/authActions"; // Importa a ação logoutUser
 
 class UserPage extends Component {
     constructor() {
@@ -27,33 +27,33 @@ class UserPage extends Component {
                 this.setState({ user: response.data });
             })
             .catch((error) => {
-                this.setState({ error: "Error fetching user information" });
+                this.setState({ error: "Erro ao obter informações do usuário" });
             });
     };
 
     handleDeleteAccount = () => {
-        // Show confirmation dialog
+        // Exibe a caixa de diálogo de confirmação
         this.setState({ confirmDelete: true });
     };
 
     confirmDelete = () => {
-        // User confirmed account deletion
+        // Usuário confirmou a exclusão da conta
         axios
             .delete("/api/users/delete")
             .then(() => {
-                // Dispatch the logoutUser action to log the user out
+                // Despacha a ação logoutUser para desconectar o usuário
                 this.props.logoutUser();
-                // Redirect to the home page after successful deletion
+                // Redireciona para a página inicial após a exclusão bem-sucedida
                 this.props.history.push("/");
             })
             .catch((error) => {
                 console.log(error);
-                // Handle deletion error
+                // Trata erro de exclusão
             });
     };
 
     cancelDelete = () => {
-        // User canceled account deletion
+        // Usuário cancelou a exclusão da conta
         this.setState({ confirmDelete: false });
     };
 

@@ -27,7 +27,7 @@ class EditPreferences extends Component {
     }
 
     componentDidMount() {
-        // Fetch user preferences from the database
+        // Busca preferências do usuário no banco de dados
         axios
             .get("/api/users/preferences")
             .then((res) => {
@@ -52,12 +52,12 @@ class EditPreferences extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        // Create an object with updated preferences
+        // Cria um objeto com as preferências atualizadas
         const updatedPreferences = {
             ...this.state.preferences,
         };
 
-        // Dispatch an action to update user preferences
+        // Despacha uma ação para atualizar as preferências do usuário
         this.props.updateUserPreferences(updatedPreferences, this.props.history);
     };
 
@@ -112,7 +112,6 @@ class EditPreferences extends Component {
                                 <option value="ambos">Ambos</option>
                             </select>
                         </div>
-                        {/* Add more preference fields here */}
                         <div className="form-field">
                             <label>Aluguel compartilhado?</label>
                             <select

@@ -1,4 +1,3 @@
-/* Style the navigation bar */
 .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -6,7 +5,6 @@
 .home-link{
     margin-left: -32px;
 }
-/* Style the navigation links and logo */
 .nav-wrapper {
     background-color: #68917d;
     display: flex;
@@ -15,7 +13,6 @@
     height: 48px;
 }
 
-/* Style the "Edit Preferences" button */
 .btn-edit-prefs,
 .btn-show-recommendations {
     height: auto;
@@ -42,10 +39,9 @@
     font-size: 0.8rem;
 }
 
-/* Style the user info container */
 .user-info {
     display: flex;
-    flex-direction: column; /* Display email and button vertically */
+    flex-direction: column;
     align-items: center;
     color: #000;
     font-weight: bold;
@@ -53,13 +49,11 @@
     overflow: hidden;
 }
 
-/* Style the user's email */
 .user-email {
-    margin-bottom: -38px; /* Add margin between email and button */
-    font-size: 0.8rem; /* Adjust font size for user email */
+    margin-bottom: -38px;
+    font-size: 0.8rem;
 }
 
-/* Style the "Logout" button */
 .btn-logout {
     background-color: #9d0101;
     padding: 6px 8px;
@@ -69,14 +63,11 @@
     margin-bottom: 20px;
 }
 
-/* Media queries and responsive styles */
 @media (max-width: 768px) {
-    /* Adjust the navbar height for smaller screens */
     .nav-wrapper {
         height: auto;
     }
 
-    /* Adjust the icon size and font size for smaller screens */
     .material-icons {
         font-size: 0.8rem;
         margin-right: 4px;
@@ -90,7 +81,6 @@
         white-space: normal;
     }
 
-    /* Adjust button size for smaller screens */
     .btn-edit-prefs,
     .btn-show-recommendations,
     .btn-logout {
@@ -100,7 +90,6 @@
 
     }
 
-    /* Adjust text size for smaller screens */
     .btn-edit-prefs p,
     .btn-show-recommendations p,
     .btn-logout p {
@@ -108,14 +97,11 @@
     }
 }
 
-/* Extended media query for screens with dimensions 320x668 */
 @media (max-width: 320px) and (max-height: 668px) {
-    /* Adjust the navbar height for smaller screens */
     .nav-wrapper {
         height: 44px;
     }
 
-    /* Adjust the icon size and font size for smaller screens */
     .material-icons {
         font-size: 0.8rem;
         margin-right: 4px;
@@ -127,7 +113,6 @@
         max-height: 36px;
     }
 
-    /* Adjust button size for smaller screens */
     .btn-edit-prefs,
     .btn-show-recommendations,
     .btn-logout {
@@ -135,29 +120,24 @@
         padding: 4px 8px;
     }
 
-    /* Adjust text size for smaller screens */
     .btn-edit-prefs p,
     .btn-show-recommendations p,
     .btn-logout p {
         font-size: 0.6rem;
     }
 
-    /* User email adjustments */
     .user-email {
         font-size: 0.6rem;
     }
 }
 
-/* Responsive styles for different device sizes */
 @media (max-width: 375px) {
-    /* Mobile M */
     .btn-show-recommendations {
         font-size: 0.6rem;
     }
 }
 
 @media (min-width: 376px) and (max-width: 414px) {
-    /* Mobile L */
     .btn-show-recommendations {
         font-size: 0.7rem;
         margin-right: auto;
@@ -165,21 +145,18 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    /* Tablet */
     .btn-show-recommendations {
         font-size: 0.9rem;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1440px) {
-    /* Laptop */
     .btn-show-recommendations {
         font-size: 1rem;
     }
 }
 
 @media (min-width: 1441px) {
-    /* Laptop Large */
     .btn-show-recommendations {
         font-size: 1.1rem;
     }

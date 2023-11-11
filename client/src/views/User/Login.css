@@ -1,6 +1,3 @@
-/* Login.css */
-
-/* Container for the login form */
 .login-container {
     background-image: url('https://media.gettyimages.com/id/83375946/pt/foto/college-dorm-hallway.jpg?s=612x612&w=0&k=20&c=KnkPhSTzkyEHq2YBUAPpV0cLeVCih4324ZrvIrfNBUI=');
     background-size: cover;
@@ -18,17 +15,15 @@
     padding-bottom: 50px;
 }
 
-/* Content within the login container */
 .login-content {
     width: 100%;
-    max-width: 400px; /* Adjust the max width as needed */
-    background: #fff; /* Background color for the content */
+    max-width: 400px;
+    background: #fff;
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
-/* Back link style */
 .back-link {
     text-decoration: none;
     font-weight: bold;
@@ -41,7 +36,6 @@
     text-decoration: underline;
 }
 
-/* Heading style */
 .heading {
     text-align: center;
     margin-bottom: 20px;
@@ -53,7 +47,6 @@
     text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 
-/* Link style */
 .heading a {
     text-decoration: none;
     font-weight: bold;
@@ -64,14 +57,12 @@
     text-decoration: underline;
 }
 
-/* Form input fields */
 .input-field {
     margin-bottom: 20px;
     position: relative;
     color: #000000;
 }
 
-/* Error message styles */
 .error-text {
     color: red;
     font-size: 14px;
@@ -80,7 +71,6 @@
     left: 0;
 }
 
-/* Submit button style */
 .login-button {
     background-color: #2196F3;
     color: #fff;
@@ -97,7 +87,6 @@
     background-color: #1976D2;
 }
 
-/* Change font color of placeholders for email and password fields */
 .input-field input::placeholder {
-    color: #000000; /* Change this color to your desired color */
+    color: #000000;
 }

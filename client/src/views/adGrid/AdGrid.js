@@ -4,11 +4,11 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import axios from "axios";
+import axios from 'axios';
 
 function AdGrid() {
     const [ads, setAds] = useState([]);
-    const [lastScrapingDate, setLastScrapingDate] = useState([]); // New state variable for last scraping date
+    const [lastScrapingDate, setLastScrapingDate] = useState([]); // Novo estado para a última data de scraping
     const [currentPage, setCurrentPage] = useState(1);
     const [adsPerPage] = useState(15);
     const [lightboxImages, setLightboxImages] = useState([]);
@@ -21,8 +21,8 @@ function AdGrid() {
                 const data = response.data;
                 setAds(data);
 
-                const lastScrapingDateResponse = await axios.get('/api/ads/lastScrapingDate'); // Fetch last scraping date
-                setLastScrapingDate(lastScrapingDateResponse.data.lastScrapingDate); // Set the last scraping date
+                const lastScrapingDateResponse = await axios.get('/api/ads/lastScrapingDate'); // Busca a última data de scraping
+                setLastScrapingDate(lastScrapingDateResponse.data.lastScrapingDate); // Define a última data de scraping
             } catch (error) {
                 console.error('Erro ao listar anúncios:', error);
             }
@@ -32,8 +32,8 @@ function AdGrid() {
 
     const totalPages = Math.ceil(ads.length / adsPerPage);
 
-    // Calculate the lower and upper bounds for the displayed page indices
-    const pageRange = 10; // Number of page indices to show
+    // Calcula os limites inferior e superior para os índices de página exibidos
+    const pageRange = 10; // Número de índices de página a serem mostrados
 
     let lowerBound = Math.max(currentPage - Math.floor(pageRange / 2), 1);
     let upperBound = Math.min(lowerBound + pageRange - 1, totalPages);
@@ -42,7 +42,7 @@ function AdGrid() {
         lowerBound = Math.max(1, upperBound - pageRange + 1);
     }
 
-    // Create an array of page indices to display
+    // Cria um array de índices de página para exibir
     const pageIndicesToDisplay = Array.from({ length: upperBound - lowerBound + 1 }, (_, i) => i + lowerBound);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -113,7 +113,7 @@ function AdGrid() {
                     ))}
                 </div>
                 <div className="pagination">
-                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
+                    <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
                     <button onClick={retreatTenPages} disabled={currentPage - 10 < 1}>-10 Páginas</button>
                     {pageIndicesToDisplay.map((pageIndex) => (
                         <button
@@ -125,7 +125,7 @@ function AdGrid() {
                         </button>
                     ))}
                     <button onClick={advanceTenPages} disabled={currentPage + 10 > totalPages}>+10 Páginas</button>
-                    <button onClick={nextPage} disabled={currentPage === totalPages}>Next</button>
+                    <button onClick={nextPage} disabled={currentPage === totalPages}>Próximo</button>
                 </div>
             </div>
             {lightboxImages.length > 0 && lightboxImageIndex !== -1 && (

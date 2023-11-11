@@ -15,45 +15,49 @@ import AdGrid from "./views/adGrid/AdGrid";
 import EditPreferences from "./views/User/EditPreferences";
 import RecommendedGrid from "./views/adGrid/RecommendedGrid";
 import UserPage from "./views/User/UserPage";
-// Check for token to keep user logged in
+
+// Verifica se há um token para manter o usuário logado
 if (localStorage.jwtToken) {
-    // Set User token header User
+    // Define o cabeçalho do token do usuário
     const token = localStorage.jwtToken;
     setAuthToken(token);
-    // Decode token and get user info and exp
+    // Decodifica o token e obtém as informações do usuário e expiração
     const decoded = jwt_decode(token);
-    // Set user and isAuthenticated
+    // Define o usuário e isAuthenticated
     store.dispatch(setCurrentUser(decoded));
-// Check for expired token
-    const currentTime = Date.now() / 1000; // to get in milliseconds
+
+    // Verifica se o token expirou
+    const currentTime = Date.now() / 1000; // para obter em milissegundos
     if (decoded.exp < currentTime) {
-        // Logout user
+        // Faz logout do usuário
         store.dispatch(logoutUser());
-        // Redirect to log in
+        // Redireciona para a página de login
         window.location.href = "./login";
     }
 }
+
 class App extends Component {
     render() {
         return (
             <Provider store={store}>
-            <Router>
-                <div className="App">
-                    <Navbar />
-                    <Route exact path="/" component={Landing} />
-                    <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" component={Login} />
-                    <Switch>
-                        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                        <PrivateRoute exact path="/products" component={AdGrid} />
-                        <PrivateRoute exact path="/preferences" component={EditPreferences} />
-                        <PrivateRoute exact path="/recommendation" component={RecommendedGrid} />
-                        <PrivateRoute exact path="/me" component={UserPage} />
-                    </Switch>
-                </div>
-            </Router>
+                <Router>
+                    <div className="App">
+                        <Navbar />
+                        <Route exact path="/" component={Landing} />
+                        <Route exact path="/register" component={Register} />
+                        <Route exact path="/login" component={Login} />
+                        <Switch>
+                            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                            <PrivateRoute exact path="/products" component={AdGrid} />
+                            <PrivateRoute exact path="/preferences" component={EditPreferences} />
+                            <PrivateRoute exact path="/recommendation" component={RecommendedGrid} />
+                            <PrivateRoute exact path="/me" component={UserPage} />
+                        </Switch>
+                    </div>
+                </Router>
             </Provider>
         );
     }
 }
+
 export default App;

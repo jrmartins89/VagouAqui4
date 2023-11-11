@@ -24,12 +24,12 @@ function RecommendedGrid() {
             .catch((err) => {
                 console.error('Erro ao listar anúncios recomendados:', err);
             });
-    }, []); // Make sure to pass an empty dependency array to run this effect only once
+    }, []); // Certificar-se de passar uma matriz de dependências vazia para executar este efeito apenas uma vez
 
     const totalPages = Math.ceil(ads.length / adsPerPage);
 
-    // Calculate the lower and upper bounds for the displayed page indices
-    const pageRange = 10; // Number of page indices to show
+    // Calcula os limites inferior e superior para os índices de página exibidos
+    const pageRange = 10; // Número de índices de página a serem mostrados
 
     let lowerBound = Math.max(currentPage - Math.floor(pageRange / 2), 1);
     let upperBound = Math.min(lowerBound + pageRange - 1, totalPages);
@@ -38,7 +38,7 @@ function RecommendedGrid() {
         lowerBound = Math.max(1, upperBound - pageRange + 1);
     }
 
-    // Create an array of page indices to display
+    // Cria um array de índices de página para exibir
     const pageIndicesToDisplay = Array.from({ length: upperBound - lowerBound + 1 }, (_, i) => i + lowerBound);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -103,7 +103,7 @@ function RecommendedGrid() {
                     ))}
                 </div>
                 <div className="pagination">
-                    <button onClick={prevPage} disabled={currentPage === 1}>Previous</button>
+                    <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
                     <button onClick={retreatTenPages} disabled={currentPage - 10 < 1}>-10 Páginas</button>
                     {pageIndicesToDisplay.map((pageIndex) => (
                         <button
@@ -115,7 +115,7 @@ function RecommendedGrid() {
                         </button>
                     ))}
                     <button onClick={advanceTenPages} disabled={currentPage + 10 > totalPages}>+10 Páginas</button>
-                    <button onClick={nextPage} disabled={currentPage === totalPages}>Next</button>
+                    <button onClick={nextPage} disabled={currentPage === totalPages}>Próximo</button>
                 </div>
             </div>
             {lightboxImages.length > 0 && lightboxImageIndex !== -1 && (

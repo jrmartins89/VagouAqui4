@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import "./MainPage.css"; // Import the CSS styles for MainPage
+import "./MainPage.css"; // Importa os estilos CSS para a MainPage
 
 class MainPage extends Component {
     render() {

@@ -1,4 +1,3 @@
-/* Default styles for all screens */
 .user-profile {
     background-image: url('https://media.gettyimages.com/id/660340054/pt/foto/space-problem-in-bedroom-interior.jpg?s=612x612&w=0&k=20&c=k8AlqAdhbcVz-hWlmOq49cB5U29P99LJV1H6A4jlgew=');
     background-size: contain;
@@ -45,10 +44,8 @@
     color: #9d0101;
 }
 
-/* Media query for small screens */
 @media screen and (max-width: 576px) {
     .user-profile {
-        /* Adjust styles for small screens */
         max-width: 100%;
         background-size: contain;
         background-position: center;
@@ -79,7 +76,6 @@
     }
 }
 
-/* Media query for medium screens */
 @media screen and (min-width: 577px) and (max-width: 992px) {
     .user-profile {
         /* Adjust styles for medium screens */
@@ -87,18 +83,14 @@
     }
 }
 
-/* Media query for large screens */
 @media screen and (min-width: 993px) {
     .user-profile {
-        /* Adjust styles for large screens */
         max-width: 400px;
     }
 }
 
-/* Media query for tablets */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     .user-profile {
-        /* Adjust styles for tablets */
         max-width: 300px;
     }
 }

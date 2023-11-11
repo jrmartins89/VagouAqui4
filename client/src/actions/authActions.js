@@ -6,11 +6,12 @@ import {
     SET_CURRENT_USER,
     USER_LOADING
 } from "./types";
-// Register User
+
+// Registra Usuário
 export const registerUser = (userData, history) => dispatch => {
     axios
         .post("/api/users/register", userData)
-        .then(res => history.push("/login")) // re-direct to login on successful register
+        .then(res => history.push("/login")) /// redireciona para o login em caso de registro bem-sucedido
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -18,22 +19,23 @@ export const registerUser = (userData, history) => dispatch => {
             })
         );
 };
-// Login - get user token
+
+// Login - obter token do usuário
 export const loginUser = userData => dispatch => {
     axios
         .post("/api/users/login", userData)
         .then(res => {
-            // Save to localStorage
-// Set token to localStorage
+            // Salva no localStorage
+            // Define o token no localStorage
             const { token } = res.data;
             localStorage.setItem("jwtToken", token);
-            // Set token to Auth header
+            // Define o token no cabeçalho de autenticação
             setAuthToken(token);
-            // Decode token to get user data
+            // Decodifica o token para obter os dados do usuário
             const decoded = jwt_decode(token);
-            // Include email in the user object
+            // Inclui o email no objeto do usuário
             decoded.email = userData.email;
-            // Set current user
+            // Define o usuário atual
             dispatch(setCurrentUser(decoded));
         })
         .catch(err =>
@@ -43,40 +45,42 @@ export const loginUser = userData => dispatch => {
             })
         );
 };
-// Set logged in user
+
+// Define usuário logado
 export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
         payload: decoded
     };
 };
-// User loading
+
+// Carregamento do usuário
 export const setUserLoading = () => {
     return {
         type: USER_LOADING
     };
 };
-// Log user out
+
+// Desconectar usuário
 export const logoutUser = () => dispatch => {
-    // Remove token from local storage
+    // Remove o token do localStorage
     localStorage.removeItem("jwtToken");
-    // Remove User header for future requests
+    // Remove o cabeçalho de usuário para futuras requisições
     setAuthToken(false);
-    // Set current user to empty object {} which will set isAuthenticated to false
+    // Define o usuário atual como um objeto vazio {} que definirá isAuthenticated como false
     dispatch(setCurrentUser({}));
 };
 
-// Update User Preferences
+// Atualizar Preferências do Usuário
 export const updateUserPreferences = (updatedPreferences, history) => (dispatch) => {
-    dispatch(setUserLoading()); // Indicate that the update is in progress
+    dispatch(setUserLoading()); // Indica que a atualização está em andamento
     axios
         .put("/api/users/preferences", updatedPreferences)
         .then((res) => {
-            // Assuming the preferences were successfully updated
-            // You can handle success as needed
-
-            // Redirect to a success page
-            history.push("/products"); // Redirect to a success page
+            // Supondo que as preferências foram atualizadas com sucesso
+            console.log(res)
+            // Redireciona para uma página de sucesso
+            history.push("/products");
         })
         .catch((err) =>
             dispatch({

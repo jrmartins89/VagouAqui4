@@ -1,6 +1,3 @@
-/* Landing.css */
-
-/* Container styles */
 .container {
     display: flex;
     flex-direction: column;
@@ -9,13 +6,13 @@
     min-height: 100vh;
 }
 
-/* Greeting styles */
+
 h4 {
     font-size: 24px;
     text-align: center;
 }
 
-/* Description text styles */
+
 .flow-text {
     font-size: 18px;
     text-align: center;
@@ -23,7 +20,7 @@ h4 {
     margin-top: 10px;
 }
 
-/* Button styles */
+
 .btn {
     width: 140px;
     border-radius: 3px;
@@ -33,18 +30,18 @@ h4 {
     cursor: pointer;
 }
 
-/* "Produtos" button */
+
 .produtos-btn {
-    background-color: #041f3b; /* Blue color */
+    background-color: #041f3b;
 }
 
-/* "Logout" button */
+
 .logout-btn {
-    background-color: #FF5733; /* Red color */
+    background-color: #FF5733;
     color: white;
 }
 
-/* Landing.css */
+
 .landing-container {
     background-image: url('https://media.gettyimages.com/id/1335298641/pt/foto/university-dorm-room.jpg?s=612x612&w=0&k=20&c=pU32Yo1uwPq4Tu0W9K1B9d94gp0Q8OcOIamG0cCRJJg=');
     background-size: cover;
@@ -60,9 +57,9 @@ h4 {
     text-align: center;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
-    /* Adjust styles for screens with a maximum width of 768px (e.g., tablets) */
+
     h4 {
         font-size: 20px;
     }

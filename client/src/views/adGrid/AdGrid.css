@@ -1,6 +1,4 @@
-/* AdGrid.css */
 
-/* Grid container */
 .grid-container {
     display: flex;
     flex-direction: column;
@@ -8,7 +6,6 @@
     margin: 20px;
 }
 
-/* Grid layout */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -22,7 +19,6 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Grid items */
 .grid-item {
     border: 1px solid #ddd;
     padding: 20px;
@@ -44,7 +40,6 @@
     margin-top: 10px;
 }
 
-/* Carousel container */
 .carousel-container {
     max-width: 100%;
     height: auto;
@@ -56,21 +51,18 @@
     align-items: center;
 }
 
-/* Price */
 .ad-price {
     font-size: 1.2em;
     font-weight: bold;
     margin-top: 10px;
 }
 
-/* Neighborhood */
 .ad-neighborhood {
     font-size: 0.9em;
     font-weight: bold;
     margin-top: 10px;
 }
 
-/* Pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -90,7 +82,6 @@
     color: white;
 }
 
-/* Media query for screens up to 768px wide */
 @media screen and (max-width: 768px) {
     .grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -106,7 +97,6 @@
     }
 }
 
-/* Extended media query for screens with dimensions 320x668 */
 @media screen and (max-width: 320px) and (max-height: 668px) {
     .grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
