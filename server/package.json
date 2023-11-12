@@ -1,7 +1,6 @@
 {
   "name": "vagou-aqui-app",
   "version": "1.0.0",
-  "description": "Package containing all the modules necessary to deploy and run the application",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
