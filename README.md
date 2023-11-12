@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Vagou Aqui App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bem-vindo ao Vagou Aqui App, uma aplicação web desenvolvida para auxiliar na busca e recomendação de anúncios imobiliários.
 
-## Available Scripts
+## Visão Geral
 
-In the project directory, you can run:
+Este projeto é uma aplicação de página única (SPA) que utiliza a stack MERN (MongoDB, Express.js, React.js, Node.js) para criar uma plataforma para busca e recomendação de anúncios imobiliários.
 
-### `npm start`
+## Estrutura do Diretório
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+A estrutura do diretório é organizada em duas partes principais: `client` (lado do cliente) e `server` (lado do servidor). Aqui está uma visão geral da estrutura do diretório:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+|--- client 
+|--- server
+|--- LICENSE.md
+|--- README.md
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para mais detalhes sobre a estrutura do diretório, consulte o README.md nos diretórios `client` e `server`.
 
-### `npm run build`
+## Configuração e Execução
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Siga as instruções abaixo para configurar e executar a aplicação:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Instalação de Dependências:**
+    - No diretório `client` do projeto, execute `npm install` para instalar as dependências do cliente.
+    - Em seguida, vá para o diretório `server` e execute `npm install` para instalar as dependências do servidor.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Configuração do Banco de Dados:**
+    - Crie um banco de dados com o o nome `VagouAqui` no mongoDB
+    - Crie um arquivo `.env` no diretório `server` e preencha-o com as informações necessárias. Exemplo:
 
-### `npm run eject`
+      ```env
+      MONGODB_URI=
+      PORT=
+      LAST_SCRAPING_DATE=
+      ```
+    - Insira a string de conexão na variável `MONGODB_URI=`.
+    - Insira o valor da porta do sevidor na variável `PORT` (sugestão `5000`)
+    - LAST_SCRAPING_DATE fica vazio porque será preenchido quando os anúncios forem raspados.
+   
+3. **Execução:**
+    - No diretório `server` do projeto, execute `npm run server` para iniciar o servidor da aplicação.
+    - No diretório `client` do projeto, execute `npm run client` para iniciar o cliente da aplicação.
+    - Acesse `http://localhost:3000/` para acessar a aplicação
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Rotas do Servidor
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Anúncios
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **GET /api/ads/all:** Obtém todos os anúncios.
+- **GET /api/ads/lastScrapingDate:** Obtém a data da última extração.
 
-## Learn More
+### Recomendações
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **GET /api/recommendations/all:** Obtém recomendações de anúncios baseadas em conteúdo para um usuário autenticado.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Usuários
 
-### Code Splitting
+- **POST /api/users/register:** Registra um novo usuário.
+- **POST /api/users/login:** Loga um usuário e retorna um token JWT.
+- **PUT /api/users/preferences:** Atualiza as preferências do usuário autenticado.
+- **GET /api/users/preferences:** Obtém as preferências do usuário autenticado.
+- **GET /api/users/me:** Obtém as informações do usuário autenticado.
+- **DELETE /api/users/delete:** Exclui a conta do usuário autenticado.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Scripts Disponíveis para o cliente
 
-### Analyzing the Bundle Size
+- `npm run dev`: Inicia o servidor e o cliente em modo de desenvolvimento.
+- `npm run build`: Compila a aplicação para produção.
+- `npm start`: Inicia o servidor em modo de produção.
+- `npm run client`: Inicia o servidor.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Licença
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Este projeto é licenciado sob a Licença MIT - consulte o arquivo [LICENSE.md](LICENSE.md) para obter detalhes.
 
-### Advanced Configuration
+## Autor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Jose Ribamar Marcal Martins Junior**
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
